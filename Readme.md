@@ -1,6 +1,6 @@
 # NIST Library
 
-![Build&Test](https://github.com/atdi/nbis/actions/workflows/main.yml/badge.svg) [![Maven Central](https://img.shields.io/maven-central/v/eu.aagsolutions.img/nbis)](https://central.sonatype.com/artifact/eu.aagsolutions.img/nbis/0.2.0) [![GitHub license](https://img.shields.io/badge/license-MIT-green.svg?style=flat)](https://opensource.org/licenses/MIT)
+![Build&Test](https://github.com/atdi/nbis/actions/workflows/main.yml/badge.svg) [![Maven Central](https://img.shields.io/maven-central/v/eu.aagsolutions.img/nbis)](https://central.sonatype.com/artifact/eu.aagsolutions.img/nbis/0.3.0) [![GitHub license](https://img.shields.io/badge/license-MIT-green.svg?style=flat)](https://opensource.org/licenses/MIT)
 
 A Kotlin implementation of NIST Biometric Image Software (NBIS) for reading, writing, and building NIST records. Compatible with any JVM language.
 
@@ -49,20 +49,20 @@ NBIS is a library implemented in Kotlin to extract, decode, build and write NIST
 <dependency>
     <groupId>eu.aagsolutions.img</groupId>
     <artifactId>nbis</artifactId>
-    <version>0.2.0</version>
+    <version>0.3.0</version>
 </dependency>
 ```
 
 ### Gradle (Groovy DSL)
 
 ```groovy
-implementation 'eu.aagsolutions.img:nbis:0.2.0'
+implementation 'eu.aagsolutions.img:nbis:0.3.0'
 ```
 
 ### Gradle (Kotlin DSL)
 
 ```kotlin
-implementation("eu.aagsolutions.img:nbis:0.2.0")
+implementation("eu.aagsolutions.img:nbis:0.3.0")
 ```
 
 ## Quick Start
