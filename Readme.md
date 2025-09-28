@@ -1,4 +1,7 @@
-# NIST Records Types
+# NIST Library
+![Build&Test](https://github.com/atdi/nbis/actions/workflows/main.yml/badge.svg)
+
+## NIST Records Types
 
 | Record Type | Description                                                              | Read | Write | Build | Validate |
 |-------------|--------------------------------------------------------------------------|------|-------|-------|----------|
