@@ -39,10 +39,10 @@ class NistFileWriterTest {
                 file.read()
             }
 
-        NistFileWriter(FileOutputStream("output.nist")).use { writer -> writer.write(nistContent) }
+        NistFileWriter(FileOutputStream("type-14-amp-nqm-utf8.nist")).use { writer -> writer.write(nistContent) }
 
         val nistContent2 =
-            NistFileReader(Files.newInputStream(Path("output.nist"), StandardOpenOption.READ)).use { file ->
+            NistFileReader(Files.newInputStream(Path("type-14-amp-nqm-utf8.nist"), StandardOpenOption.READ)).use { file ->
                 file.read()
             }
         nistContent2 shouldBeEqualUsingFields nistContent
@@ -55,10 +55,10 @@ class NistFileWriterTest {
             NistFileReader(url!!.openStream()).use { file ->
                 file.read()
             }
-        NistFileWriter(FileOutputStream("output.nist")).use { writer -> writer.write(nistContent) }
+        NistFileWriter(FileOutputStream("type-3.nist")).use { writer -> writer.write(nistContent) }
 
         val nistContent2 =
-            NistFileReader(Files.newInputStream(Path("output.nist"), StandardOpenOption.READ)).use { file ->
+            NistFileReader(Files.newInputStream(Path("type-3.nist"), StandardOpenOption.READ)).use { file ->
                 file.read()
             }
         nistContent2 shouldBeEqualUsingFields nistContent
@@ -71,10 +71,10 @@ class NistFileWriterTest {
             NistFileReader(url!!.openStream()).use { file ->
                 file.read()
             }
-        NistFileWriter(FileOutputStream("output.nist")).use { writer -> writer.write(nistContent) }
+        NistFileWriter(FileOutputStream("type-10-sap10.nist")).use { writer -> writer.write(nistContent) }
 
         val nistContent2 =
-            NistFileReader(Files.newInputStream(Path("output.nist"), StandardOpenOption.READ)).use { file ->
+            NistFileReader(Files.newInputStream(Path("type-10-sap10.nist"), StandardOpenOption.READ)).use { file ->
                 file.read()
             }
         nistContent2 shouldBeEqualUsingFields nistContent
