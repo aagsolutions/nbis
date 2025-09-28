@@ -7,7 +7,7 @@ This library is used to read and write NIST records and can be used with any JVM
 NBIS is a library, implemented in Kotlin, to extract, decode, build and write NIST compressed files.
 NIST Biometric Image Software information can be found [here](http://www.nist.gov/itl/iad/ig/nbis.cfm).
 
-## NIST Records Types
+## NIST Records Types implementation in current version 
 
 | Record Type | Description                                                              | Read | Write | Build | Validate |
 |-------------|--------------------------------------------------------------------------|------|-------|-------|----------|
