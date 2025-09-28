@@ -1,5 +1,8 @@
 # NIST Library
-![Build&Test](https://github.com/atdi/nbis/actions/workflows/main.yml/badge.svg)
+![Build&Test](https://github.com/atdi/nbis/actions/workflows/main.yml/badge.svg) [![GitHub license](https://img.shields.io/badge/license-MIT-green.svg?style=flat)](https://opensource.org/licenses/MIT)
+
+Kotlin implementation of NIST Biometric Image Software (NBIS).
+This library is used to read and write NIST records and can be used with any JVM language.
 
 ## NIST Records Types
 
