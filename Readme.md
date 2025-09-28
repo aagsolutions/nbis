@@ -1,6 +1,6 @@
 # NIST Library
 
-![Build&Test](https://github.com/atdi/nbis/actions/workflows/main.yml/badge.svg) [![GitHub license](https://img.shields.io/badge/license-MIT-green.svg?style=flat)](https://opensource.org/licenses/MIT)
+![Build&Test](https://github.com/atdi/nbis/actions/workflows/main.yml/badge.svg) [![Maven Central](https://img.shields.io/maven-central/v/eu.aagsolutions.img/nbis)](https://central.sonatype.com/artifact/eu.aagsolutions.img/nbis/0.1.0) [![GitHub license](https://img.shields.io/badge/license-MIT-green.svg?style=flat)](https://opensource.org/licenses/MIT)
 
 A Kotlin implementation of NIST Biometric Image Software (NBIS) for reading, writing, and building NIST records. Compatible with any JVM language.
 
