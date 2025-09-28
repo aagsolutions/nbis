@@ -25,10 +25,13 @@ package eu.aagsolutions.img.nbis.model.builders
 
 import eu.aagsolutions.img.nbis.calculators.TextRecordLengthCalculator
 import eu.aagsolutions.img.nbis.model.enums.RecordType
+import eu.aagsolutions.img.nbis.model.enums.records.ImageFields
 import eu.aagsolutions.img.nbis.model.enums.records.VariableResolutionFingerprintImageFields
 import eu.aagsolutions.img.nbis.model.fields.ImageField
 import eu.aagsolutions.img.nbis.model.fields.TextField
 import eu.aagsolutions.img.nbis.model.records.VariableResolutionFingerprintRecord
+import java.io.ByteArrayInputStream
+import javax.imageio.ImageIO
 
 /**
  * Builder class for creating and modifying variable-resolution fingerprint-based NIST records.
@@ -413,10 +416,18 @@ class VariableResolutionFingerprintRecordBuilder :
         )
 
     /**
-     * Sets DATA (Image Data) - the actual image data in the specified format.
+     * Sets DATA (Image Data) - the actual image data in the specified format,
+     * height (VLL) and width (HLL) are inferred from the image.
      *
      * @param imageData The binary image data
      * @return The builder instance for method chaining
      */
-    fun withImageDataField(imageData: ByteArray) = withField(VariableResolutionFingerprintImageFields.DATA.id, ImageField(imageData))
+    fun withImageDataField(imageData: ByteArray): VariableResolutionFingerprintRecordBuilder {
+        ByteArrayInputStream(imageData).use { inputStream ->
+            val bufferedImage = ImageIO.read(inputStream)
+            withHorizontalLineLengthField(bufferedImage.width.toString())
+            withVerticalLineLengthField(bufferedImage.height.toString())
+        }
+        return withField(ImageFields.DATA.id, ImageField(imageData))
+    }
 }

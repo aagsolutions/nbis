@@ -28,6 +28,8 @@ import eu.aagsolutions.img.nbis.model.enums.records.ImageFields
 import eu.aagsolutions.img.nbis.model.fields.ImageField
 import eu.aagsolutions.img.nbis.model.fields.TextField
 import eu.aagsolutions.img.nbis.model.records.BaseRecord
+import java.io.ByteArrayInputStream
+import javax.imageio.ImageIO
 
 /**
  * Abstract builder class for creating and modifying image-based NIST records.
@@ -104,10 +106,17 @@ abstract class ImageRecordBuilder<T : BaseRecord, B : ImageRecordBuilder<T, B>>(
         withField(ImageFields.GCA.id, TextField(compressionAlgorithm))
 
     /**
-     * Sets DATA (Image Data) – the binary image data.
+     * Sets DATA (Image Data) – the binary image data, height (VLL) and width (HLL) are inferred from the image.
      *
      * @param imageData the binary image data as ByteArray
      * @return The builder instance for method chaining
      */
-    fun withImageDataField(imageData: ByteArray) = withField(ImageFields.DATA.id, ImageField(imageData))
+    fun withImageDataField(imageData: ByteArray): B {
+        ByteArrayInputStream(imageData).use { inputStream ->
+            val bufferedImage = ImageIO.read(inputStream)
+            withHorizontalLineLengthField(bufferedImage.width.toString())
+            withVerticalLineLengthField(bufferedImage.height.toString())
+        }
+        return withField(ImageFields.DATA.id, ImageField(imageData))
+    }
 }

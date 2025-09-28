@@ -83,4 +83,9 @@ class NistFileBuilderTest {
                 .build()
         NistFileWriter(FileOutputStream("output.nist")).use { writer -> writer.write(nistFile) }
     }
+
+    @Test
+    fun `it should successful create a new nist file based on provided image`() {
+
+    }
 }
