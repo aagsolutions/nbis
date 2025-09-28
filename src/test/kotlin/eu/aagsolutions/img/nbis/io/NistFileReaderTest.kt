@@ -23,15 +23,44 @@
 
 package eu.aagsolutions.img.nbis.io
 
+import eu.aagsolutions.img.nbis.model.enums.records.HighResolutionGrayscaleFingerprintImageFields
+import eu.aagsolutions.img.nbis.model.records.HighResolutionGrayscaleFingerprintRecord
 import io.kotest.matchers.collections.shouldHaveSize
 import io.kotest.matchers.nulls.shouldNotBeNull
+import io.kotest.matchers.shouldBe
 import io.kotest.matchers.string.shouldContain
+import java.io.File
+import javax.imageio.ImageIO
 import kotlin.test.Test
 
 class NistFileReaderTest {
+
+    @Test
+    fun `it should read sample nist file and compare fingerprint images with references`() {
+        val url = NistFileReaderTest::class.java.getResource("/sample/nist/sample.an2")
+
+        val nistContent = NistFileReader(url!!.openStream()).use { reader -> reader.read() }
+
+        nistContent.shouldNotBeNull()
+
+        val fingerprints = nistContent.getHighResolutionGrayscaleFingerprintRecords().sortedBy { it.getFieldAsInt(HighResolutionGrayscaleFingerprintImageFields.IDC) }
+        fingerprints.shouldHaveSize(14)
+
+        fingerprints.forEachIndexed { index, record ->
+            val referenceImage =
+                ImageIO.read(File(NistFileReaderTest::class.java.getResource("/sample/nist/fp-${index + 1}.png")!!.file))
+            val nistImage = record as HighResolutionGrayscaleFingerprintRecord
+
+            nistImage.apply {
+                nistImage.getFieldAsInt(HighResolutionGrayscaleFingerprintImageFields.HLL) shouldBe referenceImage.width
+                nistImage.getFieldAsInt(HighResolutionGrayscaleFingerprintImageFields.VLL) shouldBe referenceImage.height
+            }
+        }
+    }
+
     @Test
     fun `it should read successfully a nist file with variable resolution fingerprints`() {
-        val url = NistFileReader::class.java.getResource("/references/type-14-amp-nqm-utf8.an2")
+        val url = NistFileReaderTest::class.java.getResource("/references/type-14-amp-nqm-utf8.an2")
         val nistContent = NistFileReader(url!!.openStream()).use { reader -> reader.read() }
 
         nistContent
@@ -47,7 +76,7 @@ class NistFileReaderTest {
 
     @Test
     fun `it should read successfully a nist file with low resolution grayscale fingerprints`() {
-        val url = NistFileReader::class.java.getResource("/references/type-3.an2")
+        val url = NistFileReaderTest::class.java.getResource("/references/type-3.an2")
         val nistContent = NistFileReader(url!!.openStream()).use { reader -> reader.read() }
         nistContent
             .shouldNotBeNull()
@@ -62,7 +91,7 @@ class NistFileReaderTest {
 
     @Test
     fun `it should read successfully a nist file with high resolution grayscale fingerprints`() {
-        val url = NistFileReader::class.java.getResource("/references/type-4-slaps.an2")
+        val url = NistFileReaderTest::class.java.getResource("/references/type-4-slaps.an2")
         val nistContent = NistFileReader(url!!.openStream()).use { reader -> reader.read() }
         nistContent
             .shouldNotBeNull()
@@ -77,7 +106,7 @@ class NistFileReaderTest {
 
     @Test
     fun `it should read successfully a nist file with low resolution binary fingerprints`() {
-        val url = NistFileReader::class.java.getResource("/references/type-5.an2")
+        val url = NistFileReaderTest::class.java.getResource("/references/type-5.an2")
         val nistContent = NistFileReader(url!!.openStream()).use { reader -> reader.read() }
         nistContent
             .shouldNotBeNull()
@@ -92,7 +121,7 @@ class NistFileReaderTest {
 
     @Test
     fun `it should read successfully a nist file with high resolution binary fingerprints`() {
-        val url = NistFileReader::class.java.getResource("/references/type-6.an2")
+        val url = NistFileReaderTest::class.java.getResource("/references/type-6.an2")
         val nistContent = NistFileReader(url!!.openStream()).use { reader -> reader.read() }
         nistContent
             .shouldNotBeNull()
@@ -107,7 +136,7 @@ class NistFileReaderTest {
 
     @Test
     fun `it should read successfully a nist file with user defined image records`() {
-        val url = NistFileReader::class.java.getResource("/references/type-7-latent.an2")
+        val url = NistFileReaderTest::class.java.getResource("/references/type-7-latent.an2")
         val nistContent = NistFileReader(url!!.openStream()).use { reader -> reader.read() }
         nistContent
             .shouldNotBeNull()
@@ -122,7 +151,7 @@ class NistFileReaderTest {
 
     @Test
     fun `it should read successfully a nist file with signature image records`() {
-        val url = NistFileReader::class.java.getResource("/references/type-8-sig.an2")
+        val url = NistFileReaderTest::class.java.getResource("/references/type-8-sig.an2")
         val nistContent = NistFileReader(url!!.openStream()).use { reader -> reader.read() }
         nistContent
             .shouldNotBeNull()
@@ -137,7 +166,7 @@ class NistFileReaderTest {
 
     @Test
     fun `it should read successfully a nist file with minutiae data records`() {
-        val url = NistFileReader::class.java.getResource("/references/type-9-4-iafis.an2")
+        val url = NistFileReaderTest::class.java.getResource("/references/type-9-4-iafis.an2")
         val nistContent = NistFileReader(url!!.openStream()).use { reader -> reader.read() }
         nistContent
             .shouldNotBeNull()
@@ -152,7 +181,7 @@ class NistFileReaderTest {
 
     @Test
     fun `it should read successfully a nist file with facial, scars, marks and tattoos image data records`() {
-        val url = NistFileReader::class.java.getResource("/references/type-10-sap10.an2")
+        val url = NistFileReaderTest::class.java.getResource("/references/type-10-sap10.an2")
         val nistContent = NistFileReader(url!!.openStream()).use { reader -> reader.read() }
         nistContent
             .shouldNotBeNull()
@@ -167,7 +196,7 @@ class NistFileReaderTest {
 
     @Test
     fun `it should read successfully a nist file with latent image data`() {
-        val url = NistFileReader::class.java.getResource("/references/type-13-tip-eji-j2l.an2")
+        val url = NistFileReaderTest::class.java.getResource("/references/type-13-tip-eji-j2l.an2")
         val nistContent = NistFileReader(url!!.openStream()).use { reader -> reader.read() }
         nistContent
             .shouldNotBeNull()
@@ -182,7 +211,7 @@ class NistFileReaderTest {
 
     @Test
     fun `it should read successfully a nist file with palm print image data`() {
-        val url = NistFileReader::class.java.getResource("/references/type-15-palms.an2")
+        val url = NistFileReaderTest::class.java.getResource("/references/type-15-palms.an2")
         val nistContent = NistFileReader(url!!.openStream()).use { reader -> reader.read() }
         nistContent
             .shouldNotBeNull()
@@ -197,7 +226,7 @@ class NistFileReaderTest {
 
     @Test
     fun `it should read successfully a nist file with iris image data`() {
-        val url = NistFileReader::class.java.getResource("/references/type-17-iris.an2")
+        val url = NistFileReaderTest::class.java.getResource("/references/type-17-iris.an2")
         val nistContent = NistFileReader(url!!.openStream()).use { reader -> reader.read() }
         nistContent
             .shouldNotBeNull()
@@ -209,4 +238,5 @@ class NistFileReaderTest {
                 getIrisImageRecords().shouldHaveSize(1)
             }
     }
+
 }
