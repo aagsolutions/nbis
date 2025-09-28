@@ -42,6 +42,9 @@ import eu.aagsolutions.img.nbis.model.records.UserDefinedImageRecord
 import eu.aagsolutions.img.nbis.model.records.UserDefinedTextRecord
 import eu.aagsolutions.img.nbis.model.records.VariableResolutionFingerprintRecord
 
+/**
+ * Builder class for creating and modifying NIST files.
+ */
 @Suppress("TooManyFunctions")
 class NistFileBuilder {
     private val recordsMap = mutableMapOf<RecordType, List<BaseRecord>>()
@@ -57,87 +60,187 @@ class NistFileBuilder {
         recordsMap[RecordType.RT1] = emptyList<BaseRecord>() + nistRecord
     }
 
+    /**
+     * Adds a `TransactionInformationRecord` to the builder and allows chaining additional configurations.
+     *
+     * @param record The `TransactionInformationRecord` instance to be added.
+     * @return The current `NistFileBuilder` instance, allowing for method chaining.
+     */
     fun withTransactionInformationRecord(record: TransactionInformationRecord): NistFileBuilder {
         addTransactionInformationRecord(record)
         return this
     }
 
+    /**
+     * Adds a list of `UserDefinedTextRecord` (Interpol standard)
+     * instances to the builder and allows chaining additional configurations.
+     *
+     * @param records The list of `UserDefinedTextRecord` instances to be added.
+     * @return The current `NistFileBuilder` instance, allowing for method chaining.
+     */
     fun withUserDefinedDescriptionTextRecords(records: List<UserDefinedTextRecord>): NistFileBuilder {
         records.forEach { r -> addRecord(RecordType.RT2, r) }
         return this
     }
 
+    /**
+     * Adds a list of `LowResolutionGrayscaleFingerprintRecord` instances to the builder.
+     *
+     * @param records The list of `LowResolutionGrayscaleFingerprintRecord` instances to be added.
+     * @return The current `NistFileBuilder` instance, allowing for method chaining.
+     */
     fun withLowResolutionGrayscaleFingerprintRecords(records: List<LowResolutionGrayscaleFingerprintRecord>): NistFileBuilder {
         records.forEach { r -> addRecord(RecordType.RT3, r) }
         return this
     }
 
+    /**
+     * Adds a list of `HighResolutionGrayscaleFingerprintRecord` instances to the builder.
+     *
+     * @param records The list of `HighResolutionGrayscaleFingerprintRecord` instances to be added.
+     * @return The current `NistFileBuilder` instance, allowing for method chaining.
+     */
     fun withHighResolutionGrayscaleFingerprintRecords(records: List<HighResolutionGrayscaleFingerprintRecord>): NistFileBuilder {
         records.forEach { r -> addRecord(RecordType.RT4, r) }
         return this
     }
 
+    /**
+     * Adds a list of `LowResolutionBinaryFingerprintRecord` instances to the builder.
+     *
+     * @param records The list of `LowResolutionBinaryFingerprintRecord` instances to be added.
+     * @return The current `NistFileBuilder` instance, allowing for method chaining.
+     */
     fun withLowResolutionBinaryFingerprintRecords(records: List<LowResolutionBinaryFingerprintRecord>): NistFileBuilder {
         records.forEach { r -> addRecord(RecordType.RT5, r) }
         return this
     }
 
+    /**
+     * Adds a list of `HighResolutionBinaryFingerprintRecord` instances to the builder.
+     *
+     * @param records The list of `HighResolutionBinaryFingerprintRecord` instances to be added.
+     * @return The current `NistFileBuilder` instance, allowing for method chaining.
+     */
     fun withHighResolutionBinaryFingerprintRecords(records: List<HighResolutionBinaryFingerprintRecord>): NistFileBuilder {
         records.forEach { r -> addRecord(RecordType.RT6, r) }
         return this
     }
 
+    /**
+     * Adds a list of `UserDefinedImageRecord` instances to the builder.
+     *
+     * @param records The list of `UserDefinedImageRecord` instances to be added.
+     * @return The current `NistFileBuilder` instance, allowing for method chaining.
+     */
     fun withUserDefinedImageRecords(records: List<UserDefinedImageRecord>): NistFileBuilder {
         records.forEach { r -> addRecord(RecordType.RT7, r) }
         return this
     }
 
+    /**
+     * Adds a list of `SignatureImageRecord` instances to the builder.
+     *
+     * @param records The list of `SignatureImageRecord` instances to be added.
+     * @return The current `NistFileBuilder` instance, allowing for method chaining.
+     */
     fun withSignatureImageRecords(records: List<SignatureImageRecord>): NistFileBuilder {
         records.forEach { r -> addRecord(RecordType.RT8, r) }
         return this
     }
 
+    /**
+     * Adds a list of `MinutiaeDataRecord` instances to the builder.
+     *
+     * @param records The list of `MinutiaeDataRecord` instances to be added.
+     * @return The current `NistFileBuilder` instance, allowing for method chaining.
+     */
     fun withMinutiaeDataRecords(records: List<MinutiaeDataRecord>): NistFileBuilder {
         records.forEach { r -> addRecord(RecordType.RT9, r) }
         return this
     }
 
+    /**
+     * Adds a list of `FacialAndSMTImageRecord` instances to the builder.
+     *
+     * @param records The list of `FacialAndSMTImageRecord` instances to be added.
+     * @return The current `NistFileBuilder` instance, allowing for method chaining.
+     */
     fun withFacialAndSmtImageRecords(records: List<FacialAndSMTImageRecord>): NistFileBuilder {
         records.forEach { r -> addRecord(RecordType.RT10, r) }
         return this
     }
 
+    /**
+     * Adds a list of `LatentImageRecord` instances to the builder.
+     *
+     * @param records The list of `LatentImageRecord` instances to be added.
+     * @return The current `NistFileBuilder` instance, allowing for method chaining.
+     */
     fun withLatentImageRecords(records: List<LatentImageRecord>): NistFileBuilder {
         records.forEach { r -> addRecord(RecordType.RT13, r) }
         return this
     }
 
+    /**
+     * Adds a list of `VariableResolutionFingerprintRecord` instances to the builder.
+     *
+     * @param records The list of `VariableResolutionFingerprintRecord` instances to be added.
+     * @return The current `NistFileBuilder` instance, allowing for method chaining.
+     */
     fun withVariableResolutionFingerprintRecords(records: List<VariableResolutionFingerprintRecord>): NistFileBuilder {
         records.forEach { r -> addRecord(RecordType.RT14, r) }
         return this
     }
 
+    /**
+     * Adds a list of `PalmPrintRecord` instances to the builder.
+     *
+     * @param records The list of `PalmPrintRecord` instances to be added.
+     * @return The current `NistFileBuilder` instance, allowing for method chaining.
+     */
     fun withVariableResolutionPalmPrintRecords(records: List<PalmPrintRecord>): NistFileBuilder {
         records.forEach { r -> addRecord(RecordType.RT15, r) }
         return this
     }
 
+    /**
+     * Adds a list of `UserDefinedTestingImageRecord` instances to the builder.
+     *
+     * @param records The list of `UserDefinedTestingImageRecord` instances to be added.
+     * @return The current `NistFileBuilder` instance, allowing for method chaining.
+     */
     fun withUserDefinedTestingImageRecords(records: List<BaseRecord>): NistFileBuilder {
         records.forEach { r -> addRecord(RecordType.RT16, r) }
         return this
     }
 
+    /**
+     * Adds a list of `IrisImageRecord` instances to the builder.
+     *
+     * @param records The list of `IrisImageRecord` instances to be added.
+     * @return The current `NistFileBuilder` instance, allowing for method chaining.
+     */
     fun withIrisImageRecords(records: List<BaseRecord>): NistFileBuilder {
         records.forEach { r -> addRecord(RecordType.RT17, r) }
         return this
     }
 
+    /**
+     * Builds a new instance of `NistFile` using the records stored in the builder.
+     *
+     * The method processes the existing records to generate the appropriate content
+     * for the `TransactionInformationRecord`, incorporates the constructed record into
+     * the builder, and finally creates and returns a `NistFile` object.
+     *
+     * @return A new `NistFile` instance containing the records and configurations set in the builder.
+     */
     fun build(): NistFile {
         val fileContent = fromListOfNistEntry(calculateContentField(this.recordsMap))
         val transactionInformationBuilder =
             TransactionInformationRecordBuilder().fromRecord(
                 this.recordsMap[RecordType.RT1]!![0] as TransactionInformationRecord,
-            ) as TransactionInformationRecordBuilder
+            )
         val transactionInformationRecord =
             transactionInformationBuilder
                 .withFileContentField(

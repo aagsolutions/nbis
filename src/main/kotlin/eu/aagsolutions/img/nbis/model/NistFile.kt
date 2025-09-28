@@ -46,10 +46,20 @@ class NistFile(
             .toMap()
 
     /**
-     * Returns a list of NIST records by the given type.
+     * Retrieves a list of records for the specified record type. If no records exist for the given type, an empty list is returned.
+     *
+     * @param recordType the type of record to retrieve.
+     * @return a list of records for the specified type, or an empty list if no records are available.
      */
     fun getRecordListByRecordType(recordType: RecordType): List<BaseRecord> = records[recordType] ?: emptyList()
 
+    /**
+     * Retrieves a single record that matches the specified record type and IDC (index) value.
+     *
+     * @param recordType the type of record to search for.
+     * @param idcId the IDC value to match within the specified record type.
+     * @return the matching record if found, or null if no match exists.
+     */
     fun getRecordByTypeAndIdc(
         recordType: RecordType,
         idcId: Int,
