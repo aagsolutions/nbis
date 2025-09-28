@@ -1,6 +1,6 @@
 # NIST Library
 
-![Build&Test](https://github.com/atdi/nbis/actions/workflows/main.yml/badge.svg) [![Maven Central](https://img.shields.io/maven-central/v/eu.aagsolutions.img/nbis)](https://central.sonatype.com/artifact/eu.aagsolutions.img/nbis/0.1.0) [![GitHub license](https://img.shields.io/badge/license-MIT-green.svg?style=flat)](https://opensource.org/licenses/MIT)
+![Build&Test](https://github.com/atdi/nbis/actions/workflows/main.yml/badge.svg) [![Maven Central](https://img.shields.io/maven-central/v/eu.aagsolutions.img/nbis)](https://central.sonatype.com/artifact/eu.aagsolutions.img/nbis/0.2.0) [![GitHub license](https://img.shields.io/badge/license-MIT-green.svg?style=flat)](https://opensource.org/licenses/MIT)
 
 A Kotlin implementation of NIST Biometric Image Software (NBIS) for reading, writing, and building NIST records. Compatible with any JVM language.
 
@@ -49,20 +49,20 @@ NBIS is a library implemented in Kotlin to extract, decode, build and write NIST
 <dependency>
     <groupId>eu.aagsolutions.img</groupId>
     <artifactId>nbis</artifactId>
-    <version>0.1.0</version>
+    <version>0.2.0</version>
 </dependency>
 ```
 
 ### Gradle (Groovy DSL)
 
 ```groovy
-implementation 'eu.aagsolutions.img:nbis:0.1.0'
+implementation 'eu.aagsolutions.img:nbis:0.2.0'
 ```
 
 ### Gradle (Kotlin DSL)
 
 ```kotlin
-implementation("eu.aagsolutions.img:nbis:0.1.0")
+implementation("eu.aagsolutions.img:nbis:0.2.0")
 ```
 
 ## Quick Start
@@ -210,3 +210,11 @@ val nistFile = NistFileBuilder()
 ## Requirements
 * Java: 21 or higher
 * Kotlin: 2.1 or higher
+
+## Inspiration and Credits
+This project was inspired by the need for a robust and efficient library for handling NIST biometric image files. The inspiration comes from the original NBIS library, which is written in C and has been widely used in the biometric community. 
+The goal of this project is to provide a modern, Kotlin-based alternative that is easier to use and maintain.
+
+The project also draws inspiration from the work of other developers who have contributed to the open-source community with similar libraries. By leveraging their work and building upon it, we aim to create a high-quality, reliable, and efficient library for working with NIST biometric image files:
+* [JNBIS](https://github.com/mhshams/jnbis)
+* [NIST4J](https://github.com/nist4j/nist4j)
