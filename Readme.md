@@ -3,6 +3,9 @@
 
 Kotlin implementation of NIST Biometric Image Software (NBIS).
 This library is used to read and write NIST records and can be used with any JVM language.
+## About
+NBIS is a library, implemented in Kotlin, to extract, decode, build and write NIST compressed files.
+NIST Biometric Image Software information can be found [here](http://www.nist.gov/itl/iad/ig/nbis.cfm).
 
 ## NIST Records Types
 
@@ -18,13 +21,13 @@ This library is used to read and write NIST records and can be used with any JVM
 | 8 | Signature image                                                          | Y    | Y     | Y     | N        |
 | 9 | Minutiae data (for fingerprints)                                         | Y    | Y     | Y     | N        |
 | 10 | Facial and SMT (Scar, Mark, and Tattoo) image                            | Y    | Y     | Y     | N        |
-| 11 | Forensic and investigatory voice data                                    |Y    | Y     | Y     | N        |
-| 12 | Forensic dental and oral data                                            |Y    | Y     | Y     | N        |
+| 11 | Forensic and investigatory voice data                                    | Y    | Y     | Y     | N        |
+| 12 | Forensic dental and oral data                                            | Y    | Y     | Y     | N        |
 | 13 | Variable-resolution latent friction ridge image (latent prints)          | Y    | Y     | Y     | N        |
 | 14 | Variable-resolution fingerprint image                                    | Y    | Y     | Y     | N        |
-| 15 | Palm print image                                                         |Y    | Y     | Y     | N        |
-| 16 | User-defined variable-resolution test image                              |Y    | Y     | Y     | N        |
-| 17 | Iris image                                                               |Y    | Y     | Y     | N        |
-| 18 | DNA data                                                                 |      |       |       |          |
-| 19 | Plantar (footprint) image                                                |      |       |       |          |
-| 20 | Original image record (a reference record for other image types)         |      |       |       |          |
+| 15 | Palm print image                                                         | Y    | Y     | Y     | N        |
+| 16 | User-defined variable-resolution test image                              | Y    | Y     | Y     | N        |
+| 17 | Iris image                                                               | Y    | Y     | Y     | N        |
+| 18 | DNA data                                                                 | N    | N     | N     | N        |
+| 19 | Plantar (footprint) image                                                | N    | N     | N     | N        |
+| 20 | Original image record (a reference record for other image types)         | N    | N     | N     | N        |
