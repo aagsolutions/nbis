@@ -23,24 +23,9 @@
 
 package eu.aagsolutions.img.nbis.io
 
-import eu.aagsolutions.img.nbis.model.enums.reference.CompressionAlgorithm
-import io.kotest.matchers.equals.shouldBeEqual
-import org.junit.Test
-
-class DetectCompressionAlgorithmUsingImageIOTest {
-    @Test
-    fun `it should successful detect JPGB as compression algorithm`() {
-        val url = DetectCompressionAlgorithmUsingImageIOTest::class.java.getResource("/img/mugshot-1024x1024.jpg")
-        val faceImage = url!!.openStream().use { inputStream -> inputStream.readAllBytes() }
-        val algorithm = detectCompressionAlgorithmUsingImageIO(faceImage)
-        algorithm shouldBeEqual CompressionAlgorithm.JPEGB
-    }
-
-    @Test
-    fun `it should successful detect PNG as compression algorithm`() {
-        val url = DetectCompressionAlgorithmUsingImageIOTest::class.java.getResource("/img/fp-1.png")
-        val faceImage = url!!.openStream().use { inputStream -> inputStream.readAllBytes() }
-        val algorithm = detectCompressionAlgorithmUsingImageIO(faceImage)
-        algorithm shouldBeEqual CompressionAlgorithm.PNG
-    }
-}
+data class WSQImageDimensions(
+    val width: Int,
+    val height: Int,
+    val pixelDepth: Int = 8, // WSQ is typically 8-bit grayscale
+    val pixelsPerInch: Int = 0,
+)

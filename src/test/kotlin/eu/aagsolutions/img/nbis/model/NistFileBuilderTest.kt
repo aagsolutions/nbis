@@ -30,7 +30,9 @@ import eu.aagsolutions.img.nbis.io.NistFileWriter
 import eu.aagsolutions.img.nbis.model.builders.FacialAndSMTImageRecordBuilder
 import eu.aagsolutions.img.nbis.model.builders.TransactionInformationRecordBuilder
 import eu.aagsolutions.img.nbis.model.builders.UserDefinedTextRecordBuilder
+import eu.aagsolutions.img.nbis.model.builders.VariableResolutionFingerprintRecordBuilder
 import eu.aagsolutions.img.nbis.model.enums.records.FacialAndSMTImageFields
+import eu.aagsolutions.img.nbis.model.enums.records.ImageFields
 import eu.aagsolutions.img.nbis.model.enums.reference.Color
 import eu.aagsolutions.img.nbis.model.enums.reference.CompressionAlgorithm
 import eu.aagsolutions.img.nbis.model.records.FacialAndSMTImageRecord
@@ -59,6 +61,21 @@ class NistFileBuilderTest {
                     ).withInformationDesignationCharField("1")
                     .build(),
             )
+        val variableResolutionFingerprintRecord1 =
+            VariableResolutionFingerprintRecordBuilder()
+                .fromRecord(nistContent.getVariableResolutionFingerprintRecords()[0] as VariableResolutionFingerprintRecord)
+                .withImageDataField(nistContent.getVariableResolutionFingerprintRecords()[0].getFieldImage(ImageFields.DATA)!!)
+                .build()
+        val variableResolutionFingerprintRecord2 =
+            VariableResolutionFingerprintRecordBuilder()
+                .fromRecord(nistContent.getVariableResolutionFingerprintRecords()[1] as VariableResolutionFingerprintRecord)
+                .withImageDataField(nistContent.getVariableResolutionFingerprintRecords()[1].getFieldImage(ImageFields.DATA)!!)
+                .build()
+        val variableResolutionFingerprintRecord3 =
+            VariableResolutionFingerprintRecordBuilder()
+                .fromRecord(nistContent.getVariableResolutionFingerprintRecords()[2] as VariableResolutionFingerprintRecord)
+                .withImageDataField(nistContent.getVariableResolutionFingerprintRecords()[2].getFieldImage(ImageFields.DATA)!!)
+                .build()
         val nistFile =
             NistFileBuilder()
                 .withTransactionInformationRecord(nistContent.getTransactionInformationRecord())
@@ -66,9 +83,13 @@ class NistFileBuilderTest {
                 .withLowResolutionGrayscaleFingerprintRecords(
                     nistContent2.getLowResolutionGrayscaleFingerprintRecords() as List<LowResolutionGrayscaleFingerprintRecord>,
                 ).withVariableResolutionFingerprintRecords(
-                    records = nistContent.getVariableResolutionFingerprintRecords() as List<VariableResolutionFingerprintRecord>,
+                    listOf(
+                        variableResolutionFingerprintRecord1,
+                        variableResolutionFingerprintRecord2,
+                        variableResolutionFingerprintRecord3,
+                    ),
                 ).build()
-        NistFileWriter(FileOutputStream("output.nist")).use { writer -> writer.write(nistFile) }
+        NistFileWriter(FileOutputStream("new-nist-combined.nist")).use { writer -> writer.write(nistFile) }
     }
 
     @Test
@@ -90,7 +111,7 @@ class NistFileBuilderTest {
                 .withUserDefinedDescriptionTextRecords(userDefinedText as List<UserDefinedTextRecord>)
                 .withFacialAndSmtImageRecords(imageRecords)
                 .build()
-        NistFileWriter(FileOutputStream("output.nist")).use { writer -> writer.write(nistFile) }
+        NistFileWriter(FileOutputStream("type-10-sap10-copy.nist")).use { writer -> writer.write(nistFile) }
     }
 
     @Test
@@ -155,8 +176,6 @@ class NistFileBuilderTest {
                 .withInformationDesignationCharField("01")
                 .withImageDataField(faceImage)
                 .withScaleUnitsField("1")
-                .withTransmittedHorizontalPixelScaleField("500") // Typical DPI
-                .withTransmittedVerticalPixelScaleField("500")
                 .withColorSpaceField(Color.MULTI.code)
                 .build()
         val nistFile =

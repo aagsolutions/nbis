@@ -24,12 +24,11 @@
 package eu.aagsolutions.img.nbis.model.builders
 
 import eu.aagsolutions.img.nbis.calculators.LogicalRecordLengthCalculator
-import eu.aagsolutions.img.nbis.io.detectCompressionAlgorithmUsingImageIO
+import eu.aagsolutions.img.nbis.io.ImageParser
 import eu.aagsolutions.img.nbis.model.enums.records.ImageFields
 import eu.aagsolutions.img.nbis.model.fields.ImageField
 import eu.aagsolutions.img.nbis.model.fields.TextField
 import eu.aagsolutions.img.nbis.model.records.BaseRecord
-import javax.imageio.ImageIO
 
 /**
  * Abstract builder class for creating and modifying image-based NIST records.
@@ -111,13 +110,11 @@ abstract class ImageRecordBuilder<T : BaseRecord, B : ImageRecordBuilder<T, B>>(
      * @return The builder instance for method chaining
      */
     fun withImageDataField(imageData: ByteArray): B {
-        imageData.inputStream().use { inputStream ->
-            val bufferedImage = ImageIO.read(inputStream)
-            withHorizontalLineLengthField(bufferedImage.width.toString())
-            withVerticalLineLengthField(bufferedImage.height.toString())
-        }
-        val compressionAlgorithm = detectCompressionAlgorithmUsingImageIO(imageData)
-        withCompressionAlgorithmField(compressionAlgorithm.code)
-        return withField(ImageFields.DATA.id, ImageField(imageData))
+        val imageInfo = ImageParser.readImageInfo(imageData)
+        return this
+            .withHorizontalLineLengthField(imageInfo.width.toString())
+            .withVerticalLineLengthField(imageInfo.height.toString())
+            .withCompressionAlgorithmField(imageInfo.compressionAlgorithm.code)
+            .withField(ImageFields.DATA.id, ImageField(imageData))
     }
 }

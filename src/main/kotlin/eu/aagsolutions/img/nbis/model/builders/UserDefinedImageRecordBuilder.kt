@@ -24,14 +24,13 @@
 package eu.aagsolutions.img.nbis.model.builders
 
 import eu.aagsolutions.img.nbis.calculators.BinaryRecordLengthCalculator
-import eu.aagsolutions.img.nbis.io.detectCompressionAlgorithmUsingImageIO
+import eu.aagsolutions.img.nbis.io.ImageParser
 import eu.aagsolutions.img.nbis.model.enums.RecordType
 import eu.aagsolutions.img.nbis.model.enums.records.ImageFields
 import eu.aagsolutions.img.nbis.model.enums.records.UserDefinedImageFields
 import eu.aagsolutions.img.nbis.model.fields.ImageField
 import eu.aagsolutions.img.nbis.model.fields.TextField
 import eu.aagsolutions.img.nbis.model.records.UserDefinedImageRecord
-import javax.imageio.ImageIO
 
 @Suppress("TooManyFunctions")
 class UserDefinedImageRecordBuilder :
@@ -138,14 +137,12 @@ class UserDefinedImageRecordBuilder :
      * @return The builder instance for method chaining
      */
     fun withImageDataField(imageData: ByteArray): UserDefinedImageRecordBuilder {
-        imageData.inputStream().use { inputStream ->
-            val bufferedImage = ImageIO.read(inputStream)
-            withHorizontalLineLengthField(bufferedImage.width.toString())
-            withVerticalLineLengthField(bufferedImage.height.toString())
-        }
-        val compressionAlgorithm = detectCompressionAlgorithmUsingImageIO(imageData)
-        withCompressionAlgorithmField(compressionAlgorithm.code)
-        return withField(ImageFields.DATA.id, ImageField(imageData))
+        val imageInfo = ImageParser.readImageInfo(imageData)
+        return this
+            .withHorizontalLineLengthField(imageInfo.width.toString())
+            .withVerticalLineLengthField(imageInfo.height.toString())
+            .withCompressionAlgorithmField(imageInfo.compressionAlgorithm.code)
+            .withField(ImageFields.DATA.id, ImageField(imageData))
     }
 
     companion object {

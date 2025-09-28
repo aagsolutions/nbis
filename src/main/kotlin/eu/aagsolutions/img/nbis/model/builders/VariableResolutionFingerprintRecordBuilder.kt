@@ -24,14 +24,13 @@
 package eu.aagsolutions.img.nbis.model.builders
 
 import eu.aagsolutions.img.nbis.calculators.TextRecordLengthCalculator
-import eu.aagsolutions.img.nbis.io.detectCompressionAlgorithmUsingImageIO
+import eu.aagsolutions.img.nbis.io.ImageParser
 import eu.aagsolutions.img.nbis.model.enums.RecordType
 import eu.aagsolutions.img.nbis.model.enums.records.ImageFields
 import eu.aagsolutions.img.nbis.model.enums.records.VariableResolutionFingerprintImageFields
 import eu.aagsolutions.img.nbis.model.fields.ImageField
 import eu.aagsolutions.img.nbis.model.fields.TextField
 import eu.aagsolutions.img.nbis.model.records.VariableResolutionFingerprintRecord
-import javax.imageio.ImageIO
 
 /**
  * Builder class for creating and modifying variable-resolution fingerprint-based NIST records.
@@ -423,13 +422,13 @@ class VariableResolutionFingerprintRecordBuilder :
      * @return The builder instance for method chaining
      */
     fun withImageDataField(imageData: ByteArray): VariableResolutionFingerprintRecordBuilder {
-        imageData.inputStream().use { inputStream ->
-            val bufferedImage = ImageIO.read(inputStream)
-            withHorizontalLineLengthField(bufferedImage.width.toString())
-            withVerticalLineLengthField(bufferedImage.height.toString())
-        }
-        val compressionAlgorithm = detectCompressionAlgorithmUsingImageIO(imageData)
-        withCompressionAlgorithmField(compressionAlgorithm.code)
-        return withField(ImageFields.DATA.id, ImageField(imageData))
+        val imageInfo = ImageParser.readImageInfo(imageData)
+        return this
+            .withHorizontalLineLengthField(imageInfo.width.toString())
+            .withVerticalLineLengthField(imageInfo.height.toString())
+            .withCompressionAlgorithmField(imageInfo.compressionAlgorithm.code)
+            .withTransmittedHorizontalPixelScaleField(imageInfo.pixelsPerInchX.toString())
+            .withTransmittedVerticalPixelScaleField(imageInfo.pixelsPerInchY.toString())
+            .withField(ImageFields.DATA.id, ImageField(imageData))
     }
 }

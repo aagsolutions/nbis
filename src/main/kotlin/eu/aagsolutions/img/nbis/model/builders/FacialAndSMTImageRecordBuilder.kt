@@ -24,14 +24,13 @@
 package eu.aagsolutions.img.nbis.model.builders
 
 import eu.aagsolutions.img.nbis.calculators.TextRecordLengthCalculator
-import eu.aagsolutions.img.nbis.io.detectCompressionAlgorithmUsingImageIO
+import eu.aagsolutions.img.nbis.io.ImageParser
 import eu.aagsolutions.img.nbis.model.enums.RecordType
 import eu.aagsolutions.img.nbis.model.enums.records.FacialAndSMTImageFields
 import eu.aagsolutions.img.nbis.model.enums.records.ImageFields
 import eu.aagsolutions.img.nbis.model.fields.ImageField
 import eu.aagsolutions.img.nbis.model.fields.TextField
 import eu.aagsolutions.img.nbis.model.records.FacialAndSMTImageRecord
-import javax.imageio.ImageIO
 
 /**
  * Builder class for creating FacialAndSMTImageRecord instances.
@@ -782,13 +781,13 @@ class FacialAndSMTImageRecordBuilder :
      * @param imageData the binary image data as ByteArray
      */
     fun withImageDataField(imageData: ByteArray): FacialAndSMTImageRecordBuilder {
-        imageData.inputStream().use { inputStream ->
-            val bufferedImage = ImageIO.read(inputStream)
-            withHorizontalLineLengthField(bufferedImage.width.toString())
-            withVerticalLineLengthField(bufferedImage.height.toString())
-        }
-        val compressionAlgorithm = detectCompressionAlgorithmUsingImageIO(imageData)
-        withCompressionAlgorithmField(compressionAlgorithm.code)
-        return withField(ImageFields.DATA.id, ImageField(imageData))
+        val imageInfo = ImageParser.readImageInfo(imageData)
+        return this
+            .withHorizontalLineLengthField(imageInfo.width.toString())
+            .withVerticalLineLengthField(imageInfo.height.toString())
+            .withCompressionAlgorithmField(imageInfo.compressionAlgorithm.code)
+            .withTransmittedHorizontalPixelScaleField(imageInfo.pixelsPerInchX.toString())
+            .withTransmittedVerticalPixelScaleField(imageInfo.pixelsPerInchY.toString())
+            .withField(ImageFields.DATA.id, ImageField(imageData))
     }
 }
