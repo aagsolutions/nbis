@@ -24,13 +24,13 @@
 package eu.aagsolutions.img.nbis.model.builders
 
 import eu.aagsolutions.img.nbis.calculators.BinaryRecordLengthCalculator
+import eu.aagsolutions.img.nbis.io.detectCompressionAlgorithmUsingImageIO
 import eu.aagsolutions.img.nbis.model.enums.RecordType
 import eu.aagsolutions.img.nbis.model.enums.records.ImageFields
 import eu.aagsolutions.img.nbis.model.enums.records.UserDefinedImageFields
 import eu.aagsolutions.img.nbis.model.fields.ImageField
 import eu.aagsolutions.img.nbis.model.fields.TextField
 import eu.aagsolutions.img.nbis.model.records.UserDefinedImageRecord
-import java.io.ByteArrayInputStream
 import javax.imageio.ImageIO
 
 @Suppress("TooManyFunctions")
@@ -128,7 +128,7 @@ class UserDefinedImageRecordBuilder :
      * @param compressionAlgorithm value for the GCA field
      * @return The builder instance for method chaining
      */
-    fun withGreyscaleCompressionAlgorithmField(compressionAlgorithm: String) =
+    fun withCompressionAlgorithmField(compressionAlgorithm: String) =
         withField(UserDefinedImageFields.GCA.id, TextField(compressionAlgorithm))
 
     /**
@@ -138,11 +138,13 @@ class UserDefinedImageRecordBuilder :
      * @return The builder instance for method chaining
      */
     fun withImageDataField(imageData: ByteArray): UserDefinedImageRecordBuilder {
-        ByteArrayInputStream(imageData).use { inputStream ->
+        imageData.inputStream().use { inputStream ->
             val bufferedImage = ImageIO.read(inputStream)
             withHorizontalLineLengthField(bufferedImage.width.toString())
             withVerticalLineLengthField(bufferedImage.height.toString())
         }
+        val compressionAlgorithm = detectCompressionAlgorithmUsingImageIO(imageData)
+        withCompressionAlgorithmField(compressionAlgorithm.code)
         return withField(ImageFields.DATA.id, ImageField(imageData))
     }
 

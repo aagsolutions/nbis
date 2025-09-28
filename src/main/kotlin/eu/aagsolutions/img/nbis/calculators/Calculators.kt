@@ -65,6 +65,7 @@ const val FIELD_SIZE = 11
 const val YY_SIZE = 2
 const val TCN_AGENCY_NUMBER_OF_CHARS = 4
 const val TCN_SEQUENCE_NUMBER_OF_CHARS = 6
+const val ASCII_BASE = 1000
 
 @Suppress("MagicNumber")
 val POW_10_8 = 10.0.pow(8.0).toLong()
@@ -164,40 +165,48 @@ fun calculateControlNumberLastCharacter(
 /**
  * Validates a control character field and calculates the last character of the control number.
  *
- * This method ensures that the provided `controlCharacterField` has the correct length
- * and contains only numeric values. It then calculates and appends the last character
- * of the control number based on its numeric parts.
+ * This method handles both numeric and non-numeric characters by converting characters to their
+ * numeric representation for calculation purposes while preserving the original format.
  *
  * @param controlCharacterField The input string representing the control character field,
- *                              which should be of a valid length (10 characters) and contain
- *                              only numeric values.
+ *                              which should be of a valid length (10 characters).
  * @return A string representing the original control character field with the calculated
  *         control number's last character appended.
- * @throws NistException If the input field is not of the required length or contains
- *                       non-numeric characters.
+ * @throws NistException If the input field is not of the required length.
  */
 fun calculateControlNumberLastCharacter(controlCharacterField: String): String {
     if (controlCharacterField.length != FIELD_SIZE - 1) {
-        throw NistException("Field should be 10 char long")
+        throw NistException("Field should be 10 char long, but was ${controlCharacterField.length}")
     }
-    try {
-        val left =
-            controlCharacterField
-                .take(YY_SIZE)
-                .toLong()
-        val right =
-            controlCharacterField
-                .substring(YY_SIZE)
-                .toLong()
-        return controlCharacterField +
-            calculateControlNumberLastCharacter(
-                left,
-                right,
-            )
-    } catch (e: NumberFormatException) {
-        throw NistException("Field should contain only number", e)
-    }
+    // Convert characters to numeric values for calculation
+    val leftPart = controlCharacterField.take(YY_SIZE)
+    val rightPart = controlCharacterField.substring(YY_SIZE)
+
+    // Convert each character to its ASCII value and combine into numbers
+    val left = convertStringToNumeric(leftPart)
+    val right = convertStringToNumeric(rightPart)
+
+    return controlCharacterField +
+        calculateControlNumberLastCharacter(left, right)
 }
+
+/**
+ * Converts a string to a numeric representation by using ASCII values of characters.
+ * For numeric characters, uses their face value. For non-numeric characters, uses ASCII values.
+ *
+ * @param input The input string to convert
+ * @return A Long representing the numeric value
+ */
+private fun convertStringToNumeric(input: String): Long =
+    input.fold(0L) { acc, char ->
+        val value =
+            if (char.isDigit()) {
+                char.digitToInt().toLong()
+            } else {
+                char.code.toLong()
+            }
+        acc * ASCII_BASE + value
+    }
 
 /**
  * Generates an Agency Transaction Control Number (TCN) by combining the agency code, sequence number,

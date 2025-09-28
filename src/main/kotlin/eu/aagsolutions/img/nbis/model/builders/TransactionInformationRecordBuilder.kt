@@ -200,7 +200,7 @@ class TransactionInformationRecordBuilder :
     fun withGmtDateTimeField(gmtDateTime: LocalDateTime) =
         withField(
             TransactionInformationFields.GMT.id,
-            TextField(gmtDateTime.format(DateTimeFormatter.ofPattern("yyyyMMddHHmmssZ"))),
+            TextField("${gmtDateTime.format(DateTimeFormatter.ofPattern("yyyyMMddHHmmss"))}Z"),
         )
 
     /**

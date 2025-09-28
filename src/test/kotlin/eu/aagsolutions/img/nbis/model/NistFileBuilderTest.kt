@@ -23,15 +23,24 @@
 
 package eu.aagsolutions.img.nbis.model
 
+import eu.aagsolutions.img.nbis.calculators.generateAgencyTCN
 import eu.aagsolutions.img.nbis.io.NistFileReader
+import eu.aagsolutions.img.nbis.io.NistFileReaderTest
 import eu.aagsolutions.img.nbis.io.NistFileWriter
 import eu.aagsolutions.img.nbis.model.builders.FacialAndSMTImageRecordBuilder
+import eu.aagsolutions.img.nbis.model.builders.TransactionInformationRecordBuilder
 import eu.aagsolutions.img.nbis.model.builders.UserDefinedTextRecordBuilder
+import eu.aagsolutions.img.nbis.model.enums.records.FacialAndSMTImageFields
+import eu.aagsolutions.img.nbis.model.enums.reference.Color
+import eu.aagsolutions.img.nbis.model.enums.reference.CompressionAlgorithm
 import eu.aagsolutions.img.nbis.model.records.FacialAndSMTImageRecord
 import eu.aagsolutions.img.nbis.model.records.LowResolutionGrayscaleFingerprintRecord
 import eu.aagsolutions.img.nbis.model.records.UserDefinedTextRecord
 import eu.aagsolutions.img.nbis.model.records.VariableResolutionFingerprintRecord
+import io.kotest.matchers.shouldBe
 import java.io.FileOutputStream
+import java.time.LocalDateTime
+import java.time.ZoneOffset
 import kotlin.test.Test
 
 class NistFileBuilderTest {
@@ -85,7 +94,78 @@ class NistFileBuilderTest {
     }
 
     @Test
-    fun `it should successful create a new nist file based on provided image`() {
+    fun `it should successful create a new nist file based on provided jpg image`() {
+        val currentGmtDate = LocalDateTime.now(ZoneOffset.UTC)
+        val transactionInformationRecord =
+            TransactionInformationRecordBuilder()
+                .withDateField(currentGmtDate.toLocalDate())
+                .withGmtDateTimeField(currentGmtDate)
+                .withVersionNumberField("0100")
+                .withAgencyNamesField("0101")
+                .withTransactionControlNumberField(generateAgencyTCN("INTERPOOL", 1000))
+                .build()
+        val userDefinedTextRecord =
+            UserDefinedTextRecordBuilder()
+                .withInformationDesignationCharField("01")
+                .withMiscellaneousIdentificationNumber1("RO109323243")
+                .build()
+        val url = NistFileReaderTest::class.java.getResource("/img/mugshot-1024x1024.jpg")
 
+        val faceImage = url!!.openStream().use { inputStream -> inputStream.readAllBytes() }
+        val facialAndSMTImageRecord =
+            FacialAndSMTImageRecordBuilder()
+                .withInformationDesignationCharField("01")
+                .withImageDataField(faceImage)
+                .withScaleUnitsField("1")
+                .withTransmittedHorizontalPixelScaleField("500") // Typical DPI
+                .withTransmittedVerticalPixelScaleField("500")
+                .withColorSpaceField(Color.MULTI.code)
+                .build()
+        val nistFile =
+            NistFileBuilder()
+                .withTransactionInformationRecord(transactionInformationRecord)
+                .withUserDefinedDescriptionTextRecords(listOf(userDefinedTextRecord))
+                .withFacialAndSmtImageRecords(listOf(facialAndSMTImageRecord))
+                .build()
+        NistFileWriter(FileOutputStream("output_jpeg.nist")).use { writer -> writer.write(nistFile) }
+        nistFile.getFacialAndSmtImageRecords()[0].getFieldText(FacialAndSMTImageFields.CGA) shouldBe CompressionAlgorithm.JPEGB.code
+    }
+
+    @Test
+    fun `it should successful create a new nist file based on provided png image`() {
+        val currentGmtDate = LocalDateTime.now(ZoneOffset.UTC)
+        val transactionInformationRecord =
+            TransactionInformationRecordBuilder()
+                .withDateField(currentGmtDate.toLocalDate())
+                .withGmtDateTimeField(currentGmtDate)
+                .withVersionNumberField("0100")
+                .withAgencyNamesField("0101")
+                .withTransactionControlNumberField(generateAgencyTCN("INTERPOOL", 1000))
+                .build()
+        val userDefinedTextRecord =
+            UserDefinedTextRecordBuilder()
+                .withInformationDesignationCharField("01")
+                .withMiscellaneousIdentificationNumber1("RO109323243")
+                .build()
+        val url = NistFileReaderTest::class.java.getResource("/img/fp-1.png")
+
+        val faceImage = url!!.openStream().use { inputStream -> inputStream.readAllBytes() }
+        val facialAndSMTImageRecord =
+            FacialAndSMTImageRecordBuilder()
+                .withInformationDesignationCharField("01")
+                .withImageDataField(faceImage)
+                .withScaleUnitsField("1")
+                .withTransmittedHorizontalPixelScaleField("500") // Typical DPI
+                .withTransmittedVerticalPixelScaleField("500")
+                .withColorSpaceField(Color.MULTI.code)
+                .build()
+        val nistFile =
+            NistFileBuilder()
+                .withTransactionInformationRecord(transactionInformationRecord)
+                .withUserDefinedDescriptionTextRecords(listOf(userDefinedTextRecord))
+                .withFacialAndSmtImageRecords(listOf(facialAndSMTImageRecord))
+                .build()
+        NistFileWriter(FileOutputStream("output_png.nist")).use { writer -> writer.write(nistFile) }
+        nistFile.getFacialAndSmtImageRecords()[0].getFieldText(FacialAndSMTImageFields.CGA) shouldBe CompressionAlgorithm.PNG.code
     }
 }
