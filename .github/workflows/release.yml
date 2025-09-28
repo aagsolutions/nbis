@@ -1,0 +1,23 @@
+name: Release
+
+on: workflow_dispatch
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout sources
+        uses: actions/checkout@v4
+      - name: Set up Java
+        uses: actions/setup-java@v4.5.0
+        with:
+          java-version: '21'
+          distribution: "zulu"
+      - name: Setup git
+        run: |
+          git config --global user.name atdi
+          git config --global user.email aurel.avramescu@gmail.com
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v3
+      - name: Release
+        run: ./gradlew release -Prelease.useAutomaticVersion=true

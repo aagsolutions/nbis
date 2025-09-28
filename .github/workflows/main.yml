@@ -1,0 +1,22 @@
+name: Build&Test
+
+on:
+  push:
+    branches:
+      - '*'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout sources
+        uses: actions/checkout@v4
+      - name: Set up Java
+        uses: actions/setup-java@v4.5.0
+        with:
+          java-version: '21'
+          distribution: "zulu"
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v3
+      - name: Build&Test
+        run: ./gradlew build
