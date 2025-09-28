@@ -25,10 +25,13 @@ package eu.aagsolutions.img.nbis.model.builders
 
 import eu.aagsolutions.img.nbis.calculators.TextRecordLengthCalculator
 import eu.aagsolutions.img.nbis.model.enums.RecordType
+import eu.aagsolutions.img.nbis.model.enums.records.ImageFields
 import eu.aagsolutions.img.nbis.model.enums.records.PalmPrintImageFields
 import eu.aagsolutions.img.nbis.model.fields.ImageField
 import eu.aagsolutions.img.nbis.model.fields.TextField
 import eu.aagsolutions.img.nbis.model.records.PalmPrintRecord
+import java.io.ByteArrayInputStream
+import javax.imageio.ImageIO
 
 @Suppress("TooManyFunctions")
 class PalmPrintRecordBuilder :
@@ -111,9 +114,16 @@ class PalmPrintRecordBuilder :
     fun withGeographicSampleAcquisitionLocationField(location: String) = withField(PalmPrintImageFields.GEO.id, TextField(location))
 
     /**
-     * Sets DATA (Image Data) – the binary image data.
+     * Sets DATA (Image Data) – the binary image data, height (VLL) and width (HLL) are inferred from the image.
      *
      * @param imageData the binary image data as ByteArray
      */
-    fun withImageDataField(imageData: ByteArray) = withField(PalmPrintImageFields.DATA.id, ImageField(imageData))
+    fun withImageDataField(imageData: ByteArray): PalmPrintRecordBuilder {
+        ByteArrayInputStream(imageData).use { inputStream ->
+            val bufferedImage = ImageIO.read(inputStream)
+            withHorizontalLineLengthField(bufferedImage.width.toString())
+            withVerticalLineLengthField(bufferedImage.height.toString())
+        }
+        return withField(ImageFields.DATA.id, ImageField(imageData))
+    }
 }

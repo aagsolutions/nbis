@@ -34,7 +34,6 @@ import javax.imageio.ImageIO
 import kotlin.test.Test
 
 class NistFileReaderTest {
-
     @Test
     fun `it should read sample nist file and compare fingerprint images with references`() {
         val url = NistFileReaderTest::class.java.getResource("/sample/nist/sample.an2")
@@ -43,7 +42,10 @@ class NistFileReaderTest {
 
         nistContent.shouldNotBeNull()
 
-        val fingerprints = nistContent.getHighResolutionGrayscaleFingerprintRecords().sortedBy { it.getFieldAsInt(HighResolutionGrayscaleFingerprintImageFields.IDC) }
+        val fingerprints =
+            nistContent.getHighResolutionGrayscaleFingerprintRecords().sortedBy {
+                it.getFieldAsInt(HighResolutionGrayscaleFingerprintImageFields.IDC)
+            }
         fingerprints.shouldHaveSize(14)
 
         fingerprints.forEachIndexed { index, record ->
@@ -238,5 +240,4 @@ class NistFileReaderTest {
                 getIrisImageRecords().shouldHaveSize(1)
             }
     }
-
 }

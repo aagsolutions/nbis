@@ -25,10 +25,13 @@ package eu.aagsolutions.img.nbis.model.builders
 
 import eu.aagsolutions.img.nbis.calculators.TextRecordLengthCalculator
 import eu.aagsolutions.img.nbis.model.enums.RecordType
+import eu.aagsolutions.img.nbis.model.enums.records.ImageFields
 import eu.aagsolutions.img.nbis.model.enums.records.LatentImageFields
 import eu.aagsolutions.img.nbis.model.fields.ImageField
 import eu.aagsolutions.img.nbis.model.fields.TextField
 import eu.aagsolutions.img.nbis.model.records.LatentImageRecord
+import java.io.ByteArrayInputStream
+import javax.imageio.ImageIO
 
 /**
  * Builder class for creating and modifying Type-13 Latent Image records in NIST files.
@@ -447,10 +450,18 @@ class LatentImageRecordBuilder :
         )
 
     /**
-     * Sets DATA (Image Data) - the actual image data in the specified format.
+     * Sets DATA (Image Data) - the actual image data in the specified format,
+     * height (VLL) and width (HLL) are inferred from the image.
      *
      * @param imageData The binary image data
      * @return The builder instance for method chaining
      */
-    fun withImageDataField(imageData: ByteArray) = withField(LatentImageFields.DATA.id, ImageField(imageData))
+    fun withImageDataField(imageData: ByteArray): LatentImageRecordBuilder {
+        ByteArrayInputStream(imageData).use { inputStream ->
+            val bufferedImage = ImageIO.read(inputStream)
+            withHorizontalLineLengthField(bufferedImage.width.toString())
+            withVerticalLineLengthField(bufferedImage.height.toString())
+        }
+        return withField(ImageFields.DATA.id, ImageField(imageData))
+    }
 }

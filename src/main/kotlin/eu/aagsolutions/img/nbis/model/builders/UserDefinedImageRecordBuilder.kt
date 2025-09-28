@@ -25,10 +25,13 @@ package eu.aagsolutions.img.nbis.model.builders
 
 import eu.aagsolutions.img.nbis.calculators.BinaryRecordLengthCalculator
 import eu.aagsolutions.img.nbis.model.enums.RecordType
+import eu.aagsolutions.img.nbis.model.enums.records.ImageFields
 import eu.aagsolutions.img.nbis.model.enums.records.UserDefinedImageFields
 import eu.aagsolutions.img.nbis.model.fields.ImageField
 import eu.aagsolutions.img.nbis.model.fields.TextField
 import eu.aagsolutions.img.nbis.model.records.UserDefinedImageRecord
+import java.io.ByteArrayInputStream
+import javax.imageio.ImageIO
 
 @Suppress("TooManyFunctions")
 class UserDefinedImageRecordBuilder :
@@ -129,12 +132,19 @@ class UserDefinedImageRecordBuilder :
         withField(UserDefinedImageFields.GCA.id, TextField(compressionAlgorithm))
 
     /**
-     * Sets DATA (Image Data) – the binary image data.
+     * Sets DATA (Image Data) – the binary image data, height (VLL) and width (HLL) are inferred from the image.
      *
      * @param imageData the binary image data as ByteArray
      * @return The builder instance for method chaining
      */
-    fun withImageDataField(imageData: ByteArray) = withField(UserDefinedImageFields.DATA.id, ImageField(imageData))
+    fun withImageDataField(imageData: ByteArray): UserDefinedImageRecordBuilder {
+        ByteArrayInputStream(imageData).use { inputStream ->
+            val bufferedImage = ImageIO.read(inputStream)
+            withHorizontalLineLengthField(bufferedImage.width.toString())
+            withVerticalLineLengthField(bufferedImage.height.toString())
+        }
+        return withField(ImageFields.DATA.id, ImageField(imageData))
+    }
 
     companion object {
         private const val USER_DEFINED_IMAGE_HEADER_SIZE = 33
