@@ -25,7 +25,7 @@ package eu.aagsolutions.img.nbis.io.record
 
 import eu.aagsolutions.img.nbis.exceptions.NistException
 import eu.aagsolutions.img.nbis.io.FIELD_MAX_LENGTH
-import eu.aagsolutions.img.nbis.io.FILE_SEPARATOR
+import eu.aagsolutions.img.nbis.io.FIELD_SEPARATOR
 import eu.aagsolutions.img.nbis.io.GROUP_SEPARATOR
 import eu.aagsolutions.img.nbis.io.TAG_SEPARATOR_COLON
 import eu.aagsolutions.img.nbis.io.TAG_SEPARATOR_DOT
@@ -57,6 +57,14 @@ import org.slf4j.LoggerFactory
 import java.io.OutputStream
 import kotlin.Int
 
+/**
+ * This class provides functionality to handle text-based records within a specific record type.
+ * It extends the `RecordHandler` base class and specializes in reading and writing operations
+ * for text and image fields associated with a record.
+ *
+ * @constructor
+ * @param recordType The type of record being processed by this handler.
+ */
 open class TextRecordHandler(
     recordType: RecordType,
 ) : RecordHandler(recordType) {
@@ -75,7 +83,7 @@ open class TextRecordHandler(
                     if (extractField(start, length, token, tag, fields)) {
                         break
                     }
-                } while (token.buffer[token.position++].toInt().toChar() != FILE_SEPARATOR)
+                } while (token.buffer[token.position++].toInt().toChar() != FIELD_SEPARATOR)
             }
         }
         return buildRecord(recordType, fields.toMap())
@@ -108,7 +116,7 @@ open class TextRecordHandler(
                 else -> throw NistException("Not implemented")
             }
         }
-        outputStream.write(FILE_SEPARATOR.code)
+        outputStream.write(FIELD_SEPARATOR.code)
     }
 
     private fun extractImageField(
@@ -120,7 +128,7 @@ open class TextRecordHandler(
     ) {
         val data = token.buffer.copyOfRange(token.position, token.position + length - 1 - (token.position - start))
         token.position += data.size
-        if (token.buffer[token.position].toInt().toChar() == FILE_SEPARATOR) {
+        if (token.buffer[token.position].toInt().toChar() == FIELD_SEPARATOR) {
             token.position++
         }
         val imageField = ImageField(data)

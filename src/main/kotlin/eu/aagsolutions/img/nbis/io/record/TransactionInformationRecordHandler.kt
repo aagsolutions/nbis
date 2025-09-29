@@ -25,7 +25,7 @@ package eu.aagsolutions.img.nbis.io.record
 
 import eu.aagsolutions.img.nbis.exceptions.NistException
 import eu.aagsolutions.img.nbis.io.FIELD_MAX_LENGTH
-import eu.aagsolutions.img.nbis.io.FILE_SEPARATOR
+import eu.aagsolutions.img.nbis.io.FIELD_SEPARATOR
 import eu.aagsolutions.img.nbis.io.TAG_SEPARATOR_GROUP_FIELD
 import eu.aagsolutions.img.nbis.io.Token
 import eu.aagsolutions.img.nbis.model.enums.RecordType
@@ -55,7 +55,7 @@ class TransactionInformationRecordHandler : TextRecordHandler(RecordType.RT1) {
                 if (tag.field == TransactionInformationFields.DCS.id) {
                     token.setCharSetDecoder(value)
                 }
-            } while (token.buffer[token.position++].toInt().toChar() != FILE_SEPARATOR)
+            } while (token.buffer[token.position++].toInt().toChar() != FIELD_SEPARATOR)
         }
         return DefaultRecord(recordType.id, fields)
     }

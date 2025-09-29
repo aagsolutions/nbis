@@ -26,11 +26,23 @@ package eu.aagsolutions.img.nbis.checksum
 import eu.aagsolutions.img.nbis.converters.bytesToHex
 import java.security.MessageDigest
 
+/**
+ * Computes the SHA-256 hash of the provided byte array.
+ *
+ * @param data the input byte array to be hashed; may be null
+ * @return the SHA-256 hash of the input data as a byte array
+ */
 fun calculate(data: ByteArray?): ByteArray {
     val digest = MessageDigest.getInstance("SHA-256")
     return digest.digest(data?.clone())
 }
 
+/**
+ * Computes the SHA-256 hash of the provided byte array and converts it to a hexadecimal string.
+ *
+ * @param data the input byte array to be hashed and converted to hexadecimal
+ * @return the SHA-256 hash of the input data as a hexadecimal string
+ */
 fun calculateToHex(data: ByteArray): String {
     val hash = calculate(data)
     return bytesToHex(hash)

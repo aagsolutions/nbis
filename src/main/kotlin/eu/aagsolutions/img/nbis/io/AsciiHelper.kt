@@ -42,15 +42,15 @@ const val RECORD_SEPARATOR = 30.toChar()
 const val GROUP_SEPARATOR = 29.toChar()
 
 /**
- * ASCII File Separator character (FS) - used to separate sections or files
+ * ASCII Field Separator character (FS) - used to separate fields
  */
-const val FILE_SEPARATOR = 28.toChar()
+const val FIELD_SEPARATOR = 28.toChar()
 
 const val FIELD_MAX_LENGTH = 300000
 
 val TAG_SEPARATOR_DOT = charArrayOf('.', '.')
 val TAG_SEPARATOR_COLON = charArrayOf(':', ':')
-val TAG_SEPARATOR_GROUP_FIELD = charArrayOf(GROUP_SEPARATOR, FILE_SEPARATOR)
+val TAG_SEPARATOR_GROUP_FIELD = charArrayOf(GROUP_SEPARATOR, FIELD_SEPARATOR)
 
 /**
  * Represents a tag structure containing type and field identifiers
