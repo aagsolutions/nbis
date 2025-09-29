@@ -24,11 +24,8 @@
 package eu.aagsolutions.img.nbis.model.builders
 
 import eu.aagsolutions.img.nbis.calculators.TextRecordLengthCalculator
-import eu.aagsolutions.img.nbis.io.ImageParser
 import eu.aagsolutions.img.nbis.model.enums.RecordType
-import eu.aagsolutions.img.nbis.model.enums.records.ImageFields
 import eu.aagsolutions.img.nbis.model.enums.records.VariableResolutionFingerprintImageFields
-import eu.aagsolutions.img.nbis.model.fields.ImageField
 import eu.aagsolutions.img.nbis.model.fields.TextField
 import eu.aagsolutions.img.nbis.model.records.VariableResolutionFingerprintRecord
 
@@ -37,7 +34,7 @@ import eu.aagsolutions.img.nbis.model.records.VariableResolutionFingerprintRecor
  */
 @Suppress("TooManyFunctions")
 class VariableResolutionFingerprintRecordBuilder :
-    NistRecordBuilder<VariableResolutionFingerprintRecord, VariableResolutionFingerprintRecordBuilder>(
+    TextRecordWithImageBuilder<VariableResolutionFingerprintRecord, VariableResolutionFingerprintRecordBuilder>(
         RecordType.RT14.id,
         RecordType.RT14.label,
         TextRecordLengthCalculator(),
@@ -102,7 +99,7 @@ class VariableResolutionFingerprintRecordBuilder :
      * @param horizontalLineLength The number of pixels per horizontal line
      * @return The builder instance for method chaining
      */
-    fun withHorizontalLineLengthField(horizontalLineLength: String) =
+    override fun withHorizontalLineLengthField(horizontalLineLength: String) =
         withField(
             VariableResolutionFingerprintImageFields.HLL.id,
             TextField(horizontalLineLength),
@@ -114,7 +111,7 @@ class VariableResolutionFingerprintRecordBuilder :
      * @param verticalLineLength The number of horizontal lines
      * @return The builder instance for method chaining
      */
-    fun withVerticalLineLengthField(verticalLineLength: String) =
+    override fun withVerticalLineLengthField(verticalLineLength: String) =
         withField(
             VariableResolutionFingerprintImageFields.VLL.id,
             TextField(verticalLineLength),
@@ -138,7 +135,7 @@ class VariableResolutionFingerprintRecordBuilder :
      * @param horizontalPixelScale The horizontal pixel density value
      * @return The builder instance for method chaining
      */
-    fun withTransmittedHorizontalPixelScaleField(horizontalPixelScale: String) =
+    override fun withTransmittedHorizontalPixelScaleField(horizontalPixelScale: String) =
         withField(
             VariableResolutionFingerprintImageFields.THPS.id,
             TextField(horizontalPixelScale),
@@ -150,7 +147,7 @@ class VariableResolutionFingerprintRecordBuilder :
      * @param verticalPixelScale The vertical pixel density value
      * @return The builder instance for method chaining
      */
-    fun withTransmittedVerticalPixelScaleField(verticalPixelScale: String) =
+    override fun withTransmittedVerticalPixelScaleField(verticalPixelScale: String) =
         withField(
             VariableResolutionFingerprintImageFields.TVPS.id,
             TextField(verticalPixelScale),
@@ -162,7 +159,7 @@ class VariableResolutionFingerprintRecordBuilder :
      * @param compressionAlgorithm The compression algorithm identifier
      * @return The builder instance for method chaining
      */
-    fun withCompressionAlgorithmField(compressionAlgorithm: String) =
+    override fun withCompressionAlgorithmField(compressionAlgorithm: String) =
         withField(
             VariableResolutionFingerprintImageFields.CGA.id,
             TextField(compressionAlgorithm),
@@ -413,22 +410,4 @@ class VariableResolutionFingerprintRecordBuilder :
             VariableResolutionFingerprintImageFields.GEO.id,
             TextField(geographicLocation),
         )
-
-    /**
-     * Sets DATA (Image Data) - the actual image data in the specified format,
-     * height (VLL) and width (HLL) are inferred from the image.
-     *
-     * @param imageData The binary image data
-     * @return The builder instance for method chaining
-     */
-    fun withImageDataField(imageData: ByteArray): VariableResolutionFingerprintRecordBuilder {
-        val imageInfo = ImageParser.readImageInfo(imageData)
-        return this
-            .withHorizontalLineLengthField(imageInfo.width.toString())
-            .withVerticalLineLengthField(imageInfo.height.toString())
-            .withCompressionAlgorithmField(imageInfo.compressionAlgorithm.code)
-            .withTransmittedHorizontalPixelScaleField(imageInfo.pixelsPerInchX.toString())
-            .withTransmittedVerticalPixelScaleField(imageInfo.pixelsPerInchY.toString())
-            .withField(ImageFields.DATA.id, ImageField(imageData))
-    }
 }

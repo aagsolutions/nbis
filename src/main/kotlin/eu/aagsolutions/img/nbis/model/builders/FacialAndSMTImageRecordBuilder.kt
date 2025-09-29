@@ -24,11 +24,8 @@
 package eu.aagsolutions.img.nbis.model.builders
 
 import eu.aagsolutions.img.nbis.calculators.TextRecordLengthCalculator
-import eu.aagsolutions.img.nbis.io.ImageParser
 import eu.aagsolutions.img.nbis.model.enums.RecordType
 import eu.aagsolutions.img.nbis.model.enums.records.FacialAndSMTImageFields
-import eu.aagsolutions.img.nbis.model.enums.records.ImageFields
-import eu.aagsolutions.img.nbis.model.fields.ImageField
 import eu.aagsolutions.img.nbis.model.fields.TextField
 import eu.aagsolutions.img.nbis.model.records.FacialAndSMTImageRecord
 
@@ -38,7 +35,7 @@ import eu.aagsolutions.img.nbis.model.records.FacialAndSMTImageRecord
  */
 @Suppress("TooManyFunctions")
 class FacialAndSMTImageRecordBuilder :
-    NistRecordBuilder<FacialAndSMTImageRecord, FacialAndSMTImageRecordBuilder>(
+    TextRecordWithImageBuilder<FacialAndSMTImageRecord, FacialAndSMTImageRecordBuilder>(
         RecordType.RT10.id,
         RecordType.RT10.label,
         TextRecordLengthCalculator(),
@@ -109,7 +106,7 @@ class FacialAndSMTImageRecordBuilder :
      * @param horizontalLineLength The number of pixels on each horizontal line
      * @return FacialAndSMTImageRecordBuilder for method chaining
      */
-    fun withHorizontalLineLengthField(horizontalLineLength: String) =
+    override fun withHorizontalLineLengthField(horizontalLineLength: String) =
         withField(
             FacialAndSMTImageFields.HLL.id,
             TextField(horizontalLineLength),
@@ -121,7 +118,7 @@ class FacialAndSMTImageRecordBuilder :
      * @param verticalLineLength The number of horizontal pixel rows
      * @return FacialAndSMTImageRecordBuilder for method chaining
      */
-    fun withVerticalLineLengthField(verticalLineLength: String) =
+    override fun withVerticalLineLengthField(verticalLineLength: String) =
         withField(
             FacialAndSMTImageFields.VLL.id,
             TextField(verticalLineLength),
@@ -154,13 +151,13 @@ class FacialAndSMTImageRecordBuilder :
     /**
      * Sets THPS (Transmitted Horizontal Pixel Scale) field.
      *
-     * @param transmittedHorizontalPixelScale The transmitted horizontal pixel density
+     * @param horizontalPixelScale The transmitted horizontal pixel density
      * @return FacialAndSMTImageRecordBuilder for method chaining
      */
-    fun withTransmittedHorizontalPixelScaleField(transmittedHorizontalPixelScale: String) =
+    override fun withTransmittedHorizontalPixelScaleField(horizontalPixelScale: String) =
         withField(
             FacialAndSMTImageFields.THPS.id,
-            TextField(transmittedHorizontalPixelScale),
+            TextField(horizontalPixelScale),
         )
 
     /**
@@ -178,13 +175,13 @@ class FacialAndSMTImageRecordBuilder :
     /**
      * Sets TVPS (Transmitted Vertical Pixel Scale) field.
      *
-     * @param transmittedVerticalPixelScale The transmitted vertical pixel density
+     * @param verticalPixelScale The transmitted vertical pixel density
      * @return FacialAndSMTImageRecordBuilder for method chaining
      */
-    fun withTransmittedVerticalPixelScaleField(transmittedVerticalPixelScale: String) =
+    override fun withTransmittedVerticalPixelScaleField(verticalPixelScale: String) =
         withField(
             FacialAndSMTImageFields.TVPS.id,
-            TextField(transmittedVerticalPixelScale),
+            TextField(verticalPixelScale),
         )
 
     /**
@@ -193,7 +190,7 @@ class FacialAndSMTImageRecordBuilder :
      * @param compressionAlgorithm The algorithm used to compress the image data
      * @return FacialAndSMTImageRecordBuilder for method chaining
      */
-    fun withCompressionAlgorithmField(compressionAlgorithm: String) =
+    override fun withCompressionAlgorithmField(compressionAlgorithm: String) =
         withField(
             FacialAndSMTImageFields.CGA.id,
             TextField(compressionAlgorithm),
@@ -774,20 +771,4 @@ class FacialAndSMTImageRecordBuilder :
             FacialAndSMTImageFields.GEO.id,
             TextField(geographicSampleAcquisitionLocation),
         )
-
-    /**
-     * Sets DATA (Image Data) – the binary image data.
-     *
-     * @param imageData the binary image data as ByteArray
-     */
-    fun withImageDataField(imageData: ByteArray): FacialAndSMTImageRecordBuilder {
-        val imageInfo = ImageParser.readImageInfo(imageData)
-        return this
-            .withHorizontalLineLengthField(imageInfo.width.toString())
-            .withVerticalLineLengthField(imageInfo.height.toString())
-            .withCompressionAlgorithmField(imageInfo.compressionAlgorithm.code)
-            .withTransmittedHorizontalPixelScaleField(imageInfo.pixelsPerInchX.toString())
-            .withTransmittedVerticalPixelScaleField(imageInfo.pixelsPerInchY.toString())
-            .withField(ImageFields.DATA.id, ImageField(imageData))
-    }
 }

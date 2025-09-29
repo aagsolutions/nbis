@@ -138,8 +138,6 @@ class NistFileBuilderTest {
                 .withInformationDesignationCharField("01")
                 .withImageDataField(faceImage)
                 .withScaleUnitsField("1")
-                .withTransmittedHorizontalPixelScaleField("500") // Typical DPI
-                .withTransmittedVerticalPixelScaleField("500")
                 .withColorSpaceField(Color.MULTI.code)
                 .build()
         val nistFile =

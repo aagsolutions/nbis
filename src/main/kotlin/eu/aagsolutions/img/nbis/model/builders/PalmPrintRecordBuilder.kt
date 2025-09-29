@@ -24,17 +24,14 @@
 package eu.aagsolutions.img.nbis.model.builders
 
 import eu.aagsolutions.img.nbis.calculators.TextRecordLengthCalculator
-import eu.aagsolutions.img.nbis.io.ImageParser
 import eu.aagsolutions.img.nbis.model.enums.RecordType
-import eu.aagsolutions.img.nbis.model.enums.records.ImageFields
 import eu.aagsolutions.img.nbis.model.enums.records.PalmPrintImageFields
-import eu.aagsolutions.img.nbis.model.fields.ImageField
 import eu.aagsolutions.img.nbis.model.fields.TextField
 import eu.aagsolutions.img.nbis.model.records.PalmPrintRecord
 
 @Suppress("TooManyFunctions")
 class PalmPrintRecordBuilder :
-    NistRecordBuilder<PalmPrintRecord, PalmPrintRecordBuilder>(
+    TextRecordWithImageBuilder<PalmPrintRecord, PalmPrintRecordBuilder>(
         RecordType.RT15.id,
         RecordType.RT15.label,
         TextRecordLengthCalculator(),
@@ -57,18 +54,21 @@ class PalmPrintRecordBuilder :
 
     fun withCaptureDateField(captureDate: String) = withField(PalmPrintImageFields.PCD.id, TextField(captureDate))
 
-    fun withHorizontalLineLengthField(horizontalLineLength: String) =
+    override fun withHorizontalLineLengthField(horizontalLineLength: String) =
         withField(PalmPrintImageFields.HLL.id, TextField(horizontalLineLength))
 
-    fun withVerticalLineLengthField(verticalLineLength: String) = withField(PalmPrintImageFields.VLL.id, TextField(verticalLineLength))
+    override fun withVerticalLineLengthField(verticalLineLength: String) =
+        withField(PalmPrintImageFields.VLL.id, TextField(verticalLineLength))
 
     fun withScaleUnitsField(scaleUnits: String) = withField(PalmPrintImageFields.SLC.id, TextField(scaleUnits))
 
-    fun withTransmittedHorizontalPixelScaleField(scale: String) = withField(PalmPrintImageFields.THPS.id, TextField(scale))
+    override fun withTransmittedHorizontalPixelScaleField(horizontalPixelScale: String) =
+        withField(PalmPrintImageFields.THPS.id, TextField(horizontalPixelScale))
 
-    fun withTransmittedVerticalPixelScaleField(scale: String) = withField(PalmPrintImageFields.TVPS.id, TextField(scale))
+    override fun withTransmittedVerticalPixelScaleField(verticalPixelScale: String) =
+        withField(PalmPrintImageFields.TVPS.id, TextField(verticalPixelScale))
 
-    fun withCompressionAlgorithmField(compressionAlgorithm: String) =
+    override fun withCompressionAlgorithmField(compressionAlgorithm: String) =
         withField(PalmPrintImageFields.CGA.id, TextField(compressionAlgorithm))
 
     fun withBitPerPixelField(bitPerPixel: String) = withField(PalmPrintImageFields.BPX.id, TextField(bitPerPixel))
@@ -111,20 +111,4 @@ class PalmPrintRecordBuilder :
     fun withSourceRepresentationField(sourceRep: String) = withField(PalmPrintImageFields.SOR.id, TextField(sourceRep))
 
     fun withGeographicSampleAcquisitionLocationField(location: String) = withField(PalmPrintImageFields.GEO.id, TextField(location))
-
-    /**
-     * Sets DATA (Image Data) – the binary image data, height (VLL) and width (HLL) are inferred from the image.
-     *
-     * @param imageData the binary image data as ByteArray
-     */
-    fun withImageDataField(imageData: ByteArray): PalmPrintRecordBuilder {
-        val imageInfo = ImageParser.readImageInfo(imageData)
-        return this
-            .withHorizontalLineLengthField(imageInfo.width.toString())
-            .withVerticalLineLengthField(imageInfo.height.toString())
-            .withCompressionAlgorithmField(imageInfo.compressionAlgorithm.code)
-            .withTransmittedHorizontalPixelScaleField(imageInfo.pixelsPerInchX.toString())
-            .withTransmittedVerticalPixelScaleField(imageInfo.pixelsPerInchY.toString())
-            .withField(ImageFields.DATA.id, ImageField(imageData))
-    }
 }
