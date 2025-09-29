@@ -100,7 +100,7 @@ centralPortal {
     pom {
         group = "eu.aagsolutions.img"
         name = "nbis"
-        url = "https://github.com/atdi/nbis"
+        url = "https://github.com/aagsolutions/nbis"
         packaging = "jar"
         licenses {
             license {
@@ -109,9 +109,9 @@ centralPortal {
             }
         }
         scm {
-            url.set("https://github.com/atdi/nbis")
-            connection.set("scm:git:git://github.com/atdi/nbis.git")
-            developerConnection.set("scm:git:ssh://github.com/atdi/nbis.git")
+            url.set("https://github.com/aagsolutions/nbis")
+            connection.set("scm:git:git://github.com/aagsolutions/nbis.git")
+            developerConnection.set("scm:git:ssh://github.com/aagsolutions/nbis.git")
         }
         developers {
             developer {
