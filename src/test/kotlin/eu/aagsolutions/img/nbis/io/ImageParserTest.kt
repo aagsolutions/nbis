@@ -37,11 +37,15 @@ class ImageParserTest {
             compressionAlgorithm shouldBe CompressionAlgorithm.JPEGB
             width shouldBe 1024
             height shouldBe 959
+            pixelsPerInchX shouldBe 300
+            pixelsPerInchY shouldBe 300
+            colorSpace shouldBe "RGB"
+            pixelDepth shouldBe 24
         }
     }
 
     @Test
-    fun `it should successful detect PNG as compression algorithm`() {
+    fun `it should successful detect PNG image properties`() {
         val url = ImageParserTest::class.java.getResource("/img/fp-1.png")
         val faceImage = url!!.openStream().use { inputStream -> inputStream.readAllBytes() }
         val imageInfo = ImageParser.readImageInfo(faceImage)
@@ -49,6 +53,26 @@ class ImageParserTest {
             compressionAlgorithm shouldBe CompressionAlgorithm.PNG
             width shouldBe 804
             height shouldBe 752
+            pixelsPerInchX shouldBe 72
+            pixelsPerInchY shouldBe 72
+            colorSpace shouldBe "RGB"
+            pixelDepth shouldBe 24
+        }
+    }
+
+    @Test
+    fun `it should successful detect WSQ image properties`() {
+        val url = ImageParserTest::class.java.getResource("/img/sample.wsq")
+        val faceImage = url!!.openStream().use { inputStream -> inputStream.readAllBytes() }
+        val imageInfo = ImageParser.readImageInfo(faceImage)
+        imageInfo.apply {
+            compressionAlgorithm shouldBe CompressionAlgorithm.WSQ20
+            width shouldBe 545
+            height shouldBe 622
+            pixelsPerInchX shouldBe 24
+            pixelsPerInchY shouldBe 24
+            colorSpace shouldBe "GRAY"
+            pixelDepth shouldBe 255
         }
     }
 }

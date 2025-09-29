@@ -451,17 +451,18 @@ object ImageParser {
         // WSQ SOF structure:
         // 0-1: Marker (0xFF 0xA2)
         // 2-3: Length of segment
-        // 4: Precision (usually 8)
-        // 5-6: Height (big-endian)
-        // 7-8: Width (big-endian)
-        // 9: Number of components (usually 1 for grayscale)
-        // 10+: Component specifications
+        // 4: Black value (0)
+        // 5: Precision (usually 8)
+        // 6-7: Height (big-endian)
+        // 8-9: Width (big-endian)
+        // 10: Number of components (usually 1 for grayscale)
+        // 11+: Component specifications
 
         val segmentLength = readUInt16BigEndian(data, offset + 2)
-        val precision = data[offset + 4].toInt() and 0xFF
-        val height = readUInt16BigEndian(data, offset + 5)
-        val width = readUInt16BigEndian(data, offset + 7)
-        val numComponents = data[offset + 9].toInt() and 0xFF
+        val precision = data[offset + 5].toInt() and 0xFF
+        val height = readUInt16BigEndian(data, offset + 6)
+        val width = readUInt16BigEndian(data, offset + 8)
+        val numComponents = data[offset + 10].toInt() and 0xFF
 
         // Try to find PPI (Pixels Per Inch) information in comments
         val ppi = findWSQPixelsPerInch(data) ?: 500 // Default PPI for fingerprints
@@ -538,22 +539,5 @@ object ImageParser {
 
         // WSQ starts with SOI marker: 0xFF 0xA0
         return data[0] == 0xFF.toByte() && data[1] == 0xA0.toByte()
-    }
-
-    /**
-     * Alternative method that reads WSQ dimensions along with additional metadata.
-     */
-    fun readWSQImageInfo(wsqData: ByteArray): Map<String, Any> {
-        val dimensions = readWSQDimensions(wsqData)
-
-        return mapOf(
-            "width" to dimensions.width,
-            "height" to dimensions.height,
-            "pixelDepth" to dimensions.pixelDepth,
-            "pixelsPerInch" to dimensions.pixelsPerInch,
-            "compressionAlgorithm" to "WSQ20",
-            "colorSpace" to "GRAYSCALE",
-            "estimatedFileSize" to wsqData.size,
-        )
     }
 }
