@@ -72,7 +72,7 @@ class ImageParserTest {
             pixelsPerInchX shouldBe 24
             pixelsPerInchY shouldBe 24
             colorSpace shouldBe "GRAY"
-            pixelDepth shouldBe 255
+            pixelDepth shouldBe 8
         }
     }
 }

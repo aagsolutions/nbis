@@ -452,25 +452,25 @@ object ImageParser {
         // 0-1: Marker (0xFF 0xA2)
         // 2-3: Length of segment
         // 4: Black value (0)
-        // 5: Precision (usually 8)
+        // 5: Precision (must be 8)
         // 6-7: Height (big-endian)
         // 8-9: Width (big-endian)
-        // 10: Number of components (usually 1 for grayscale)
+        // 10: Number of components (must be 1 for grayscale)
         // 11+: Component specifications
 
         val segmentLength = readUInt16BigEndian(data, offset + 2)
-        val precision = data[offset + 5].toInt() and 0xFF
+
         val height = readUInt16BigEndian(data, offset + 6)
         val width = readUInt16BigEndian(data, offset + 8)
         val numComponents = data[offset + 10].toInt() and 0xFF
 
-        // Try to find PPI (Pixels Per Inch) information in comments
-        val ppi = findWSQPixelsPerInch(data) ?: 500 // Default PPI for fingerprints
+        // Try to find PPI in comments, default to 500 if not found
+        val ppi = findWSQPixelsPerInch(data) ?: 500
 
         return WSQImageDimensions(
             width = width,
             height = height,
-            pixelDepth = precision,
+            pixelDepth = 8,
             pixelsPerInch = ppi,
         )
     }
