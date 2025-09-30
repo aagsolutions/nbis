@@ -69,8 +69,8 @@ class ImageParserTest {
             compressionAlgorithm shouldBe CompressionAlgorithm.WSQ20
             width shouldBe 545
             height shouldBe 622
-            pixelsPerInchX shouldBe 24
-            pixelsPerInchY shouldBe 24
+            pixelsPerInchX shouldBe 500
+            pixelsPerInchY shouldBe 500
             colorSpace shouldBe "GRAY"
             pixelDepth shouldBe 8
         }

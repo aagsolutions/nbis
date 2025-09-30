@@ -37,7 +37,7 @@ import eu.aagsolutions.img.nbis.model.enums.reference.CompressionAlgorithm
     "ReturnCount",
     "ThrowsCount",
 )
-object ImageParser {
+object ImageParserCopy {
     private const val JP2_SIGNATURE_SIZE = 12
     private const val PNG_SIGNATURE_SIZE = 8
 
@@ -489,7 +489,7 @@ object ImageParser {
                     val comment = String(commentBytes, Charsets.US_ASCII)
 
                     // Look for PPI information in the comment
-                    val ppiRegex = Regex("""\bPPI\s+(\d+)""", RegexOption.IGNORE_CASE)
+                    val ppiRegex = Regex("""(\d+)\s*PPI""", RegexOption.IGNORE_CASE)
                     val match = ppiRegex.find(comment)
                     if (match != null) {
                         return match.groupValues[1].toIntOrNull()
