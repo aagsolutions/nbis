@@ -25,6 +25,7 @@ package eu.aagsolutions.img.nbis.model.builders
 
 import eu.aagsolutions.img.nbis.calculators.TextRecordLengthCalculator
 import eu.aagsolutions.img.nbis.model.enums.records.IrisImageFields
+import eu.aagsolutions.img.nbis.model.enums.records.LatentImageFields
 import eu.aagsolutions.img.nbis.model.fields.TextField
 import eu.aagsolutions.img.nbis.model.records.IrisImageRecord
 
@@ -42,6 +43,18 @@ class IrisImageRecordBuilder(
         this.fields[LENGTH_FIELD_ID] = lengthField
         return IrisImageRecord(this.id, this.fields)
     }
+
+    /**
+     * Sets IDC (Information Designation Character) – uniquely identifies the record within the transaction.
+     *
+     * @param designationChar The designation character value for the IDC field
+     * @return The builder instance for method chaining
+     */
+    fun withInformationDesignationCharField(designationChar: String) =
+        withField(
+            LatentImageFields.IDC.id,
+            TextField(designationChar),
+        )
 
     /**
      * Sets HLL (Horizontal Line Length) – the number of pixels contained on a single horizontal line.
