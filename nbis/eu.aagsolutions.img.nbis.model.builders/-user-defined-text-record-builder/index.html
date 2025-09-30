@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8">
+    <title>UserDefinedTextRecordBuilder</title>
+    <link href="../../../images/logo-icon.svg" rel="icon" type="image/svg">
+        <script>var pathToRoot = "../../../";</script>
+    <script>document.documentElement.classList.replace("no-js", "js");</script>
+    <script>const storage = localStorage.getItem("dokka-dark-mode")
+      if (storage == null) {
+        const osDarkSchemePreferred = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+        if (osDarkSchemePreferred === true) {
+          document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        }
+      } else {
+        const savedDarkMode = JSON.parse(storage)
+        if (savedDarkMode === true) {
+          document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        }
+      }
+    </script>
+<script type="text/javascript" src="https://unpkg.com/kotlin-playground@1/dist/playground.min.js" async="async"></script>
+<script type="text/javascript" src="../../../scripts/sourceset_dependencies.js" async="async"></script>
+<link href="../../../styles/style.css" rel="Stylesheet">
+<link href="../../../styles/main.css" rel="Stylesheet">
+<link href="../../../styles/prism.css" rel="Stylesheet">
+<link href="../../../styles/logo-styles.css" rel="Stylesheet">
+<link href="../../../ui-kit/ui-kit.min.css" rel="Stylesheet">
+<script type="text/javascript" src="../../../scripts/safe-local-storage_blocking.js"></script>
+<script type="text/javascript" src="../../../scripts/navigation-loader.js" async="async"></script>
+<script type="text/javascript" src="../../../scripts/platform-content-handler.js" async="async"></script>
+<script type="text/javascript" src="../../../scripts/main.js" defer="defer"></script>
+<script type="text/javascript" src="../../../scripts/prism.js" async="async"></script>
+<script type="text/javascript" src="../../../ui-kit/ui-kit.min.js" defer="defer"></script>
+</head>
+<body>
+<div class="root">
+    <header class="navigation theme-dark" id="navigation-wrapper" role="banner">
+            <a class="library-name--link" href="../../../index.html" tabindex="1">
+                    nbis
+            </a>
+        <button class="navigation-controls--btn navigation-controls--btn_toc ui-kit_mobile-only" id="toc-toggle"
+                type="button">Toggle table of contents
+        </button>
+        <div class="navigation-controls--break ui-kit_mobile-only"></div>
+        <div class="library-version" id="library-version">
+0.4.1-SNAPSHOT        </div>
+        <div class="navigation-controls">
+        <ul class="filter-section filter-section_loading" id="filter-section" aria-label="Target filter">
+                <button class="platform-tag platform-selector jvm-like" data-active="" aria-pressed="true"
+                        data-filter=":/main">jvm</button>
+            <div class="dropdown filter-section--dropdown" data-role="dropdown" id="filter-section-dropdown">
+                <button class="button button_dropdown filter-section--dropdown-toggle" role="combobox"
+                        data-role="dropdown-toggle"
+                        aria-controls="platform-tags-listbox"
+                        aria-haspopup="listbox"
+                        aria-expanded="false"
+                        aria-label="Toggle source sets"
+                ></button>
+                <ul role="listbox" id="platform-tags-listbox" class="dropdown--list" data-role="dropdown-listbox" aria-label="Target filter">
+                    <div class="dropdown--header"><span>Target filter</span>
+                        <button class="button" data-role="dropdown-toggle" aria-label="Close target filter">
+                            <i class="ui-kit-icon ui-kit-icon_cross"></i>
+                        </button>
+                    </div>
+                        <li role="option" class="dropdown--option platform-selector-option jvm-like" tabindex="0">
+                            <label class="checkbox">
+                                <input type="checkbox" class="checkbox--input" id=":/main"
+                                       data-filter=":/main"/>
+                                <span class="checkbox--icon"></span>
+                                jvm
+                            </label>
+                        </li>
+                </ul>
+                <div class="dropdown--overlay"></div>
+            </div>
+        </ul>
+            <button class="navigation-controls--btn navigation-controls--btn_theme" id="theme-toggle-button"
+                    type="button">Switch theme
+            </button>
+            <div class="navigation-controls--btn navigation-controls--btn_search" id="searchBar" role="button">Search in
+                API
+            </div>
+        </div>
+    </header>
+    <div id="container">
+        <nav id="leftColumn" class="sidebar" data-item-type="SECTION" data-item-config='{"defaultSize": 280, "minSize": 200, "maxSize": 400}'>
+            <a class="toc--skip-link" href="#main">Skip to content</a>
+            <div class="dropdown theme-dark_mobile" data-role="dropdown" id="toc-dropdown">
+                <ul role="listbox" id="toc-listbox" class="dropdown--list dropdown--list_toc-list"
+                    data-role="dropdown-listbox" aria-label="Table of contents">
+                    <div class="dropdown--header">
+                            <span>
+                                    nbis
+                            </span>
+                        <button class="button" data-role="dropdown-toggle" aria-label="Close table of contents">
+                            <i class="ui-kit-icon ui-kit-icon_cross"></i>
+                        </button>
+                    </div>
+                    <div class="sidebar--inner" id="sideMenu"></div>
+                </ul>
+                <div class="dropdown--overlay"></div>
+            </div>
+        </nav>
+        <div id="resizer" class="resizer" data-item-type="BAR"></div>
+        <div id="main" data-item-type="SECTION" role="main">
+<div class="main-content" data-page-type="classlike" id="content" pageIds="nbis::eu.aagsolutions.img.nbis.model.builders/UserDefinedTextRecordBuilder///PointingToDeclaration//-251573632">
+  <div class="breadcrumbs"><a href="../../../index.html">nbis</a><span class="delimiter">/</span><a href="../index.html">eu.aagsolutions.img.nbis.model.builders</a><span class="delimiter">/</span><span class="current">UserDefinedTextRecordBuilder</span></div>
+  <div class="cover ">
+    <h1 class="cover"><span>User</span><wbr></wbr><span>Defined</span><wbr></wbr><span>Text</span><wbr></wbr><span>Record</span><wbr></wbr><span><span>Builder</span></span></h1>
+    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">class </span><a href="index.html">UserDefinedTextRecordBuilder</a> : <a href="../-nist-record-builder/index.html">NistRecordBuilder</a><span class="token operator">&lt;</span><a href="../../eu.aagsolutions.img.nbis.model.records/-user-defined-text-record/index.html">UserDefinedTextRecord</a><span class="token punctuation">, </span><a href="index.html">UserDefinedTextRecordBuilder</a><span class="token operator">&gt; </span></div><p class="paragraph">Builder for creating instances of UserDefinedTextRecord (NIST Type-2 record).</p><p class="paragraph">This builder provides fluent helper methods to populate common Type-2 fields defined by the NIST standard (see UserDefinedTextFields). The record length (LEN) is automatically calculated and injected at build() time using TextRecordLengthCalculator.</p></div></div>
+  </div>
+  <div class="tabbedcontent">
+    <div class="tabs-section" tabs-section="tabs-section"><button class="section-tab" data-active="" data-togglable="CONSTRUCTOR,TYPE,PROPERTY,FUNCTION">Members</button></div>
+    <div class="tabs-section-body">
+      <div data-togglable="CONSTRUCTOR">
+        <h2 class="tableheader">Constructors</h2>
+        <div class="table"><a data-name="-945465128%2FConstructors%2F-251573632" anchor-label="UserDefinedTextRecordBuilder" id="-945465128%2FConstructors%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-togglable="CONSTRUCTOR" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-user-defined-text-record-builder.html"><span>User</span><wbr></wbr><span>Defined</span><wbr></wbr><span>Text</span><wbr></wbr><span>Record</span><wbr></wbr><span><span>Builder</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-945465128%2FConstructors%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">constructor</span><span class="token punctuation">(</span><span class="token punctuation">)</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div data-togglable="PROPERTY">
+        <h2 class="tableheader">Properties</h2>
+        <div class="table"><a data-name="192857296%2FProperties%2F-251573632" anchor-label="calculator" id="192857296%2FProperties%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="../-nist-record-builder/calculator.html"><span><span>calculator</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="192857296%2FProperties%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="../-nist-record-builder/calculator.html">calculator</a><span class="token operator">: </span><a href="../../eu.aagsolutions.img.nbis.calculators/-logical-record-length-calculator/index.html">LogicalRecordLengthCalculator</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1867558777%2FProperties%2F-251573632" anchor-label="fields" id="1867558777%2FProperties%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="../-nist-record-builder/fields.html"><span><span>fields</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1867558777%2FProperties%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="../-nist-record-builder/fields.html">fields</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-mutable-map/index.html">MutableMap</a><span class="token operator">&lt;</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a><span class="token punctuation">, </span><a href="../../eu.aagsolutions.img.nbis.model.fields/-field/index.html">Field</a><span class="token operator">&lt;</span><span class="token operator">*</span><span class="token operator">&gt;</span><span class="token operator">&gt;</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="936322519%2FProperties%2F-251573632" anchor-label="id" id="936322519%2FProperties%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="../-nist-record-builder/id.html"><span><span>id</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="936322519%2FProperties%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="../-nist-record-builder/id.html">id</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="174753876%2FProperties%2F-251573632" anchor-label="label" id="174753876%2FProperties%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="../-nist-record-builder/label.html"><span><span>label</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="174753876%2FProperties%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="../-nist-record-builder/label.html">label</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div data-togglable="FUNCTION">
+        <h2 class="tableheader">Functions</h2>
+        <div class="table"><a data-name="-1779864523%2FFunctions%2F-251573632" anchor-label="build" id="-1779864523%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="build.html"><span><span>build</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1779864523%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="build.html"><span class="token function">build</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../../eu.aagsolutions.img.nbis.model.records/-user-defined-text-record/index.html">UserDefinedTextRecord</a></div><div class="brief "><p class="paragraph">Finalizes the record by calculating and setting the LEN field, then returns an immutable UserDefinedTextRecord containing all collected fields.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-953121780%2FFunctions%2F-251573632" anchor-label="fromRecord" id="-953121780%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="../-nist-record-builder/from-record.html"><span>from</span><wbr></wbr><span><span>Record</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-953121780%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="../-nist-record-builder/from-record.html"><span class="token function">fromRecord</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">record<span class="token operator">: </span><a href="../../eu.aagsolutions.img.nbis.model.records/-user-defined-text-record/index.html">UserDefinedTextRecord</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">UserDefinedTextRecordBuilder</a></div><div class="brief "><p class="paragraph">Creates a new builder instance initialized with fields from an existing record.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-415548016%2FFunctions%2F-251573632" anchor-label="removeField" id="-415548016%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="../-nist-record-builder/remove-field.html"><span>remove</span><wbr></wbr><span><span>Field</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-415548016%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="../-nist-record-builder/remove-field.html"><span class="token function">removeField</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">fieldId<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">UserDefinedTextRecordBuilder</a></div><div class="brief "><p class="paragraph">Removes a field from the record being built.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1901245388%2FFunctions%2F-251573632" anchor-label="withCaseNumber" id="1901245388%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="with-case-number.html"><span>with</span><wbr></wbr><span>Case</span><wbr></wbr><span><span>Number</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1901245388%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="with-case-number.html"><span class="token function">withCaseNumber</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">caseNumber<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">UserDefinedTextRecordBuilder</a></div><div class="brief "><p class="paragraph">Sets CNO – case number.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="777100076%2FFunctions%2F-251573632" anchor-label="withCriminalReferenceNumber" id="777100076%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="with-criminal-reference-number.html"><span>with</span><wbr></wbr><span>Criminal</span><wbr></wbr><span>Reference</span><wbr></wbr><span><span>Number</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="777100076%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="with-criminal-reference-number.html"><span class="token function">withCriminalReferenceNumber</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">criminalReferenceNumber<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">UserDefinedTextRecordBuilder</a></div><div class="brief "><p class="paragraph">Sets CRN – criminal reference number.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="268198672%2FFunctions%2F-251573632" anchor-label="withDateFingerprinted" id="268198672%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="with-date-fingerprinted.html"><span>with</span><wbr></wbr><span>Date</span><wbr></wbr><span><span>Fingerprinted</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="268198672%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="with-date-fingerprinted.html"><span class="token function">withDateFingerprinted</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">dateFingerprinted<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">UserDefinedTextRecordBuilder</a></div><div class="brief "><p class="paragraph">Sets DPR – date fingerprinted. The expected format should follow the profile being used.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1186026191%2FFunctions%2F-251573632" anchor-label="withDateOfLastUpdateField" id="-1186026191%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="with-date-of-last-update-field.html"><span>with</span><wbr></wbr><span>Date</span><wbr></wbr><span>Of</span><wbr></wbr><span>Last</span><wbr></wbr><span>Update</span><wbr></wbr><span><span>Field</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1186026191%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="with-date-of-last-update-field.html"><span class="token function">withDateOfLastUpdateField</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">dateOfLastUpdate<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">UserDefinedTextRecordBuilder</a></div><div class="brief "><p class="paragraph">Sets DLU – date of the last update to this record.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1354567711%2FFunctions%2F-251573632" anchor-label="withDateOfRecordField" id="1354567711%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="with-date-of-record-field.html"><span>with</span><wbr></wbr><span>Date</span><wbr></wbr><span>Of</span><wbr></wbr><span>Record</span><wbr></wbr><span><span>Field</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1354567711%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="with-date-of-record-field.html"><span class="token function">withDateOfRecordField</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">dateOfRecord<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">UserDefinedTextRecordBuilder</a></div><div class="brief "><p class="paragraph">Sets DAR – date of record creation. The expected format should follow the profile being used (e.g., YYYYMMDD).</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1456635247%2FFunctions%2F-251573632" anchor-label="withField" id="-1456635247%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="../-nist-record-builder/with-field.html"><span>with</span><wbr></wbr><span><span>Field</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1456635247%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="../-nist-record-builder/with-field.html"><span class="token function">withField</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">fieldId<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a><span class="token punctuation">, </span></span><span class="parameter ">field<span class="token operator">: </span><a href="../../eu.aagsolutions.img.nbis.model.fields/-field/index.html">Field</a><span class="token operator">&lt;</span><span class="token operator">*</span><span class="token operator">&gt;</span></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">UserDefinedTextRecordBuilder</a></div><div class="brief "><p class="paragraph">Adds or updates a field in the record being built.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1013012357%2FFunctions%2F-251573632" anchor-label="withFingerNumber" id="1013012357%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="with-finger-number.html"><span>with</span><wbr></wbr><span>Finger</span><wbr></wbr><span><span>Number</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1013012357%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="with-finger-number.html"><span class="token function">withFingerNumber</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">fingerNumber<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">UserDefinedTextRecordBuilder</a></div><div class="brief "><p class="paragraph">Sets FNU – finger number.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-894206347%2FFunctions%2F-251573632" anchor-label="withFingerprintIdentificationByte" id="-894206347%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="with-fingerprint-identification-byte.html"><span>with</span><wbr></wbr><span>Fingerprint</span><wbr></wbr><span>Identification</span><wbr></wbr><span><span>Byte</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-894206347%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="with-fingerprint-identification-byte.html"><span class="token function">withFingerprintIdentificationByte</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">fingerprintIdByte<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">UserDefinedTextRecordBuilder</a></div><div class="brief "><p class="paragraph">Sets FIB – fingerprint identification byte.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1122842124%2FFunctions%2F-251573632" anchor-label="withInformationDesignationCharField" id="-1122842124%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="with-information-designation-char-field.html"><span>with</span><wbr></wbr><span>Information</span><wbr></wbr><span>Designation</span><wbr></wbr><span>Char</span><wbr></wbr><span><span>Field</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1122842124%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="with-information-designation-char-field.html"><span class="token function">withInformationDesignationCharField</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">designationChar<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">UserDefinedTextRecordBuilder</a></div><div class="brief "><p class="paragraph">Sets IDC (Information Designation Character) – the record sequence number within the transaction.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="509505248%2FFunctions%2F-251573632" anchor-label="withLatentIdentifierField" id="509505248%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="with-latent-identifier-field.html"><span>with</span><wbr></wbr><span>Latent</span><wbr></wbr><span>Identifier</span><wbr></wbr><span><span>Field</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="509505248%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="with-latent-identifier-field.html"><span class="token function">withLatentIdentifierField</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">latenIdentifier<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">UserDefinedTextRecordBuilder</a></div><div class="brief "><p class="paragraph">Sets MID – latent identifier.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-456772769%2FFunctions%2F-251573632" anchor-label="withMiscellaneousIdentificationNumber1" id="-456772769%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="with-miscellaneous-identification-number1.html"><span>with</span><wbr></wbr><span>Miscellaneous</span><wbr></wbr><span>Identification</span><wbr></wbr><span><span>Number1</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-456772769%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="with-miscellaneous-identification-number1.html"><span class="token function">withMiscellaneousIdentificationNumber1</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">miscellaneousId1<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">UserDefinedTextRecordBuilder</a></div><div class="brief "><p class="paragraph">Sets MN1 – miscellaneous identification number 1.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1379456352%2FFunctions%2F-251573632" anchor-label="withMiscellaneousIdentificationNumber2" id="-1379456352%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="with-miscellaneous-identification-number2.html"><span>with</span><wbr></wbr><span>Miscellaneous</span><wbr></wbr><span>Identification</span><wbr></wbr><span><span>Number2</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1379456352%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="with-miscellaneous-identification-number2.html"><span class="token function">withMiscellaneousIdentificationNumber2</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">miscellaneousId2<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">UserDefinedTextRecordBuilder</a></div><div class="brief "><p class="paragraph">Sets MN2 – miscellaneous identification number 2.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1992827361%2FFunctions%2F-251573632" anchor-label="withMiscellaneousIdentificationNumber3" id="1992827361%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="with-miscellaneous-identification-number3.html"><span>with</span><wbr></wbr><span>Miscellaneous</span><wbr></wbr><span>Identification</span><wbr></wbr><span><span>Number3</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1992827361%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="with-miscellaneous-identification-number3.html"><span class="token function">withMiscellaneousIdentificationNumber3</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">miscellaneousId3<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">UserDefinedTextRecordBuilder</a></div><div class="brief "><p class="paragraph">Sets MN3 – miscellaneous identification number 3.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1070143778%2FFunctions%2F-251573632" anchor-label="withMiscellaneousIdentificationNumber4" id="1070143778%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="with-miscellaneous-identification-number4.html"><span>with</span><wbr></wbr><span>Miscellaneous</span><wbr></wbr><span>Identification</span><wbr></wbr><span><span>Number4</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1070143778%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="with-miscellaneous-identification-number4.html"><span class="token function">withMiscellaneousIdentificationNumber4</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">miscellaneousId4<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">UserDefinedTextRecordBuilder</a></div><div class="brief "><p class="paragraph">Sets MN4 – miscellaneous identification number 4.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="147460195%2FFunctions%2F-251573632" anchor-label="withMiscellaneousIdentificationNumber5" id="147460195%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="with-miscellaneous-identification-number5.html"><span>with</span><wbr></wbr><span>Miscellaneous</span><wbr></wbr><span>Identification</span><wbr></wbr><span><span>Number5</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="147460195%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="with-miscellaneous-identification-number5.html"><span class="token function">withMiscellaneousIdentificationNumber5</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">miscellaneousId5<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">UserDefinedTextRecordBuilder</a></div><div class="brief "><p class="paragraph">Sets MN5 – miscellaneous identification number 5.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1014351431%2FFunctions%2F-251573632" anchor-label="withOrderReferenceNumber" id="-1014351431%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="with-order-reference-number.html"><span>with</span><wbr></wbr><span>Order</span><wbr></wbr><span>Reference</span><wbr></wbr><span><span>Number</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1014351431%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="with-order-reference-number.html"><span class="token function">withOrderReferenceNumber</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">orderReferenceNumber<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">UserDefinedTextRecordBuilder</a></div><div class="brief "><p class="paragraph">Sets ORN – order reference number.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1140028034%2FFunctions%2F-251573632" anchor-label="withPlaceOfArrest" id="-1140028034%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="with-place-of-arrest.html"><span>with</span><wbr></wbr><span>Place</span><wbr></wbr><span>Of</span><wbr></wbr><span><span>Arrest</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1140028034%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="with-place-of-arrest.html"><span class="token function">withPlaceOfArrest</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">placeOfArrest<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">UserDefinedTextRecordBuilder</a></div><div class="brief "><p class="paragraph">Sets POA – place of arrest.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1091827782%2FFunctions%2F-251573632" anchor-label="withReasonFingerprinted" id="-1091827782%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="with-reason-fingerprinted.html"><span>with</span><wbr></wbr><span>Reason</span><wbr></wbr><span><span>Fingerprinted</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1091827782%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="with-reason-fingerprinted.html"><span class="token function">withReasonFingerprinted</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">reasonFingerprinted<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">UserDefinedTextRecordBuilder</a></div><div class="brief "><p class="paragraph">Sets RFP – reason fingerprinted.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1524831293%2FFunctions%2F-251573632" anchor-label="withSendCopyToField" id="1524831293%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="with-send-copy-to-field.html"><span>with</span><wbr></wbr><span>Send</span><wbr></wbr><span>Copy</span><wbr></wbr><span>To</span><wbr></wbr><span><span>Field</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1524831293%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="with-send-copy-to-field.html"><span class="token function">withSendCopyToField</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">sendCopy<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">UserDefinedTextRecordBuilder</a></div><div class="brief "><p class="paragraph">Sets SCT – send copy to.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1486992139%2FFunctions%2F-251573632" anchor-label="withSequenceNumberField" id="1486992139%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="with-sequence-number-field.html"><span>with</span><wbr></wbr><span>Sequence</span><wbr></wbr><span>Number</span><wbr></wbr><span><span>Field</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1486992139%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="with-sequence-number-field.html"><span class="token function">withSequenceNumberField</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">sequenceNumber<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">UserDefinedTextRecordBuilder</a></div><div class="brief "><p class="paragraph">Sets SQN – sequence number.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-2121734224%2FFunctions%2F-251573632" anchor-label="withSystemInformationField" id="-2121734224%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="with-system-information-field.html"><span>with</span><wbr></wbr><span>System</span><wbr></wbr><span>Information</span><wbr></wbr><span><span>Field</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-2121734224%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="with-system-information-field.html"><span class="token function">withSystemInformationField</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">systemInformationField<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">UserDefinedTextRecordBuilder</a></div><div class="brief "><p class="paragraph">Sets SYS – system information field identifying the originating system/application.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1402597013%2FFunctions%2F-251573632" anchor-label="withTimeOfFingerprinting" id="1402597013%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="with-time-of-fingerprinting.html"><span>with</span><wbr></wbr><span>Time</span><wbr></wbr><span>Of</span><wbr></wbr><span><span>Fingerprinting</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1402597013%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="with-time-of-fingerprinting.html"><span class="token function">withTimeOfFingerprinting</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">timeOfFingerprinting<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">UserDefinedTextRecordBuilder</a></div><div class="brief "><p class="paragraph">Sets TOF – time of fingerprinting.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    <div class="footer">
+        <div class="footer--container">
+            <a href="#content" id="go-to-top-link" class="footer--button footer--button_go-to-top"></a>
+            <div class="footer--content">
+                <div>
+                    <span>Generated by </span>
+                    <a class="footer--link footer--link_external" href="https://github.com/Kotlin/dokka">
+                        Dokka
+                    </a>
+                    <div>© 2025 Copyright</div>
+                </div>
+            </div>
+        </div>
+    </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

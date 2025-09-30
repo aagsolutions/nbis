@@ -1,0 +1,1199 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8">
+    <title>FacialAndSMTImageRecordBuilder</title>
+    <link href="../../../images/logo-icon.svg" rel="icon" type="image/svg">
+        <script>var pathToRoot = "../../../";</script>
+    <script>document.documentElement.classList.replace("no-js", "js");</script>
+    <script>const storage = localStorage.getItem("dokka-dark-mode")
+      if (storage == null) {
+        const osDarkSchemePreferred = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+        if (osDarkSchemePreferred === true) {
+          document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        }
+      } else {
+        const savedDarkMode = JSON.parse(storage)
+        if (savedDarkMode === true) {
+          document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        }
+      }
+    </script>
+<script type="text/javascript" src="https://unpkg.com/kotlin-playground@1/dist/playground.min.js" async="async"></script>
+<script type="text/javascript" src="../../../scripts/sourceset_dependencies.js" async="async"></script>
+<link href="../../../styles/style.css" rel="Stylesheet">
+<link href="../../../styles/main.css" rel="Stylesheet">
+<link href="../../../styles/prism.css" rel="Stylesheet">
+<link href="../../../styles/logo-styles.css" rel="Stylesheet">
+<link href="../../../ui-kit/ui-kit.min.css" rel="Stylesheet">
+<script type="text/javascript" src="../../../scripts/safe-local-storage_blocking.js"></script>
+<script type="text/javascript" src="../../../scripts/navigation-loader.js" async="async"></script>
+<script type="text/javascript" src="../../../scripts/platform-content-handler.js" async="async"></script>
+<script type="text/javascript" src="../../../scripts/main.js" defer="defer"></script>
+<script type="text/javascript" src="../../../scripts/prism.js" async="async"></script>
+<script type="text/javascript" src="../../../ui-kit/ui-kit.min.js" defer="defer"></script>
+</head>
+<body>
+<div class="root">
+    <header class="navigation theme-dark" id="navigation-wrapper" role="banner">
+            <a class="library-name--link" href="../../../index.html" tabindex="1">
+                    nbis
+            </a>
+        <button class="navigation-controls--btn navigation-controls--btn_toc ui-kit_mobile-only" id="toc-toggle"
+                type="button">Toggle table of contents
+        </button>
+        <div class="navigation-controls--break ui-kit_mobile-only"></div>
+        <div class="library-version" id="library-version">
+0.4.1-SNAPSHOT        </div>
+        <div class="navigation-controls">
+        <ul class="filter-section filter-section_loading" id="filter-section" aria-label="Target filter">
+                <button class="platform-tag platform-selector jvm-like" data-active="" aria-pressed="true"
+                        data-filter=":/main">jvm</button>
+            <div class="dropdown filter-section--dropdown" data-role="dropdown" id="filter-section-dropdown">
+                <button class="button button_dropdown filter-section--dropdown-toggle" role="combobox"
+                        data-role="dropdown-toggle"
+                        aria-controls="platform-tags-listbox"
+                        aria-haspopup="listbox"
+                        aria-expanded="false"
+                        aria-label="Toggle source sets"
+                ></button>
+                <ul role="listbox" id="platform-tags-listbox" class="dropdown--list" data-role="dropdown-listbox" aria-label="Target filter">
+                    <div class="dropdown--header"><span>Target filter</span>
+                        <button class="button" data-role="dropdown-toggle" aria-label="Close target filter">
+                            <i class="ui-kit-icon ui-kit-icon_cross"></i>
+                        </button>
+                    </div>
+                        <li role="option" class="dropdown--option platform-selector-option jvm-like" tabindex="0">
+                            <label class="checkbox">
+                                <input type="checkbox" class="checkbox--input" id=":/main"
+                                       data-filter=":/main"/>
+                                <span class="checkbox--icon"></span>
+                                jvm
+                            </label>
+                        </li>
+                </ul>
+                <div class="dropdown--overlay"></div>
+            </div>
+        </ul>
+            <button class="navigation-controls--btn navigation-controls--btn_theme" id="theme-toggle-button"
+                    type="button">Switch theme
+            </button>
+            <div class="navigation-controls--btn navigation-controls--btn_search" id="searchBar" role="button">Search in
+                API
+            </div>
+        </div>
+    </header>
+    <div id="container">
+        <nav id="leftColumn" class="sidebar" data-item-type="SECTION" data-item-config='{"defaultSize": 280, "minSize": 200, "maxSize": 400}'>
+            <a class="toc--skip-link" href="#main">Skip to content</a>
+            <div class="dropdown theme-dark_mobile" data-role="dropdown" id="toc-dropdown">
+                <ul role="listbox" id="toc-listbox" class="dropdown--list dropdown--list_toc-list"
+                    data-role="dropdown-listbox" aria-label="Table of contents">
+                    <div class="dropdown--header">
+                            <span>
+                                    nbis
+                            </span>
+                        <button class="button" data-role="dropdown-toggle" aria-label="Close table of contents">
+                            <i class="ui-kit-icon ui-kit-icon_cross"></i>
+                        </button>
+                    </div>
+                    <div class="sidebar--inner" id="sideMenu"></div>
+                </ul>
+                <div class="dropdown--overlay"></div>
+            </div>
+        </nav>
+        <div id="resizer" class="resizer" data-item-type="BAR"></div>
+        <div id="main" data-item-type="SECTION" role="main">
+<div class="main-content" data-page-type="classlike" id="content" pageIds="nbis::eu.aagsolutions.img.nbis.model.builders/FacialAndSMTImageRecordBuilder///PointingToDeclaration//-251573632">
+  <div class="breadcrumbs"><a href="../../../index.html">nbis</a><span class="delimiter">/</span><a href="../index.html">eu.aagsolutions.img.nbis.model.builders</a><span class="delimiter">/</span><span class="current">FacialAndSMTImageRecordBuilder</span></div>
+  <div class="cover ">
+    <h1 class="cover"><span>Facial</span><wbr></wbr><span>And</span><wbr></wbr><span>SMTImage</span><wbr></wbr><span>Record</span><wbr></wbr><span><span>Builder</span></span></h1>
+    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">class </span><a href="index.html">FacialAndSMTImageRecordBuilder</a> : <a href="../-text-record-with-image-builder/index.html">TextRecordWithImageBuilder</a><span class="token operator">&lt;</span><a href="../../eu.aagsolutions.img.nbis.model.records/-facial-and-s-m-t-image-record/index.html">FacialAndSMTImageRecord</a><span class="token punctuation">, </span><a href="index.html">FacialAndSMTImageRecordBuilder</a><span class="token operator">&gt; </span></div><p class="paragraph">Builder class for creating FacialAndSMTImageRecord instances. Handles construction of Type-10 records containing facial and SMT (Scars, Marks, Tattoos) image data.</p></div></div>
+  </div>
+  <div class="tabbedcontent">
+    <div class="tabs-section" tabs-section="tabs-section"><button class="section-tab" data-active="" data-togglable="CONSTRUCTOR,TYPE,PROPERTY,FUNCTION">Members</button></div>
+    <div class="tabs-section-body">
+      <div data-togglable="CONSTRUCTOR">
+        <h2 class="tableheader">Constructors</h2>
+        <div class="table"><a data-name="-2022972488%2FConstructors%2F-251573632" anchor-label="FacialAndSMTImageRecordBuilder" id="-2022972488%2FConstructors%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-togglable="CONSTRUCTOR" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-facial-and-s-m-t-image-record-builder.html"><span>Facial</span><wbr></wbr><span>And</span><wbr></wbr><span>SMTImage</span><wbr></wbr><span>Record</span><wbr></wbr><span><span>Builder</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-2022972488%2FConstructors%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">constructor</span><span class="token punctuation">(</span><span class="token punctuation">)</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div data-togglable="PROPERTY">
+        <h2 class="tableheader">Properties</h2>
+        <div class="table"><a data-name="192857296%2FProperties%2F-251573632" anchor-label="calculator" id="192857296%2FProperties%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="../-nist-record-builder/calculator.html"><span><span>calculator</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="192857296%2FProperties%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="../-nist-record-builder/calculator.html">calculator</a><span class="token operator">: </span><a href="../../eu.aagsolutions.img.nbis.calculators/-logical-record-length-calculator/index.html">LogicalRecordLengthCalculator</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1867558777%2FProperties%2F-251573632" anchor-label="fields" id="1867558777%2FProperties%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="../-nist-record-builder/fields.html"><span><span>fields</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1867558777%2FProperties%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="../-nist-record-builder/fields.html">fields</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-mutable-map/index.html">MutableMap</a><span class="token operator">&lt;</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a><span class="token punctuation">, </span><a href="../../eu.aagsolutions.img.nbis.model.fields/-field/index.html">Field</a><span class="token operator">&lt;</span><span class="token operator">*</span><span class="token operator">&gt;</span><span class="token operator">&gt;</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="936322519%2FProperties%2F-251573632" anchor-label="id" id="936322519%2FProperties%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="../-nist-record-builder/id.html"><span><span>id</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="936322519%2FProperties%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="../-nist-record-builder/id.html">id</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="174753876%2FProperties%2F-251573632" anchor-label="label" id="174753876%2FProperties%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="../-nist-record-builder/label.html"><span><span>label</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="174753876%2FProperties%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="../-nist-record-builder/label.html">label</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div data-togglable="FUNCTION">
+        <h2 class="tableheader">Functions</h2>
+        <div class="table"><a data-name="744376406%2FFunctions%2F-251573632" anchor-label="build" id="744376406%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="build.html"><span><span>build</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="744376406%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="build.html"><span class="token function">build</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../../eu.aagsolutions.img.nbis.model.records/-facial-and-s-m-t-image-record/index.html">FacialAndSMTImageRecord</a></div><div class="brief "><p class="paragraph">Builds and returns a FacialAndSMTImageRecord instance with all configured fields. Calculates and sets the record length before building.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-953121780%2FFunctions%2F-251573632" anchor-label="fromRecord" id="-953121780%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="../-nist-record-builder/from-record.html"><span>from</span><wbr></wbr><span><span>Record</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-953121780%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="../-nist-record-builder/from-record.html"><span class="token function">fromRecord</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">record<span class="token operator">: </span><a href="../../eu.aagsolutions.img.nbis.model.records/-facial-and-s-m-t-image-record/index.html">FacialAndSMTImageRecord</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">FacialAndSMTImageRecordBuilder</a></div><div class="brief "><p class="paragraph">Creates a new builder instance initialized with fields from an existing record.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-415548016%2FFunctions%2F-251573632" anchor-label="removeField" id="-415548016%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="../-nist-record-builder/remove-field.html"><span>remove</span><wbr></wbr><span><span>Field</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-415548016%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="../-nist-record-builder/remove-field.html"><span class="token function">removeField</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">fieldId<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">FacialAndSMTImageRecordBuilder</a></div><div class="brief "><p class="paragraph">Removes a field from the record being built.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-454757165%2FFunctions%2F-251573632" anchor-label="with2DFacialFeaturePointsField" id="-454757165%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="with2-d-facial-feature-points-field.html"><span>with2DFacial</span><wbr></wbr><span>Feature</span><wbr></wbr><span>Points</span><wbr></wbr><span><span>Field</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-454757165%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="with2-d-facial-feature-points-field.html"><span class="token function">with2DFacialFeaturePointsField</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">facialFeaturePoints2D<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">FacialAndSMTImageRecordBuilder</a></div><div class="brief "><p class="paragraph">Sets FFP (2D Facial Feature Points) field.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1665530034%2FFunctions%2F-251573632" anchor-label="with3DFacialFeaturePointsField" id="1665530034%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="with3-d-facial-feature-points-field.html"><span>with3DFacial</span><wbr></wbr><span>Feature</span><wbr></wbr><span>Points</span><wbr></wbr><span><span>Field</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1665530034%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="with3-d-facial-feature-points-field.html"><span class="token function">with3DFacialFeaturePointsField</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">facialFeaturePoints3D<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">FacialAndSMTImageRecordBuilder</a></div><div class="brief "><p class="paragraph">Sets 3DF (3D Facial Feature Points) field.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1788234223%2FFunctions%2F-251573632" anchor-label="withAnnotationInformationField" id="-1788234223%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="with-annotation-information-field.html"><span>with</span><wbr></wbr><span>Annotation</span><wbr></wbr><span>Information</span><wbr></wbr><span><span>Field</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1788234223%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="with-annotation-information-field.html"><span class="token function">withAnnotationInformationField</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">annotationInformation<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">FacialAndSMTImageRecordBuilder</a></div><div class="brief "><p class="paragraph">Sets ANN (Annotation Information) field.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="641361349%2FFunctions%2F-251573632" anchor-label="withAssociatedContextField" id="641361349%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="with-associated-context-field.html"><span>with</span><wbr></wbr><span>Associated</span><wbr></wbr><span>Context</span><wbr></wbr><span><span>Field</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="641361349%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="with-associated-context-field.html"><span class="token function">withAssociatedContextField</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">associatedContext<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">FacialAndSMTImageRecordBuilder</a></div><div class="brief "><p class="paragraph">Sets ASC (Associated Context) field.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1782911702%2FFunctions%2F-251573632" anchor-label="withCaptureOrganizationNameField" id="-1782911702%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="with-capture-organization-name-field.html"><span>with</span><wbr></wbr><span>Capture</span><wbr></wbr><span>Organization</span><wbr></wbr><span>Name</span><wbr></wbr><span><span>Field</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1782911702%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="with-capture-organization-name-field.html"><span class="token function">withCaptureOrganizationNameField</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">captureOrganizationName<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">FacialAndSMTImageRecordBuilder</a></div><div class="brief "><p class="paragraph">Sets CON (Capture Organization Name) field.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="600868444%2FFunctions%2F-251573632" anchor-label="withCheiloscopicImageDescriptionField" id="600868444%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="with-cheiloscopic-image-description-field.html"><span>with</span><wbr></wbr><span>Cheiloscopic</span><wbr></wbr><span>Image</span><wbr></wbr><span>Description</span><wbr></wbr><span><span>Field</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="600868444%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="with-cheiloscopic-image-description-field.html"><span class="token function">withCheiloscopicImageDescriptionField</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">cheiloscopicImageDescription<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">FacialAndSMTImageRecordBuilder</a></div><div class="brief "><p class="paragraph">Sets CID (Cheiloscopic Image Description) field.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-2109139535%2FFunctions%2F-251573632" anchor-label="withColorSpaceField" id="-2109139535%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="with-color-space-field.html"><span>with</span><wbr></wbr><span>Color</span><wbr></wbr><span>Space</span><wbr></wbr><span><span>Field</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-2109139535%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="with-color-space-field.html"><span class="token function">withColorSpaceField</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">colorSpace<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">FacialAndSMTImageRecordBuilder</a></div><div class="brief "><p class="paragraph">Sets CSP (Color Space) field.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="494939043%2FFunctions%2F-251573632" anchor-label="withColorsPresentField" id="494939043%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="with-colors-present-field.html"><span>with</span><wbr></wbr><span>Colors</span><wbr></wbr><span>Present</span><wbr></wbr><span><span>Field</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="494939043%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="with-colors-present-field.html"><span class="token function">withColorsPresentField</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">colorsPresent<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">FacialAndSMTImageRecordBuilder</a></div><div class="brief "><p class="paragraph">Sets COL (Colors Present) field.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1277956015%2FFunctions%2F-251573632" anchor-label="withCommentField" id="1277956015%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="with-comment-field.html"><span>with</span><wbr></wbr><span>Comment</span><wbr></wbr><span><span>Field</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1277956015%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="with-comment-field.html"><span class="token function">withCommentField</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">comment<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">FacialAndSMTImageRecordBuilder</a></div><div class="brief "><p class="paragraph">Sets COM (Comment) field.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-785429525%2FFunctions%2F-251573632" anchor-label="withCompressionAlgorithmField" id="-785429525%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="with-compression-algorithm-field.html"><span>with</span><wbr></wbr><span>Compression</span><wbr></wbr><span>Algorithm</span><wbr></wbr><span><span>Field</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-785429525%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="with-compression-algorithm-field.html"><span class="token function">withCompressionAlgorithmField</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">compressionAlgorithm<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">FacialAndSMTImageRecordBuilder</a></div><div class="brief "><p class="paragraph">Sets CGA (Compression Algorithm) field.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1576125093%2FFunctions%2F-251573632" anchor-label="withDentalVisualImageDataInformationField" id="-1576125093%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="with-dental-visual-image-data-information-field.html"><span>with</span><wbr></wbr><span>Dental</span><wbr></wbr><span>Visual</span><wbr></wbr><span>Image</span><wbr></wbr><span>Data</span><wbr></wbr><span>Information</span><wbr></wbr><span><span>Field</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1576125093%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="with-dental-visual-image-data-information-field.html"><span class="token function">withDentalVisualImageDataInformationField</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">dentalVisualImageDataInformation<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">FacialAndSMTImageRecordBuilder</a></div><div class="brief "><p class="paragraph">Sets VID (Dental Visual Image Data Information) field.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1947686765%2FFunctions%2F-251573632" anchor-label="withDeviceMonitoringModeField" id="-1947686765%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="with-device-monitoring-mode-field.html"><span>with</span><wbr></wbr><span>Device</span><wbr></wbr><span>Monitoring</span><wbr></wbr><span>Mode</span><wbr></wbr><span><span>Field</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1947686765%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="with-device-monitoring-mode-field.html"><span class="token function">withDeviceMonitoringModeField</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">deviceMonitoringMode<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">FacialAndSMTImageRecordBuilder</a></div><div class="brief "><p class="paragraph">Sets DMM (Device Monitoring Mode) field.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-338740060%2FFunctions%2F-251573632" anchor-label="withDeviceUniqueIdentifierField" id="-338740060%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="with-device-unique-identifier-field.html"><span>with</span><wbr></wbr><span>Device</span><wbr></wbr><span>Unique</span><wbr></wbr><span>Identifier</span><wbr></wbr><span><span>Field</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-338740060%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="with-device-unique-identifier-field.html"><span class="token function">withDeviceUniqueIdentifierField</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">deviceUniqueIdentifier<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">FacialAndSMTImageRecordBuilder</a></div><div class="brief "><p class="paragraph">Sets DUI (Device Unique Identifier) field.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1241046071%2FFunctions%2F-251573632" anchor-label="withDistortionField" id="1241046071%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="with-distortion-field.html"><span>with</span><wbr></wbr><span>Distortion</span><wbr></wbr><span><span>Field</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1241046071%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="with-distortion-field.html"><span class="token function">withDistortionField</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">distortion<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">FacialAndSMTImageRecordBuilder</a></div><div class="brief "><p class="paragraph">Sets DIST (Distortion) field.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1757069558%2FFunctions%2F-251573632" anchor-label="withExternalFileReferenceField" id="-1757069558%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="with-external-file-reference-field.html"><span>with</span><wbr></wbr><span>External</span><wbr></wbr><span>File</span><wbr></wbr><span>Reference</span><wbr></wbr><span><span>Field</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1757069558%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="with-external-file-reference-field.html"><span class="token function">withExternalFileReferenceField</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">externalFileReference<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">FacialAndSMTImageRecordBuilder</a></div><div class="brief "><p class="paragraph">Sets EFR (External File Reference) field.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="730836223%2FFunctions%2F-251573632" anchor-label="withFaceImagePathCoordinatesInFullImageField" id="730836223%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="with-face-image-path-coordinates-in-full-image-field.html"><span>with</span><wbr></wbr><span>Face</span><wbr></wbr><span>Image</span><wbr></wbr><span>Path</span><wbr></wbr><span>Coordinates</span><wbr></wbr><span>In</span><wbr></wbr><span>Full</span><wbr></wbr><span>Image</span><wbr></wbr><span><span>Field</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="730836223%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="with-face-image-path-coordinates-in-full-image-field.html"><span class="token function">withFaceImagePathCoordinatesInFullImageField</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">faceImagePathCoordinates<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">FacialAndSMTImageRecordBuilder</a></div><div class="brief "><p class="paragraph">Sets FPFI (Face Image Path Coordinates) field.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-983799368%2FFunctions%2F-251573632" anchor-label="withFacialFeaturePointsLegacyField" id="-983799368%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="with-facial-feature-points-legacy-field.html"><span>with</span><wbr></wbr><span>Facial</span><wbr></wbr><span>Feature</span><wbr></wbr><span>Points</span><wbr></wbr><span>Legacy</span><wbr></wbr><span><span>Field</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-983799368%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="with-facial-feature-points-legacy-field.html"><span class="token function">withFacialFeaturePointsLegacyField</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">facialFeaturePointsLegacy<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">FacialAndSMTImageRecordBuilder</a></div><div class="brief "><p class="paragraph">Sets SFP (Subject Feature Points) legacy field.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="19497104%2FFunctions%2F-251573632" anchor-label="withFacialImageBoundingBoxCoordinatesInFullImageField" id="19497104%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="with-facial-image-bounding-box-coordinates-in-full-image-field.html"><span>with</span><wbr></wbr><span>Facial</span><wbr></wbr><span>Image</span><wbr></wbr><span>Bounding</span><wbr></wbr><span>Box</span><wbr></wbr><span>Coordinates</span><wbr></wbr><span>In</span><wbr></wbr><span>Full</span><wbr></wbr><span>Image</span><wbr></wbr><span><span>Field</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="19497104%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="with-facial-image-bounding-box-coordinates-in-full-image-field.html"><span class="token function">withFacialImageBoundingBoxCoordinatesInFullImageField</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">boundingBoxCoordinates<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">FacialAndSMTImageRecordBuilder</a></div><div class="brief "><p class="paragraph">Sets FIP (Facial Image Bounding Box Coordinates) field.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1642930913%2FFunctions%2F-251573632" anchor-label="withFeatureContoursField" id="-1642930913%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="with-feature-contours-field.html"><span>with</span><wbr></wbr><span>Feature</span><wbr></wbr><span>Contours</span><wbr></wbr><span><span>Field</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1642930913%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="with-feature-contours-field.html"><span class="token function">withFeatureContoursField</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">featureContours<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">FacialAndSMTImageRecordBuilder</a></div><div class="brief "><p class="paragraph">Sets FEC (Feature Contours) field.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1456635247%2FFunctions%2F-251573632" anchor-label="withField" id="-1456635247%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="../-nist-record-builder/with-field.html"><span>with</span><wbr></wbr><span><span>Field</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1456635247%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="../-nist-record-builder/with-field.html"><span class="token function">withField</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">fieldId<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a><span class="token punctuation">, </span></span><span class="parameter ">field<span class="token operator">: </span><a href="../../eu.aagsolutions.img.nbis.model.fields/-field/index.html">Field</a><span class="token operator">&lt;</span><span class="token operator">*</span><span class="token operator">&gt;</span></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">FacialAndSMTImageRecordBuilder</a></div><div class="brief "><p class="paragraph">Adds or updates a field in the record being built.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-53239379%2FFunctions%2F-251573632" anchor-label="withGeographicSampleAcquisitionLocationField" id="-53239379%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="with-geographic-sample-acquisition-location-field.html"><span>with</span><wbr></wbr><span>Geographic</span><wbr></wbr><span>Sample</span><wbr></wbr><span>Acquisition</span><wbr></wbr><span>Location</span><wbr></wbr><span><span>Field</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-53239379%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="with-geographic-sample-acquisition-location-field.html"><span class="token function">withGeographicSampleAcquisitionLocationField</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">geographicSampleAcquisitionLocation<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">FacialAndSMTImageRecordBuilder</a></div><div class="brief "><p class="paragraph">Sets GEO (Geographic Sample Acquisition Location) field.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="796471654%2FFunctions%2F-251573632" anchor-label="withHashField" id="796471654%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="with-hash-field.html"><span>with</span><wbr></wbr><span>Hash</span><wbr></wbr><span><span>Field</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="796471654%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="with-hash-field.html"><span class="token function">withHashField</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">hash<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">FacialAndSMTImageRecordBuilder</a></div><div class="brief "><p class="paragraph">Sets HAS (Hash) field.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1047368502%2FFunctions%2F-251573632" anchor-label="withHorizontalLineLengthField" id="1047368502%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="with-horizontal-line-length-field.html"><span>with</span><wbr></wbr><span>Horizontal</span><wbr></wbr><span>Line</span><wbr></wbr><span>Length</span><wbr></wbr><span><span>Field</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1047368502%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="with-horizontal-line-length-field.html"><span class="token function">withHorizontalLineLengthField</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">horizontalLineLength<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">FacialAndSMTImageRecordBuilder</a></div><div class="brief "><p class="paragraph">Sets HLL (Horizontal Line Length) field.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1938013891%2FFunctions%2F-251573632" anchor-label="withHorizontalPixelScaleLegacyField" id="1938013891%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="with-horizontal-pixel-scale-legacy-field.html"><span>with</span><wbr></wbr><span>Horizontal</span><wbr></wbr><span>Pixel</span><wbr></wbr><span>Scale</span><wbr></wbr><span>Legacy</span><wbr></wbr><span><span>Field</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1938013891%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="with-horizontal-pixel-scale-legacy-field.html"><span class="token function">withHorizontalPixelScaleLegacyField</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">horizontalPixelScale<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">FacialAndSMTImageRecordBuilder</a></div><div class="brief "><p class="paragraph">Sets HPS (Horizontal Pixel Scale) legacy field.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-67157534%2FFunctions%2F-251573632" anchor-label="withImageCaptureDateRangeEstimateField" id="-67157534%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="with-image-capture-date-range-estimate-field.html"><span>with</span><wbr></wbr><span>Image</span><wbr></wbr><span>Capture</span><wbr></wbr><span>Date</span><wbr></wbr><span>Range</span><wbr></wbr><span>Estimate</span><wbr></wbr><span><span>Field</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-67157534%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="with-image-capture-date-range-estimate-field.html"><span class="token function">withImageCaptureDateRangeEstimateField</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">captureDateRangeEstimate<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">FacialAndSMTImageRecordBuilder</a></div><div class="brief "><p class="paragraph">Sets ICDR (Image Capture Date Range Estimate) field.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="2040293629%2FFunctions%2F-251573632" anchor-label="withImageDataField" id="2040293629%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="../-text-record-with-image-builder/with-image-data-field.html"><span>with</span><wbr></wbr><span>Image</span><wbr></wbr><span>Data</span><wbr></wbr><span><span>Field</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="2040293629%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="../-text-record-with-image-builder/with-image-data-field.html"><span class="token function">withImageDataField</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">imageData<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-byte-array/index.html">ByteArray</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">FacialAndSMTImageRecordBuilder</a></div><div class="brief "><p class="paragraph">Sets DATA (Image Data) - the actual image data in the specified format, height (VLL) and width (HLL) are inferred from the image.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1088440924%2FFunctions%2F-251573632" anchor-label="withImageSubjectConditionField" id="-1088440924%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="with-image-subject-condition-field.html"><span>with</span><wbr></wbr><span>Image</span><wbr></wbr><span>Subject</span><wbr></wbr><span>Condition</span><wbr></wbr><span><span>Field</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1088440924%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="with-image-subject-condition-field.html"><span class="token function">withImageSubjectConditionField</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">imageSubjectCondition<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">FacialAndSMTImageRecordBuilder</a></div><div class="brief "><p class="paragraph">Sets SUB (Image Subject Condition) field.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1807493078%2FFunctions%2F-251573632" anchor-label="withImageTransformationField" id="-1807493078%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="with-image-transformation-field.html"><span>with</span><wbr></wbr><span>Image</span><wbr></wbr><span>Transformation</span><wbr></wbr><span><span>Field</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1807493078%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="with-image-transformation-field.html"><span class="token function">withImageTransformationField</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">imageTransformation<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">FacialAndSMTImageRecordBuilder</a></div><div class="brief "><p class="paragraph">Sets ITX (Image Transformation) field.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-863906343%2FFunctions%2F-251573632" anchor-label="withImageTypeField" id="-863906343%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="with-image-type-field.html"><span>with</span><wbr></wbr><span>Image</span><wbr></wbr><span>Type</span><wbr></wbr><span><span>Field</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-863906343%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="with-image-type-field.html"><span class="token function">withImageTypeField</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">imageType<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">FacialAndSMTImageRecordBuilder</a></div><div class="brief "><p class="paragraph">Sets IMT (Image Type) field.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1898316595%2FFunctions%2F-251573632" anchor-label="withInformationDesignationCharField" id="1898316595%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="with-information-designation-char-field.html"><span>with</span><wbr></wbr><span>Information</span><wbr></wbr><span>Designation</span><wbr></wbr><span>Char</span><wbr></wbr><span><span>Field</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1898316595%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="with-information-designation-char-field.html"><span class="token function">withInformationDesignationCharField</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">designationChar<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">FacialAndSMTImageRecordBuilder</a></div><div class="brief "><p class="paragraph">Sets IDC (Information Designation Character) field.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1211670311%2FFunctions%2F-251573632" anchor-label="withLightingArtifactsField" id="-1211670311%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="with-lighting-artifacts-field.html"><span>with</span><wbr></wbr><span>Lighting</span><wbr></wbr><span>Artifacts</span><wbr></wbr><span><span>Field</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1211670311%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="with-lighting-artifacts-field.html"><span class="token function">withLightingArtifactsField</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">lightingArtifacts<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">FacialAndSMTImageRecordBuilder</a></div><div class="brief "><p class="paragraph">Sets LAF (Lighting Artifacts) field.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-505000490%2FFunctions%2F-251573632" anchor-label="withMakeModelSerialNumberField" id="-505000490%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="with-make-model-serial-number-field.html"><span>with</span><wbr></wbr><span>Make</span><wbr></wbr><span>Model</span><wbr></wbr><span>Serial</span><wbr></wbr><span>Number</span><wbr></wbr><span><span>Field</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-505000490%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="with-make-model-serial-number-field.html"><span class="token function">withMakeModelSerialNumberField</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">makeModelSerialNumber<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">FacialAndSMTImageRecordBuilder</a></div><div class="brief "><p class="paragraph">Sets MMS (Make Model Serial Number) field.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="2121903065%2FFunctions%2F-251573632" anchor-label="withNcicDesignationCodeField" id="2121903065%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="with-ncic-designation-code-field.html"><span>with</span><wbr></wbr><span>Ncic</span><wbr></wbr><span>Designation</span><wbr></wbr><span>Code</span><wbr></wbr><span><span>Field</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="2121903065%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="with-ncic-designation-code-field.html"><span class="token function">withNcicDesignationCodeField</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">ncicDesignationCode<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">FacialAndSMTImageRecordBuilder</a></div><div class="brief "><p class="paragraph">Sets SMT (NCIC Designation Code) field.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="972753070%2FFunctions%2F-251573632" anchor-label="withOcclusionsField" id="972753070%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="with-occlusions-field.html"><span>with</span><wbr></wbr><span>Occlusions</span><wbr></wbr><span><span>Field</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="972753070%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="with-occlusions-field.html"><span class="token function">withOcclusionsField</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">occlusions<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">FacialAndSMTImageRecordBuilder</a></div><div class="brief "><p class="paragraph">Sets OCC (Occlusions) field.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-33101634%2FFunctions%2F-251573632" anchor-label="withPhotoAcquisitionSourceField" id="-33101634%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="with-photo-acquisition-source-field.html"><span>with</span><wbr></wbr><span>Photo</span><wbr></wbr><span>Acquisition</span><wbr></wbr><span>Source</span><wbr></wbr><span><span>Field</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-33101634%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="with-photo-acquisition-source-field.html"><span class="token function">withPhotoAcquisitionSourceField</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">photoAcquisitionSource<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">FacialAndSMTImageRecordBuilder</a></div><div class="brief "><p class="paragraph">Sets PAS (Photo Acquisition Source) field.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-560983250%2FFunctions%2F-251573632" anchor-label="withPhotoDateField" id="-560983250%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="with-photo-date-field.html"><span>with</span><wbr></wbr><span>Photo</span><wbr></wbr><span>Date</span><wbr></wbr><span><span>Field</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-560983250%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="with-photo-date-field.html"><span class="token function">withPhotoDateField</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">photoDate<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">FacialAndSMTImageRecordBuilder</a></div><div class="brief "><p class="paragraph">Sets PHD (Photo Date) field.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="614831398%2FFunctions%2F-251573632" anchor-label="withPhotoDesignationLegacyField" id="614831398%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="with-photo-designation-legacy-field.html"><span>with</span><wbr></wbr><span>Photo</span><wbr></wbr><span>Designation</span><wbr></wbr><span>Legacy</span><wbr></wbr><span><span>Field</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="614831398%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="with-photo-designation-legacy-field.html"><span class="token function">withPhotoDesignationLegacyField</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">photoDesignation<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">FacialAndSMTImageRecordBuilder</a></div><div class="brief "><p class="paragraph">Sets PXS (Photo Designation) legacy field.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1063474081%2FFunctions%2F-251573632" anchor-label="withPoseOffsetAngleField" id="-1063474081%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="with-pose-offset-angle-field.html"><span>with</span><wbr></wbr><span>Pose</span><wbr></wbr><span>Offset</span><wbr></wbr><span>Angle</span><wbr></wbr><span><span>Field</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1063474081%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="with-pose-offset-angle-field.html"><span class="token function">withPoseOffsetAngleField</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">poseOffsetAngle<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">FacialAndSMTImageRecordBuilder</a></div><div class="brief "><p class="paragraph">Sets POA (Pose Offset Angle) field.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="259444296%2FFunctions%2F-251573632" anchor-label="withRulerOrScalePresenceField" id="259444296%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="with-ruler-or-scale-presence-field.html"><span>with</span><wbr></wbr><span>Ruler</span><wbr></wbr><span>Or</span><wbr></wbr><span>Scale</span><wbr></wbr><span>Presence</span><wbr></wbr><span><span>Field</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="259444296%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="with-ruler-or-scale-presence-field.html"><span class="token function">withRulerOrScalePresenceField</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">rulerOrScalePresence<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">FacialAndSMTImageRecordBuilder</a></div><div class="brief "><p class="paragraph">Sets RSP (Ruler or Scale Presence) field.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1143933041%2FFunctions%2F-251573632" anchor-label="withScaleUnitsField" id="-1143933041%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="with-scale-units-field.html"><span>with</span><wbr></wbr><span>Scale</span><wbr></wbr><span>Units</span><wbr></wbr><span><span>Field</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1143933041%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="with-scale-units-field.html"><span class="token function">withScaleUnitsField</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">scaleUnits<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">FacialAndSMTImageRecordBuilder</a></div><div class="brief "><p class="paragraph">Sets SLC (Scale Units) field.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1292238543%2FFunctions%2F-251573632" anchor-label="withScanHorizontalPixelScaleField" id="1292238543%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="with-scan-horizontal-pixel-scale-field.html"><span>with</span><wbr></wbr><span>Scan</span><wbr></wbr><span>Horizontal</span><wbr></wbr><span>Pixel</span><wbr></wbr><span>Scale</span><wbr></wbr><span><span>Field</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1292238543%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="with-scan-horizontal-pixel-scale-field.html"><span class="token function">withScanHorizontalPixelScaleField</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">scanHorizontalPixelScale<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">FacialAndSMTImageRecordBuilder</a></div><div class="brief "><p class="paragraph">Sets SHPS (Scan Horizontal Pixel Scale) field.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="130746429%2FFunctions%2F-251573632" anchor-label="withScanVerticalPixelScaleField" id="130746429%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="with-scan-vertical-pixel-scale-field.html"><span>with</span><wbr></wbr><span>Scan</span><wbr></wbr><span>Vertical</span><wbr></wbr><span>Pixel</span><wbr></wbr><span>Scale</span><wbr></wbr><span><span>Field</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="130746429%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="with-scan-vertical-pixel-scale-field.html"><span class="token function">withScanVerticalPixelScaleField</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">scanVerticalPixelScale<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">FacialAndSMTImageRecordBuilder</a></div><div class="brief "><p class="paragraph">Sets SVPS (Scan Vertical Pixel Scale) field.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="837197560%2FFunctions%2F-251573632" anchor-label="withScarMarkTattooSizeField" id="837197560%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="with-scar-mark-tattoo-size-field.html"><span>with</span><wbr></wbr><span>Scar</span><wbr></wbr><span>Mark</span><wbr></wbr><span>Tattoo</span><wbr></wbr><span>Size</span><wbr></wbr><span><span>Field</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="837197560%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="with-scar-mark-tattoo-size-field.html"><span class="token function">withScarMarkTattooSizeField</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">scarMarkTattooSize<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">FacialAndSMTImageRecordBuilder</a></div><div class="brief "><p class="paragraph">Sets SMS (Scar/Mark/Tattoo Size) field.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1155793910%2FFunctions%2F-251573632" anchor-label="withSmtDescriptorsField" id="-1155793910%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="with-smt-descriptors-field.html"><span>with</span><wbr></wbr><span>Smt</span><wbr></wbr><span>Descriptors</span><wbr></wbr><span><span>Field</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1155793910%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="with-smt-descriptors-field.html"><span class="token function">withSmtDescriptorsField</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">smtDescriptors<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">FacialAndSMTImageRecordBuilder</a></div><div class="brief "><p class="paragraph">Sets SMD (SMT Descriptors) field.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1227308841%2FFunctions%2F-251573632" anchor-label="withSourceAgencyNameField" id="1227308841%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="with-source-agency-name-field.html"><span>with</span><wbr></wbr><span>Source</span><wbr></wbr><span>Agency</span><wbr></wbr><span>Name</span><wbr></wbr><span><span>Field</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1227308841%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="with-source-agency-name-field.html"><span class="token function">withSourceAgencyNameField</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">sourceAgencyName<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">FacialAndSMTImageRecordBuilder</a></div><div class="brief "><p class="paragraph">Sets SAN (Source Agency Name) field.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="962650088%2FFunctions%2F-251573632" anchor-label="withSourceAgencyOriField" id="962650088%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="with-source-agency-ori-field.html"><span>with</span><wbr></wbr><span>Source</span><wbr></wbr><span>Agency</span><wbr></wbr><span>Ori</span><wbr></wbr><span><span>Field</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="962650088%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="with-source-agency-ori-field.html"><span class="token function">withSourceAgencyOriField</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">sourceAgencyOri<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">FacialAndSMTImageRecordBuilder</a></div><div class="brief "><p class="paragraph">Sets SRC (Source Agency ORI) field.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1854241388%2FFunctions%2F-251573632" anchor-label="withSourceRepresentationField" id="1854241388%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="with-source-representation-field.html"><span>with</span><wbr></wbr><span>Source</span><wbr></wbr><span>Representation</span><wbr></wbr><span><span>Field</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1854241388%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="with-source-representation-field.html"><span class="token function">withSourceRepresentationField</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">sourceRepresentation<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">FacialAndSMTImageRecordBuilder</a></div><div class="brief "><p class="paragraph">Sets SOR (Source Representation) field.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="140652934%2FFunctions%2F-251573632" anchor-label="withSubjectAcquisitionProfileField" id="140652934%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="with-subject-acquisition-profile-field.html"><span>with</span><wbr></wbr><span>Subject</span><wbr></wbr><span>Acquisition</span><wbr></wbr><span>Profile</span><wbr></wbr><span><span>Field</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="140652934%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="with-subject-acquisition-profile-field.html"><span class="token function">withSubjectAcquisitionProfileField</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">subjectAcquisitionProfile<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">FacialAndSMTImageRecordBuilder</a></div><div class="brief "><p class="paragraph">Sets SAP (Subject Acquisition Profile) field.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="518388400%2FFunctions%2F-251573632" anchor-label="withSubjectEyeColorField" id="518388400%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="with-subject-eye-color-field.html"><span>with</span><wbr></wbr><span>Subject</span><wbr></wbr><span>Eye</span><wbr></wbr><span>Color</span><wbr></wbr><span><span>Field</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="518388400%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="with-subject-eye-color-field.html"><span class="token function">withSubjectEyeColorField</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">subjectEyeColor<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">FacialAndSMTImageRecordBuilder</a></div><div class="brief "><p class="paragraph">Sets SEC (Subject Eye Color) field.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-306530576%2FFunctions%2F-251573632" anchor-label="withSubjectFacialDescriptionField" id="-306530576%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="with-subject-facial-description-field.html"><span>with</span><wbr></wbr><span>Subject</span><wbr></wbr><span>Facial</span><wbr></wbr><span>Description</span><wbr></wbr><span><span>Field</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-306530576%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="with-subject-facial-description-field.html"><span class="token function">withSubjectFacialDescriptionField</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">subjectFacialDescription<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">FacialAndSMTImageRecordBuilder</a></div><div class="brief "><p class="paragraph">Sets SXS (Subject Facial Description) field.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1326911809%2FFunctions%2F-251573632" anchor-label="withSubjectHairColorField" id="-1326911809%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="with-subject-hair-color-field.html"><span>with</span><wbr></wbr><span>Subject</span><wbr></wbr><span>Hair</span><wbr></wbr><span>Color</span><wbr></wbr><span><span>Field</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1326911809%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="with-subject-hair-color-field.html"><span class="token function">withSubjectHairColorField</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">subjectHairColor<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">FacialAndSMTImageRecordBuilder</a></div><div class="brief "><p class="paragraph">Sets SHC (Subject Hair Color) field.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-2044400943%2FFunctions%2F-251573632" anchor-label="withSubjectPoseAnglesField" id="-2044400943%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="with-subject-pose-angles-field.html"><span>with</span><wbr></wbr><span>Subject</span><wbr></wbr><span>Pose</span><wbr></wbr><span>Angles</span><wbr></wbr><span><span>Field</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-2044400943%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="with-subject-pose-angles-field.html"><span class="token function">withSubjectPoseAnglesField</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">subjectPoseAngles<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">FacialAndSMTImageRecordBuilder</a></div><div class="brief "><p class="paragraph">Sets SPA (Subject Pose Angles) field.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1099378929%2FFunctions%2F-251573632" anchor-label="withSubjectPoseField" id="1099378929%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="with-subject-pose-field.html"><span>with</span><wbr></wbr><span>Subject</span><wbr></wbr><span>Pose</span><wbr></wbr><span><span>Field</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1099378929%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="with-subject-pose-field.html"><span class="token function">withSubjectPoseField</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">subjectPose<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">FacialAndSMTImageRecordBuilder</a></div><div class="brief "><p class="paragraph">Sets POS (Subject Pose) field.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-2017448337%2FFunctions%2F-251573632" anchor-label="withSubjectQualityScoreField" id="-2017448337%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="with-subject-quality-score-field.html"><span>with</span><wbr></wbr><span>Subject</span><wbr></wbr><span>Quality</span><wbr></wbr><span>Score</span><wbr></wbr><span><span>Field</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-2017448337%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="with-subject-quality-score-field.html"><span class="token function">withSubjectQualityScoreField</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">subjectQualityScore<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">FacialAndSMTImageRecordBuilder</a></div><div class="brief "><p class="paragraph">Sets SQS (Subject Quality Score) field.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-370827629%2FFunctions%2F-251573632" anchor-label="withSuspectedPatternedInjuryDetailField" id="-370827629%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="with-suspected-patterned-injury-detail-field.html"><span>with</span><wbr></wbr><span>Suspected</span><wbr></wbr><span>Patterned</span><wbr></wbr><span>Injury</span><wbr></wbr><span>Detail</span><wbr></wbr><span><span>Field</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-370827629%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="with-suspected-patterned-injury-detail-field.html"><span class="token function">withSuspectedPatternedInjuryDetailField</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">suspectedPatternedInjuryDetail<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">FacialAndSMTImageRecordBuilder</a></div><div class="brief "><p class="paragraph">Sets PID (Suspected Patterned Injury Detail) field.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1407329523%2FFunctions%2F-251573632" anchor-label="withTieredMarkupCollectionField" id="-1407329523%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="with-tiered-markup-collection-field.html"><span>with</span><wbr></wbr><span>Tiered</span><wbr></wbr><span>Markup</span><wbr></wbr><span>Collection</span><wbr></wbr><span><span>Field</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1407329523%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="with-tiered-markup-collection-field.html"><span class="token function">withTieredMarkupCollectionField</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">tieredMarkupCollection<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">FacialAndSMTImageRecordBuilder</a></div><div class="brief "><p class="paragraph">Sets TMC (Tiered Markup Collection) field.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="560113123%2FFunctions%2F-251573632" anchor-label="withTransmittedHorizontalPixelScaleField" id="560113123%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="with-transmitted-horizontal-pixel-scale-field.html"><span>with</span><wbr></wbr><span>Transmitted</span><wbr></wbr><span>Horizontal</span><wbr></wbr><span>Pixel</span><wbr></wbr><span>Scale</span><wbr></wbr><span><span>Field</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="560113123%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="with-transmitted-horizontal-pixel-scale-field.html"><span class="token function">withTransmittedHorizontalPixelScaleField</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">horizontalPixelScale<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">FacialAndSMTImageRecordBuilder</a></div><div class="brief "><p class="paragraph">Sets THPS (Transmitted Horizontal Pixel Scale) field.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1081187247%2FFunctions%2F-251573632" anchor-label="withTransmittedVerticalPixelScaleField" id="-1081187247%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="with-transmitted-vertical-pixel-scale-field.html"><span>with</span><wbr></wbr><span>Transmitted</span><wbr></wbr><span>Vertical</span><wbr></wbr><span>Pixel</span><wbr></wbr><span>Scale</span><wbr></wbr><span><span>Field</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1081187247%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="with-transmitted-vertical-pixel-scale-field.html"><span class="token function">withTransmittedVerticalPixelScaleField</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">verticalPixelScale<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">FacialAndSMTImageRecordBuilder</a></div><div class="brief "><p class="paragraph">Sets TVPS (Transmitted Vertical Pixel Scale) field.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1009182579%2FFunctions%2F-251573632" anchor-label="withType10ReferenceNumberField" id="1009182579%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="with-type10-reference-number-field.html"><span>with</span><wbr></wbr><span>Type10Reference</span><wbr></wbr><span>Number</span><wbr></wbr><span><span>Field</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1009182579%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="with-type10-reference-number-field.html"><span class="token function">withType10ReferenceNumberField</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">type10ReferenceNumber<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">FacialAndSMTImageRecordBuilder</a></div><div class="brief "><p class="paragraph">Sets T10 (Type-10 Reference Number) field.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-2102748230%2FFunctions%2F-251573632" anchor-label="withType2RecordCrossReferenceField" id="-2102748230%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="with-type2-record-cross-reference-field.html"><span>with</span><wbr></wbr><span>Type2Record</span><wbr></wbr><span>Cross</span><wbr></wbr><span>Reference</span><wbr></wbr><span><span>Field</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-2102748230%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="with-type2-record-cross-reference-field.html"><span class="token function">withType2RecordCrossReferenceField</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">type2RecordCrossReference<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">FacialAndSMTImageRecordBuilder</a></div><div class="brief "><p class="paragraph">Sets T2C (Type-2 Record Cross Reference) field.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-867145756%2FFunctions%2F-251573632" anchor-label="withVerticalLineLengthField" id="-867145756%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="with-vertical-line-length-field.html"><span>with</span><wbr></wbr><span>Vertical</span><wbr></wbr><span>Line</span><wbr></wbr><span>Length</span><wbr></wbr><span><span>Field</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-867145756%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="with-vertical-line-length-field.html"><span class="token function">withVerticalLineLengthField</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">verticalLineLength<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">FacialAndSMTImageRecordBuilder</a></div><div class="brief "><p class="paragraph">Sets VLL (Vertical Line Length) field.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="762566897%2FFunctions%2F-251573632" anchor-label="withVerticalPixelScaleLegacyField" id="762566897%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="with-vertical-pixel-scale-legacy-field.html"><span>with</span><wbr></wbr><span>Vertical</span><wbr></wbr><span>Pixel</span><wbr></wbr><span>Scale</span><wbr></wbr><span>Legacy</span><wbr></wbr><span><span>Field</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="762566897%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="with-vertical-pixel-scale-legacy-field.html"><span class="token function">withVerticalPixelScaleLegacyField</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">verticalPixelScale<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">FacialAndSMTImageRecordBuilder</a></div><div class="brief "><p class="paragraph">Sets VPS (Vertical Pixel Scale) legacy field.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    <div class="footer">
+        <div class="footer--container">
+            <a href="#content" id="go-to-top-link" class="footer--button footer--button_go-to-top"></a>
+            <div class="footer--content">
+                <div>
+                    <span>Generated by </span>
+                    <a class="footer--link footer--link_external" href="https://github.com/Kotlin/dokka">
+                        Dokka
+                    </a>
+                    <div>© 2025 Copyright</div>
+                </div>
+            </div>
+        </div>
+    </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

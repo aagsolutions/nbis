@@ -1,0 +1,1619 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8">
+    <title>MinutiaeDataRecordBuilder</title>
+    <link href="../../../images/logo-icon.svg" rel="icon" type="image/svg">
+        <script>var pathToRoot = "../../../";</script>
+    <script>document.documentElement.classList.replace("no-js", "js");</script>
+    <script>const storage = localStorage.getItem("dokka-dark-mode")
+      if (storage == null) {
+        const osDarkSchemePreferred = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+        if (osDarkSchemePreferred === true) {
+          document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        }
+      } else {
+        const savedDarkMode = JSON.parse(storage)
+        if (savedDarkMode === true) {
+          document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        }
+      }
+    </script>
+<script type="text/javascript" src="https://unpkg.com/kotlin-playground@1/dist/playground.min.js" async="async"></script>
+<script type="text/javascript" src="../../../scripts/sourceset_dependencies.js" async="async"></script>
+<link href="../../../styles/style.css" rel="Stylesheet">
+<link href="../../../styles/main.css" rel="Stylesheet">
+<link href="../../../styles/prism.css" rel="Stylesheet">
+<link href="../../../styles/logo-styles.css" rel="Stylesheet">
+<link href="../../../ui-kit/ui-kit.min.css" rel="Stylesheet">
+<script type="text/javascript" src="../../../scripts/safe-local-storage_blocking.js"></script>
+<script type="text/javascript" src="../../../scripts/navigation-loader.js" async="async"></script>
+<script type="text/javascript" src="../../../scripts/platform-content-handler.js" async="async"></script>
+<script type="text/javascript" src="../../../scripts/main.js" defer="defer"></script>
+<script type="text/javascript" src="../../../scripts/prism.js" async="async"></script>
+<script type="text/javascript" src="../../../ui-kit/ui-kit.min.js" defer="defer"></script>
+</head>
+<body>
+<div class="root">
+    <header class="navigation theme-dark" id="navigation-wrapper" role="banner">
+            <a class="library-name--link" href="../../../index.html" tabindex="1">
+                    nbis
+            </a>
+        <button class="navigation-controls--btn navigation-controls--btn_toc ui-kit_mobile-only" id="toc-toggle"
+                type="button">Toggle table of contents
+        </button>
+        <div class="navigation-controls--break ui-kit_mobile-only"></div>
+        <div class="library-version" id="library-version">
+0.4.1-SNAPSHOT        </div>
+        <div class="navigation-controls">
+        <ul class="filter-section filter-section_loading" id="filter-section" aria-label="Target filter">
+                <button class="platform-tag platform-selector jvm-like" data-active="" aria-pressed="true"
+                        data-filter=":/main">jvm</button>
+            <div class="dropdown filter-section--dropdown" data-role="dropdown" id="filter-section-dropdown">
+                <button class="button button_dropdown filter-section--dropdown-toggle" role="combobox"
+                        data-role="dropdown-toggle"
+                        aria-controls="platform-tags-listbox"
+                        aria-haspopup="listbox"
+                        aria-expanded="false"
+                        aria-label="Toggle source sets"
+                ></button>
+                <ul role="listbox" id="platform-tags-listbox" class="dropdown--list" data-role="dropdown-listbox" aria-label="Target filter">
+                    <div class="dropdown--header"><span>Target filter</span>
+                        <button class="button" data-role="dropdown-toggle" aria-label="Close target filter">
+                            <i class="ui-kit-icon ui-kit-icon_cross"></i>
+                        </button>
+                    </div>
+                        <li role="option" class="dropdown--option platform-selector-option jvm-like" tabindex="0">
+                            <label class="checkbox">
+                                <input type="checkbox" class="checkbox--input" id=":/main"
+                                       data-filter=":/main"/>
+                                <span class="checkbox--icon"></span>
+                                jvm
+                            </label>
+                        </li>
+                </ul>
+                <div class="dropdown--overlay"></div>
+            </div>
+        </ul>
+            <button class="navigation-controls--btn navigation-controls--btn_theme" id="theme-toggle-button"
+                    type="button">Switch theme
+            </button>
+            <div class="navigation-controls--btn navigation-controls--btn_search" id="searchBar" role="button">Search in
+                API
+            </div>
+        </div>
+    </header>
+    <div id="container">
+        <nav id="leftColumn" class="sidebar" data-item-type="SECTION" data-item-config='{"defaultSize": 280, "minSize": 200, "maxSize": 400}'>
+            <a class="toc--skip-link" href="#main">Skip to content</a>
+            <div class="dropdown theme-dark_mobile" data-role="dropdown" id="toc-dropdown">
+                <ul role="listbox" id="toc-listbox" class="dropdown--list dropdown--list_toc-list"
+                    data-role="dropdown-listbox" aria-label="Table of contents">
+                    <div class="dropdown--header">
+                            <span>
+                                    nbis
+                            </span>
+                        <button class="button" data-role="dropdown-toggle" aria-label="Close table of contents">
+                            <i class="ui-kit-icon ui-kit-icon_cross"></i>
+                        </button>
+                    </div>
+                    <div class="sidebar--inner" id="sideMenu"></div>
+                </ul>
+                <div class="dropdown--overlay"></div>
+            </div>
+        </nav>
+        <div id="resizer" class="resizer" data-item-type="BAR"></div>
+        <div id="main" data-item-type="SECTION" role="main">
+<div class="main-content" data-page-type="classlike" id="content" pageIds="nbis::eu.aagsolutions.img.nbis.model.builders/MinutiaeDataRecordBuilder///PointingToDeclaration//-251573632">
+  <div class="breadcrumbs"><a href="../../../index.html">nbis</a><span class="delimiter">/</span><a href="../index.html">eu.aagsolutions.img.nbis.model.builders</a><span class="delimiter">/</span><span class="current">MinutiaeDataRecordBuilder</span></div>
+  <div class="cover ">
+    <h1 class="cover"><span>Minutiae</span><wbr></wbr><span>Data</span><wbr></wbr><span>Record</span><wbr></wbr><span><span>Builder</span></span></h1>
+    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">class </span><a href="index.html">MinutiaeDataRecordBuilder</a> : <a href="../-nist-record-builder/index.html">NistRecordBuilder</a><span class="token operator">&lt;</span><a href="../../eu.aagsolutions.img.nbis.model.records/-minutiae-data-record/index.html">MinutiaeDataRecord</a><span class="token punctuation">, </span><a href="index.html">MinutiaeDataRecordBuilder</a><span class="token operator">&gt; </span></div><p class="paragraph">Builder class for creating and modifying Type-9 Minutiae Data records in NIST transactions.</p><p class="paragraph">This builder exposes fluent helpers for setting the fields defined in MinutiaeDataFields (ANSI/NIST-ITL 1-2011 and later). It automatically computes and injects the required LEN field during build().</p><p class="paragraph">Type-9 records contain minutiae, ridge counts and associated feature metadata for friction ridge impressions (finger, palm, plantar), including legacy and EFS elements.</p></div></div>
+  </div>
+  <div class="tabbedcontent">
+    <div class="tabs-section" tabs-section="tabs-section"><button class="section-tab" data-active="" data-togglable="CONSTRUCTOR,TYPE,PROPERTY,FUNCTION">Members</button></div>
+    <div class="tabs-section-body">
+      <div data-togglable="CONSTRUCTOR">
+        <h2 class="tableheader">Constructors</h2>
+        <div class="table"><a data-name="428060398%2FConstructors%2F-251573632" anchor-label="MinutiaeDataRecordBuilder" id="428060398%2FConstructors%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-togglable="CONSTRUCTOR" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-minutiae-data-record-builder.html"><span>Minutiae</span><wbr></wbr><span>Data</span><wbr></wbr><span>Record</span><wbr></wbr><span><span>Builder</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="428060398%2FConstructors%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">constructor</span><span class="token punctuation">(</span><span class="token punctuation">)</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div data-togglable="PROPERTY">
+        <h2 class="tableheader">Properties</h2>
+        <div class="table"><a data-name="192857296%2FProperties%2F-251573632" anchor-label="calculator" id="192857296%2FProperties%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="../-nist-record-builder/calculator.html"><span><span>calculator</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="192857296%2FProperties%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="../-nist-record-builder/calculator.html">calculator</a><span class="token operator">: </span><a href="../../eu.aagsolutions.img.nbis.calculators/-logical-record-length-calculator/index.html">LogicalRecordLengthCalculator</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1867558777%2FProperties%2F-251573632" anchor-label="fields" id="1867558777%2FProperties%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="../-nist-record-builder/fields.html"><span><span>fields</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1867558777%2FProperties%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="../-nist-record-builder/fields.html">fields</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-mutable-map/index.html">MutableMap</a><span class="token operator">&lt;</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a><span class="token punctuation">, </span><a href="../../eu.aagsolutions.img.nbis.model.fields/-field/index.html">Field</a><span class="token operator">&lt;</span><span class="token operator">*</span><span class="token operator">&gt;</span><span class="token operator">&gt;</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="936322519%2FProperties%2F-251573632" anchor-label="id" id="936322519%2FProperties%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="../-nist-record-builder/id.html"><span><span>id</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="936322519%2FProperties%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="../-nist-record-builder/id.html">id</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="174753876%2FProperties%2F-251573632" anchor-label="label" id="174753876%2FProperties%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="../-nist-record-builder/label.html"><span><span>label</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="174753876%2FProperties%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="../-nist-record-builder/label.html">label</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div data-togglable="FUNCTION">
+        <h2 class="tableheader">Functions</h2>
+        <div class="table"><a data-name="1448555972%2FFunctions%2F-251573632" anchor-label="build" id="1448555972%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="build.html"><span><span>build</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1448555972%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="build.html"><span class="token function">build</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../../eu.aagsolutions.img.nbis.model.records/-minutiae-data-record/index.html">MinutiaeDataRecord</a></div><div class="brief "><p class="paragraph">Builds a new MinutiaeDataRecord with the configured fields.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-953121780%2FFunctions%2F-251573632" anchor-label="fromRecord" id="-953121780%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="../-nist-record-builder/from-record.html"><span>from</span><wbr></wbr><span><span>Record</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-953121780%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="../-nist-record-builder/from-record.html"><span class="token function">fromRecord</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">record<span class="token operator">: </span><a href="../../eu.aagsolutions.img.nbis.model.records/-minutiae-data-record/index.html">MinutiaeDataRecord</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">MinutiaeDataRecordBuilder</a></div><div class="brief "><p class="paragraph">Creates a new builder instance initialized with fields from an existing record.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-415548016%2FFunctions%2F-251573632" anchor-label="removeField" id="-415548016%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="../-nist-record-builder/remove-field.html"><span>remove</span><wbr></wbr><span><span>Field</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-415548016%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="../-nist-record-builder/remove-field.html"><span class="token function">removeField</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">fieldId<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">MinutiaeDataRecordBuilder</a></div><div class="brief "><p class="paragraph">Removes a field from the record being built.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="357574091%2FFunctions%2F-251573632" anchor-label="withAdditionalDeltaAnglesField" id="357574091%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="with-additional-delta-angles-field.html"><span>with</span><wbr></wbr><span>Additional</span><wbr></wbr><span>Delta</span><wbr></wbr><span>Angles</span><wbr></wbr><span><span>Field</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="357574091%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="with-additional-delta-angles-field.html"><span class="token function">withAdditionalDeltaAnglesField</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">additionalAngles<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">MinutiaeDataRecordBuilder</a></div><div class="brief "><p class="paragraph">Sets ADA (Additional Delta Angles) – supplementary angular measurements at delta(s).</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-927784705%2FFunctions%2F-251573632" anchor-label="withAnnotationInformationField" id="-927784705%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="with-annotation-information-field.html"><span>with</span><wbr></wbr><span>Annotation</span><wbr></wbr><span>Information</span><wbr></wbr><span><span>Field</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-927784705%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="with-annotation-information-field.html"><span class="token function">withAnnotationInformationField</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">info<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">MinutiaeDataRecordBuilder</a></div><div class="brief "><p class="paragraph">Sets ANN (Annotation Information) – general annotation metadata/details.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="285791688%2FFunctions%2F-251573632" anchor-label="withAreaOfCorrespondenceField" id="285791688%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="with-area-of-correspondence-field.html"><span>with</span><wbr></wbr><span>Area</span><wbr></wbr><span>Of</span><wbr></wbr><span>Correspondence</span><wbr></wbr><span><span>Field</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="285791688%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="with-area-of-correspondence-field.html"><span class="token function">withAreaOfCorrespondenceField</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">aoc<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">MinutiaeDataRecordBuilder</a></div><div class="brief "><p class="paragraph">Sets AOC (Area of Correspondence) – region(s) used for comparison/correspondence assessment.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-2129698365%2FFunctions%2F-251573632" anchor-label="withCaptureEquipmentIdField" id="-2129698365%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="with-capture-equipment-id-field.html"><span>with</span><wbr></wbr><span>Capture</span><wbr></wbr><span>Equipment</span><wbr></wbr><span>Id</span><wbr></wbr><span><span>Field</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-2129698365%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="with-capture-equipment-id-field.html"><span class="token function">withCaptureEquipmentIdField</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">captureEquipmentId<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">MinutiaeDataRecordBuilder</a></div><div class="brief "><p class="paragraph">Sets CEI (Capture Equipment ID) – M1 identifier of the capture device.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1043991992%2FFunctions%2F-251573632" anchor-label="withCaptureEquipmentInformationField" id="1043991992%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="with-capture-equipment-information-field.html"><span>with</span><wbr></wbr><span>Capture</span><wbr></wbr><span>Equipment</span><wbr></wbr><span>Information</span><wbr></wbr><span><span>Field</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1043991992%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="with-capture-equipment-information-field.html"><span class="token function">withCaptureEquipmentInformationField</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">cbeffInformation<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">MinutiaeDataRecordBuilder</a></div><div class="brief "><p class="paragraph">Sets CBI (CBEFF Information) – M1 CBEFF metadata about the capture equipment/biometric data.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="2115327917%2FFunctions%2F-251573632" anchor-label="withCenterPointOfReferenceField" id="2115327917%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="with-center-point-of-reference-field.html"><span>with</span><wbr></wbr><span>Center</span><wbr></wbr><span>Point</span><wbr></wbr><span>Of</span><wbr></wbr><span>Reference</span><wbr></wbr><span><span>Field</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="2115327917%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="with-center-point-of-reference-field.html"><span class="token function">withCenterPointOfReferenceField</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">centerPoint<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">MinutiaeDataRecordBuilder</a></div><div class="brief "><p class="paragraph">Sets CPR (Center Point of Reference) – reference point used for alignment/annotation.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1842408675%2FFunctions%2F-251573632" anchor-label="withCommentField" id="-1842408675%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="with-comment-field.html"><span>with</span><wbr></wbr><span>Comment</span><wbr></wbr><span><span>Field</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1842408675%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="with-comment-field.html"><span class="token function">withCommentField</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">comment<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">MinutiaeDataRecordBuilder</a></div><div class="brief "><p class="paragraph">Sets COM (Comment) – free-form comment related to the minutiae/feature set.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="441808218%2FFunctions%2F-251573632" anchor-label="withContactInformationField" id="441808218%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="with-contact-information-field.html"><span>with</span><wbr></wbr><span>Contact</span><wbr></wbr><span>Information</span><wbr></wbr><span><span>Field</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="441808218%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="with-contact-information-field.html"><span class="token function">withContactInformationField</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">contactInformation<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">MinutiaeDataRecordBuilder</a></div><div class="brief "><p class="paragraph">Sets DTX (Contact Information) – contact details for the owner/developer of the feature set.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="419294224%2FFunctions%2F-251573632" anchor-label="withCoreDeltaRidgeCountsField" id="419294224%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="with-core-delta-ridge-counts-field.html"><span>with</span><wbr></wbr><span>Core</span><wbr></wbr><span>Delta</span><wbr></wbr><span>Ridge</span><wbr></wbr><span>Counts</span><wbr></wbr><span><span>Field</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="419294224%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="with-core-delta-ridge-counts-field.html"><span class="token function">withCoreDeltaRidgeCountsField</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">counts<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">MinutiaeDataRecordBuilder</a></div><div class="brief "><p class="paragraph">Sets CDR (Core-Delta Ridge Counts) – ridge counts measured between core and delta points.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-867929681%2FFunctions%2F-251573632" anchor-label="withCoreInformationField" id="-867929681%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="with-core-information-field.html"><span>with</span><wbr></wbr><span>Core</span><wbr></wbr><span>Information</span><wbr></wbr><span><span>Field</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-867929681%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="with-core-information-field.html"><span class="token function">withCoreInformationField</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">coreInfo<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">MinutiaeDataRecordBuilder</a></div><div class="brief "><p class="paragraph">Sets CIN (Core Information) – data describing detected core(s).</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="729492821%2FFunctions%2F-251573632" anchor-label="withCorePositionLegacyField" id="729492821%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="with-core-position-legacy-field.html"><span>with</span><wbr></wbr><span>Core</span><wbr></wbr><span>Position</span><wbr></wbr><span>Legacy</span><wbr></wbr><span><span>Field</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="729492821%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="with-core-position-legacy-field.html"><span class="token function">withCorePositionLegacyField</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">corePosition<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">MinutiaeDataRecordBuilder</a></div><div class="brief "><p class="paragraph">Sets CRP (Core Position) – legacy field indicating the position of the core.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1988721560%2FFunctions%2F-251573632" anchor-label="withCoresField" id="-1988721560%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="with-cores-field.html"><span>with</span><wbr></wbr><span>Cores</span><wbr></wbr><span><span>Field</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1988721560%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="with-cores-field.html"><span class="token function">withCoresField</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">cores<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">MinutiaeDataRecordBuilder</a></div><div class="brief "><p class="paragraph">Sets COR (Cores) – EFS description of core point(s).</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1246517498%2FFunctions%2F-251573632" anchor-label="withCorrespondingPointsOrFeaturesField" id="-1246517498%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="with-corresponding-points-or-features-field.html"><span>with</span><wbr></wbr><span>Corresponding</span><wbr></wbr><span>Points</span><wbr></wbr><span>Or</span><wbr></wbr><span>Features</span><wbr></wbr><span><span>Field</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1246517498%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="with-corresponding-points-or-features-field.html"><span class="token function">withCorrespondingPointsOrFeaturesField</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">cpf<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">MinutiaeDataRecordBuilder</a></div><div class="brief "><p class="paragraph">Sets CPF (Corresponding Points or Features) – list/encoding of feature correspondences.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1978228134%2FFunctions%2F-251573632" anchor-label="withCreasesAndLinearDiscontinuitiesField" id="1978228134%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="with-creases-and-linear-discontinuities-field.html"><span>with</span><wbr></wbr><span>Creases</span><wbr></wbr><span>And</span><wbr></wbr><span>Linear</span><wbr></wbr><span>Discontinuities</span><wbr></wbr><span><span>Field</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1978228134%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="with-creases-and-linear-discontinuities-field.html"><span class="token function">withCreasesAndLinearDiscontinuitiesField</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">creases<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">MinutiaeDataRecordBuilder</a></div><div class="brief "><p class="paragraph">Sets CLD (Creases and Linear Discontinuities) – EFS creases/line interruptions in ridge detail.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-597120974%2FFunctions%2F-251573632" anchor-label="withDeltaInformationField" id="-597120974%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="with-delta-information-field.html"><span>with</span><wbr></wbr><span>Delta</span><wbr></wbr><span>Information</span><wbr></wbr><span><span>Field</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-597120974%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="with-delta-information-field.html"><span class="token function">withDeltaInformationField</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">deltaInfo<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">MinutiaeDataRecordBuilder</a></div><div class="brief "><p class="paragraph">Sets DIN (Delta Information) – data describing detected delta(s).</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1851866126%2FFunctions%2F-251573632" anchor-label="withDeltaPositionLegacyField" id="-1851866126%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="with-delta-position-legacy-field.html"><span>with</span><wbr></wbr><span>Delta</span><wbr></wbr><span>Position</span><wbr></wbr><span>Legacy</span><wbr></wbr><span><span>Field</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1851866126%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="with-delta-position-legacy-field.html"><span class="token function">withDeltaPositionLegacyField</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">deltaPosition<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">MinutiaeDataRecordBuilder</a></div><div class="brief "><p class="paragraph">Sets DLT (Delta Position) – legacy field indicating the position of the delta.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-65965397%2FFunctions%2F-251573632" anchor-label="withDeltasField" id="-65965397%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="with-deltas-field.html"><span>with</span><wbr></wbr><span>Deltas</span><wbr></wbr><span><span>Field</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-65965397%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="with-deltas-field.html"><span class="token function">withDeltasField</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">deltas<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">MinutiaeDataRecordBuilder</a></div><div class="brief "><p class="paragraph">Sets DEL (Deltas) – EFS description of delta point(s).</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="565391222%2FFunctions%2F-251573632" anchor-label="withDeviceUniqueIdentifierField" id="565391222%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="with-device-unique-identifier-field.html"><span>with</span><wbr></wbr><span>Device</span><wbr></wbr><span>Unique</span><wbr></wbr><span>Identifier</span><wbr></wbr><span><span>Field</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="565391222%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="with-device-unique-identifier-field.html"><span class="token function">withDeviceUniqueIdentifierField</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">dui<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">MinutiaeDataRecordBuilder</a></div><div class="brief "><p class="paragraph">Sets DUI (Device Unique Identifier) – unique identifier of the device used.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1550653443%2FFunctions%2F-251573632" anchor-label="withDistinctiveFeaturesField" id="1550653443%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="with-distinctive-features-field.html"><span>with</span><wbr></wbr><span>Distinctive</span><wbr></wbr><span>Features</span><wbr></wbr><span><span>Field</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1550653443%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="with-distinctive-features-field.html"><span class="token function">withDistinctiveFeaturesField</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">features<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">MinutiaeDataRecordBuilder</a></div><div class="brief "><p class="paragraph">Sets DIS (Distinctive Features) – EFS description of distinctive ridge features.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1428620284%2FFunctions%2F-251573632" anchor-label="withDotsField" id="1428620284%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="with-dots-field.html"><span>with</span><wbr></wbr><span>Dots</span><wbr></wbr><span><span>Field</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1428620284%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="with-dots-field.html"><span class="token function">withDotsField</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">dots<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">MinutiaeDataRecordBuilder</a></div><div class="brief "><p class="paragraph">Sets DOT (Dots) – EFS dot features within the friction ridge detail.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-142961074%2FFunctions%2F-251573632" anchor-label="withEfsMinutiaeField" id="-142961074%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="with-efs-minutiae-field.html"><span>with</span><wbr></wbr><span>Efs</span><wbr></wbr><span>Minutiae</span><wbr></wbr><span><span>Field</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-142961074%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="with-efs-minutiae-field.html"><span class="token function">withEfsMinutiaeField</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">minutiae<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">MinutiaeDataRecordBuilder</a></div><div class="brief "><p class="paragraph">Sets MIN (EFS Minutiae) – list/encoding of minutiae according to the EFS specification.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1820706394%2FFunctions%2F-251573632" anchor-label="withEvidenceOfFraudField" id="-1820706394%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="with-evidence-of-fraud-field.html"><span>with</span><wbr></wbr><span>Evidence</span><wbr></wbr><span>Of</span><wbr></wbr><span>Fraud</span><wbr></wbr><span><span>Field</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1820706394%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="with-evidence-of-fraud-field.html"><span class="token function">withEvidenceOfFraudField</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">evidence<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">MinutiaeDataRecordBuilder</a></div><div class="brief "><p class="paragraph">Sets EOF (Evidence of Fraud) – records any indicators of alteration or fraud.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="475409303%2FFunctions%2F-251573632" anchor-label="withExaminerAnalysisAssessmentField" id="475409303%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="with-examiner-analysis-assessment-field.html"><span>with</span><wbr></wbr><span>Examiner</span><wbr></wbr><span>Analysis</span><wbr></wbr><span>Assessment</span><wbr></wbr><span><span>Field</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="475409303%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="with-examiner-analysis-assessment-field.html"><span class="token function">withExaminerAnalysisAssessmentField</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">assessment<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">MinutiaeDataRecordBuilder</a></div><div class="brief "><p class="paragraph">Sets EAA (Examiner Analysis Assessment) – assessment outcome of examiner analysis.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-721581997%2FFunctions%2F-251573632" anchor-label="withExaminerComparisonDeterminationField" id="-721581997%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="with-examiner-comparison-determination-field.html"><span>with</span><wbr></wbr><span>Examiner</span><wbr></wbr><span>Comparison</span><wbr></wbr><span>Determination</span><wbr></wbr><span><span>Field</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-721581997%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="with-examiner-comparison-determination-field.html"><span class="token function">withExaminerComparisonDeterminationField</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">ecd<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">MinutiaeDataRecordBuilder</a></div><div class="brief "><p class="paragraph">Sets ECD (Examiner Comparison Determination) – conclusion of the examiner's comparison.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-688318031%2FFunctions%2F-251573632" anchor-label="withFeatureColorAndCommentField" id="-688318031%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="with-feature-color-and-comment-field.html"><span>with</span><wbr></wbr><span>Feature</span><wbr></wbr><span>Color</span><wbr></wbr><span>And</span><wbr></wbr><span>Comment</span><wbr></wbr><span><span>Field</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-688318031%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="with-feature-color-and-comment-field.html"><span class="token function">withFeatureColorAndCommentField</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">fcc<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">MinutiaeDataRecordBuilder</a></div><div class="brief "><p class="paragraph">Sets FCC (Feature Color and Comment) – color coding and comments for annotated features.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-161593729%2FFunctions%2F-251573632" anchor-label="withFeatureSetProfileField" id="-161593729%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="with-feature-set-profile-field.html"><span>with</span><wbr></wbr><span>Feature</span><wbr></wbr><span>Set</span><wbr></wbr><span>Profile</span><wbr></wbr><span><span>Field</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-161593729%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="with-feature-set-profile-field.html"><span class="token function">withFeatureSetProfileField</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">profile<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">MinutiaeDataRecordBuilder</a></div><div class="brief "><p class="paragraph">Sets FSP (Feature Set Profile) – identifies the EFS profile used.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1456635247%2FFunctions%2F-251573632" anchor-label="withField" id="-1456635247%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="../-nist-record-builder/with-field.html"><span>with</span><wbr></wbr><span><span>Field</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1456635247%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="../-nist-record-builder/with-field.html"><span class="token function">withField</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">fieldId<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a><span class="token punctuation">, </span></span><span class="parameter ">field<span class="token operator">: </span><a href="../../eu.aagsolutions.img.nbis.model.fields/-field/index.html">Field</a><span class="token operator">&lt;</span><span class="token operator">*</span><span class="token operator">&gt;</span></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">MinutiaeDataRecordBuilder</a></div><div class="brief "><p class="paragraph">Adds or updates a field in the record being built.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1498623575%2FFunctions%2F-251573632" anchor-label="withFingerMinutiaeDataField" id="1498623575%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="with-finger-minutiae-data-field.html"><span>with</span><wbr></wbr><span>Finger</span><wbr></wbr><span>Minutiae</span><wbr></wbr><span>Data</span><wbr></wbr><span><span>Field</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1498623575%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="with-finger-minutiae-data-field.html"><span class="token function">withFingerMinutiaeDataField</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">minutiaeData<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">MinutiaeDataRecordBuilder</a></div><div class="brief "><p class="paragraph">Sets FMD (Finger Minutiae Data) – the serialized minutiae data per the selected format profile.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-757317006%2FFunctions%2F-251573632" anchor-label="withFingerPalmPlantarPositionField" id="-757317006%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="with-finger-palm-plantar-position-field.html"><span>with</span><wbr></wbr><span>Finger</span><wbr></wbr><span>Palm</span><wbr></wbr><span>Plantar</span><wbr></wbr><span>Position</span><wbr></wbr><span><span>Field</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-757317006%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="with-finger-palm-plantar-position-field.html"><span class="token function">withFingerPalmPlantarPositionField</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">position<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">MinutiaeDataRecordBuilder</a></div><div class="brief "><p class="paragraph">Sets FPP (Finger, Palm, Plantar Position) – EFS anatomic position classification.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1104457850%2FFunctions%2F-251573632" anchor-label="withFingerPatternClassificationLegacyField" id="-1104457850%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="with-finger-pattern-classification-legacy-field.html"><span>with</span><wbr></wbr><span>Finger</span><wbr></wbr><span>Pattern</span><wbr></wbr><span>Classification</span><wbr></wbr><span>Legacy</span><wbr></wbr><span><span>Field</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1104457850%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="with-finger-pattern-classification-legacy-field.html"><span class="token function">withFingerPatternClassificationLegacyField</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">classification<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">MinutiaeDataRecordBuilder</a></div><div class="brief "><p class="paragraph">Sets FPC (Finger Pattern Classification) – legacy field describing the fingerprint pattern class.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-887092341%2FFunctions%2F-251573632" anchor-label="withFingerPositionLegacyField" id="-887092341%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="with-finger-position-legacy-field.html"><span>with</span><wbr></wbr><span>Finger</span><wbr></wbr><span>Position</span><wbr></wbr><span>Legacy</span><wbr></wbr><span><span>Field</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-887092341%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="with-finger-position-legacy-field.html"><span class="token function">withFingerPositionLegacyField</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">position<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">MinutiaeDataRecordBuilder</a></div><div class="brief "><p class="paragraph">Sets FGP (Finger Position) – legacy field specifying the finger position.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="907867224%2FFunctions%2F-251573632" anchor-label="withFingerViewField" id="907867224%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="with-finger-view-field.html"><span>with</span><wbr></wbr><span>Finger</span><wbr></wbr><span>View</span><wbr></wbr><span><span>Field</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="907867224%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="with-finger-view-field.html"><span class="token function">withFingerViewField</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">fingerView<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">MinutiaeDataRecordBuilder</a></div><div class="brief "><p class="paragraph">Sets FVW (Finger View) – indicates the view number for the finger impression.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1421475542%2FFunctions%2F-251573632" anchor-label="withFrictionRidgeGeneralizedPositionField" id="1421475542%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="with-friction-ridge-generalized-position-field.html"><span>with</span><wbr></wbr><span>Friction</span><wbr></wbr><span>Ridge</span><wbr></wbr><span>Generalized</span><wbr></wbr><span>Position</span><wbr></wbr><span><span>Field</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1421475542%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="with-friction-ridge-generalized-position-field.html"><span class="token function">withFrictionRidgeGeneralizedPositionField</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">position<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">MinutiaeDataRecordBuilder</a></div><div class="brief "><p class="paragraph">Sets FGP (Friction Ridge Generalized Position) – generalized anatomic position of the ridge detail.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="621907534%2FFunctions%2F-251573632" anchor-label="withFrictionRidgeQualityDataField" id="621907534%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="with-friction-ridge-quality-data-field.html"><span>with</span><wbr></wbr><span>Friction</span><wbr></wbr><span>Ridge</span><wbr></wbr><span>Quality</span><wbr></wbr><span>Data</span><wbr></wbr><span><span>Field</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="621907534%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="with-friction-ridge-quality-data-field.html"><span class="token function">withFrictionRidgeQualityDataField</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">qualityData<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">MinutiaeDataRecordBuilder</a></div><div class="brief "><p class="paragraph">Sets FQD (Friction Ridge Quality Data) – quality information for the friction ridge data.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1980268856%2FFunctions%2F-251573632" anchor-label="withFrictionRidgeQualityMetricField" id="-1980268856%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="with-friction-ridge-quality-metric-field.html"><span>with</span><wbr></wbr><span>Friction</span><wbr></wbr><span>Ridge</span><wbr></wbr><span>Quality</span><wbr></wbr><span>Metric</span><wbr></wbr><span><span>Field</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1980268856%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="with-friction-ridge-quality-metric-field.html"><span class="token function">withFrictionRidgeQualityMetricField</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">metric<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">MinutiaeDataRecordBuilder</a></div><div class="brief "><p class="paragraph">Sets FQM (Friction Ridge Quality Metric) – numeric/encoded measure of overall ridge quality.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1141632376%2FFunctions%2F-251573632" anchor-label="withHorizontalLineLengthField" id="-1141632376%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="with-horizontal-line-length-field.html"><span>with</span><wbr></wbr><span>Horizontal</span><wbr></wbr><span>Line</span><wbr></wbr><span>Length</span><wbr></wbr><span><span>Field</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1141632376%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="with-horizontal-line-length-field.html"><span class="token function">withHorizontalLineLengthField</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">horizontalLineLength<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">MinutiaeDataRecordBuilder</a></div><div class="brief "><p class="paragraph">Sets HLL (Horizontal Line Length) – number of pixels per horizontal line of the image.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="175032195%2FFunctions%2F-251573632" anchor-label="withImpressionTypeField" id="175032195%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="with-impression-type-field.html"><span>with</span><wbr></wbr><span>Impression</span><wbr></wbr><span>Type</span><wbr></wbr><span><span>Field</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="175032195%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="with-impression-type-field.html"><span class="token function">withImpressionTypeField</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">impressionType<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">MinutiaeDataRecordBuilder</a></div><div class="brief "><p class="paragraph">Sets IMP (Impression Type) – indicates how the friction ridge impression was obtained.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="99785613%2FFunctions%2F-251573632" anchor-label="withIncipientRidgesField" id="99785613%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="with-incipient-ridges-field.html"><span>with</span><wbr></wbr><span>Incipient</span><wbr></wbr><span>Ridges</span><wbr></wbr><span><span>Field</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="99785613%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="with-incipient-ridges-field.html"><span class="token function">withIncipientRidgesField</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">incipientRidges<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">MinutiaeDataRecordBuilder</a></div><div class="brief "><p class="paragraph">Sets INR (Incipient Ridges) – EFS incipient/partial ridge features.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1531985157%2FFunctions%2F-251573632" anchor-label="withInformationDesignationCharField" id="1531985157%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="with-information-designation-char-field.html"><span>with</span><wbr></wbr><span>Information</span><wbr></wbr><span>Designation</span><wbr></wbr><span>Char</span><wbr></wbr><span><span>Field</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1531985157%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="with-information-designation-char-field.html"><span class="token function">withInformationDesignationCharField</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">designationChar<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">MinutiaeDataRecordBuilder</a></div><div class="brief "><p class="paragraph">Sets IDC (Information Designation Character) – uniquely identifies this Type-9 record within the transaction.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="635448729%2FFunctions%2F-251573632" anchor-label="withLatentMatrixField" id="635448729%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="with-latent-matrix-field.html"><span>with</span><wbr></wbr><span>Latent</span><wbr></wbr><span>Matrix</span><wbr></wbr><span><span>Field</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="635448729%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="with-latent-matrix-field.html"><span class="token function">withLatentMatrixField</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">matrix<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">MinutiaeDataRecordBuilder</a></div><div class="brief "><p class="paragraph">Sets LMT (Latent Matrix) – describes the matrix/medium of the latent impression (e.g., residue/contaminant).</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1489474150%2FFunctions%2F-251573632" anchor-label="withLatentProcessingMethodField" id="1489474150%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="with-latent-processing-method-field.html"><span>with</span><wbr></wbr><span>Latent</span><wbr></wbr><span>Processing</span><wbr></wbr><span>Method</span><wbr></wbr><span><span>Field</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1489474150%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="with-latent-processing-method-field.html"><span class="token function">withLatentProcessingMethodField</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">method<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">MinutiaeDataRecordBuilder</a></div><div class="brief "><p class="paragraph">Sets LPM (Latent Processing Method) – method used to process/develop the latent print.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1723614905%2FFunctions%2F-251573632" anchor-label="withLatentSubstrateField" id="-1723614905%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="with-latent-substrate-field.html"><span>with</span><wbr></wbr><span>Latent</span><wbr></wbr><span>Substrate</span><wbr></wbr><span><span>Field</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1723614905%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="with-latent-substrate-field.html"><span class="token function">withLatentSubstrateField</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">substrate<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">MinutiaeDataRecordBuilder</a></div><div class="brief "><p class="paragraph">Sets LSB (Latent Substrate) – describes the surface on which the latent impression was deposited.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="474911256%2FFunctions%2F-251573632" anchor-label="withLocalQualityIssuesField" id="474911256%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="with-local-quality-issues-field.html"><span>with</span><wbr></wbr><span>Local</span><wbr></wbr><span>Quality</span><wbr></wbr><span>Issues</span><wbr></wbr><span><span>Field</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="474911256%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="with-local-quality-issues-field.html"><span class="token function">withLocalQualityIssuesField</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">issues<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">MinutiaeDataRecordBuilder</a></div><div class="brief "><p class="paragraph">Sets LQI (Local Quality Issues) – documents localized quality deficiencies affecting interpretation.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="355449028%2FFunctions%2F-251573632" anchor-label="withMakeModelSerialNumberField" id="355449028%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="with-make-model-serial-number-field.html"><span>with</span><wbr></wbr><span>Make</span><wbr></wbr><span>Model</span><wbr></wbr><span>Serial</span><wbr></wbr><span>Number</span><wbr></wbr><span><span>Field</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="355449028%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="with-make-model-serial-number-field.html"><span class="token function">withMakeModelSerialNumberField</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">mms<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">MinutiaeDataRecordBuilder</a></div><div class="brief "><p class="paragraph">Sets MMS (Make/Model/Serial Number) – device make, model and serial number details.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1227150527%2FFunctions%2F-251573632" anchor-label="withMethodOfFeatureDetectionField" id="1227150527%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="with-method-of-feature-detection-field.html"><span>with</span><wbr></wbr><span>Method</span><wbr></wbr><span>Of</span><wbr></wbr><span>Feature</span><wbr></wbr><span>Detection</span><wbr></wbr><span><span>Field</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1227150527%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="with-method-of-feature-detection-field.html"><span class="token function">withMethodOfFeatureDetectionField</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">method<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">MinutiaeDataRecordBuilder</a></div><div class="brief "><p class="paragraph">Sets MFD (Method of Feature Detection) – method used to detect/annotate features.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="771815850%2FFunctions%2F-251573632" anchor-label="withMinutiaeAndRidgeCountDataLegacyField" id="771815850%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="with-minutiae-and-ridge-count-data-legacy-field.html"><span>with</span><wbr></wbr><span>Minutiae</span><wbr></wbr><span>And</span><wbr></wbr><span>Ridge</span><wbr></wbr><span>Count</span><wbr></wbr><span>Data</span><wbr></wbr><span>Legacy</span><wbr></wbr><span><span>Field</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="771815850%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="with-minutiae-and-ridge-count-data-legacy-field.html"><span class="token function">withMinutiaeAndRidgeCountDataLegacyField</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">data<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">MinutiaeDataRecordBuilder</a></div><div class="brief "><p class="paragraph">Sets MRC (Minutiae and Ridge Count Data) – legacy field containing minutiae and ridge count details.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1224783635%2FFunctions%2F-251573632" anchor-label="withMinutiaeFormatField" id="1224783635%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="with-minutiae-format-field.html"><span>with</span><wbr></wbr><span>Minutiae</span><wbr></wbr><span>Format</span><wbr></wbr><span><span>Field</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1224783635%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="with-minutiae-format-field.html"><span class="token function">withMinutiaeFormatField</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">format<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">MinutiaeDataRecordBuilder</a></div><div class="brief "><p class="paragraph">Sets FMT (Minutiae Format) – identifies the minutiae data format used in this record.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1662608941%2FFunctions%2F-251573632" anchor-label="withMinutiaeRidgeCountAlgorithmField" id="1662608941%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="with-minutiae-ridge-count-algorithm-field.html"><span>with</span><wbr></wbr><span>Minutiae</span><wbr></wbr><span>Ridge</span><wbr></wbr><span>Count</span><wbr></wbr><span>Algorithm</span><wbr></wbr><span><span>Field</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1662608941%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="with-minutiae-ridge-count-algorithm-field.html"><span class="token function">withMinutiaeRidgeCountAlgorithmField</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">algorithm<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">MinutiaeDataRecordBuilder</a></div><div class="brief "><p class="paragraph">Sets MRA (Minutiae Ridge Count Algorithm) – identifies the algorithm used to compute ridge counts.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1879111684%2FFunctions%2F-251573632" anchor-label="withMinutiaeRidgeCountIndicatorLegacyField" id="1879111684%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="with-minutiae-ridge-count-indicator-legacy-field.html"><span>with</span><wbr></wbr><span>Minutiae</span><wbr></wbr><span>Ridge</span><wbr></wbr><span>Count</span><wbr></wbr><span>Indicator</span><wbr></wbr><span>Legacy</span><wbr></wbr><span><span>Field</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1879111684%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="with-minutiae-ridge-count-indicator-legacy-field.html"><span class="token function">withMinutiaeRidgeCountIndicatorLegacyField</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">indicator<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">MinutiaeDataRecordBuilder</a></div><div class="brief "><p class="paragraph">Sets RDG (Minutiae Ridge Count Indicator) – legacy field indicating presence/use of ridge counts.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-2109024631%2FFunctions%2F-251573632" anchor-label="withMinutiaeRidgeCountsField" id="-2109024631%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="with-minutiae-ridge-counts-field.html"><span>with</span><wbr></wbr><span>Minutiae</span><wbr></wbr><span>Ridge</span><wbr></wbr><span>Counts</span><wbr></wbr><span><span>Field</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-2109024631%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="with-minutiae-ridge-counts-field.html"><span class="token function">withMinutiaeRidgeCountsField</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">counts<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">MinutiaeDataRecordBuilder</a></div><div class="brief "><p class="paragraph">Sets MRC (Minutiae Ridge Counts) – ridge counts associated with the encoded minutiae.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="817156478%2FFunctions%2F-251573632" anchor-label="withNoCoresPresentField" id="817156478%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="with-no-cores-present-field.html"><span>with</span><wbr></wbr><span>No</span><wbr></wbr><span>Cores</span><wbr></wbr><span>Present</span><wbr></wbr><span><span>Field</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="817156478%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="with-no-cores-present-field.html"><span class="token function">withNoCoresPresentField</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">flag<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">MinutiaeDataRecordBuilder</a></div><div class="brief "><p class="paragraph">Sets NCOR (No Cores Present) – flag indicating that no cores are present.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="535155328%2FFunctions%2F-251573632" anchor-label="withNoCreasesPresentField" id="535155328%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="with-no-creases-present-field.html"><span>with</span><wbr></wbr><span>No</span><wbr></wbr><span>Creases</span><wbr></wbr><span>Present</span><wbr></wbr><span><span>Field</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="535155328%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="with-no-creases-present-field.html"><span class="token function">withNoCreasesPresentField</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">flag<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">MinutiaeDataRecordBuilder</a></div><div class="brief "><p class="paragraph">Sets NCLD (No Creases Present) – flag indicating that no creases are present.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="346638909%2FFunctions%2F-251573632" anchor-label="withNoDeltasPresentField" id="346638909%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="with-no-deltas-present-field.html"><span>with</span><wbr></wbr><span>No</span><wbr></wbr><span>Deltas</span><wbr></wbr><span>Present</span><wbr></wbr><span><span>Field</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="346638909%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="with-no-deltas-present-field.html"><span class="token function">withNoDeltasPresentField</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">flag<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">MinutiaeDataRecordBuilder</a></div><div class="brief "><p class="paragraph">Sets NDEL (No Deltas Present) – flag indicating that no deltas are present.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1883574083%2FFunctions%2F-251573632" anchor-label="withNoDistinctiveFeaturesPresentField" id="1883574083%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="with-no-distinctive-features-present-field.html"><span>with</span><wbr></wbr><span>No</span><wbr></wbr><span>Distinctive</span><wbr></wbr><span>Features</span><wbr></wbr><span>Present</span><wbr></wbr><span><span>Field</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1883574083%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="with-no-distinctive-features-present-field.html"><span class="token function">withNoDistinctiveFeaturesPresentField</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">flag<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">MinutiaeDataRecordBuilder</a></div><div class="brief "><p class="paragraph">Sets NDIS (No Distinctive Features Present) – flag indicating that no distinctive features are present.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1469931532%2FFunctions%2F-251573632" anchor-label="withNoDotsPresentField" id="1469931532%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="with-no-dots-present-field.html"><span>with</span><wbr></wbr><span>No</span><wbr></wbr><span>Dots</span><wbr></wbr><span>Present</span><wbr></wbr><span><span>Field</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1469931532%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="with-no-dots-present-field.html"><span class="token function">withNoDotsPresentField</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">flag<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">MinutiaeDataRecordBuilder</a></div><div class="brief "><p class="paragraph">Sets NDOT (No Dots Present) – flag indicating that no dot features are present.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-947850247%2FFunctions%2F-251573632" anchor-label="withNoIncipientRidgesPresentField" id="-947850247%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="with-no-incipient-ridges-present-field.html"><span>with</span><wbr></wbr><span>No</span><wbr></wbr><span>Incipient</span><wbr></wbr><span>Ridges</span><wbr></wbr><span>Present</span><wbr></wbr><span><span>Field</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-947850247%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="with-no-incipient-ridges-present-field.html"><span class="token function">withNoIncipientRidgesPresentField</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">flag<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">MinutiaeDataRecordBuilder</a></div><div class="brief "><p class="paragraph">Sets NINR (No Incipient Ridges Present) – flag indicating that no incipient ridges are present.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="265996670%2FFunctions%2F-251573632" anchor-label="withNoMinutiaePresentField" id="265996670%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="with-no-minutiae-present-field.html"><span>with</span><wbr></wbr><span>No</span><wbr></wbr><span>Minutiae</span><wbr></wbr><span>Present</span><wbr></wbr><span><span>Field</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="265996670%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="with-no-minutiae-present-field.html"><span class="token function">withNoMinutiaePresentField</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">flag<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">MinutiaeDataRecordBuilder</a></div><div class="brief "><p class="paragraph">Sets NMIN (No Minutiae Present) – flag indicating that no minutiae are present.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1241327051%2FFunctions%2F-251573632" anchor-label="withNoPoresPresentField" id="1241327051%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="with-no-pores-present-field.html"><span>with</span><wbr></wbr><span>No</span><wbr></wbr><span>Pores</span><wbr></wbr><span>Present</span><wbr></wbr><span><span>Field</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1241327051%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="with-no-pores-present-field.html"><span class="token function">withNoPoresPresentField</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">flag<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">MinutiaeDataRecordBuilder</a></div><div class="brief "><p class="paragraph">Sets NPOR (No Pores Present) – flag indicating that no pore features are present.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1940882415%2FFunctions%2F-251573632" anchor-label="withNoRidgeEdgeFeaturesPresentField" id="1940882415%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="with-no-ridge-edge-features-present-field.html"><span>with</span><wbr></wbr><span>No</span><wbr></wbr><span>Ridge</span><wbr></wbr><span>Edge</span><wbr></wbr><span>Features</span><wbr></wbr><span>Present</span><wbr></wbr><span><span>Field</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1940882415%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="with-no-ridge-edge-features-present-field.html"><span class="token function">withNoRidgeEdgeFeaturesPresentField</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">flag<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">MinutiaeDataRecordBuilder</a></div><div class="brief "><p class="paragraph">Sets NREF (No Ridge Edge Features Present) – flag indicating that no ridge edge features are present.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-662271446%2FFunctions%2F-251573632" anchor-label="withNumberOfMinutiaeField" id="-662271446%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="with-number-of-minutiae-field.html"><span>with</span><wbr></wbr><span>Number</span><wbr></wbr><span>Of</span><wbr></wbr><span>Minutiae</span><wbr></wbr><span><span>Field</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-662271446%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="with-number-of-minutiae-field.html"><span class="token function">withNumberOfMinutiaeField</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">numberOfMinutiae<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">MinutiaeDataRecordBuilder</a></div><div class="brief "><p class="paragraph">Sets NOM (Number of Minutiae) – count of minutiae encoded in the record (EFS).</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-894402591%2FFunctions%2F-251573632" anchor-label="withNumberOfMinutiaeLegacyField" id="-894402591%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="with-number-of-minutiae-legacy-field.html"><span>with</span><wbr></wbr><span>Number</span><wbr></wbr><span>Of</span><wbr></wbr><span>Minutiae</span><wbr></wbr><span>Legacy</span><wbr></wbr><span><span>Field</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-894402591%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="with-number-of-minutiae-legacy-field.html"><span class="token function">withNumberOfMinutiaeLegacyField</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">numberOfMinutiae<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">MinutiaeDataRecordBuilder</a></div><div class="brief "><p class="paragraph">Sets MIN (Number of Minutiae) – legacy field specifying how many minutiae are present.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1498273396%2FFunctions%2F-251573632" anchor-label="withOrientationField" id="-1498273396%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="with-orientation-field.html"><span>with</span><wbr></wbr><span>Orientation</span><wbr></wbr><span><span>Field</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1498273396%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="with-orientation-field.html"><span class="token function">withOrientationField</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">orientation<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">MinutiaeDataRecordBuilder</a></div><div class="brief "><p class="paragraph">Sets ORT (Orientation) – EFS overall ridge orientation information.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="73996924%2FFunctions%2F-251573632" anchor-label="withOriginatingFingerprintReadingSystemField" id="73996924%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="with-originating-fingerprint-reading-system-field.html"><span>with</span><wbr></wbr><span>Originating</span><wbr></wbr><span>Fingerprint</span><wbr></wbr><span>Reading</span><wbr></wbr><span>System</span><wbr></wbr><span><span>Field</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="73996924%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="with-originating-fingerprint-reading-system-field.html"><span class="token function">withOriginatingFingerprintReadingSystemField</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">system<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">MinutiaeDataRecordBuilder</a></div><div class="brief "><p class="paragraph">Sets OFR (Originating Fingerprint Reading System) – legacy field identifying the source system.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1708264942%2FFunctions%2F-251573632" anchor-label="withOwnerOrDeveloperField" id="-1708264942%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="with-owner-or-developer-field.html"><span>with</span><wbr></wbr><span>Owner</span><wbr></wbr><span>Or</span><wbr></wbr><span>Developer</span><wbr></wbr><span><span>Field</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1708264942%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="with-owner-or-developer-field.html"><span class="token function">withOwnerOrDeveloperField</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">ownerOrDeveloper<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">MinutiaeDataRecordBuilder</a></div><div class="brief "><p class="paragraph">Sets OOD (Owner or Developer) – identifies the owner/developer of an alternate feature set.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1832454726%2FFunctions%2F-251573632" anchor-label="withPatternClassificationField" id="1832454726%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="with-pattern-classification-field.html"><span>with</span><wbr></wbr><span>Pattern</span><wbr></wbr><span>Classification</span><wbr></wbr><span><span>Field</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1832454726%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="with-pattern-classification-field.html"><span class="token function">withPatternClassificationField</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">pattern<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">MinutiaeDataRecordBuilder</a></div><div class="brief "><p class="paragraph">Sets PAT (Pattern Classification) – EFS classification of the ridge pattern.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="2025897147%2FFunctions%2F-251573632" anchor-label="withPoresField" id="2025897147%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="with-pores-field.html"><span>with</span><wbr></wbr><span>Pores</span><wbr></wbr><span><span>Field</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="2025897147%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="with-pores-field.html"><span class="token function">withPoresField</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">pores<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">MinutiaeDataRecordBuilder</a></div><div class="brief "><p class="paragraph">Sets POR (Pores) – EFS pore features within the friction ridge detail.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1310662335%2FFunctions%2F-251573632" anchor-label="withPossibleGrowthOrShrinkageField" id="-1310662335%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="with-possible-growth-or-shrinkage-field.html"><span>with</span><wbr></wbr><span>Possible</span><wbr></wbr><span>Growth</span><wbr></wbr><span>Or</span><wbr></wbr><span>Shrinkage</span><wbr></wbr><span><span>Field</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1310662335%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="with-possible-growth-or-shrinkage-field.html"><span class="token function">withPossibleGrowthOrShrinkageField</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">value<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">MinutiaeDataRecordBuilder</a></div><div class="brief "><p class="paragraph">Sets PGS (Possible Growth or Shrinkage) – indicates potential size changes in the impression.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="288788456%2FFunctions%2F-251573632" anchor-label="withPossibleLateralReversalField" id="288788456%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="with-possible-lateral-reversal-field.html"><span>with</span><wbr></wbr><span>Possible</span><wbr></wbr><span>Lateral</span><wbr></wbr><span>Reversal</span><wbr></wbr><span><span>Field</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="288788456%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="with-possible-lateral-reversal-field.html"><span class="token function">withPossibleLateralReversalField</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">possibleLateralReversal<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">MinutiaeDataRecordBuilder</a></div><div class="brief "><p class="paragraph">Sets PLR (Possible Lateral Reversal) – indicates potential left-right/lateral reversal.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-412360128%2FFunctions%2F-251573632" anchor-label="withProcessingAlgorithmField" id="-412360128%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="with-processing-algorithm-field.html"><span>with</span><wbr></wbr><span>Processing</span><wbr></wbr><span>Algorithm</span><wbr></wbr><span><span>Field</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-412360128%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="with-processing-algorithm-field.html"><span class="token function">withProcessingAlgorithmField</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">processingAlgorithm<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">MinutiaeDataRecordBuilder</a></div><div class="brief "><p class="paragraph">Sets PAG (Processing Algorithm) – identifies the algorithm used to generate features.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="762728369%2FFunctions%2F-251573632" anchor-label="withRegionOfInterestField" id="762728369%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="with-region-of-interest-field.html"><span>with</span><wbr></wbr><span>Region</span><wbr></wbr><span>Of</span><wbr></wbr><span>Interest</span><wbr></wbr><span><span>Field</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="762728369%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="with-region-of-interest-field.html"><span class="token function">withRegionOfInterestField</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">roi<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">MinutiaeDataRecordBuilder</a></div><div class="brief "><p class="paragraph">Sets ROI (Region of Interest) – EFS region(s) within the image considered for features.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="887057067%2FFunctions%2F-251573632" anchor-label="withRelativeRotationOfCorrespondingPrintField" id="887057067%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="with-relative-rotation-of-corresponding-print-field.html"><span>with</span><wbr></wbr><span>Relative</span><wbr></wbr><span>Rotation</span><wbr></wbr><span>Of</span><wbr></wbr><span>Corresponding</span><wbr></wbr><span>Print</span><wbr></wbr><span><span>Field</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="887057067%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="with-relative-rotation-of-corresponding-print-field.html"><span class="token function">withRelativeRotationOfCorrespondingPrintField</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">rrc<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">MinutiaeDataRecordBuilder</a></div><div class="brief "><p class="paragraph">Sets RRC (Relative Rotation of Corresponding Print) – rotation between compared impressions.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="719804664%2FFunctions%2F-251573632" anchor-label="withRidgeCountConfidenceField" id="719804664%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="with-ridge-count-confidence-field.html"><span>with</span><wbr></wbr><span>Ridge</span><wbr></wbr><span>Count</span><wbr></wbr><span>Confidence</span><wbr></wbr><span><span>Field</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="719804664%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="with-ridge-count-confidence-field.html"><span class="token function">withRidgeCountConfidenceField</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">confidence<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">MinutiaeDataRecordBuilder</a></div><div class="brief "><p class="paragraph">Sets RCC (Ridge Count Confidence) – confidence metric for computed ridge counts.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1992632628%2FFunctions%2F-251573632" anchor-label="withRidgeCountInformationField" id="1992632628%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="with-ridge-count-information-field.html"><span>with</span><wbr></wbr><span>Ridge</span><wbr></wbr><span>Count</span><wbr></wbr><span>Information</span><wbr></wbr><span><span>Field</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1992632628%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="with-ridge-count-information-field.html"><span class="token function">withRidgeCountInformationField</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">ridgeCountInfo<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">MinutiaeDataRecordBuilder</a></div><div class="brief "><p class="paragraph">Sets RCI (Ridge Count Information) – ridge count data between feature points.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-2054559593%2FFunctions%2F-251573632" anchor-label="withRidgeEdgeFeaturesField" id="-2054559593%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="with-ridge-edge-features-field.html"><span>with</span><wbr></wbr><span>Ridge</span><wbr></wbr><span>Edge</span><wbr></wbr><span>Features</span><wbr></wbr><span><span>Field</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-2054559593%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="with-ridge-edge-features-field.html"><span class="token function">withRidgeEdgeFeaturesField</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">features<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">MinutiaeDataRecordBuilder</a></div><div class="brief "><p class="paragraph">Sets REF (Ridge Edge Features) – EFS ridge edge characteristics (e.g., breaks, notches).</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1792570755%2FFunctions%2F-251573632" anchor-label="withRidgeFlowMapField" id="1792570755%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="with-ridge-flow-map-field.html"><span>with</span><wbr></wbr><span>Ridge</span><wbr></wbr><span>Flow</span><wbr></wbr><span>Map</span><wbr></wbr><span><span>Field</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1792570755%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="with-ridge-flow-map-field.html"><span class="token function">withRidgeFlowMapField</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">map<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">MinutiaeDataRecordBuilder</a></div><div class="brief "><p class="paragraph">Sets RFM (Ridge Flow Map) – EFS map describing local ridge flow directions.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1465659276%2FFunctions%2F-251573632" anchor-label="withRidgeFlowMapFormatField" id="1465659276%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="with-ridge-flow-map-format-field.html"><span>with</span><wbr></wbr><span>Ridge</span><wbr></wbr><span>Flow</span><wbr></wbr><span>Map</span><wbr></wbr><span>Format</span><wbr></wbr><span><span>Field</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1465659276%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="with-ridge-flow-map-format-field.html"><span class="token function">withRidgeFlowMapFormatField</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">format<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">MinutiaeDataRecordBuilder</a></div><div class="brief "><p class="paragraph">Sets RFF (Ridge Flow Map Format) – encoding/format for the ridge flow map.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1543923180%2FFunctions%2F-251573632" anchor-label="withRidgePathSegmentsField" id="1543923180%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="with-ridge-path-segments-field.html"><span>with</span><wbr></wbr><span>Ridge</span><wbr></wbr><span>Path</span><wbr></wbr><span>Segments</span><wbr></wbr><span><span>Field</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1543923180%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="with-ridge-path-segments-field.html"><span class="token function">withRidgePathSegmentsField</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">rps<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">MinutiaeDataRecordBuilder</a></div><div class="brief "><p class="paragraph">Sets RPS (Ridge Path Segments) – encoded ridge path segment information.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-543350789%2FFunctions%2F-251573632" anchor-label="withRidgeQualityFormatField" id="-543350789%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="with-ridge-quality-format-field.html"><span>with</span><wbr></wbr><span>Ridge</span><wbr></wbr><span>Quality</span><wbr></wbr><span>Format</span><wbr></wbr><span><span>Field</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-543350789%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="with-ridge-quality-format-field.html"><span class="token function">withRidgeQualityFormatField</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">format<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">MinutiaeDataRecordBuilder</a></div><div class="brief "><p class="paragraph">Sets RQF (Ridge Quality Format) – encoding/format of the ridge quality map.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-48690700%2FFunctions%2F-251573632" anchor-label="withRidgeQualityMapField" id="-48690700%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="with-ridge-quality-map-field.html"><span>with</span><wbr></wbr><span>Ridge</span><wbr></wbr><span>Quality</span><wbr></wbr><span>Map</span><wbr></wbr><span><span>Field</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-48690700%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="with-ridge-quality-map-field.html"><span class="token function">withRidgeQualityMapField</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">map<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">MinutiaeDataRecordBuilder</a></div><div class="brief "><p class="paragraph">Sets RQM (Ridge Quality Map) – EFS map describing local ridge quality.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1716849076%2FFunctions%2F-251573632" anchor-label="withRidgeWavelengthMapField" id="1716849076%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="with-ridge-wavelength-map-field.html"><span>with</span><wbr></wbr><span>Ridge</span><wbr></wbr><span>Wavelength</span><wbr></wbr><span>Map</span><wbr></wbr><span><span>Field</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1716849076%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="with-ridge-wavelength-map-field.html"><span class="token function">withRidgeWavelengthMapField</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">map<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">MinutiaeDataRecordBuilder</a></div><div class="brief "><p class="paragraph">Sets RWM (Ridge Wavelength Map) – EFS map describing local ridge wavelengths/frequencies.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="2824957%2FFunctions%2F-251573632" anchor-label="withRidgeWavelengthMapFormatField" id="2824957%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="with-ridge-wavelength-map-format-field.html"><span>with</span><wbr></wbr><span>Ridge</span><wbr></wbr><span>Wavelength</span><wbr></wbr><span>Map</span><wbr></wbr><span>Format</span><wbr></wbr><span><span>Field</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="2824957%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="with-ridge-wavelength-map-format-field.html"><span class="token function">withRidgeWavelengthMapFormatField</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">format<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">MinutiaeDataRecordBuilder</a></div><div class="brief "><p class="paragraph">Sets RWF (Ridge Wavelength Map Format) – encoding/format for the ridge wavelength map.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="343741793%2FFunctions%2F-251573632" anchor-label="withScaleUnitsField" id="343741793%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="with-scale-units-field.html"><span>with</span><wbr></wbr><span>Scale</span><wbr></wbr><span>Units</span><wbr></wbr><span><span>Field</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="343741793%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="with-scale-units-field.html"><span class="token function">withScaleUnitsField</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">scaleUnits<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">MinutiaeDataRecordBuilder</a></div><div class="brief "><p class="paragraph">Sets SLC (Scale Units) – measurement units used for pixel scale values (e.g., PPI).</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-791036322%2FFunctions%2F-251573632" anchor-label="withSkeletonizedImageField" id="-791036322%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="with-skeletonized-image-field.html"><span>with</span><wbr></wbr><span>Skeletonized</span><wbr></wbr><span>Image</span><wbr></wbr><span><span>Field</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-791036322%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="with-skeletonized-image-field.html"><span class="token function">withSkeletonizedImageField</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">sim<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">MinutiaeDataRecordBuilder</a></div><div class="brief "><p class="paragraph">Sets SIM (Skeletonized Image) – reference or encoding of a skeletonized ridge image.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1638127070%2FFunctions%2F-251573632" anchor-label="withSystemOrDeviceField" id="1638127070%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="with-system-or-device-field.html"><span>with</span><wbr></wbr><span>System</span><wbr></wbr><span>Or</span><wbr></wbr><span>Device</span><wbr></wbr><span><span>Field</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1638127070%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="with-system-or-device-field.html"><span class="token function">withSystemOrDeviceField</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">systemOrDevice<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">MinutiaeDataRecordBuilder</a></div><div class="brief "><p class="paragraph">Sets SOD (System or Device) – identifies the system or device producing the feature set.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="14918744%2FFunctions%2F-251573632" anchor-label="withTemporaryLinesField" id="14918744%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="with-temporary-lines-field.html"><span>with</span><wbr></wbr><span>Temporary</span><wbr></wbr><span>Lines</span><wbr></wbr><span><span>Field</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="14918744%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="with-temporary-lines-field.html"><span class="token function">withTemporaryLinesField</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">tpl<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">MinutiaeDataRecordBuilder</a></div><div class="brief "><p class="paragraph">Sets TPL (Temporary Lines) – temporary lines used for analysis/annotation purposes.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1494232816%2FFunctions%2F-251573632" anchor-label="withTonalReversalField" id="1494232816%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="with-tonal-reversal-field.html"><span>with</span><wbr></wbr><span>Tonal</span><wbr></wbr><span>Reversal</span><wbr></wbr><span><span>Field</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1494232816%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="with-tonal-reversal-field.html"><span class="token function">withTonalReversalField</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">tonalReversal<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">MinutiaeDataRecordBuilder</a></div><div class="brief "><p class="paragraph">Sets TRV (Tonal Reversal) – indicates whether the image exhibits tonal reversal.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1408385199%2FFunctions%2F-251573632" anchor-label="withTransmittedHorizontalPixelScaleField" id="-1408385199%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="with-transmitted-horizontal-pixel-scale-field.html"><span>with</span><wbr></wbr><span>Transmitted</span><wbr></wbr><span>Horizontal</span><wbr></wbr><span>Pixel</span><wbr></wbr><span>Scale</span><wbr></wbr><span><span>Field</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1408385199%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="with-transmitted-horizontal-pixel-scale-field.html"><span class="token function">withTransmittedHorizontalPixelScaleField</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">horizontalPixelScale<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">MinutiaeDataRecordBuilder</a></div><div class="brief "><p class="paragraph">Sets THPS (Transmitted Horizontal Pixel Scale) – horizontal pixel density of the transmitted image.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-949157569%2FFunctions%2F-251573632" anchor-label="withTransmittedVerticalPixelScaleField" id="-949157569%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="with-transmitted-vertical-pixel-scale-field.html"><span>with</span><wbr></wbr><span>Transmitted</span><wbr></wbr><span>Vertical</span><wbr></wbr><span>Pixel</span><wbr></wbr><span>Scale</span><wbr></wbr><span><span>Field</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-949157569%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="with-transmitted-vertical-pixel-scale-field.html"><span class="token function">withTransmittedVerticalPixelScaleField</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">verticalPixelScale<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">MinutiaeDataRecordBuilder</a></div><div class="brief "><p class="paragraph">Sets TVPS (Transmitted Vertical Pixel Scale) – vertical pixel density of the transmitted image.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="712720054%2FFunctions%2F-251573632" anchor-label="withUniversalLatentAnnotationField" id="712720054%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="with-universal-latent-annotation-field.html"><span>with</span><wbr></wbr><span>Universal</span><wbr></wbr><span>Latent</span><wbr></wbr><span>Annotation</span><wbr></wbr><span><span>Field</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="712720054%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="with-universal-latent-annotation-field.html"><span class="token function">withUniversalLatentAnnotationField</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">ula<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">MinutiaeDataRecordBuilder</a></div><div class="brief "><p class="paragraph">Sets ULA (Universal Latent Annotation) – standardized latent annotation content.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="431133622%2FFunctions%2F-251573632" anchor-label="withVerticalLineLengthField" id="431133622%2FFunctions%2F-251573632" data-filterable-set=":/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="with-vertical-line-length-field.html"><span>with</span><wbr></wbr><span>Vertical</span><wbr></wbr><span>Line</span><wbr></wbr><span>Length</span><wbr></wbr><span><span>Field</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="431133622%2FFunctions%2F-251573632"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="with-vertical-line-length-field.html"><span class="token function">withVerticalLineLengthField</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">verticalLineLength<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">MinutiaeDataRecordBuilder</a></div><div class="brief "><p class="paragraph">Sets VLL (Vertical Line Length) – number of horizontal lines comprising the image height.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    <div class="footer">
+        <div class="footer--container">
+            <a href="#content" id="go-to-top-link" class="footer--button footer--button_go-to-top"></a>
+            <div class="footer--content">
+                <div>
+                    <span>Generated by </span>
+                    <a class="footer--link footer--link_external" href="https://github.com/Kotlin/dokka">
+                        Dokka
+                    </a>
+                    <div>© 2025 Copyright</div>
+                </div>
+            </div>
+        </div>
+    </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
