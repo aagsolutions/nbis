@@ -25,20 +25,8 @@ package eu.aagsolutions.img.nbis.io
 
 import eu.aagsolutions.img.nbis.converters.stringToListOfNistEntries
 import eu.aagsolutions.img.nbis.exceptions.NistException
-import eu.aagsolutions.img.nbis.io.record.FacialSMTImageRecordHandler
-import eu.aagsolutions.img.nbis.io.record.HighResolutionBinaryFingerprintRecordHandler
-import eu.aagsolutions.img.nbis.io.record.HighResolutionGrayscaleFingerprintRecordHandler
-import eu.aagsolutions.img.nbis.io.record.LatentImageDataRecordHandler
-import eu.aagsolutions.img.nbis.io.record.LowResolutionBinaryFingerprintRecordHandler
-import eu.aagsolutions.img.nbis.io.record.LowResolutionGrayscaleFingerprintRecordHandler
-import eu.aagsolutions.img.nbis.io.record.MinutiaeDataRecordHandler
-import eu.aagsolutions.img.nbis.io.record.PalmRecordHandler
-import eu.aagsolutions.img.nbis.io.record.SignatureImageRecordHandler
-import eu.aagsolutions.img.nbis.io.record.TextRecordHandler
+import eu.aagsolutions.img.nbis.io.record.HandlerFactory
 import eu.aagsolutions.img.nbis.io.record.TransactionInformationRecordHandler
-import eu.aagsolutions.img.nbis.io.record.UserDefinedDescriptionTextRecordHandler
-import eu.aagsolutions.img.nbis.io.record.UserDefinedImageRecordHandler
-import eu.aagsolutions.img.nbis.io.record.VariableResolutionFingerprintRecordHandler
 import eu.aagsolutions.img.nbis.model.NistFile
 import eu.aagsolutions.img.nbis.model.enums.RecordType
 import eu.aagsolutions.img.nbis.model.enums.records.TransactionInformationFields
@@ -73,7 +61,6 @@ class NistFileWriter(
      * @return the provided `OutputStream` after writing the data.
      * @throws NistException if an error occurs during the writing process.
      */
-    @Suppress("CyclomaticComplexMethod")
     fun write(file: NistFile) {
         log.debug("Writing a nistFile to provided outputStream")
 
@@ -95,26 +82,8 @@ class NistFileWriter(
                     val nistRecord =
                         file.getRecordByTypeAndIdc(recordType, idcId)
                             ?: throw NistException("Missing record $recordId with idc $idcId")
-
-                    when (recordType) {
-                        RecordType.RT2 -> UserDefinedDescriptionTextRecordHandler().write(bufferedOS, nistRecord)
-                        RecordType.RT3 -> LowResolutionGrayscaleFingerprintRecordHandler().write(bufferedOS, nistRecord)
-                        RecordType.RT4 -> HighResolutionGrayscaleFingerprintRecordHandler().write(bufferedOS, nistRecord)
-                        RecordType.RT5 -> LowResolutionBinaryFingerprintRecordHandler().write(bufferedOS, nistRecord)
-                        RecordType.RT6 -> HighResolutionBinaryFingerprintRecordHandler().write(bufferedOS, nistRecord)
-                        RecordType.RT7 -> UserDefinedImageRecordHandler().write(bufferedOS, nistRecord)
-                        RecordType.RT8 -> SignatureImageRecordHandler().write(bufferedOS, nistRecord)
-                        RecordType.RT9 -> MinutiaeDataRecordHandler().write(bufferedOS, nistRecord)
-                        RecordType.RT10 -> FacialSMTImageRecordHandler().write(bufferedOS, nistRecord)
-                        RecordType.RT11 -> TextRecordHandler(RecordType.RT11).write(bufferedOS, nistRecord)
-                        RecordType.RT12 -> TextRecordHandler(RecordType.RT12).write(bufferedOS, nistRecord)
-                        RecordType.RT13 -> LatentImageDataRecordHandler().write(bufferedOS, nistRecord)
-                        RecordType.RT14 -> VariableResolutionFingerprintRecordHandler().write(bufferedOS, nistRecord)
-                        RecordType.RT15 -> PalmRecordHandler().write(bufferedOS, nistRecord)
-                        RecordType.RT16 -> TextRecordHandler(RecordType.RT16).write(bufferedOS, nistRecord)
-                        RecordType.RT17 -> TextRecordHandler(RecordType.RT17).write(bufferedOS, nistRecord)
-                        else -> TextRecordHandler(RecordType.findByRecordId(recordId)).write(bufferedOS, nistRecord)
-                    }
+                    val handler = HandlerFactory.findByRecordId(recordId).handler
+                    handler.write(bufferedOS, nistRecord)
                 }
             }
             bufferedOS.flush()

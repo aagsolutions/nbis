@@ -23,21 +23,8 @@
 
 package eu.aagsolutions.img.nbis.io
 
-import eu.aagsolutions.img.nbis.io.record.FacialSMTImageRecordHandler
-import eu.aagsolutions.img.nbis.io.record.HighResolutionBinaryFingerprintRecordHandler
-import eu.aagsolutions.img.nbis.io.record.HighResolutionGrayscaleFingerprintRecordHandler
-import eu.aagsolutions.img.nbis.io.record.IrisImageRecordHandler
-import eu.aagsolutions.img.nbis.io.record.LatentImageDataRecordHandler
-import eu.aagsolutions.img.nbis.io.record.LowResolutionBinaryFingerprintRecordHandler
-import eu.aagsolutions.img.nbis.io.record.LowResolutionGrayscaleFingerprintRecordHandler
-import eu.aagsolutions.img.nbis.io.record.MinutiaeDataRecordHandler
-import eu.aagsolutions.img.nbis.io.record.PalmRecordHandler
-import eu.aagsolutions.img.nbis.io.record.SignatureImageRecordHandler
-import eu.aagsolutions.img.nbis.io.record.TextRecordHandler
+import eu.aagsolutions.img.nbis.io.record.HandlerFactory
 import eu.aagsolutions.img.nbis.io.record.TransactionInformationRecordHandler
-import eu.aagsolutions.img.nbis.io.record.UserDefinedDescriptionTextRecordHandler
-import eu.aagsolutions.img.nbis.io.record.UserDefinedImageRecordHandler
-import eu.aagsolutions.img.nbis.io.record.VariableResolutionFingerprintRecordHandler
 import eu.aagsolutions.img.nbis.model.NistFile
 import eu.aagsolutions.img.nbis.model.enums.RecordType
 import eu.aagsolutions.img.nbis.model.records.BaseRecord
@@ -63,7 +50,7 @@ class NistFileReader(
     fun read(): NistFile {
         log.debug("Read a nist file")
         val content = inputStream.readNBytes(inputStream.available())
-        return read(content)
+        return decode(content)
     }
 
     fun readToBase64(): String = byteArrayToBase64(inputStream.readAllBytes())
@@ -74,6 +61,10 @@ class NistFileReader(
 
     companion object {
         val log: Logger = LoggerFactory.getLogger(NistFileReader::class.java)
+
+        private const val NAX_SUPPORTED_RECORD_TYPE = 17
+        private const val RECORD_SEPARATOR = "\u001E"
+        private const val UNIT_SEPARATOR = "\u001F"
 
         private fun addRecord(
             recordsMap: MutableMap<RecordType, List<BaseRecord>>,
@@ -102,132 +93,21 @@ class NistFileReader(
 
         fun byteArrayToBase64(content: ByteArray): String = Base64.getEncoder().encodeToString(content)
 
-        @Suppress("CyclomaticComplexMethod", "LongMethod")
-        fun read(content: ByteArray): NistFile {
+        fun decode(content: ByteArray): NistFile {
             val recordsMap = mutableMapOf<RecordType, List<BaseRecord>>()
             val token = Token(content)
             addRecord(recordsMap, RecordType.RT1, TransactionInformationRecordHandler().read(token))
             while (nextRecord(token)) {
                 when (token.crt) {
                     0, 1 -> continue
-                    RecordType.RT2.id ->
-                        addRecord(
-                            recordsMap,
-                            RecordType.findByRecordId(token.crt),
-                            UserDefinedDescriptionTextRecordHandler().read(token),
-                        )
-
-                    RecordType.RT3.id ->
-                        addRecord(
-                            recordsMap,
-                            RecordType.findByRecordId(token.crt),
-                            LowResolutionGrayscaleFingerprintRecordHandler().read(token),
-                        )
-
-                    RecordType.RT4.id ->
-                        addRecord(
-                            recordsMap,
-                            RecordType.findByRecordId(token.crt),
-                            HighResolutionGrayscaleFingerprintRecordHandler().read(token),
-                        )
-
-                    RecordType.RT5.id ->
-                        addRecord(
-                            recordsMap,
-                            RecordType.findByRecordId(token.crt),
-                            LowResolutionBinaryFingerprintRecordHandler().read(token),
-                        )
-
-                    RecordType.RT6.id ->
-                        addRecord(
-                            recordsMap,
-                            RecordType.findByRecordId(token.crt),
-                            HighResolutionBinaryFingerprintRecordHandler().read(token),
-                        )
-
-                    RecordType.RT7.id ->
-                        addRecord(
-                            recordsMap,
-                            RecordType.findByRecordId(token.crt),
-                            UserDefinedImageRecordHandler().read(token),
-                        )
-
-                    RecordType.RT8.id ->
-                        addRecord(
-                            recordsMap,
-                            RecordType.findByRecordId(token.crt),
-                            SignatureImageRecordHandler().read(token),
-                        )
-
-                    RecordType.RT9.id ->
-                        addRecord(
-                            recordsMap,
-                            RecordType.findByRecordId(token.crt),
-                            MinutiaeDataRecordHandler().read(token),
-                        )
-
-                    RecordType.RT10.id ->
-                        addRecord(
-                            recordsMap,
-                            RecordType.findByRecordId(token.crt),
-                            FacialSMTImageRecordHandler().read(token),
-                        )
-
-                    RecordType.RT11.id ->
-                        addRecord(
-                            recordsMap,
-                            RecordType.findByRecordId(token.crt),
-                            TextRecordHandler(RecordType.RT11).read(token),
-                        )
-
-                    RecordType.RT12.id ->
-                        addRecord(
-                            recordsMap,
-                            RecordType.findByRecordId(token.crt),
-                            TextRecordHandler(RecordType.RT12).read(token),
-                        )
-
-                    RecordType.RT13.id ->
-                        addRecord(
-                            recordsMap,
-                            RecordType.findByRecordId(token.crt),
-                            LatentImageDataRecordHandler().read(token),
-                        )
-
-                    RecordType.RT14.id ->
-                        addRecord(
-                            recordsMap,
-                            RecordType.findByRecordId(token.crt),
-                            VariableResolutionFingerprintRecordHandler().read(token),
-                        )
-
-                    RecordType.RT15.id ->
-                        addRecord(
-                            recordsMap,
-                            RecordType.findByRecordId(token.crt),
-                            PalmRecordHandler().read(token),
-                        )
-                    RecordType.RT16.id ->
-                        addRecord(
-                            recordsMap,
-                            RecordType.findByRecordId(token.crt),
-                            TextRecordHandler(RecordType.RT16).read(token),
-                        )
-
-                    RecordType.RT17.id ->
-                        addRecord(
-                            recordsMap,
-                            RecordType.findByRecordId(token.crt),
-                            IrisImageRecordHandler().read(token),
-                        )
-
+                    in 2..NAX_SUPPORTED_RECORD_TYPE -> {
+                        HandlerFactory.findByRecordId(token.crt).let { f ->
+                            val handler = f.handler
+                            addRecord(recordsMap, handler.recordType, handler.read(token))
+                        }
+                    }
                     else -> {
                         log.error("RecordType not implemented {}", token.crt)
-                        addRecord(
-                            recordsMap,
-                            RecordType.findByRecordId(token.crt),
-                            TextRecordHandler(RecordType.findByRecordId(token.crt)).read(token),
-                        )
                     }
                 }
             }

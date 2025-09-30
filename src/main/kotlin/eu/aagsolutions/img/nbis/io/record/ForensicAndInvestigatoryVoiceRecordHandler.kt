@@ -25,4 +25,4 @@ package eu.aagsolutions.img.nbis.io.record
 
 import eu.aagsolutions.img.nbis.model.enums.RecordType
 
-class PalmRecordHandler : TextRecordHandler(RecordType.RT15)
+class ForensicAndInvestigatoryVoiceRecordHandler : TextRecordHandler(RecordType.RT11)

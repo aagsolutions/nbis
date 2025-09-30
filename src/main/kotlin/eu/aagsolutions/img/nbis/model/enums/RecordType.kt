@@ -23,6 +23,8 @@
 
 package eu.aagsolutions.img.nbis.model.enums
 
+import eu.aagsolutions.img.nbis.exceptions.NistException
+
 /**
  * Represents a record type as defined by the ANSI/NIST-ITL standards.
  *
@@ -93,10 +95,10 @@ enum class RecordType(
          *
          * @param recordId The unique identifier for the record to find.
          * @return The record of type RecordType that matches the given recordId.
-         * @throws IllegalArgumentException if no record is found for the given recordId.
+         * @throws NistException if no record is found for the given recordId.
          */
         fun findByRecordId(recordId: Int): RecordType =
             entries.find { it.id == recordId }
-                ?: throw IllegalArgumentException("Record inconnu pour recordId: $recordId")
+                ?: throw NistException("Record type not found: $recordId")
     }
 }
