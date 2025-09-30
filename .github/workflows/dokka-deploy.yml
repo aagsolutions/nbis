@@ -1,0 +1,35 @@
+name: Publish Documentation
+on: workflow_dispatch
+
+jobs:
+  build:
+    permissions:
+      contents: write
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout sources
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.tag_name }}
+      - name: Set up Java
+        uses: actions/setup-java@v4.5.0
+        with:
+          java-version: '21'
+          distribution: "zulu"
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v3
+      - name: Setup git
+        run: |
+          git config --global user.name atdi
+          git config --global user.email aurel.avramescu@gmail.com
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v3
+      - name: Generate Dokka Documentation
+        run: ./gradlew dokkaHtml # or dokkaHtmlMultiModule for multi-module projects
+
+      - name: Deploy to GitHub Pages
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          branch: gh-pages
+          folder: build/dokka/html
+          clean: true

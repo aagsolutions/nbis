@@ -25,6 +25,7 @@ import net.researchgate.release.ReleaseExtension
 
 plugins {
     kotlin("jvm") version "2.2.10"
+    id("org.jetbrains.dokka") version "2.1.0-Beta"
     id("org.jlleitschuh.gradle.ktlint") version "13.1.0"
     id("net.researchgate.release") version "3.1.0"
     id("net.thebugmc.gradle.sonatype-central-portal-publisher") version "1.2.4"
