@@ -1,5 +1,11 @@
 name: Publish Documentation
-on: workflow_dispatch
+on:
+  workflow_dispatch:
+    inputs:
+      tag_name:
+        description: 'Choose a tag'
+        required: true
+        type: string
 
 jobs:
   build:
