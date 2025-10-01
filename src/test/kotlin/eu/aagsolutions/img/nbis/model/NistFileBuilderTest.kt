@@ -79,15 +79,16 @@ class NistFileBuilderTest {
         val nistFile =
             NistFileBuilder()
                 .withTransactionInformationRecord(nistContent.getTransactionInformationRecord())
-                .withUserDefinedDescriptionTextRecords(userDefinedText as List<UserDefinedTextRecord>)
+                .withUserDefinedDescriptionTextRecords(*userDefinedText.filterIsInstance<UserDefinedTextRecord>().toTypedArray())
                 .withLowResolutionGrayscaleFingerprintRecords(
-                    nistContent2.getLowResolutionGrayscaleFingerprintRecords() as List<LowResolutionGrayscaleFingerprintRecord>,
+                    *nistContent2
+                        .getLowResolutionGrayscaleFingerprintRecords()
+                        .filterIsInstance<LowResolutionGrayscaleFingerprintRecord>()
+                        .toTypedArray(),
                 ).withVariableResolutionFingerprintRecords(
-                    listOf(
-                        variableResolutionFingerprintRecord1,
-                        variableResolutionFingerprintRecord2,
-                        variableResolutionFingerprintRecord3,
-                    ),
+                    variableResolutionFingerprintRecord1,
+                    variableResolutionFingerprintRecord2,
+                    variableResolutionFingerprintRecord3,
                 ).build()
         NistFileWriter(FileOutputStream("new-nist-combined.nist")).use { writer -> writer.write(nistFile) }
     }
@@ -108,8 +109,8 @@ class NistFileBuilderTest {
         val nistFile =
             NistFileBuilder()
                 .withTransactionInformationRecord(nistContent.getTransactionInformationRecord())
-                .withUserDefinedDescriptionTextRecords(userDefinedText as List<UserDefinedTextRecord>)
-                .withFacialAndSmtImageRecords(imageRecords)
+                .withUserDefinedDescriptionTextRecords(*userDefinedText.filterIsInstance<UserDefinedTextRecord>().toTypedArray())
+                .withFacialAndSmtImageRecords(*imageRecords.toTypedArray())
                 .build()
         NistFileWriter(FileOutputStream("type-10-sap10-copy.nist")).use { writer -> writer.write(nistFile) }
     }
@@ -143,8 +144,8 @@ class NistFileBuilderTest {
         val nistFile =
             NistFileBuilder()
                 .withTransactionInformationRecord(transactionInformationRecord)
-                .withUserDefinedDescriptionTextRecords(listOf(userDefinedTextRecord))
-                .withFacialAndSmtImageRecords(listOf(facialAndSMTImageRecord))
+                .withUserDefinedDescriptionTextRecords(userDefinedTextRecord)
+                .withFacialAndSmtImageRecords(facialAndSMTImageRecord)
                 .build()
         NistFileWriter(FileOutputStream("output_jpeg.nist")).use { writer -> writer.write(nistFile) }
         nistFile.getFacialAndSmtImageRecords()[0].getFieldText(FacialAndSMTImageFields.CGA) shouldBe CompressionAlgorithm.JPEGB.code
@@ -179,8 +180,8 @@ class NistFileBuilderTest {
         val nistFile =
             NistFileBuilder()
                 .withTransactionInformationRecord(transactionInformationRecord)
-                .withUserDefinedDescriptionTextRecords(listOf(userDefinedTextRecord))
-                .withFacialAndSmtImageRecords(listOf(facialAndSMTImageRecord))
+                .withUserDefinedDescriptionTextRecords(userDefinedTextRecord)
+                .withFacialAndSmtImageRecords(facialAndSMTImageRecord)
                 .build()
         NistFileWriter(FileOutputStream("output_png.nist")).use { writer -> writer.write(nistFile) }
         nistFile.getFacialAndSmtImageRecords()[0].getFieldText(FacialAndSMTImageFields.CGA) shouldBe CompressionAlgorithm.PNG.code

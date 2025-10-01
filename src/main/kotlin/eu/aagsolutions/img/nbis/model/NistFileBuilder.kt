@@ -31,6 +31,7 @@ import eu.aagsolutions.img.nbis.model.records.BaseRecord
 import eu.aagsolutions.img.nbis.model.records.FacialAndSMTImageRecord
 import eu.aagsolutions.img.nbis.model.records.HighResolutionBinaryFingerprintRecord
 import eu.aagsolutions.img.nbis.model.records.HighResolutionGrayscaleFingerprintRecord
+import eu.aagsolutions.img.nbis.model.records.IrisImageRecord
 import eu.aagsolutions.img.nbis.model.records.LatentImageRecord
 import eu.aagsolutions.img.nbis.model.records.LowResolutionBinaryFingerprintRecord
 import eu.aagsolutions.img.nbis.model.records.LowResolutionGrayscaleFingerprintRecord
@@ -75,10 +76,10 @@ class NistFileBuilder {
      * Adds a list of `UserDefinedTextRecord` (Interpol standard)
      * instances to the builder and allows chaining additional configurations.
      *
-     * @param records The list of `UserDefinedTextRecord` instances to be added.
+     * @param records One or more `UserDefinedTextRecord` instances to be added.
      * @return The current `NistFileBuilder` instance, allowing for method chaining.
      */
-    fun withUserDefinedDescriptionTextRecords(records: List<UserDefinedTextRecord>): NistFileBuilder {
+    fun withUserDefinedDescriptionTextRecords(vararg records: UserDefinedTextRecord): NistFileBuilder {
         records.forEach { r -> addRecord(RecordType.RT2, r) }
         return this
     }
@@ -89,7 +90,7 @@ class NistFileBuilder {
      * @param records The list of `LowResolutionGrayscaleFingerprintRecord` instances to be added.
      * @return The current `NistFileBuilder` instance, allowing for method chaining.
      */
-    fun withLowResolutionGrayscaleFingerprintRecords(records: List<LowResolutionGrayscaleFingerprintRecord>): NistFileBuilder {
+    fun withLowResolutionGrayscaleFingerprintRecords(vararg records: LowResolutionGrayscaleFingerprintRecord): NistFileBuilder {
         records.forEach { r -> addRecord(RecordType.RT3, r) }
         return this
     }
@@ -100,7 +101,7 @@ class NistFileBuilder {
      * @param records The list of `HighResolutionGrayscaleFingerprintRecord` instances to be added.
      * @return The current `NistFileBuilder` instance, allowing for method chaining.
      */
-    fun withHighResolutionGrayscaleFingerprintRecords(records: List<HighResolutionGrayscaleFingerprintRecord>): NistFileBuilder {
+    fun withHighResolutionGrayscaleFingerprintRecords(vararg records: HighResolutionGrayscaleFingerprintRecord): NistFileBuilder {
         records.forEach { r -> addRecord(RecordType.RT4, r) }
         return this
     }
@@ -111,7 +112,7 @@ class NistFileBuilder {
      * @param records The list of `LowResolutionBinaryFingerprintRecord` instances to be added.
      * @return The current `NistFileBuilder` instance, allowing for method chaining.
      */
-    fun withLowResolutionBinaryFingerprintRecords(records: List<LowResolutionBinaryFingerprintRecord>): NistFileBuilder {
+    fun withLowResolutionBinaryFingerprintRecords(vararg records: LowResolutionBinaryFingerprintRecord): NistFileBuilder {
         records.forEach { r -> addRecord(RecordType.RT5, r) }
         return this
     }
@@ -122,7 +123,7 @@ class NistFileBuilder {
      * @param records The list of `HighResolutionBinaryFingerprintRecord` instances to be added.
      * @return The current `NistFileBuilder` instance, allowing for method chaining.
      */
-    fun withHighResolutionBinaryFingerprintRecords(records: List<HighResolutionBinaryFingerprintRecord>): NistFileBuilder {
+    fun withHighResolutionBinaryFingerprintRecords(vararg records: HighResolutionBinaryFingerprintRecord): NistFileBuilder {
         records.forEach { r -> addRecord(RecordType.RT6, r) }
         return this
     }
@@ -133,7 +134,7 @@ class NistFileBuilder {
      * @param records The list of `UserDefinedImageRecord` instances to be added.
      * @return The current `NistFileBuilder` instance, allowing for method chaining.
      */
-    fun withUserDefinedImageRecords(records: List<UserDefinedImageRecord>): NistFileBuilder {
+    fun withUserDefinedImageRecords(vararg records: UserDefinedImageRecord): NistFileBuilder {
         records.forEach { r -> addRecord(RecordType.RT7, r) }
         return this
     }
@@ -144,7 +145,7 @@ class NistFileBuilder {
      * @param records The list of `SignatureImageRecord` instances to be added.
      * @return The current `NistFileBuilder` instance, allowing for method chaining.
      */
-    fun withSignatureImageRecords(records: List<SignatureImageRecord>): NistFileBuilder {
+    fun withSignatureImageRecords(vararg records: SignatureImageRecord): NistFileBuilder {
         records.forEach { r -> addRecord(RecordType.RT8, r) }
         return this
     }
@@ -155,7 +156,7 @@ class NistFileBuilder {
      * @param records The list of `MinutiaeDataRecord` instances to be added.
      * @return The current `NistFileBuilder` instance, allowing for method chaining.
      */
-    fun withMinutiaeDataRecords(records: List<MinutiaeDataRecord>): NistFileBuilder {
+    fun withMinutiaeDataRecords(vararg records: MinutiaeDataRecord): NistFileBuilder {
         records.forEach { r -> addRecord(RecordType.RT9, r) }
         return this
     }
@@ -166,7 +167,7 @@ class NistFileBuilder {
      * @param records The list of `FacialAndSMTImageRecord` instances to be added.
      * @return The current `NistFileBuilder` instance, allowing for method chaining.
      */
-    fun withFacialAndSmtImageRecords(records: List<FacialAndSMTImageRecord>): NistFileBuilder {
+    fun withFacialAndSmtImageRecords(vararg records: FacialAndSMTImageRecord): NistFileBuilder {
         records.forEach { r -> addRecord(RecordType.RT10, r) }
         return this
     }
@@ -177,7 +178,7 @@ class NistFileBuilder {
      * @param records The list of `LatentImageRecord` instances to be added.
      * @return The current `NistFileBuilder` instance, allowing for method chaining.
      */
-    fun withLatentImageRecords(records: List<LatentImageRecord>): NistFileBuilder {
+    fun withLatentImageRecords(vararg records: LatentImageRecord): NistFileBuilder {
         records.forEach { r -> addRecord(RecordType.RT13, r) }
         return this
     }
@@ -188,7 +189,7 @@ class NistFileBuilder {
      * @param records The list of `VariableResolutionFingerprintRecord` instances to be added.
      * @return The current `NistFileBuilder` instance, allowing for method chaining.
      */
-    fun withVariableResolutionFingerprintRecords(records: List<VariableResolutionFingerprintRecord>): NistFileBuilder {
+    fun withVariableResolutionFingerprintRecords(vararg records: VariableResolutionFingerprintRecord): NistFileBuilder {
         records.forEach { r -> addRecord(RecordType.RT14, r) }
         return this
     }
@@ -199,7 +200,7 @@ class NistFileBuilder {
      * @param records The list of `PalmPrintRecord` instances to be added.
      * @return The current `NistFileBuilder` instance, allowing for method chaining.
      */
-    fun withVariableResolutionPalmPrintRecords(records: List<PalmPrintRecord>): NistFileBuilder {
+    fun withVariableResolutionPalmPrintRecords(vararg records: PalmPrintRecord): NistFileBuilder {
         records.forEach { r -> addRecord(RecordType.RT15, r) }
         return this
     }
@@ -210,7 +211,7 @@ class NistFileBuilder {
      * @param records The list of `UserDefinedTestingImageRecord` instances to be added.
      * @return The current `NistFileBuilder` instance, allowing for method chaining.
      */
-    fun withUserDefinedTestingImageRecords(records: List<BaseRecord>): NistFileBuilder {
+    fun withUserDefinedTestingImageRecords(vararg records: UserDefinedImageRecord): NistFileBuilder {
         records.forEach { r -> addRecord(RecordType.RT16, r) }
         return this
     }
@@ -221,7 +222,7 @@ class NistFileBuilder {
      * @param records The list of `IrisImageRecord` instances to be added.
      * @return The current `NistFileBuilder` instance, allowing for method chaining.
      */
-    fun withIrisImageRecords(records: List<BaseRecord>): NistFileBuilder {
+    fun withIrisImageRecords(vararg records: IrisImageRecord): NistFileBuilder {
         records.forEach { r -> addRecord(RecordType.RT17, r) }
         return this
     }
