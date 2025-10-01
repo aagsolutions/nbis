@@ -33,7 +33,7 @@ import eu.aagsolutions.img.nbis.model.enums.records.TransactionInformationFields
 import eu.aagsolutions.img.nbis.model.fields.Field
 import eu.aagsolutions.img.nbis.model.fields.TextField
 import eu.aagsolutions.img.nbis.model.records.BaseRecord
-import eu.aagsolutions.img.nbis.model.records.DefaultRecord
+import eu.aagsolutions.img.nbis.model.records.TransactionInformationRecord
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 
@@ -57,7 +57,7 @@ class TransactionInformationRecordHandler : TextRecordHandler(RecordType.RT1) {
                 }
             } while (token.buffer[token.position++].toInt().toChar() != FIELD_SEPARATOR)
         }
-        return DefaultRecord(recordType.id, fields)
+        return TransactionInformationRecord(fields)
     }
 
     companion object {

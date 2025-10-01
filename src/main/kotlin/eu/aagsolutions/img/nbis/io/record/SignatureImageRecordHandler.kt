@@ -33,7 +33,7 @@ import eu.aagsolutions.img.nbis.model.fields.Field
 import eu.aagsolutions.img.nbis.model.fields.ImageField
 import eu.aagsolutions.img.nbis.model.fields.TextField
 import eu.aagsolutions.img.nbis.model.records.BaseRecord
-import eu.aagsolutions.img.nbis.model.records.DefaultRecord
+import eu.aagsolutions.img.nbis.model.records.SignatureImageRecord
 import java.io.OutputStream
 
 class SignatureImageRecordHandler : ImageRecordHandler(RecordType.RT8) {
@@ -81,7 +81,7 @@ class SignatureImageRecordHandler : ImageRecordHandler(RecordType.RT8) {
             }
             token.position += length.toInt()
         }
-        return DefaultRecord(recordType.id, fields.toMap())
+        return SignatureImageRecord(fields.toMap())
     }
 
     override fun write(

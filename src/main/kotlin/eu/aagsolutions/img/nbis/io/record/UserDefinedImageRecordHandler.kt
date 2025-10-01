@@ -32,7 +32,7 @@ import eu.aagsolutions.img.nbis.model.fields.Field
 import eu.aagsolutions.img.nbis.model.fields.ImageField
 import eu.aagsolutions.img.nbis.model.fields.TextField
 import eu.aagsolutions.img.nbis.model.records.BaseRecord
-import eu.aagsolutions.img.nbis.model.records.DefaultRecord
+import eu.aagsolutions.img.nbis.model.records.UserDefinedImageRecord
 import java.io.OutputStream
 
 class UserDefinedImageRecordHandler : ImageRecordHandler(RecordType.RT7) {
@@ -85,7 +85,7 @@ class UserDefinedImageRecordHandler : ImageRecordHandler(RecordType.RT7) {
             }
             token.position += length.toInt()
         }
-        return DefaultRecord(recordType.id, fields.toMap())
+        return UserDefinedImageRecord(fields.toMap())
     }
 
     override fun write(
