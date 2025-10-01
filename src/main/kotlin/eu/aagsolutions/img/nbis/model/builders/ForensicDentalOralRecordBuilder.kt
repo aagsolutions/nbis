@@ -24,16 +24,19 @@
 package eu.aagsolutions.img.nbis.model.builders
 
 import eu.aagsolutions.img.nbis.calculators.TextRecordLengthCalculator
-import eu.aagsolutions.img.nbis.model.records.DefaultRecord
+import eu.aagsolutions.img.nbis.model.enums.RecordType
+import eu.aagsolutions.img.nbis.model.records.ForensicDentalOralRecord
 
-class DefaultRecordBuilder(
-    id: Int,
-    label: String,
-    calculator: TextRecordLengthCalculator,
-) : NistRecordBuilder<DefaultRecord, DefaultRecordBuilder>(
-        id,
-        label,
-        calculator,
+class ForensicDentalOralRecordBuilder :
+    NistRecordBuilder<ForensicDentalOralRecord, ForensicDentalOralRecordBuilder>(
+        RecordType.RT12.id,
+        RecordType.RT12.label,
+        TextRecordLengthCalculator(),
     ) {
-    override fun build() = DefaultRecord(this.id, this.fields)
+    /**
+     * Builds a new ForensicDentalOralRecord with the configured fields.
+     *
+     * @return A new ForensicDentalOralRecord instance containing all configured fields
+     */
+    override fun build() = ForensicDentalOralRecord(this.fields)
 }

@@ -34,11 +34,7 @@ class HighResolutionGrayscaleFingerprintRecordBuilder :
         RecordType.RT4.label,
         BinaryRecordLengthCalculator(HIGH_RESOLUTION_GRAYSCALE_FINGERPRINT_HEADER_SIZE, ImageFields.DATA),
     ) {
-    override fun build(): HighResolutionGrayscaleFingerprintRecord {
-        val lengthField = calculator.calculate(this.id, this.fields)
-        this.fields[LENGTH_FIELD_ID] = lengthField
-        return HighResolutionGrayscaleFingerprintRecord(this.fields)
-    }
+    override fun build() = HighResolutionGrayscaleFingerprintRecord(this.fields)
 
     companion object {
         const val HIGH_RESOLUTION_GRAYSCALE_FINGERPRINT_HEADER_SIZE = 18

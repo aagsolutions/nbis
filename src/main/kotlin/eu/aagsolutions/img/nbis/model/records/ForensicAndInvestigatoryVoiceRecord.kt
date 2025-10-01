@@ -21,8 +21,15 @@
  *
  */
 
-package eu.aagsolutions.img.nbis.io.record
+package eu.aagsolutions.img.nbis.model.records
 
 import eu.aagsolutions.img.nbis.model.enums.RecordType
+import eu.aagsolutions.img.nbis.model.enums.records.FacialAndSMTImageFields
+import eu.aagsolutions.img.nbis.model.enums.records.FieldType
+import eu.aagsolutions.img.nbis.model.fields.Field
 
-class UserDefinedTestingImageRecordHandler : TextRecordHandler(RecordType.RT16)
+class ForensicAndInvestigatoryVoiceRecord(
+    fields: Map<Int, Field<*>>,
+) : BaseRecord(RecordType.RT11.id, RecordType.RT11.label, fields) {
+    override fun getFieldTypeValues(): Set<FieldType> = FacialAndSMTImageFields.entries.toSet()
+}

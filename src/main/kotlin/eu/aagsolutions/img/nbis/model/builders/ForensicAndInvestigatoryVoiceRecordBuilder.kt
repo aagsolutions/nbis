@@ -21,8 +21,22 @@
  *
  */
 
-package eu.aagsolutions.img.nbis.io.record
+package eu.aagsolutions.img.nbis.model.builders
 
+import eu.aagsolutions.img.nbis.calculators.TextRecordLengthCalculator
 import eu.aagsolutions.img.nbis.model.enums.RecordType
+import eu.aagsolutions.img.nbis.model.records.ForensicAndInvestigatoryVoiceRecord
 
-class UserDefinedDescriptionTextRecordHandler : TextRecordHandler(RecordType.RT2)
+class ForensicAndInvestigatoryVoiceRecordBuilder :
+    NistRecordBuilder<ForensicAndInvestigatoryVoiceRecord, ForensicAndInvestigatoryVoiceRecordBuilder>(
+        RecordType.RT11.id,
+        RecordType.RT11.label,
+        TextRecordLengthCalculator(),
+    ) {
+    /**
+     * Builds a new ForensicAndInvestigatoryVoiceRecord with the configured fields.
+     *
+     * @return A new ForensicAndInvestigatoryVoiceRecord instance containing all configured fields
+     */
+    override fun build() = ForensicAndInvestigatoryVoiceRecord(this.fields)
+}

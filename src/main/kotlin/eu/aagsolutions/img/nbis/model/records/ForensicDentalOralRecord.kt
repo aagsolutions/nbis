@@ -21,19 +21,15 @@
  *
  */
 
-package eu.aagsolutions.img.nbis.model.builders
+package eu.aagsolutions.img.nbis.model.records
 
-import eu.aagsolutions.img.nbis.calculators.TextRecordLengthCalculator
-import eu.aagsolutions.img.nbis.model.records.DefaultRecord
+import eu.aagsolutions.img.nbis.model.enums.RecordType
+import eu.aagsolutions.img.nbis.model.enums.records.FacialAndSMTImageFields
+import eu.aagsolutions.img.nbis.model.enums.records.FieldType
+import eu.aagsolutions.img.nbis.model.fields.Field
 
-class DefaultRecordBuilder(
-    id: Int,
-    label: String,
-    calculator: TextRecordLengthCalculator,
-) : NistRecordBuilder<DefaultRecord, DefaultRecordBuilder>(
-        id,
-        label,
-        calculator,
-    ) {
-    override fun build() = DefaultRecord(this.id, this.fields)
+class ForensicDentalOralRecord(
+    fields: Map<Int, Field<*>>,
+) : BaseRecord(RecordType.RT12.id, RecordType.RT12.label, fields) {
+    override fun getFieldTypeValues(): Set<FieldType> = FacialAndSMTImageFields.entries.toSet()
 }

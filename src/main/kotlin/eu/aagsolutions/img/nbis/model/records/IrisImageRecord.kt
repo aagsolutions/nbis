@@ -29,7 +29,6 @@ import eu.aagsolutions.img.nbis.model.enums.records.IrisImageFields
 import eu.aagsolutions.img.nbis.model.fields.Field
 
 class IrisImageRecord(
-    fields1: Int,
     fields: Map<Int, Field<*>>,
 ) : BaseRecord(RecordType.RT17.id, RecordType.RT17.label, fields) {
     override fun getFieldTypeValues(): Set<FieldType> = IrisImageFields.entries.toSet()

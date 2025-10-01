@@ -53,17 +53,9 @@ class LatentImageRecordBuilder :
     /**
      * Builds a new LatentImageRecord with the configured fields.
      *
-     * This method calculates the logical record length using the configured calculator,
-     * adds the length field to the record's fields, and creates a new LatentImageRecord
-     * instance with all the configured fields.
-     *
      * @return A new LatentImageRecord instance containing all configured fields
      */
-    override fun build(): LatentImageRecord {
-        val lengthField = calculator.calculate(this.id, this.fields)
-        this.fields[LENGTH_FIELD_ID] = lengthField
-        return LatentImageRecord(this.fields)
-    }
+    override fun build() = LatentImageRecord(this.fields)
 
     /**
      * Sets IDC (Information Designation Character) – uniquely identifies the record within the transaction.

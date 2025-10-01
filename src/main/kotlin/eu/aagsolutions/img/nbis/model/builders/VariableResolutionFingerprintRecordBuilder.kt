@@ -39,11 +39,7 @@ class VariableResolutionFingerprintRecordBuilder :
         RecordType.RT14.label,
         TextRecordLengthCalculator(),
     ) {
-    override fun build(): VariableResolutionFingerprintRecord {
-        val lengthField = calculator.calculate(this.id, this.fields)
-        this.fields[LENGTH_FIELD_ID] = lengthField
-        return VariableResolutionFingerprintRecord(this.fields)
-    }
+    override fun build() = VariableResolutionFingerprintRecord(this.fields)
 
     /**
      * Sets IDC (Information Designation Character) – uniquely identifies the record within the transaction.

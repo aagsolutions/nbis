@@ -39,11 +39,7 @@ class UserDefinedImageRecordBuilder :
         RecordType.RT7.label,
         BinaryRecordLengthCalculator(USER_DEFINED_IMAGE_HEADER_SIZE, UserDefinedImageFields.DATA),
     ) {
-    override fun build(): UserDefinedImageRecord {
-        val lengthField = calculator.calculate(this.id, this.fields)
-        this.fields[LENGTH_FIELD_ID] = lengthField
-        return UserDefinedImageRecord(this.fields)
-    }
+    override fun build() = UserDefinedImageRecord(this.fields)
 
     /**
      * Sets IDC (Information Designation Character) – the record sequence number within the transaction.

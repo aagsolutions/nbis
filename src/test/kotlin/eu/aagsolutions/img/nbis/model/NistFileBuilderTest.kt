@@ -59,22 +59,26 @@ class NistFileBuilderTest {
                     .fromRecord(
                         nistContent2.getUserDefinedDescriptionTextRecords()[0] as UserDefinedTextRecord,
                     ).withInformationDesignationCharField("1")
+                    .calculateFields(true)
                     .build(),
             )
         val variableResolutionFingerprintRecord1 =
             VariableResolutionFingerprintRecordBuilder()
                 .fromRecord(nistContent.getVariableResolutionFingerprintRecords()[0] as VariableResolutionFingerprintRecord)
                 .withImageDataField(nistContent.getVariableResolutionFingerprintRecords()[0].getFieldImage(ImageFields.DATA)!!)
+                .calculateFields(true)
                 .build()
         val variableResolutionFingerprintRecord2 =
             VariableResolutionFingerprintRecordBuilder()
                 .fromRecord(nistContent.getVariableResolutionFingerprintRecords()[1] as VariableResolutionFingerprintRecord)
                 .withImageDataField(nistContent.getVariableResolutionFingerprintRecords()[1].getFieldImage(ImageFields.DATA)!!)
+                .calculateFields(true)
                 .build()
         val variableResolutionFingerprintRecord3 =
             VariableResolutionFingerprintRecordBuilder()
                 .fromRecord(nistContent.getVariableResolutionFingerprintRecords()[2] as VariableResolutionFingerprintRecord)
                 .withImageDataField(nistContent.getVariableResolutionFingerprintRecords()[2].getFieldImage(ImageFields.DATA)!!)
+                .calculateFields(true)
                 .build()
         val nistFile =
             NistFileBuilder()
@@ -104,7 +108,8 @@ class NistFileBuilderTest {
                 FacialAndSMTImageRecordBuilder()
                     .fromRecord(
                         r as FacialAndSMTImageRecord,
-                    ).build()
+                    ).calculateFields(true)
+                    .build()
             }
         val nistFile =
             NistFileBuilder()
@@ -125,11 +130,13 @@ class NistFileBuilderTest {
                 .withVersionNumberField("0100")
                 .withAgencyNamesField("0101")
                 .withTransactionControlNumberField(generateAgencyTCN("INTERPOOL", 1000))
+                .calculateFields(true)
                 .build()
         val userDefinedTextRecord =
             UserDefinedTextRecordBuilder()
                 .withInformationDesignationCharField("01")
                 .withMiscellaneousIdentificationNumber1("RO109323243")
+                .calculateFields(true)
                 .build()
         val url = NistFileReaderTest::class.java.getResource("/img/mugshot-1024x1024.jpg")
 
@@ -140,6 +147,7 @@ class NistFileBuilderTest {
                 .withImageDataField(faceImage)
                 .withScaleUnitsField("1")
                 .withColorSpaceField(Color.MULTI.code)
+                .calculateFields(true)
                 .build()
         val nistFile =
             NistFileBuilder()
@@ -161,11 +169,13 @@ class NistFileBuilderTest {
                 .withVersionNumberField("0100")
                 .withAgencyNamesField("0101")
                 .withTransactionControlNumberField(generateAgencyTCN("INTERPOOL", 1000))
+                .calculateFields(true)
                 .build()
         val userDefinedTextRecord =
             UserDefinedTextRecordBuilder()
                 .withInformationDesignationCharField("01")
                 .withMiscellaneousIdentificationNumber1("RO109323243")
+                .calculateFields(true)
                 .build()
         val url = NistFileReaderTest::class.java.getResource("/img/fp-1.png")
 
@@ -176,6 +186,7 @@ class NistFileBuilderTest {
                 .withImageDataField(faceImage)
                 .withScaleUnitsField("1")
                 .withColorSpaceField(Color.MULTI.code)
+                .calculateFields(true)
                 .build()
         val nistFile =
             NistFileBuilder()

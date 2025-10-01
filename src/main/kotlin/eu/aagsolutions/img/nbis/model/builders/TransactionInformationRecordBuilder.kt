@@ -47,11 +47,7 @@ class TransactionInformationRecordBuilder :
         RecordType.RT1.label,
         TextRecordLengthCalculator(),
     ) {
-    override fun build(): TransactionInformationRecord {
-        val lengthField = calculator.calculate(this.id, this.fields)
-        this.fields[LENGTH_FIELD_ID] = lengthField
-        return TransactionInformationRecord(this.fields)
-    }
+    override fun build() = TransactionInformationRecord(this.fields)
 
     /**
      * Adds a version number field to the transaction information record being built.

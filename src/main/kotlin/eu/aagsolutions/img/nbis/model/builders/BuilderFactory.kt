@@ -21,32 +21,32 @@
  *
  */
 
-package eu.aagsolutions.img.nbis.io.record
+package eu.aagsolutions.img.nbis.model.builders
 
 import eu.aagsolutions.img.nbis.exceptions.NistException
 
 @Suppress("MagicNumber")
-enum class HandlerFactory(
+enum class BuilderFactory(
     val id: Int,
-    val handler: RecordHandler,
+    val builder: NistRecordBuilder<*, *>,
 ) {
-    RT1(1, TransactionInformationRecordHandler()),
-    RT2(2, UserDefinedTextRecordHandler()),
-    RT3(3, LowResolutionGrayscaleFingerprintRecordHandler()),
-    RT4(4, HighResolutionGrayscaleFingerprintRecordHandler()),
-    RT5(5, LowResolutionBinaryFingerprintRecordHandler()),
-    RT6(6, HighResolutionBinaryFingerprintRecordHandler()),
-    RT7(7, UserDefinedImageRecordHandler()),
-    RT8(8, SignatureImageRecordHandler()),
-    RT9(9, MinutiaeDataRecordHandler()),
-    RT10(10, FacialSMTImageRecordHandler()),
-    RT11(11, ForensicAndInvestigatoryVoiceRecordHandler()),
-    RT12(12, ForensicDentalOralRecordHandler()),
-    RT13(13, LatentImageDataRecordHandler()),
-    RT14(14, VariableResolutionFingerprintRecordHandler()),
-    RT15(15, PalmPrintImageRecordHandler()),
-    RT16(16, UserDefinedTestImageRecordHandler()),
-    RT17(17, IrisImageRecordHandler()),
+    RT1(1, TransactionInformationRecordBuilder()),
+    RT2(2, UserDefinedTextRecordBuilder()),
+    RT3(3, LowResolutionGrayscaleFingerprintRecordBuilder()),
+    RT4(4, HighResolutionGrayscaleFingerprintRecordBuilder()),
+    RT5(5, LowResolutionBinaryFingerprintRecordBuilder()),
+    RT6(6, HighResolutionBinaryFingerprintRecordBuilder()),
+    RT7(7, UserDefinedImageRecordBuilder()),
+    RT8(8, SignatureImageRecordBuilder()),
+    RT9(9, MinutiaeDataRecordBuilder()),
+    RT10(10, FacialAndSMTImageRecordBuilder()),
+    RT11(11, ForensicAndInvestigatoryVoiceRecordBuilder()),
+    RT12(12, ForensicDentalOralRecordBuilder()),
+    RT13(13, LatentImageRecordBuilder()),
+    RT14(14, VariableResolutionFingerprintRecordBuilder()),
+    RT15(15, PalmPrintRecordBuilder()),
+    RT16(16, UserDefinedTestImageRecordBuilder()),
+    RT17(17, IrisImageRecordBuilder()),
     ;
 
     companion object {
@@ -57,8 +57,8 @@ enum class HandlerFactory(
          * @return The record of type HandlerFactory that matches the given recordId.
          * @throws NistException if no record is found for the given recordId.
          */
-        fun findByRecordId(recordId: Int): HandlerFactory =
-            HandlerFactory.entries.find { it.id == recordId }
+        fun findByRecordId(recordId: Int): BuilderFactory =
+            entries.find { it.id == recordId }
                 ?: throw NistException("Record type not supported: $recordId")
     }
 }

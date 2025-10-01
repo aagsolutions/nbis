@@ -24,25 +24,19 @@
 package eu.aagsolutions.img.nbis.model.builders
 
 import eu.aagsolutions.img.nbis.calculators.TextRecordLengthCalculator
+import eu.aagsolutions.img.nbis.model.enums.RecordType
 import eu.aagsolutions.img.nbis.model.enums.records.IrisImageFields
 import eu.aagsolutions.img.nbis.model.enums.records.LatentImageFields
 import eu.aagsolutions.img.nbis.model.fields.TextField
 import eu.aagsolutions.img.nbis.model.records.IrisImageRecord
 
-class IrisImageRecordBuilder(
-    id: Int,
-    label: String,
-    calculator: TextRecordLengthCalculator,
-) : TextRecordWithImageBuilder<IrisImageRecord, IrisImageRecordBuilder>(
-        id,
-        label,
-        calculator,
+class IrisImageRecordBuilder :
+    TextRecordWithImageBuilder<IrisImageRecord, IrisImageRecordBuilder>(
+        RecordType.RT17.id,
+        RecordType.RT17.label,
+        TextRecordLengthCalculator(),
     ) {
-    override fun build(): IrisImageRecord {
-        val lengthField = calculator.calculate(this.id, this.fields)
-        this.fields[LENGTH_FIELD_ID] = lengthField
-        return IrisImageRecord(this.id, this.fields)
-    }
+    override fun build() = IrisImageRecord(this.fields)
 
     /**
      * Sets IDC (Information Designation Character) – uniquely identifies the record within the transaction.

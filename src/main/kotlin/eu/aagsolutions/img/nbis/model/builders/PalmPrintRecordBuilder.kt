@@ -36,11 +36,7 @@ class PalmPrintRecordBuilder :
         RecordType.RT15.label,
         TextRecordLengthCalculator(),
     ) {
-    override fun build(): PalmPrintRecord {
-        val lengthField = calculator.calculate(this.id, this.fields)
-        this.fields[LENGTH_FIELD_ID] = lengthField
-        return PalmPrintRecord(this.fields)
-    }
+    override fun build() = PalmPrintRecord(this.fields)
 
     fun withInformationDesignationCharField(designationChar: String) =
         withField(

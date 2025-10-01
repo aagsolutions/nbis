@@ -34,11 +34,7 @@ class SignatureImageRecordBuilder :
         RecordType.RT8.label,
         BinaryRecordLengthCalculator(SIGNATURE_IMAGE_HEADER_SIZE, ImageFields.DATA),
     ) {
-    override fun build(): SignatureImageRecord {
-        val lengthField = calculator.calculate(this.id, this.fields)
-        this.fields[LENGTH_FIELD_ID] = lengthField
-        return SignatureImageRecord(this.fields)
-    }
+    override fun build() = SignatureImageRecord(this.fields)
 
     companion object {
         private const val SIGNATURE_IMAGE_HEADER_SIZE = 12

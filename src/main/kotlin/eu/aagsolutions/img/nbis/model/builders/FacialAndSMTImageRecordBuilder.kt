@@ -42,15 +42,10 @@ class FacialAndSMTImageRecordBuilder :
     ) {
     /**
      * Builds and returns a FacialAndSMTImageRecord instance with all configured fields.
-     * Calculates and sets the record length before building.
      *
      * @return FacialAndSMTImageRecord The constructed facial/SMT image record
      */
-    override fun build(): FacialAndSMTImageRecord {
-        val lengthField = calculator.calculate(this.id, this.fields)
-        this.fields[LENGTH_FIELD_ID] = lengthField
-        return FacialAndSMTImageRecord(this.fields)
-    }
+    override fun build() = FacialAndSMTImageRecord(this.fields)
 
     /**
      * Sets IDC (Information Designation Character) field.

@@ -32,26 +32,13 @@ import eu.aagsolutions.img.nbis.io.TAG_SEPARATOR_DOT
 import eu.aagsolutions.img.nbis.io.TAG_SEPARATOR_GROUP_FIELD
 import eu.aagsolutions.img.nbis.io.Tag
 import eu.aagsolutions.img.nbis.io.Token
+import eu.aagsolutions.img.nbis.model.builders.BuilderFactory
 import eu.aagsolutions.img.nbis.model.enums.RecordType
 import eu.aagsolutions.img.nbis.model.enums.records.ImageFields
 import eu.aagsolutions.img.nbis.model.fields.Field
 import eu.aagsolutions.img.nbis.model.fields.ImageField
 import eu.aagsolutions.img.nbis.model.fields.TextField
 import eu.aagsolutions.img.nbis.model.records.BaseRecord
-import eu.aagsolutions.img.nbis.model.records.DefaultRecord
-import eu.aagsolutions.img.nbis.model.records.FacialAndSMTImageRecord
-import eu.aagsolutions.img.nbis.model.records.HighResolutionBinaryFingerprintRecord
-import eu.aagsolutions.img.nbis.model.records.HighResolutionGrayscaleFingerprintRecord
-import eu.aagsolutions.img.nbis.model.records.LatentImageRecord
-import eu.aagsolutions.img.nbis.model.records.LowResolutionBinaryFingerprintRecord
-import eu.aagsolutions.img.nbis.model.records.LowResolutionGrayscaleFingerprintRecord
-import eu.aagsolutions.img.nbis.model.records.MinutiaeDataRecord
-import eu.aagsolutions.img.nbis.model.records.PalmPrintRecord
-import eu.aagsolutions.img.nbis.model.records.SignatureImageRecord
-import eu.aagsolutions.img.nbis.model.records.TransactionInformationRecord
-import eu.aagsolutions.img.nbis.model.records.UserDefinedImageRecord
-import eu.aagsolutions.img.nbis.model.records.UserDefinedTextRecord
-import eu.aagsolutions.img.nbis.model.records.VariableResolutionFingerprintRecord
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import java.io.OutputStream
@@ -160,27 +147,14 @@ open class TextRecordHandler(
         return lastField
     }
 
-    @Suppress("CyclomaticComplexMethod")
     private fun buildRecord(
         recordType: RecordType,
         fields: Map<Int, Field<*>>,
-    ): BaseRecord =
-        when (recordType.id) {
-            RecordType.RT1.id -> TransactionInformationRecord(fields)
-            RecordType.RT2.id -> UserDefinedTextRecord(fields)
-            RecordType.RT3.id -> LowResolutionGrayscaleFingerprintRecord(fields)
-            RecordType.RT4.id -> HighResolutionGrayscaleFingerprintRecord(fields)
-            RecordType.RT5.id -> LowResolutionBinaryFingerprintRecord(fields)
-            RecordType.RT6.id -> HighResolutionBinaryFingerprintRecord(fields)
-            RecordType.RT7.id -> UserDefinedImageRecord(fields)
-            RecordType.RT8.id -> SignatureImageRecord(fields)
-            RecordType.RT9.id -> MinutiaeDataRecord(fields)
-            RecordType.RT10.id -> FacialAndSMTImageRecord(fields)
-            RecordType.RT13.id -> LatentImageRecord(fields)
-            RecordType.RT14.id -> VariableResolutionFingerprintRecord(fields)
-            RecordType.RT15.id -> PalmPrintRecord(fields)
-            else -> DefaultRecord(recordType.id, fields)
-        }
+    ) = BuilderFactory
+        .findByRecordId(recordType.id)
+        .builder
+        .withFields(fields)
+        .build()
 
     private fun generateFieldTextToken(
         recordId: Int,

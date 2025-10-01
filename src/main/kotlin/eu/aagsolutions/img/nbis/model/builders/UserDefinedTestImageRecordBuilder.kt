@@ -24,16 +24,19 @@
 package eu.aagsolutions.img.nbis.model.builders
 
 import eu.aagsolutions.img.nbis.calculators.TextRecordLengthCalculator
-import eu.aagsolutions.img.nbis.model.records.DefaultRecord
+import eu.aagsolutions.img.nbis.model.enums.RecordType
+import eu.aagsolutions.img.nbis.model.records.UserDefinedTestImageRecord
 
-class DefaultRecordBuilder(
-    id: Int,
-    label: String,
-    calculator: TextRecordLengthCalculator,
-) : NistRecordBuilder<DefaultRecord, DefaultRecordBuilder>(
-        id,
-        label,
-        calculator,
+class UserDefinedTestImageRecordBuilder :
+    NistRecordBuilder<UserDefinedTestImageRecord, UserDefinedTestImageRecordBuilder>(
+        RecordType.RT16.id,
+        RecordType.RT16.label,
+        TextRecordLengthCalculator(),
     ) {
-    override fun build() = DefaultRecord(this.id, this.fields)
+    /**
+     * Builds a new UserDefinedTestImageRecord with the configured fields.
+     *
+     * @return A new UserDefinedTestImageRecord instance containing all configured fields
+     */
+    override fun build() = UserDefinedTestImageRecord(this.fields)
 }

@@ -21,19 +21,8 @@
  *
  */
 
-package eu.aagsolutions.img.nbis.model.builders
+package eu.aagsolutions.img.nbis.io.record
 
-import eu.aagsolutions.img.nbis.calculators.TextRecordLengthCalculator
-import eu.aagsolutions.img.nbis.model.records.DefaultRecord
+import eu.aagsolutions.img.nbis.model.enums.RecordType
 
-class DefaultRecordBuilder(
-    id: Int,
-    label: String,
-    calculator: TextRecordLengthCalculator,
-) : NistRecordBuilder<DefaultRecord, DefaultRecordBuilder>(
-        id,
-        label,
-        calculator,
-    ) {
-    override fun build() = DefaultRecord(this.id, this.fields)
-}
+class UserDefinedTextRecordHandler : TextRecordHandler(RecordType.RT2)

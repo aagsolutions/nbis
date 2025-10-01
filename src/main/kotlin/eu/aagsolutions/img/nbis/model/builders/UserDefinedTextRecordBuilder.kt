@@ -43,15 +43,7 @@ class UserDefinedTextRecordBuilder :
         RecordType.RT2.label,
         TextRecordLengthCalculator(),
     ) {
-    /**
-     * Finalizes the record by calculating and setting the LEN field, then returns
-     * an immutable UserDefinedTextRecord containing all collected fields.
-     */
-    override fun build(): UserDefinedTextRecord {
-        val lengthField = calculator.calculate(this.id, this.fields)
-        this.fields[LENGTH_FIELD_ID] = lengthField
-        return UserDefinedTextRecord(this.fields)
-    }
+    override fun build() = UserDefinedTextRecord(this.fields)
 
     /**
      * Sets IDC (Information Designation Character) – the record sequence number within the transaction.

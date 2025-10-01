@@ -49,17 +49,9 @@ class MinutiaeDataRecordBuilder :
     /**
      * Builds a new MinutiaeDataRecord with the configured fields.
      *
-     * Calculates the logical record length (LEN) using the configured calculator,
-     * inserts it into the field map and returns an immutable MinutiaeDataRecord
-     * instance containing all configured fields.
-     *
      * @return A MinutiaeDataRecord instance containing all configured fields
      */
-    override fun build(): MinutiaeDataRecord {
-        val lengthField = calculator.calculate(this.id, this.fields)
-        this.fields[LENGTH_FIELD_ID] = lengthField
-        return MinutiaeDataRecord(this.fields)
-    }
+    override fun build() = MinutiaeDataRecord(this.fields)
 
     /**
      * Sets IDC (Information Designation Character) – uniquely identifies this Type-9 record within the transaction.

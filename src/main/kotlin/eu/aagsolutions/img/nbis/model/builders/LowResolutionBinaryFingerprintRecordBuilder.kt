@@ -34,11 +34,7 @@ class LowResolutionBinaryFingerprintRecordBuilder :
         RecordType.RT5.label,
         BinaryRecordLengthCalculator(LOW_RESOLUTION_BINARY_FINGERPRINT_HEADER_SIZE, ImageFields.DATA),
     ) {
-    override fun build(): LowResolutionBinaryFingerprintRecord {
-        val lengthField = calculator.calculate(this.id, this.fields)
-        this.fields[LENGTH_FIELD_ID] = lengthField
-        return LowResolutionBinaryFingerprintRecord(this.fields)
-    }
+    override fun build() = LowResolutionBinaryFingerprintRecord(this.fields)
 
     companion object {
         const val LOW_RESOLUTION_BINARY_FINGERPRINT_HEADER_SIZE = 18

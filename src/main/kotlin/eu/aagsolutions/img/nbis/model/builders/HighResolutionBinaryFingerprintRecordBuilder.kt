@@ -34,11 +34,7 @@ class HighResolutionBinaryFingerprintRecordBuilder :
         RecordType.RT6.label,
         BinaryRecordLengthCalculator(HIGH_RESOLUTION_BINARY_FINGERPRINT_HEADER_SIZE, ImageFields.DATA),
     ) {
-    override fun build(): HighResolutionBinaryFingerprintRecord {
-        val lengthField = calculator.calculate(this.id, this.fields)
-        this.fields[LENGTH_FIELD_ID] = lengthField
-        return HighResolutionBinaryFingerprintRecord(this.fields)
-    }
+    override fun build() = HighResolutionBinaryFingerprintRecord(this.fields)
 
     companion object {
         const val HIGH_RESOLUTION_BINARY_FINGERPRINT_HEADER_SIZE = 18

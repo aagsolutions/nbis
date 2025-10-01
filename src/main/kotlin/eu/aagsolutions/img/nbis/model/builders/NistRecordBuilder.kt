@@ -48,6 +48,20 @@ abstract class NistRecordBuilder<T : BaseRecord, B : NistRecordBuilder<T, B>>(
     val fields: MutableMap<Int, Field<*>> = mutableMapOf()
 
     /**
+     * This method calculates the logical record length using the configured calculator, if
+     * calculate is set to true.
+     *
+     * @param calculate Whether to calculate fields
+     * @return Builder instance for method chaining
+     */
+    fun calculateFields(calculate: Boolean): B {
+        calculate.let {
+            this.fields[LENGTH_FIELD_ID] = calculator.calculate(this.id, this.fields)
+        }
+        return this as B
+    }
+
+    /**
      * Creates a new builder instance initialized with fields from an existing record.
      *
      * @param record The existing record to copy fields from
@@ -81,6 +95,18 @@ abstract class NistRecordBuilder<T : BaseRecord, B : NistRecordBuilder<T, B>>(
      */
     fun removeField(fieldId: Int): B {
         this.fields.remove(fieldId)
+        return this as B
+    }
+
+    /**
+     * Sets all fields in the record being built.
+     *
+     * @param fields A map of field identifiers to field values
+     * @return Builder instance for method chaining
+     */
+    fun withFields(fields: Map<Int, Field<*>>): B {
+        this.fields.clear()
+        this.fields.putAll(fields)
         return this as B
     }
 
