@@ -2,6 +2,8 @@
 
 ![Build&Test](https://github.com/aagsolutions/nbis/actions/workflows/main.yml/badge.svg) [![Maven Central](https://img.shields.io/maven-central/v/eu.aagsolutions.img/nbis)](https://central.sonatype.com/artifact/eu.aagsolutions.img/nbis/0.4.0) [![GitHub license](https://img.shields.io/badge/license-MIT-green.svg?style=flat)](https://opensource.org/licenses/MIT) ![CodeQL Scan Status](https://github.com/aagsolutions/nbis/actions/workflows/codeql.yml/badge.svg)
 
+[Documentation](https://aagsolutions.github.io/nbis/)
+
 A Kotlin implementation of NIST Biometric Image Software (NBIS) for reading, writing, and building NIST records. Compatible with any JVM language.
 
 ## About
