@@ -29,6 +29,7 @@ import eu.aagsolutions.img.nbis.converters.listToString
 import eu.aagsolutions.img.nbis.converters.stringToList
 import eu.aagsolutions.img.nbis.converters.twoBytesToLong
 import eu.aagsolutions.img.nbis.io.Token
+import eu.aagsolutions.img.nbis.model.builders.BuilderFactory
 import eu.aagsolutions.img.nbis.model.enums.RecordType
 import eu.aagsolutions.img.nbis.model.enums.records.FieldType
 import eu.aagsolutions.img.nbis.model.enums.records.ImageFields
@@ -36,13 +37,6 @@ import eu.aagsolutions.img.nbis.model.fields.Field
 import eu.aagsolutions.img.nbis.model.fields.ImageField
 import eu.aagsolutions.img.nbis.model.fields.TextField
 import eu.aagsolutions.img.nbis.model.records.BaseRecord
-import eu.aagsolutions.img.nbis.model.records.DefaultRecord
-import eu.aagsolutions.img.nbis.model.records.HighResolutionBinaryFingerprintRecord
-import eu.aagsolutions.img.nbis.model.records.HighResolutionGrayscaleFingerprintRecord
-import eu.aagsolutions.img.nbis.model.records.LowResolutionBinaryFingerprintRecord
-import eu.aagsolutions.img.nbis.model.records.LowResolutionGrayscaleFingerprintRecord
-import eu.aagsolutions.img.nbis.model.records.SignatureImageRecord
-import eu.aagsolutions.img.nbis.model.records.UserDefinedImageRecord
 import java.io.OutputStream
 import java.util.concurrent.atomic.AtomicInteger
 
@@ -106,15 +100,7 @@ abstract class ImageRecordHandler(
             }
             token.position += length.toInt()
         }
-        return when (recordType.id) {
-            RecordType.RT3.id -> LowResolutionGrayscaleFingerprintRecord(fields.toMap())
-            RecordType.RT4.id -> HighResolutionGrayscaleFingerprintRecord(fields.toMap())
-            RecordType.RT5.id -> LowResolutionBinaryFingerprintRecord(fields.toMap())
-            RecordType.RT6.id -> HighResolutionBinaryFingerprintRecord(fields.toMap())
-            RecordType.RT7.id -> UserDefinedImageRecord(fields.toMap())
-            RecordType.RT8.id -> SignatureImageRecord(fields.toMap())
-            else -> DefaultRecord(recordType.id, fields.toMap())
-        }
+        return BuilderFactory.findByRecordId(recordType.id).builder.withFields(fields).build()
     }
 
     override fun write(
