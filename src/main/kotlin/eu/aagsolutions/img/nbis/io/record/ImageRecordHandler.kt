@@ -100,7 +100,11 @@ abstract class ImageRecordHandler(
             }
             token.position += length.toInt()
         }
-        return BuilderFactory.findByRecordId(recordType.id).builder.withFields(fields).build()
+        return BuilderFactory
+            .findByRecordId(recordType.id)
+            .builder
+            .withFields(fields)
+            .build()
     }
 
     override fun write(
