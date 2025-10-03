@@ -6,7 +6,7 @@ A Kotlin implementation of NIST Biometric Image Software (NBIS) for reading, wri
 
 ### Getting started:
 * [Documentation](https://aagsolutions.github.io/nbis/)
-* [Examples](https://github.com/aagsolutions/nbis/tree/samples)
+* [Examples](https://github.com/aagsolutions/nbis/tree/main/samples)
 
 ## About
 
