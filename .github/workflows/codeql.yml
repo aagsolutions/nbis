@@ -6,11 +6,13 @@ on:
     paths-ignore:
       - '**/*.properties'
       - '**/*.md'
+      - 'samples'
   pull_request:
     branches: [ "main" ]
     paths-ignore:
       - '**/*.properties'
       - '**/*.md'
+      - 'samples'
     
 jobs:
   analyze:
