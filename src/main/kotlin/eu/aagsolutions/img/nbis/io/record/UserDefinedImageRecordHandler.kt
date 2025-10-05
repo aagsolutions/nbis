@@ -23,7 +23,7 @@
 
 package eu.aagsolutions.img.nbis.io.record
 
-import eu.aagsolutions.img.nbis.converters.fourBytesToLong
+import eu.aagsolutions.img.nbis.converters.Converters.fourBytesToLong
 import eu.aagsolutions.img.nbis.io.Token
 import eu.aagsolutions.img.nbis.model.enums.RecordType
 import eu.aagsolutions.img.nbis.model.enums.records.DefaultFields

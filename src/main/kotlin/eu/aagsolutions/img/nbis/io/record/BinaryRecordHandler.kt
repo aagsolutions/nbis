@@ -23,7 +23,7 @@
 
 package eu.aagsolutions.img.nbis.io.record
 
-import eu.aagsolutions.img.nbis.converters.longToBytes
+import eu.aagsolutions.img.nbis.converters.Converters.longToBytes
 import eu.aagsolutions.img.nbis.exceptions.NistException
 import eu.aagsolutions.img.nbis.model.enums.RecordType
 import eu.aagsolutions.img.nbis.model.enums.records.FieldType

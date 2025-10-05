@@ -24,10 +24,8 @@
 package eu.aagsolutions.img.nbis.jsample;
 
 import eu.aagsolutions.img.nbis.io.NistFileReader;
-import eu.aagsolutions.img.nbis.model.enums.records.FacialAndSMTImageFields;
 import eu.aagsolutions.img.nbis.model.enums.records.UserDefinedTextFields;
 
-import java.io.FileOutputStream;
 import java.io.IOException;
 
 public class ReadNewNistFile {
