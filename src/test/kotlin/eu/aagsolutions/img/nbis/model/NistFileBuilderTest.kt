@@ -23,7 +23,7 @@
 
 package eu.aagsolutions.img.nbis.model
 
-import eu.aagsolutions.img.nbis.calculators.generateAgencyTCN
+import eu.aagsolutions.img.nbis.calculators.Calculators.generateAgencyTCN
 import eu.aagsolutions.img.nbis.io.NistFileReader
 import eu.aagsolutions.img.nbis.io.NistFileReaderTest
 import eu.aagsolutions.img.nbis.io.NistFileWriter

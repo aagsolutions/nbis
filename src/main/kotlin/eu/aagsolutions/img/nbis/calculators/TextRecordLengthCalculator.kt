@@ -23,6 +23,7 @@
 
 package eu.aagsolutions.img.nbis.calculators
 
+import eu.aagsolutions.img.nbis.calculators.Calculators.calculateLength
 import eu.aagsolutions.img.nbis.model.fields.Field
 import eu.aagsolutions.img.nbis.model.fields.TextField
 

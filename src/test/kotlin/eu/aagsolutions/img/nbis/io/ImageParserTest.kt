@@ -25,7 +25,7 @@ package eu.aagsolutions.img.nbis.io
 
 import eu.aagsolutions.img.nbis.model.enums.reference.CompressionAlgorithm
 import io.kotest.matchers.shouldBe
-import org.junit.Test
+import kotlin.test.Test
 
 class ImageParserTest {
     @Test

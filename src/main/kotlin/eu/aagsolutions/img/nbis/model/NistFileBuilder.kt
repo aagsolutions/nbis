@@ -23,8 +23,8 @@
 
 package eu.aagsolutions.img.nbis.model
 
-import eu.aagsolutions.img.nbis.calculators.calculateContentField
-import eu.aagsolutions.img.nbis.calculators.fromListOfNistEntry
+import eu.aagsolutions.img.nbis.calculators.Calculators.calculateContentField
+import eu.aagsolutions.img.nbis.calculators.Calculators.fromListOfNistEntry
 import eu.aagsolutions.img.nbis.model.builders.TransactionInformationRecordBuilder
 import eu.aagsolutions.img.nbis.model.enums.RecordType
 import eu.aagsolutions.img.nbis.model.records.BaseRecord
