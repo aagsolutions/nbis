@@ -23,8 +23,8 @@
 
 package eu.aagsolutions.img.nbis.converters
 
-import eu.aagsolutions.img.nbis.io.RECORD_SEPARATOR
-import eu.aagsolutions.img.nbis.io.UNIT_SEPARATOR
+import eu.aagsolutions.img.nbis.io.AsciiHelper.RECORD_SEPARATOR
+import eu.aagsolutions.img.nbis.io.AsciiHelper.UNIT_SEPARATOR
 import eu.aagsolutions.img.nbis.model.NistEntry
 
 object Converters {

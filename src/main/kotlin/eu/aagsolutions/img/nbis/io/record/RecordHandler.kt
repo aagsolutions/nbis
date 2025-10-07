@@ -24,8 +24,8 @@
 package eu.aagsolutions.img.nbis.io.record
 
 import eu.aagsolutions.img.nbis.exceptions.NistException
-import eu.aagsolutions.img.nbis.io.TAG_SEPARATOR_COLON
-import eu.aagsolutions.img.nbis.io.TAG_SEPARATOR_DOT
+import eu.aagsolutions.img.nbis.io.AsciiHelper.TAG_SEPARATOR_COLON
+import eu.aagsolutions.img.nbis.io.AsciiHelper.TAG_SEPARATOR_DOT
 import eu.aagsolutions.img.nbis.io.Tag
 import eu.aagsolutions.img.nbis.io.Token
 import eu.aagsolutions.img.nbis.model.enums.RecordType

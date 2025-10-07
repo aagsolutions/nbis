@@ -24,12 +24,12 @@
 package eu.aagsolutions.img.nbis.io.record
 
 import eu.aagsolutions.img.nbis.exceptions.NistException
-import eu.aagsolutions.img.nbis.io.FIELD_MAX_LENGTH
-import eu.aagsolutions.img.nbis.io.FIELD_SEPARATOR
-import eu.aagsolutions.img.nbis.io.GROUP_SEPARATOR
-import eu.aagsolutions.img.nbis.io.TAG_SEPARATOR_COLON
-import eu.aagsolutions.img.nbis.io.TAG_SEPARATOR_DOT
-import eu.aagsolutions.img.nbis.io.TAG_SEPARATOR_GROUP_FIELD
+import eu.aagsolutions.img.nbis.io.AsciiHelper.FIELD_MAX_LENGTH
+import eu.aagsolutions.img.nbis.io.AsciiHelper.FIELD_SEPARATOR
+import eu.aagsolutions.img.nbis.io.AsciiHelper.GROUP_SEPARATOR
+import eu.aagsolutions.img.nbis.io.AsciiHelper.TAG_SEPARATOR_COLON
+import eu.aagsolutions.img.nbis.io.AsciiHelper.TAG_SEPARATOR_DOT
+import eu.aagsolutions.img.nbis.io.AsciiHelper.TAG_SEPARATOR_GROUP_FIELD
 import eu.aagsolutions.img.nbis.io.Tag
 import eu.aagsolutions.img.nbis.io.Token
 import eu.aagsolutions.img.nbis.model.builders.BuilderFactory

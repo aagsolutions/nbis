@@ -29,28 +29,30 @@ import java.nio.charset.CharsetDecoder
 /**
  * ASCII Unit Separator character (US) - used to separate subfields within a field
  */
-const val UNIT_SEPARATOR = 31.toChar()
+object AsciiHelper {
+    const val UNIT_SEPARATOR = 31.toChar()
 
-/**
- * ASCII Record Separator character (RS) - used to separate records
- */
-const val RECORD_SEPARATOR = 30.toChar()
+    /**
+     * ASCII Record Separator character (RS) - used to separate records
+     */
+    const val RECORD_SEPARATOR = 30.toChar()
 
-/**
- * ASCII Group Separator character (GS) - used to separate groups of data
- */
-const val GROUP_SEPARATOR = 29.toChar()
+    /**
+     * ASCII Group Separator character (GS) - used to separate groups of data
+     */
+    const val GROUP_SEPARATOR = 29.toChar()
 
-/**
- * ASCII Field Separator character (FS) - used to separate fields
- */
-const val FIELD_SEPARATOR = 28.toChar()
+    /**
+     * ASCII Field Separator character (FS) - used to separate fields
+     */
+    const val FIELD_SEPARATOR = 28.toChar()
 
-const val FIELD_MAX_LENGTH = 300000
+    const val FIELD_MAX_LENGTH = 300000
 
-val TAG_SEPARATOR_DOT = charArrayOf('.', '.')
-val TAG_SEPARATOR_COLON = charArrayOf(':', ':')
-val TAG_SEPARATOR_GROUP_FIELD = charArrayOf(GROUP_SEPARATOR, FIELD_SEPARATOR)
+    val TAG_SEPARATOR_DOT = charArrayOf('.', '.')
+    val TAG_SEPARATOR_COLON = charArrayOf(':', ':')
+    val TAG_SEPARATOR_GROUP_FIELD = charArrayOf(GROUP_SEPARATOR, FIELD_SEPARATOR)
+}
 
 /**
  * Represents a tag structure containing type and field identifiers
