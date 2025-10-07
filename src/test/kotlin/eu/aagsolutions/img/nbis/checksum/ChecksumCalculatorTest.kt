@@ -26,18 +26,18 @@ package eu.aagsolutions.img.nbis.checksum
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
-class ChecksumCalculator {
+class ChecksumCalculatorTest {
     @Test
     fun `it should calculate the checksum to hex successful for empty array`() {
         val empty = byteArrayOf()
-        val emptyHash: String = calculateToHex(empty)
+        val emptyHash: String = ChecksumCalculator.calculateToHex(empty)
         assertEquals(emptyHash.uppercase(), "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855")
     }
 
     @Test
     fun `it should calculate checksum to hex successful`() {
         val data1 = byteArrayOf(1, 2, 3, 4)
-        val hash1: String = calculateToHex(data1)
+        val hash1: String = ChecksumCalculator.calculateToHex(data1)
         assertEquals(hash1.uppercase(), "9F64A747E1B97F131FABB6B447296C9B6F0201E79FB3C5356E6C77E89B6A806A")
     }
 }
