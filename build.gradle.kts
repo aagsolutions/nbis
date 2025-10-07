@@ -122,7 +122,7 @@ centralPortal {
             developer {
                 id.set("atdi")
                 name.set("Aurel Avramescu")
-                email.set("aav@aagsoltuions.eu")
+                email.set("aav@aagsolutions.eu")
                 organization.set("https://www.aagsolutions.eu")
             }
         }
