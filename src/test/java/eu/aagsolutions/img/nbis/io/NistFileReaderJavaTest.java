@@ -26,10 +26,8 @@ package eu.aagsolutions.img.nbis.io;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.Arrays;
 import java.util.Base64;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -53,7 +51,7 @@ public class NistFileReaderJavaTest {
         var path = NistFileReaderJavaTest.class.getResource("/base64/base64content.txt").getPath();
         String base64 = Files.readString(Paths.get(path));
         var bytes = Base64.getDecoder().decode(base64);
-        var nistFile = NistFileReader.Companion.decode(Base64.getDecoder().decode(bytes));
+        var nistFile = NistFileReader.Companion.decode(bytes);
         nistFile.getTransactionInformationRecord().getFields().forEach((idx, f) -> System.out.println(f.getData()));
         nistFile.getUserDefinedDescriptionTextRecords().forEach(System.out::println);
         assertNotNull(nistFile.getUserDefinedDescriptionTextRecords());
