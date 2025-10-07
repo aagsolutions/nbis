@@ -31,7 +31,7 @@ import eu.aagsolutions.img.nbis.model.records.BaseRecord
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import java.io.InputStream
-import java.util.Base64
+import kotlin.io.encoding.Base64
 
 /**
  * A class designed to read and parse NIST files. The NIST file format is typically used for handling
@@ -91,7 +91,7 @@ class NistFileReader(
             return true
         }
 
-        fun byteArrayToBase64(content: ByteArray): String = Base64.getEncoder().encodeToString(content)
+        fun byteArrayToBase64(content: ByteArray): String = Base64.encode(content)
 
         fun decode(content: ByteArray): NistFile {
             val recordsMap = mutableMapOf<RecordType, List<BaseRecord>>()

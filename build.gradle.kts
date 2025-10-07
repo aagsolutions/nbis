@@ -56,6 +56,7 @@ val slf4jVersion = "2.0.17"
 val logbackVersion = "1.5.18"
 val kotestVersion = "6.0.3"
 val mockkVersion = "1.14.5"
+val junitVersion = "6.0.0"
 
 repositories {
     mavenCentral()
@@ -65,11 +66,14 @@ dependencies {
     testImplementation(kotlin("test"))
     testImplementation("io.kotest:kotest-assertions-core:$kotestVersion")
     testImplementation("io.mockk:mockk:$mockkVersion")
+    testImplementation("ch.qos.logback:logback-classic:$logbackVersion")
+    testImplementation("org.junit.jupiter:junit-jupiter:$junitVersion")
+    testRuntimeOnly("org.junit.platform:junit-platform-launcher")
     implementation("org.slf4j:slf4j-api:$slf4jVersion")
-    implementation("ch.qos.logback:logback-classic:$logbackVersion")
 }
 
 tasks.test {
+    useJUnitPlatform()
     finalizedBy(tasks.jacocoTestReport)
 }
 
