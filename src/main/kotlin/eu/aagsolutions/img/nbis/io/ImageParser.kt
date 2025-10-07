@@ -35,11 +35,18 @@ import eu.aagsolutions.img.nbis.model.enums.reference.CompressionAlgorithm
     "TooManyFunctions",
     "LoopWithTooManyJumpStatements",
     "ReturnCount",
-    "ThrowsCount",
 )
 object ImageParser {
     private const val JP2_SIGNATURE_SIZE = 12
     private const val PNG_SIGNATURE_SIZE = 8
+    private const val START_OF_WSQ_IMG = 0xA0
+    private const val END_OF_WSQ_IMG = 0xA1
+    private const val START_OF_WSQ_FRAME = 0xA2
+    private const val START_OF_WSQ_BLOCK = 0xA3
+    private const val WSQ_TRANSFORM_TABLE = 0xA4
+    private const val WSQ_QUANTIZATION_TABLE = 0xA5
+    private const val WSQ_HUFFMAN_TABLE = 0xA6
+    private const val WSQ_COMMENT = 0xA8
 
     /**
      * Reads comprehensive image information from byte array for JPEG, PNG, and WSQ formats.
@@ -165,7 +172,7 @@ object ImageParser {
                         isLossless = false
                     }
                     0xC3, 0xC7, 0xCB, 0xCF -> { // Lossless JPEG markers
-                        val segmentLength = readUInt16BigEndian(jpegData, offset + 2)
+                        readUInt16BigEndian(jpegData, offset + 2)
                         bitsPerComponent = jpegData[offset + 4].toInt() and 0xFF
                         height = readUInt16BigEndian(jpegData, offset + 5)
                         width = readUInt16BigEndian(jpegData, offset + 7)
@@ -370,75 +377,78 @@ object ImageParser {
      * @throws NistException if the data is not a valid WSQ file
      */
     fun readWSQDimensions(wsqData: ByteArray): WSQImageDimensions {
-        if (wsqData.size < 10) {
-            throw NistException("Invalid WSQ data: too small")
-        }
+        (wsqData.size > 4 && isWsq(wsqData)).let {
+            var offset = 0
 
-        // Verify WSQ magic number
-        if (!isWsq(wsqData)) {
-            throw NistException("Not a valid WSQ file")
-        }
+            // Parse WSQ segments to find the Frame Header (FRH) segment
+            while (offset < wsqData.size - 4) {
+                // Check for segment marker (0xFF followed by segment type)
+                if (wsqData[offset] == 0xFF.toByte()) {
+                    val segmentType = wsqData[offset + 1].toInt() and 0xFF
 
-        var offset = 0
+                    when (segmentType) {
+                        START_OF_WSQ_IMG -> { // SOI (Start of Image)
+                            offset += 2
+                            continue
+                        }
 
-        // Parse WSQ segments to find the Frame Header (FRH) segment
-        while (offset < wsqData.size - 4) {
-            // Check for segment marker (0xFF followed by segment type)
-            if (wsqData[offset] == 0xFF.toByte()) {
-                val segmentType = wsqData[offset + 1].toInt() and 0xFF
+                        END_OF_WSQ_IMG -> { // EOI (End of Image)
+                            break
+                        }
 
-                when (segmentType) {
-                    0xA0 -> { // SOI (Start of Image)
-                        offset += 2
-                        continue
-                    }
-                    0xA1 -> { // EOI (End of Image)
-                        break
-                    }
-                    0xA2 -> { // SOF (Start of Frame) - This contains dimensions
-                        return parseWSQFrameHeader(wsqData, offset)
-                    }
-                    0xA3 -> { // SOB (Start of Block)
-                        // Skip this segment
-                        val segmentLength = readUInt16BigEndian(wsqData, offset + 2)
-                        offset += 2 + segmentLength
-                    }
-                    0xA4 -> { // DTT (Define Transform Table)
-                        val segmentLength = readUInt16BigEndian(wsqData, offset + 2)
-                        offset += 2 + segmentLength
-                    }
-                    0xA5 -> { // DQT (Define Quantization Table)
-                        val segmentLength = readUInt16BigEndian(wsqData, offset + 2)
-                        offset += 2 + segmentLength
-                    }
-                    0xA6 -> { // DHT (Define Huffman Table)
-                        val segmentLength = readUInt16BigEndian(wsqData, offset + 2)
-                        offset += 2 + segmentLength
-                    }
-                    0xA8 -> { // COM (Comment)
-                        val segmentLength = readUInt16BigEndian(wsqData, offset + 2)
-                        offset += 2 + segmentLength
-                    }
-                    else -> {
-                        // Unknown segment, try to skip
-                        if (offset + 4 < wsqData.size) {
+                        START_OF_WSQ_FRAME -> { // SOF (Start of Frame) - This contains dimensions
+                            return parseWSQFrameHeader(wsqData, offset)
+                        }
+
+                        START_OF_WSQ_BLOCK -> { // SOB (Start of Block)
+                            // Skip this segment
                             val segmentLength = readUInt16BigEndian(wsqData, offset + 2)
                             offset += 2 + segmentLength
-                        } else {
-                            offset++
+                        }
+
+                        WSQ_TRANSFORM_TABLE -> { // DTT (Define Transform Table)
+                            val segmentLength = readUInt16BigEndian(wsqData, offset + 2)
+                            offset += 2 + segmentLength
+                        }
+
+                        WSQ_QUANTIZATION_TABLE -> { // DQT (Define Quantization Table)
+                            val segmentLength = readUInt16BigEndian(wsqData, offset + 2)
+                            offset += 2 + segmentLength
+                        }
+
+                        WSQ_HUFFMAN_TABLE -> { // DHT (Define Huffman Table)
+                            val segmentLength = readUInt16BigEndian(wsqData, offset + 2)
+                            offset += 2 + segmentLength
+                        }
+
+                        WSQ_COMMENT -> { // COM (Comment)
+                            val segmentLength = readUInt16BigEndian(wsqData, offset + 2)
+                            offset += 2 + segmentLength
+                        }
+
+                        else -> {
+                            // Unknown segment, try to skip
+                            if (offset + 4 < wsqData.size) {
+                                val segmentLength = readUInt16BigEndian(wsqData, offset + 2)
+                                offset += 2 + segmentLength
+                            } else {
+                                offset++
+                            }
                         }
                     }
+                } else {
+                    offset++
                 }
-            } else {
-                offset++
             }
         }
-
-        throw NistException("WSQ Frame Header not found")
+        throw NistException("Invalid WSQ data")
     }
 
     /**
      * Parses the WSQ Start of Frame (SOF) segment to extract image dimensions.
+     *
+     * @param data The WSQ byte array
+     * @param offset The offset to the SOF segment
      */
     private fun parseWSQFrameHeader(
         data: ByteArray,
@@ -477,6 +487,8 @@ object ImageParser {
 
     /**
      * Attempts to find PPI information from WSQ comment segments.
+     *
+     * @param data The WSQ byte array
      */
     private fun findWSQPixelsPerInch(data: ByteArray): Int? {
         var offset = 0
@@ -538,6 +550,6 @@ object ImageParser {
         if (data.size < 4) return false
 
         // WSQ starts with SOI marker: 0xFF 0xA0
-        return data[0] == 0xFF.toByte() && data[1] == 0xA0.toByte()
+        return data[0] == 0xFF.toByte() && data[1] == START_OF_WSQ_IMG.toByte()
     }
 }
