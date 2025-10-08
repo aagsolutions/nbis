@@ -29,7 +29,6 @@ import eu.aagsolutions.img.nbis.model.enums.reference.CompressionAlgorithm
 @Suppress(
     "MagicNumber",
     "CyclomaticComplexMethod",
-    "ComplexCondition",
     "LongMethod",
     "NestedBlockDepth",
     "TooManyFunctions",
@@ -294,13 +293,7 @@ object ImageParser {
         return data.take(PNG_SIGNATURE_SIZE).toByteArray().contentEquals(pngSignature)
     }
 
-    private fun isJpegBaseline(data: ByteArray): Boolean {
-        if (data.size < 4 || data[0] != 0xFF.toByte() || data[1] != 0xD8.toByte() || data[2] != 0xFF.toByte()) {
-            return false
-        }
-
-        return containsMarker(data, byteArrayOf(0xFF.toByte(), 0xC0.toByte()))
-    }
+    private fun isJpegBaseline(data: ByteArray): Boolean = containsMarker(data, byteArrayOf(0xFF.toByte(), 0xC0.toByte()))
 
     /**
      * Checks if the byte array represents a lossless JPEG image.
