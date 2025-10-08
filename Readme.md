@@ -1,6 +1,6 @@
 # NIST Library
 
-![Build&Test](https://github.com/aagsolutions/nbis/actions/workflows/main.yml/badge.svg) [![Maven Central](https://img.shields.io/maven-central/v/eu.aagsolutions.img/nbis)](https://central.sonatype.com/artifact/eu.aagsolutions.img/nbis/0.6.3) [![GitHub license](https://img.shields.io/badge/license-MIT-green.svg?style=flat)](https://opensource.org/licenses/MIT) ![CodeQL Scan Status](https://github.com/aagsolutions/nbis/actions/workflows/codeql.yml/badge.svg)
+![Build&Test](https://github.com/aagsolutions/nbis/actions/workflows/main.yml/badge.svg) [![Maven Central](https://img.shields.io/maven-central/v/eu.aagsolutions.img/nbis)](https://central.sonatype.com/artifact/eu.aagsolutions.img/nbis/0.7.0) [![GitHub license](https://img.shields.io/badge/license-MIT-green.svg?style=flat)](https://opensource.org/licenses/MIT) ![CodeQL Scan Status](https://github.com/aagsolutions/nbis/actions/workflows/codeql.yml/badge.svg)
 
 A Kotlin implementation of NIST Biometric Image Software (NBIS) for reading, writing, and building NIST records. Compatible with any JVM language.
 
@@ -53,37 +53,48 @@ NBIS is a library implemented in Kotlin to extract, decode, build and write NIST
 <dependency>
     <groupId>eu.aagsolutions.img</groupId>
     <artifactId>nbis</artifactId>
-    <version>0.6.3</version>
+    <version>0.7.0</version>
 </dependency>
 ```
 
 ### Gradle (Groovy DSL)
 
 ```groovy
-implementation 'eu.aagsolutions.img:nbis:0.6.3'
+implementation 'eu.aagsolutions.img:nbis:0.7.0'
 ```
 
 ### Gradle (Kotlin DSL)
 
 ```kotlin
-implementation("eu.aagsolutions.img:nbis:0.6.3")
+implementation("eu.aagsolutions.img:nbis:0.7.0")
 ```
 
 ## Quick Start
 
 ### Reading a NIST File
-
-#### Kotlin
+#### From an input stream
+##### Kotlin
 ```kotlin
 val nistFile = NistFileReader(inputStream).use { reader -> reader.read() }
 val transactionInformationRecord = nistFile.getTransactionInformationRecord()
 ```
-#### Java
+##### Java
 ```java
 try (NistFileReader reader = new NistFileReader(inputStream)) {
     NistFile nistFile = reader.read();
     TransactionInformationRecord transactionInformationRecord = nistFile.getTransactionInformationRecord();
 }
+```
+#### From a byte array
+##### Kotlin
+```kotlin
+val nistFile = NistFileReader.Companion.decode(byteArray)
+val transactionInformationRecord = nistFile.getTransactionInformationRecord()
+```
+##### Java
+```java
+NistFile nistFile = NistFileReader.Companion.decode(byteArray);
+TransactionInformationRecord transactionInformationRecord = nistFile.getTransactionInformationRecord();
 ```
 ### Writing a NIST File
 #### Kotlin
@@ -92,13 +103,15 @@ NistFileWriter(FileOutputStream("output.nist")).use { writer -> writer.write(nis
 ```
 #### Java
 ```java
-NistFile nistFile = new NistFile();
-// ... populate nistFile ...
+NistFile nistFile = new NistFileBuilder()
+        .withTransactionInformationRecord(transactionInformationRecord)
+        .withUserDefinedDescriptionTextRecords(userDefinedTextRecord)
+        .withFacialAndSmtImageRecords(facialAndSMTImageRecord)
+        .build();
 try (NistFileWriter writer = new NistFileWriter(new FileOutputStream("output.nist"))) {
     writer.write(nistFile);
 }
 ```
-
 ## API Documentation
 
 ### Core Classes
@@ -121,15 +134,6 @@ Writes NIST files to output streams.
 #### `NistFileBuilder`
 Programmatically builds NIST files.
 
-**Usage:**
-
-```kotlin 
-val builder = NistFileBuilder()
-    .withTransactionInformationRecord(informationRecord)
-    .withUserDefinedDescriptionTextRecords(userDefinedTextRecords)
-val nistFile = builder.build()
-```
-
 ### Working with Records
 
 #### Accessing Field Data
@@ -141,7 +145,6 @@ val imageData = record.getBinaryData()
 // Get specific field object 
 val field = record.getField(DefaultFields.LEN)
 ```
-
 #### Record Types
 
 All record types extend `BaseRecord` and provide type-specific functionality:
@@ -159,46 +162,6 @@ The library supports different field types:
 - **`TextField`** - Text-based fields
 - **`ImageField`** - Binary image data fields
 
-## Complete Examples
-
-### Example 1: Reading and Analyzing a NIST File
-```kotlin
-fun analyzeNistFile(filePath: String) { 
-    val nistFile = NistFileReader(FileInputStream(filePath)).use { it.read() }
-    // Print file information
-    val transaction = nistFile.getTransactionInformationRecord()
-    println("NIST File Analysis:")
-    println("- Version: ${transaction.getFieldText(TransactionInformationFields.VER)}")
-    println("- Agency: ${transaction.getFieldText(TransactionInformationFields.ORI)}")
-
-// Count records by type
-    val recordCounts = nistFile.getAllRecords()
-        .groupBy { it.recordId }
-        .mapValues { it.value.size }
-
-    println("\nRecord Counts:")
-    recordCounts.forEach { (type, count) ->
-        println("- Type $type: $count records")
-    }
-
-// Analyze fingerprint records
-    val fingerprintRecords = nistFile.getRecordsByType(RecordType.RT4)
-    println("\nFingerprint Records: ${fingerprintRecords.size}")
-    fingerprintRecords.forEach { record ->
-        val idc = record.getFieldText(DefaultFields.IDC)
-        println("- IDC $idc")
-    }
-}
-```
-### Example 2: Building a NIST File from Scratch
-
-```kotlin
-val nistFile = NistFileBuilder()
-        .withTransactionInformationRecord(transactionInformationRecord)
-        .withUserDefinedDescriptionTextRecords(userDefinedText as List<UserDefinedTextRecord>)
-        .withFacialAndSmtImageRecords(imageRecords)
-        .build()
-```
 ## Requirements
 * Java: 21 or higher
 * Kotlin: 2.1 or higher
