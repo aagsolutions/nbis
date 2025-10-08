@@ -24,7 +24,7 @@
 package eu.aagsolutions.img.nbis.io.record
 
 import eu.aagsolutions.img.nbis.converters.Converters.fourBytesToLong
-import eu.aagsolutions.img.nbis.io.Token
+import eu.aagsolutions.img.nbis.datakit.Token
 import eu.aagsolutions.img.nbis.model.enums.RecordType
 import eu.aagsolutions.img.nbis.model.enums.records.DefaultFields
 import eu.aagsolutions.img.nbis.model.enums.records.UserDefinedImageFields

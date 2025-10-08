@@ -24,9 +24,9 @@
 package eu.aagsolutions.img.nbis.calculators
 
 import eu.aagsolutions.img.nbis.exceptions.NistException
-import eu.aagsolutions.img.nbis.io.AsciiHelper.GROUP_SEPARATOR
-import eu.aagsolutions.img.nbis.io.AsciiHelper.RECORD_SEPARATOR
-import eu.aagsolutions.img.nbis.io.AsciiHelper.UNIT_SEPARATOR
+import eu.aagsolutions.img.nbis.datakit.AsciiHelper.GROUP_SEPARATOR
+import eu.aagsolutions.img.nbis.datakit.AsciiHelper.RECORD_SEPARATOR
+import eu.aagsolutions.img.nbis.datakit.AsciiHelper.UNIT_SEPARATOR
 import eu.aagsolutions.img.nbis.model.NistEntry
 import eu.aagsolutions.img.nbis.model.enums.RecordType
 import eu.aagsolutions.img.nbis.model.enums.records.DefaultFields

@@ -24,10 +24,10 @@
 package eu.aagsolutions.img.nbis.io.record
 
 import eu.aagsolutions.img.nbis.exceptions.NistException
-import eu.aagsolutions.img.nbis.io.AsciiHelper.FIELD_MAX_LENGTH
-import eu.aagsolutions.img.nbis.io.AsciiHelper.FIELD_SEPARATOR
-import eu.aagsolutions.img.nbis.io.AsciiHelper.TAG_SEPARATOR_GROUP_FIELD
-import eu.aagsolutions.img.nbis.io.Token
+import eu.aagsolutions.img.nbis.datakit.AsciiHelper.FIELD_MAX_LENGTH
+import eu.aagsolutions.img.nbis.datakit.AsciiHelper.FIELD_SEPARATOR
+import eu.aagsolutions.img.nbis.datakit.AsciiHelper.TAG_SEPARATOR_GROUP_FIELD
+import eu.aagsolutions.img.nbis.datakit.Token
 import eu.aagsolutions.img.nbis.model.enums.RecordType
 import eu.aagsolutions.img.nbis.model.enums.records.TransactionInformationFields
 import eu.aagsolutions.img.nbis.model.fields.Field

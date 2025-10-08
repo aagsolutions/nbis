@@ -21,7 +21,7 @@
  *
  */
 
-package eu.aagsolutions.img.nbis.io
+package eu.aagsolutions.img.nbis.datakit
 
 import eu.aagsolutions.img.nbis.model.enums.AcceptedCharset
 import java.nio.charset.CharsetDecoder

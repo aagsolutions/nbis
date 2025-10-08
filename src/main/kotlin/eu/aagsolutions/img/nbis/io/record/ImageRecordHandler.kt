@@ -28,7 +28,7 @@ import eu.aagsolutions.img.nbis.converters.Converters.fourBytesToLong
 import eu.aagsolutions.img.nbis.converters.Converters.listToString
 import eu.aagsolutions.img.nbis.converters.Converters.stringToList
 import eu.aagsolutions.img.nbis.converters.Converters.twoBytesToLong
-import eu.aagsolutions.img.nbis.io.Token
+import eu.aagsolutions.img.nbis.datakit.Token
 import eu.aagsolutions.img.nbis.model.builders.BuilderFactory
 import eu.aagsolutions.img.nbis.model.enums.RecordType
 import eu.aagsolutions.img.nbis.model.enums.records.FieldType

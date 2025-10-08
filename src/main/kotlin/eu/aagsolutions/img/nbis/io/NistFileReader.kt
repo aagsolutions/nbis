@@ -23,6 +23,7 @@
 
 package eu.aagsolutions.img.nbis.io
 
+import eu.aagsolutions.img.nbis.datakit.Token
 import eu.aagsolutions.img.nbis.io.record.HandlerFactory
 import eu.aagsolutions.img.nbis.io.record.TransactionInformationRecordHandler
 import eu.aagsolutions.img.nbis.model.NistFile

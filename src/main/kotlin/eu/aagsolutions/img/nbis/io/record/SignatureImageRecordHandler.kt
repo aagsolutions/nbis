@@ -26,7 +26,7 @@ package eu.aagsolutions.img.nbis.io.record
 import eu.aagsolutions.img.nbis.converters.Converters.byteToString
 import eu.aagsolutions.img.nbis.converters.Converters.fourBytesToLong
 import eu.aagsolutions.img.nbis.converters.Converters.twoBytesToLong
-import eu.aagsolutions.img.nbis.io.Token
+import eu.aagsolutions.img.nbis.datakit.Token
 import eu.aagsolutions.img.nbis.model.enums.RecordType
 import eu.aagsolutions.img.nbis.model.enums.records.SignatureImageFields
 import eu.aagsolutions.img.nbis.model.fields.Field

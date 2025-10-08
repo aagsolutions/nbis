@@ -21,16 +21,16 @@
  *
  */
 
-package eu.aagsolutions.img.nbis.converters
+package eu.aagsolutions.img.nbis.datakit
 
-import eu.aagsolutions.img.nbis.io.AsciiHelper.RECORD_SEPARATOR
-import eu.aagsolutions.img.nbis.io.AsciiHelper.UNIT_SEPARATOR
+import eu.aagsolutions.img.nbis.datakit.AsciiHelper.RECORD_SEPARATOR
+import eu.aagsolutions.img.nbis.datakit.AsciiHelper.UNIT_SEPARATOR
 import eu.aagsolutions.img.nbis.model.NistEntry
 
 object Converters {
-    const val SHIFT_WITH_EIGHT_BYTES = 8
-    const val SHIFT_WITH_SIXTEEN_BYTES = 16
-    const val SHIFT_WITH_TWENTYFOUR_BYTES = 24
+    const val SHIFT_WITH_EIGHT_BITS = 8
+    const val SHIFT_WITH_SIXTEEN_BITS = 16
+    const val SHIFT_WITH_TWENTYFOUR_BITS = 24
     const val MAX_NR_OF_BYTES = 8
     const val BYTE_MASK = 0xFF
 
@@ -58,7 +58,7 @@ object Converters {
     ): Long {
         val byte1 = buffer[offset]
         val byte2 = buffer[offset + 1]
-        return ((byte1.toInt() shl SHIFT_WITH_EIGHT_BYTES) or (byte2.toInt() and BYTE_MASK)).toLong()
+        return ((byte1.toInt() shl SHIFT_WITH_EIGHT_BITS) or (byte2.toInt() and BYTE_MASK)).toLong()
     }
 
     @Suppress("MagicNumber")
@@ -72,9 +72,9 @@ object Converters {
         val byte4 = buffer[offset + 3]
 
         return (
-            (byte1.toInt() shl SHIFT_WITH_TWENTYFOUR_BYTES) or
-                ((byte2.toInt() and BYTE_MASK) shl SHIFT_WITH_SIXTEEN_BYTES) or
-                ((byte3.toInt() and BYTE_MASK) shl SHIFT_WITH_EIGHT_BYTES) or
+            (byte1.toInt() shl SHIFT_WITH_TWENTYFOUR_BITS) or
+                ((byte2.toInt() and BYTE_MASK) shl SHIFT_WITH_SIXTEEN_BITS) or
+                ((byte3.toInt() and BYTE_MASK) shl SHIFT_WITH_EIGHT_BITS) or
                 (byte4.toInt() and BYTE_MASK)
         ).toLong()
     }
@@ -94,7 +94,7 @@ object Converters {
         require(numBytes in 1..MAX_NR_OF_BYTES) { "Number of bytes must be between 1 and $MAX_NR_OF_BYTES." }
         val byteArray = ByteArray(numBytes)
         for (i in 0 until numBytes) {
-            val shift = SHIFT_WITH_EIGHT_BYTES * (numBytes - 1 - i)
+            val shift = SHIFT_WITH_EIGHT_BITS * (numBytes - 1 - i)
             byteArray[i] = (value shr shift).toByte()
         }
         return byteArray

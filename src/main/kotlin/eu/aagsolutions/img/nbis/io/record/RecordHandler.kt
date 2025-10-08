@@ -24,10 +24,10 @@
 package eu.aagsolutions.img.nbis.io.record
 
 import eu.aagsolutions.img.nbis.exceptions.NistException
-import eu.aagsolutions.img.nbis.io.AsciiHelper.TAG_SEPARATOR_COLON
-import eu.aagsolutions.img.nbis.io.AsciiHelper.TAG_SEPARATOR_DOT
-import eu.aagsolutions.img.nbis.io.Tag
-import eu.aagsolutions.img.nbis.io.Token
+import eu.aagsolutions.img.nbis.datakit.AsciiHelper.TAG_SEPARATOR_COLON
+import eu.aagsolutions.img.nbis.datakit.AsciiHelper.TAG_SEPARATOR_DOT
+import eu.aagsolutions.img.nbis.datakit.Tag
+import eu.aagsolutions.img.nbis.datakit.Token
 import eu.aagsolutions.img.nbis.model.enums.RecordType
 import eu.aagsolutions.img.nbis.model.records.BaseRecord
 import java.io.OutputStream
