@@ -34,7 +34,6 @@ import eu.aagsolutions.img.nbis.model.enums.reference.CompressionAlgorithm
     "NestedBlockDepth",
     "TooManyFunctions",
     "LoopWithTooManyJumpStatements",
-    "ReturnCount",
 )
 object ImageParser {
     private const val JP2_SIGNATURE_SIZE = 12
@@ -492,7 +491,7 @@ object ImageParser {
      */
     private fun findWSQPixelsPerInch(data: ByteArray): Int? {
         var offset = 0
-
+        var extractedPpiValue: Int? = null
         while (offset < data.size - 4) {
             if (data[offset] == 0xFF.toByte() && data[offset + 1] == 0xA8.toByte()) { // COM segment
                 val segmentLength = readUInt16BigEndian(data, offset + 2)
@@ -504,18 +503,15 @@ object ImageParser {
                     val ppiRegex = Regex("""\bPPI\s+(\d+)""", RegexOption.IGNORE_CASE)
                     val match = ppiRegex.find(comment)
                     if (match != null) {
-                        return match.groupValues[1].toIntOrNull()
-                    }
-
-                    // Alternative format: "NIST_COM" followed by PPI
-                    if (comment.contains("NIST_COM")) {
+                        extractedPpiValue = match.groupValues[1].toIntOrNull()
+                    } else if (comment.contains("NIST_COM")) {
                         // Parse NIST comment format if needed
-                        val parts = comment.split("\u0000") // Null-separated values
+                        val parts = comment.split("\u0000")
                         for (part in parts) {
                             if (part.contains("PPI")) {
                                 val ppiValue = part.filter { it.isDigit() }
                                 if (ppiValue.isNotEmpty()) {
-                                    return ppiValue.toIntOrNull()
+                                    extractedPpiValue = ppiValue.toIntOrNull()
                                 }
                             }
                         }
@@ -527,7 +523,7 @@ object ImageParser {
             }
         }
 
-        return null
+        return extractedPpiValue
     }
 
     /**
