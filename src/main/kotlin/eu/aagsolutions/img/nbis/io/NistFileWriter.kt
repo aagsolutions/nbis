@@ -23,7 +23,7 @@
 
 package eu.aagsolutions.img.nbis.io
 
-import eu.aagsolutions.img.nbis.converters.Converters.stringToListOfNistEntries
+import eu.aagsolutions.img.nbis.datakit.Converters.stringToListOfNistEntries
 import eu.aagsolutions.img.nbis.exceptions.NistException
 import eu.aagsolutions.img.nbis.io.record.HandlerFactory
 import eu.aagsolutions.img.nbis.io.record.TransactionInformationRecordHandler

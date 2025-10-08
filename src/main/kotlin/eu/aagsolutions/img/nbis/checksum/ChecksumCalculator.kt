@@ -23,7 +23,7 @@
 
 package eu.aagsolutions.img.nbis.checksum
 
-import eu.aagsolutions.img.nbis.converters.Converters.bytesToHex
+import eu.aagsolutions.img.nbis.datakit.Converters.bytesToHex
 import java.security.MessageDigest
 
 object ChecksumCalculator {

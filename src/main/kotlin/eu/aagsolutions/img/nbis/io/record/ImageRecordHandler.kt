@@ -23,11 +23,11 @@
 
 package eu.aagsolutions.img.nbis.io.record
 
-import eu.aagsolutions.img.nbis.converters.Converters.byteToString
-import eu.aagsolutions.img.nbis.converters.Converters.fourBytesToLong
-import eu.aagsolutions.img.nbis.converters.Converters.listToString
-import eu.aagsolutions.img.nbis.converters.Converters.stringToList
-import eu.aagsolutions.img.nbis.converters.Converters.twoBytesToLong
+import eu.aagsolutions.img.nbis.datakit.Converters.byteToString
+import eu.aagsolutions.img.nbis.datakit.Converters.fourBytesToLong
+import eu.aagsolutions.img.nbis.datakit.Converters.listToString
+import eu.aagsolutions.img.nbis.datakit.Converters.stringToList
+import eu.aagsolutions.img.nbis.datakit.Converters.twoBytesToLong
 import eu.aagsolutions.img.nbis.datakit.Token
 import eu.aagsolutions.img.nbis.model.builders.BuilderFactory
 import eu.aagsolutions.img.nbis.model.enums.RecordType

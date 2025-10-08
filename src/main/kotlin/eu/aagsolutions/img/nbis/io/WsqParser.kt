@@ -23,7 +23,7 @@
 
 package eu.aagsolutions.img.nbis.io
 
-import eu.aagsolutions.img.nbis.converters.EndianReader.readUInt16BigEndian
+import eu.aagsolutions.img.nbis.datakit.EndianReader.readUInt16BigEndian
 import eu.aagsolutions.img.nbis.exceptions.NistException
 import eu.aagsolutions.img.nbis.model.enums.reference.CompressionAlgorithm
 

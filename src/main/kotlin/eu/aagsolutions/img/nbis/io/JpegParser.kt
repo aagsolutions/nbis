@@ -23,8 +23,8 @@
 
 package eu.aagsolutions.img.nbis.io
 
-import eu.aagsolutions.img.nbis.converters.Converters.BYTE_MASK
-import eu.aagsolutions.img.nbis.converters.EndianReader.readUInt16BigEndian
+import eu.aagsolutions.img.nbis.datakit.Converters.BYTE_MASK
+import eu.aagsolutions.img.nbis.datakit.EndianReader.readUInt16BigEndian
 import eu.aagsolutions.img.nbis.model.enums.reference.CompressionAlgorithm
 
 object JpegParser {
