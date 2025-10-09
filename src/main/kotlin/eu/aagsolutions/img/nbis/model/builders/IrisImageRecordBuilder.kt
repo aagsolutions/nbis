@@ -98,6 +98,8 @@ class IrisImageRecordBuilder :
             TextField(verticalPixelScale),
         )
 
+    override fun withColorSpaceField(colorSpace: String) = withField(IrisImageFields.CSP.id, TextField(colorSpace))
+
     /**
      * Sets CGA (Compression Algorithm) – specifies the algorithm used to compress the image data.
      *

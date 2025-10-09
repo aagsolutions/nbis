@@ -64,6 +64,8 @@ class PalmPrintRecordBuilder :
     override fun withTransmittedVerticalPixelScaleField(verticalPixelScale: String) =
         withField(PalmPrintImageFields.TVPS.id, TextField(verticalPixelScale))
 
+    override fun withColorSpaceField(colorSpace: String) = this
+
     override fun withCompressionAlgorithmField(compressionAlgorithm: String) =
         withField(PalmPrintImageFields.CGA.id, TextField(compressionAlgorithm))
 

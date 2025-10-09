@@ -149,6 +149,8 @@ class VariableResolutionFingerprintRecordBuilder :
             TextField(verticalPixelScale),
         )
 
+    override fun withColorSpaceField(colorSpace: String) = this
+
     /**
      * Sets CGA (Compression Algorithm) – specifies the algorithm used to compress the image data.
      *

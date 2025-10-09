@@ -197,7 +197,7 @@ class FacialAndSMTImageRecordBuilder :
      * @param colorSpace The color space of the image
      * @return FacialAndSMTImageRecordBuilder for method chaining
      */
-    fun withColorSpaceField(colorSpace: String) =
+    override fun withColorSpaceField(colorSpace: String) =
         withField(
             FacialAndSMTImageFields.CSP.id,
             TextField(colorSpace),

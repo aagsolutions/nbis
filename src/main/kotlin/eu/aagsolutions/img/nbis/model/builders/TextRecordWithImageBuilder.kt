@@ -75,6 +75,15 @@ abstract class TextRecordWithImageBuilder<T : BaseRecord, B : TextRecordWithImag
     abstract fun withTransmittedVerticalPixelScaleField(verticalPixelScale: String): B
 
     /**
+     * Sets the color space for the image being built. The color space specifies the format
+     * in which colors are represented (e.g., RGB, CMYK, grayscale).
+     *
+     * @param colorSpace The color space identifier as a string
+     * @return The builder instance for method chaining
+     */
+    abstract fun withColorSpaceField(colorSpace: String): B
+
+    /**
      * Sets DATA (Image Data) - the actual image data in the specified format,
      * height (VLL) and width (HLL) are inferred from the image.
      *
@@ -89,6 +98,7 @@ abstract class TextRecordWithImageBuilder<T : BaseRecord, B : TextRecordWithImag
             .withCompressionAlgorithmField(imageInfo.compressionAlgorithm.code)
             .withTransmittedHorizontalPixelScaleField(imageInfo.pixelsPerInchX.toString())
             .withTransmittedVerticalPixelScaleField(imageInfo.pixelsPerInchY.toString())
+            .withColorSpaceField(imageInfo.colorSpace)
             .withField(ImageFields.DATA.id, ImageField(imageData))
     }
 }

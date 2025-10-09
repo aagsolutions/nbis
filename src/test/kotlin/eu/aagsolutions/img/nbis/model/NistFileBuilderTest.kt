@@ -33,7 +33,6 @@ import eu.aagsolutions.img.nbis.model.builders.UserDefinedTextRecordBuilder
 import eu.aagsolutions.img.nbis.model.builders.VariableResolutionFingerprintRecordBuilder
 import eu.aagsolutions.img.nbis.model.enums.records.FacialAndSMTImageFields
 import eu.aagsolutions.img.nbis.model.enums.records.ImageFields
-import eu.aagsolutions.img.nbis.model.enums.reference.Color
 import eu.aagsolutions.img.nbis.model.enums.reference.CompressionAlgorithm
 import eu.aagsolutions.img.nbis.model.records.FacialAndSMTImageRecord
 import eu.aagsolutions.img.nbis.model.records.LowResolutionGrayscaleFingerprintRecord
@@ -146,7 +145,6 @@ class NistFileBuilderTest {
                 .withInformationDesignationCharField("01")
                 .withImageDataField(faceImage)
                 .withScaleUnitsField("1")
-                .withColorSpaceField(Color.MULTI.code)
                 .calculateFields(true)
                 .build()
         val nistFile =
@@ -157,6 +155,7 @@ class NistFileBuilderTest {
                 .build()
         NistFileWriter(FileOutputStream("output_jpeg.nist")).use { writer -> writer.write(nistFile) }
         nistFile.getFacialAndSmtImageRecords()[0].getFieldText(FacialAndSMTImageFields.CGA) shouldBe CompressionAlgorithm.JPEGB.code
+        nistFile.getFacialAndSmtImageRecords()[0].getFieldText(FacialAndSMTImageFields.CSP) shouldBe "RGB"
     }
 
     @Test
@@ -185,7 +184,6 @@ class NistFileBuilderTest {
                 .withInformationDesignationCharField("01")
                 .withImageDataField(faceImage)
                 .withScaleUnitsField("1")
-                .withColorSpaceField(Color.MULTI.code)
                 .calculateFields(true)
                 .build()
         val nistFile =
@@ -196,5 +194,6 @@ class NistFileBuilderTest {
                 .build()
         NistFileWriter(FileOutputStream("output_png.nist")).use { writer -> writer.write(nistFile) }
         nistFile.getFacialAndSmtImageRecords()[0].getFieldText(FacialAndSMTImageFields.CGA) shouldBe CompressionAlgorithm.PNG.code
+        nistFile.getFacialAndSmtImageRecords()[0].getFieldText(FacialAndSMTImageFields.CSP) shouldBe "RGB"
     }
 }
