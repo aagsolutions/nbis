@@ -28,7 +28,6 @@ import kotlin.test.Test
 import kotlin.test.assertEquals
 
 class CalculatorsTest {
-
     @Test
     fun `it should calculate the control character correctly`() {
         val inputString = "2401995014"
