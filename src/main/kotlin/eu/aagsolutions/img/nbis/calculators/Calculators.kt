@@ -66,7 +66,7 @@ object Calculators {
     const val YY_SIZE = 2
     const val TCN_AGENCY_NUMBER_OF_CHARS = 4
     const val TCN_SEQUENCE_NUMBER_OF_CHARS = 6
-    const val ASCII_BASE = 1000
+    const val ASCII_BASE = 10
 
     @Suppress("MagicNumber")
     val POW_10_8 = 10.0.pow(8.0).toLong()

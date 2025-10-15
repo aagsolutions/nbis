@@ -50,7 +50,7 @@ class NistFileReader(
      */
     fun read(): NistFile {
         log.debug("Read a nist file")
-        val content = inputStream.readNBytes(inputStream.available())
+        val content = inputStream.readAllBytes()
         return decode(content)
     }
 
