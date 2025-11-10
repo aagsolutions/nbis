@@ -94,7 +94,11 @@ class NistFileBuilderTest {
                     variableResolutionFingerprintRecord2,
                     variableResolutionFingerprintRecord3,
                 ).build()
-        nistFile.getLowResolutionGrayscaleFingerprintRecords()[0].fields[8]!!.getData().toString() shouldBeEqual "0"
+        nistFile
+            .getLowResolutionGrayscaleFingerprintRecords()[0]
+            .fields[8]!!
+            .getData()
+            .toString() shouldBeEqual "0"
         NistFileWriter(FileOutputStream("new-nist-combined.nist")).use { writer -> writer.write(nistFile) }
     }
 
