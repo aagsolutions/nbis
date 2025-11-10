@@ -38,6 +38,7 @@ import eu.aagsolutions.img.nbis.model.records.FacialAndSMTImageRecord
 import eu.aagsolutions.img.nbis.model.records.LowResolutionGrayscaleFingerprintRecord
 import eu.aagsolutions.img.nbis.model.records.UserDefinedTextRecord
 import eu.aagsolutions.img.nbis.model.records.VariableResolutionFingerprintRecord
+import io.kotest.matchers.equals.shouldBeEqual
 import io.kotest.matchers.shouldBe
 import java.io.FileOutputStream
 import java.time.LocalDateTime
@@ -93,6 +94,7 @@ class NistFileBuilderTest {
                     variableResolutionFingerprintRecord2,
                     variableResolutionFingerprintRecord3,
                 ).build()
+        nistFile.getLowResolutionGrayscaleFingerprintRecords()[0].fields[8]!!.getData().toString() shouldBeEqual "0"
         NistFileWriter(FileOutputStream("new-nist-combined.nist")).use { writer -> writer.write(nistFile) }
     }
 

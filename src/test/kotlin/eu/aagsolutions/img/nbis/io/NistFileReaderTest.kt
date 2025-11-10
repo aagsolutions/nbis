@@ -26,6 +26,7 @@ package eu.aagsolutions.img.nbis.io
 import eu.aagsolutions.img.nbis.model.enums.records.HighResolutionGrayscaleFingerprintImageFields
 import eu.aagsolutions.img.nbis.model.records.HighResolutionGrayscaleFingerprintRecord
 import io.kotest.matchers.collections.shouldHaveSize
+import io.kotest.matchers.equals.shouldBeEqual
 import io.kotest.matchers.nulls.shouldNotBeNull
 import io.kotest.matchers.shouldBe
 import io.kotest.matchers.string.shouldContain
@@ -103,6 +104,7 @@ class NistFileReaderTest {
                     .getData()
                     .toString() shouldContain "domain defined text place holder"
                 getHighResolutionGrayscaleFingerprintRecords().shouldHaveSize(4)
+                getHighResolutionGrayscaleFingerprintRecords()[0].fields[8]!!.getData().toString() shouldBeEqual "1"
             }
     }
 
@@ -208,6 +210,21 @@ class NistFileReaderTest {
                     .getData()
                     .toString() shouldContain "domain defined text place holder"
                 getLatentImageRecords().shouldHaveSize(5)
+            }
+    }
+
+    @Test
+    fun `it should read successfully a nist file with type 14 record type`() {
+        val url = NistFileReaderTest::class.java.getResource("/references/type-14-amp-nqm-utf8.an2")
+        val nistContent = NistFileReader(url!!.openStream()).use { reader -> reader.read() }
+        nistContent
+            .shouldNotBeNull()
+            .apply {
+                getVariableResolutionFingerprintRecords().shouldHaveSize(3)
+                getVariableResolutionFingerprintRecords()[0]
+                    .fields[11]!!
+                    .getData()
+                    .toString() shouldBeEqual "WSQ20"
             }
     }
 
