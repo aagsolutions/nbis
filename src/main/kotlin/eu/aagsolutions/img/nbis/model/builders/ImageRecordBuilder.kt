@@ -109,12 +109,12 @@ abstract class ImageRecordBuilder<T : BaseRecord, B : ImageRecordBuilder<T, B>>(
      * @param imageData the binary image data as ByteArray
      * @return The builder instance for method chaining
      */
-    open fun withImageDataField(imageData: ByteArray): B {
+    fun withImageDataField(imageData: ByteArray): B {
         val imageInfo = ImageParser.readImageInfo(imageData)
         return this
             .withHorizontalLineLengthField(imageInfo.width.toString())
             .withVerticalLineLengthField(imageInfo.height.toString())
-            .withCompressionAlgorithmField(imageInfo.compressionAlgorithm.code)
+            .withCompressionAlgorithmField(imageInfo.compressionAlgorithm.codeBinary)
             .withField(ImageFields.DATA.id, ImageField(imageData))
     }
 }

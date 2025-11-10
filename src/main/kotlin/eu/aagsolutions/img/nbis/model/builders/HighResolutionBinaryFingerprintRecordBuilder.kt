@@ -24,10 +24,8 @@
 package eu.aagsolutions.img.nbis.model.builders
 
 import eu.aagsolutions.img.nbis.calculators.BinaryRecordLengthCalculator
-import eu.aagsolutions.img.nbis.io.ImageParser
 import eu.aagsolutions.img.nbis.model.enums.RecordType
 import eu.aagsolutions.img.nbis.model.enums.records.ImageFields
-import eu.aagsolutions.img.nbis.model.fields.ImageField
 import eu.aagsolutions.img.nbis.model.records.HighResolutionBinaryFingerprintRecord
 
 class HighResolutionBinaryFingerprintRecordBuilder :
@@ -37,21 +35,6 @@ class HighResolutionBinaryFingerprintRecordBuilder :
         BinaryRecordLengthCalculator(HIGH_RESOLUTION_BINARY_FINGERPRINT_HEADER_SIZE, ImageFields.DATA),
     ) {
     override fun build() = HighResolutionBinaryFingerprintRecord(this.fields)
-
-    /**
-     * Sets DATA (Image Data) – the binary image data, height (VLL) and width (HLL) are inferred from the image.
-     *
-     * @param imageData the binary image data as ByteArray
-     * @return The builder instance for method chaining
-     */
-    override fun withImageDataField(imageData: ByteArray): HighResolutionBinaryFingerprintRecordBuilder {
-        val imageInfo = ImageParser.readImageInfo(imageData)
-        return this
-            .withHorizontalLineLengthField(imageInfo.width.toString())
-            .withVerticalLineLengthField(imageInfo.height.toString())
-            .withCompressionAlgorithmField(imageInfo.compressionAlgorithm.codeBinary)
-            .withField(ImageFields.DATA.id, ImageField(imageData))
-    }
 
     companion object {
         const val HIGH_RESOLUTION_BINARY_FINGERPRINT_HEADER_SIZE = 18
