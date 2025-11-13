@@ -54,6 +54,6 @@ class TransactionInformationRecordValidator {
                 .map {
                     NistEntry(it.key.toInt(), it.value.toInt())
                 }.sortedBy { it.key }
-        return entriesFromCnt.equals(entriesFromNistFile)
+        return entriesFromCnt == entriesFromNistFile
     }
 }

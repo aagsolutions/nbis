@@ -36,4 +36,11 @@ class TransactionInformationRecordValidatorTest {
         val nistContent = NistFileReader(url!!.openStream()).use { reader -> reader.read() }
         assertTrue(TransactionInformationRecordValidator().validateCNTField(nistContent))
     }
+
+    @Test
+    fun `it should validate successfully CNT field for type 10 nist file`() {
+        val url = NistFileReaderTest::class.java.getResource("/references/type-10-14-17-piv-index-iris.an2")
+        val nistContent = NistFileReader(url!!.openStream()).use { reader -> reader.read() }
+        assertTrue(TransactionInformationRecordValidator().validateCNTField(nistContent))
+    }
 }
