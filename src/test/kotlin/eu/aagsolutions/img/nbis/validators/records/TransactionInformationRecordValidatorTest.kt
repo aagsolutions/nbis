@@ -21,21 +21,19 @@
  *
  */
 
-package eu.aagsolutions.img.nbis.model
+package eu.aagsolutions.img.nbis.validators.records
 
-class NistEntry<K, V>(
-    override val key: K,
-    override val value: V,
-) : Map.Entry<K, V> {
-    override fun equals(other: Any?): Boolean {
-        if (this === other) return true
-        if (other !is Map.Entry<*, *>) return false
+import eu.aagsolutions.img.nbis.io.NistFileReader
+import eu.aagsolutions.img.nbis.io.NistFileReaderTest
+import kotlin.test.Test
+import kotlin.test.assertTrue
+import kotlin.use
 
-        return key == other.key && value == other.value
-    }
-
-    override fun hashCode(): Int {
-        // As specified by Map.Entry: key.hashCode() xor value.hashCode()
-        return (key?.hashCode() ?: 0) xor (value?.hashCode() ?: 0)
+class TransactionInformationRecordValidatorTest {
+    @Test
+    fun `it should validate successfully CNT field for type 14 nist file`() {
+        val url = NistFileReaderTest::class.java.getResource("/references/type-14-amp-nqm-utf8.an2")
+        val nistContent = NistFileReader(url!!.openStream()).use { reader -> reader.read() }
+        assertTrue(TransactionInformationRecordValidator().validateCNTField(nistContent))
     }
 }

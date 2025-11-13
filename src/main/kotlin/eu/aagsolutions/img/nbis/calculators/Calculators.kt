@@ -81,7 +81,7 @@ object Calculators {
      * @return A list of `NistEntry` objects. The first entry represents the summary with the total
      *         number of records, followed by entries representing each applicable record.
      */
-    fun calculateContentField(mapOfAllRecords: Map<RecordType, List<BaseRecord>>): List<NistEntry> {
+    fun calculateContentField(mapOfAllRecords: Map<RecordType, List<BaseRecord>>): List<NistEntry<String, String>> {
         val allRecords =
             mapOfAllRecords
                 .filterKeys { it != RecordType.RT1 }
@@ -235,12 +235,37 @@ object Calculators {
      * @param entries The list of NistEntry objects to convert.
      * @return The converted string.
      */
-    fun fromListOfNistEntry(entries: List<NistEntry>): String =
+    fun fromListOfNistEntry(entries: List<NistEntry<String, String>>): String =
         if (entries.isEmpty()) {
             ""
         } else {
             entries.joinToString(separator = RECORD_SEPARATOR.toString()) {
                 it.key + UNIT_SEPARATOR + it.value
+            }
+        }
+
+    /**
+     * Converts a text field (CNT) into a list of NistEntry objects.
+     * The text field is expected to be in the format of a single record,
+     * where each entry is separated by a unit separator.
+     *
+     * @param textField The text field to convert
+     */
+    fun fromTextTolistOfEntries(textField: String): List<NistEntry<String, String>> =
+        textField.split(RECORD_SEPARATOR.toString()).map {
+            val parts = it.split(UNIT_SEPARATOR.toString())
+            NistEntry(parts[0], parts[1])
+        }
+
+    /**
+     * Converts a map of records into a list of NistEntry objects.
+     *
+     * @param records the map of records to convert
+     */
+    fun fromRecordsMapToListOfEntries(records: Map<RecordType, List<BaseRecord>>): List<NistEntry<String, String>> =
+        records.flatMap { entry ->
+            entry.value.map { record ->
+                NistEntry(record.recordId.toString(), (record.getFieldText(DefaultFields.IDC) ?: "").take(2))
             }
         }
 }

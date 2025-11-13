@@ -21,21 +21,6 @@
  *
  */
 
-package eu.aagsolutions.img.nbis.model
+package eu.aagsolutions.img.nbis.validators
 
-class NistEntry<K, V>(
-    override val key: K,
-    override val value: V,
-) : Map.Entry<K, V> {
-    override fun equals(other: Any?): Boolean {
-        if (this === other) return true
-        if (other !is Map.Entry<*, *>) return false
-
-        return key == other.key && value == other.value
-    }
-
-    override fun hashCode(): Int {
-        // As specified by Map.Entry: key.hashCode() xor value.hashCode()
-        return (key?.hashCode() ?: 0) xor (value?.hashCode() ?: 0)
-    }
-}
+class NistFileValidator

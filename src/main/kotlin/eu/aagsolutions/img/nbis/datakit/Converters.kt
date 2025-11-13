@@ -148,7 +148,7 @@ object Converters {
      * @return A list of `NistEntry` objects, where each entry in the input string is converted into an object
      *         with a key and value.
      */
-    fun stringToListOfNistEntries(items: String): List<NistEntry> =
+    fun stringToListOfNistEntries(items: String): List<NistEntry<String, String>> =
         splitStringByRecordSeparator(items)
             .map { stringToNistEntry(it) }
             .toList()
@@ -159,7 +159,7 @@ object Converters {
             .dropLastWhile { it.isEmpty() }
             .toTypedArray()
 
-    private fun stringToNistEntry(value: String): NistEntry {
+    private fun stringToNistEntry(value: String): NistEntry<String, String> {
         val parts = value.split(UNIT_SEPARATOR.toString().toRegex())
         return if (parts.size > 1) {
             NistEntry(parts[0], parts[1])
