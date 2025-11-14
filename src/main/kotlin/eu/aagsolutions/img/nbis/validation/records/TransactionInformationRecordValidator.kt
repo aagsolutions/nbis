@@ -52,13 +52,15 @@ class TransactionInformationRecordValidator(
                 .getFieldText(TransactionInformationFields.CNT)
         if (cntFiled != null) {
             val entriesFromCnt =
-                fromTextTolistOfEntries(cntFiled).map {
-                    NistEntry(it.key.toInt(), it.value.toInt())
-                }.sortedBy { it.key }
+                fromTextTolistOfEntries(cntFiled)
+                    .map {
+                        NistEntry(it.key.toInt(), it.value.toInt())
+                    }.sortedBy { it.key }
             val entriesFromNistFile =
-                fromRecordsMapToListOfEntries(nistContent.records).map {
-                    NistEntry(it.key.toInt(), it.value.toInt())
-                }.sortedBy { it.key }
+                fromRecordsMapToListOfEntries(nistContent.records)
+                    .map {
+                        NistEntry(it.key.toInt(), it.value.toInt())
+                    }.sortedBy { it.key }
             if (entriesFromCnt != entriesFromNistFile) {
                 errors.add(
                     ValidationError(
