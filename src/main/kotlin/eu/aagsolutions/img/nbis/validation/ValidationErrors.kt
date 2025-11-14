@@ -36,4 +36,10 @@ enum class ValidationErrors(
         RecordType.RT1,
     ),
     STD_ERR_NSR_NO_RT4_INVALID_FORMAT_RT1("NSR expected value is 00.00", RecordType.RT1),
+    STD_ERR_NTR_WITH_RT4_INVALID_FORMAT_RT1(
+        "NTR is having invalid format invalid, it should be in the format of ^\\d{2}\\.\\d{2}$",
+        RecordType.RT1,
+    ),
+    STD_ERR_NTR_NO_RT4_INVALID_FORMAT_RT1("NTR expected value is 00.00", RecordType.RT1),
+    STD_ERR_VER_INVALID_FORMAT_RT1("Invalid version provided", RecordType.RT1),
 }

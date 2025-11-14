@@ -32,7 +32,7 @@ import kotlin.use
 
 class TransactionInformationRecordValidatorTest {
     @Test
-    fun `it should validate successfully CNT field for type 14 nist file`() {
+    fun `it should validate successfully type 14 nist file`() {
         val url = NistFileReaderTest::class.java.getResource("/references/type-14-amp-nqm-utf8.an2")
         val nistContent = NistFileReader(url!!.openStream()).use { reader -> reader.read() }
         val errors = mutableListOf<ValidationError>()
@@ -41,20 +41,25 @@ class TransactionInformationRecordValidatorTest {
     }
 
     @Test
-    fun `it should validate successfully CNT field for type 10 nist file`() {
+    fun `it should validate successfully type 10 nist file`() {
         val url = NistFileReaderTest::class.java.getResource("/references/type-10-14-17-piv-index-iris.an2")
         val nistContent = NistFileReader(url!!.openStream()).use { reader -> reader.read() }
         val errors = mutableListOf<ValidationError>()
-        TransactionInformationRecordValidator(errors, nistContent).validateCNTField().validateSpecialResolutionFields()
+        TransactionInformationRecordValidator(errors, nistContent)
+            .validateCNTField()
+            .validateSpecialResolutionFields()
         assertTrue { errors.isEmpty() }
     }
 
     @Test
-    fun `it should validate successfully CNT and NSR fields for type 4 nist file`() {
+    fun `it should validate successfully type 4 nist file`() {
         val url = NistFileReaderTest::class.java.getResource("/references/type-4-slaps.an2")
         val nistContent = NistFileReader(url!!.openStream()).use { reader -> reader.read() }
         val errors = mutableListOf<ValidationError>()
-        TransactionInformationRecordValidator(errors, nistContent).validateCNTField().validateSpecialResolutionFields()
+        TransactionInformationRecordValidator(errors, nistContent)
+            .validateCNTField()
+            .validateSpecialResolutionFields()
+            .validateVersionField()
         assertTrue { errors.isEmpty() }
     }
 }

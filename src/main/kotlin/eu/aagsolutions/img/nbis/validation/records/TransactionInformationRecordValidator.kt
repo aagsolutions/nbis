@@ -28,6 +28,7 @@ import eu.aagsolutions.img.nbis.calculators.Calculators.fromTextTolistOfEntries
 import eu.aagsolutions.img.nbis.model.NistEntry
 import eu.aagsolutions.img.nbis.model.NistFile
 import eu.aagsolutions.img.nbis.model.enums.RecordType
+import eu.aagsolutions.img.nbis.model.enums.Standard
 import eu.aagsolutions.img.nbis.model.enums.records.TransactionInformationFields
 import eu.aagsolutions.img.nbis.validation.ValidationError
 import eu.aagsolutions.img.nbis.validation.ValidationErrors
@@ -93,32 +94,82 @@ class TransactionInformationRecordValidator(
     fun validateSpecialResolutionFields(): TransactionInformationRecordValidator {
         val transactionInformationRecord = nistContent.getTransactionInformationRecord()
         val nsrField = transactionInformationRecord.getFieldText(TransactionInformationFields.NSR) ?: ""
-        if (StringPredicates
-                .stringMatches(Regex("^\\d{2}\\.\\d{2}$"))(nsrField)
-                .not()
-                .and(nistContent.getHighResolutionGrayscaleFingerprintRecords().isNotEmpty())
-        ) {
-            errors.add(
-                ValidationError(
-                    RecordType.RT1,
-                    TransactionInformationFields.CNT,
-                    ValidationErrors.STD_ERR_NSR_WITH_RT4_INVALID_FORMAT_RT1.message,
-                    nsrField,
-                ),
-            )
-        }
+        val ntrField = transactionInformationRecord.getFieldText(TransactionInformationFields.NTR) ?: ""
 
-        if (StringPredicates
-                .stringMatches(Regex("^00.00\$"))(nsrField)
-                .not()
-                .and(nistContent.getHighResolutionGrayscaleFingerprintRecords().isEmpty())
-        ) {
+        if (nistContent.getHighResolutionGrayscaleFingerprintRecords().isNotEmpty()) {
+            if (StringPredicates
+                    .stringMatches(Regex("^\\d{2}\\.\\d{2}$"))(nsrField)
+                    .not()
+            ) {
+                errors.add(
+                    ValidationError(
+                        RecordType.RT1,
+                        TransactionInformationFields.CNT,
+                        ValidationErrors.STD_ERR_NSR_WITH_RT4_INVALID_FORMAT_RT1.message,
+                        nsrField,
+                    ),
+                )
+            }
+
+            if (StringPredicates
+                    .stringMatches(Regex("^\\d{2}\\.\\d{2}$"))(ntrField)
+                    .not()
+            ) {
+                errors.add(
+                    ValidationError(
+                        RecordType.RT1,
+                        TransactionInformationFields.CNT,
+                        ValidationErrors.STD_ERR_NTR_WITH_RT4_INVALID_FORMAT_RT1.message,
+                        ntrField,
+                    ),
+                )
+            }
+        } else {
+            if (StringPredicates
+                    .stringMatches(Regex("^00.00\$"))(nsrField)
+                    .not()
+            ) {
+                errors.add(
+                    ValidationError(
+                        RecordType.RT1,
+                        TransactionInformationFields.CNT,
+                        ValidationErrors.STD_ERR_NSR_NO_RT4_INVALID_FORMAT_RT1.message,
+                        nsrField,
+                    ),
+                )
+            }
+
+            if (StringPredicates
+                    .stringMatches(Regex("^00.00\$"))(ntrField)
+                    .not()
+            ) {
+                errors.add(
+                    ValidationError(
+                        RecordType.RT1,
+                        TransactionInformationFields.CNT,
+                        ValidationErrors.STD_ERR_NTR_NO_RT4_INVALID_FORMAT_RT1.message,
+                        ntrField,
+                    ),
+                )
+            }
+        }
+        return this
+    }
+
+    /**
+     * Validates the version field of the Transaction Information Record.
+     *
+     * @return `this` validator instance for method chaining
+     */
+    fun validateVersionField(): TransactionInformationRecordValidator {
+        val versionField = nistContent.getTransactionInformationRecord().getFieldText(TransactionInformationFields.VER) ?: ""
+        if (Standard.findByCode(versionField) == null) {
             errors.add(
                 ValidationError(
                     RecordType.RT1,
-                    TransactionInformationFields.CNT,
-                    ValidationErrors.STD_ERR_NSR_NO_RT4_INVALID_FORMAT_RT1.message,
-                    nsrField,
+                    TransactionInformationFields.VER,
+                    ValidationErrors.STD_ERR_VER_INVALID_FORMAT_RT1.message,
+                    versionField,
                 ),
             )
         }
