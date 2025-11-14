@@ -48,4 +48,13 @@ class TransactionInformationRecordValidatorTest {
         TransactionInformationRecordValidator(errors, nistContent).validateCNTField().validateSpecialResolutionFields()
         assertTrue { errors.isEmpty() }
     }
+
+    @Test
+    fun `it should validate successfully CNT and NSR fields for type 4 nist file`() {
+        val url = NistFileReaderTest::class.java.getResource("/references/type-4-slaps.an2")
+        val nistContent = NistFileReader(url!!.openStream()).use { reader -> reader.read() }
+        val errors = mutableListOf<ValidationError>()
+        TransactionInformationRecordValidator(errors, nistContent).validateCNTField().validateSpecialResolutionFields()
+        assertTrue { errors.isEmpty() }
+    }
 }

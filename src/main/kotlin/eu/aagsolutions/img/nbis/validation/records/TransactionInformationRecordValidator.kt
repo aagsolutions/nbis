@@ -25,6 +25,7 @@ package eu.aagsolutions.img.nbis.validation.records
 
 import eu.aagsolutions.img.nbis.calculators.Calculators.fromRecordsMapToListOfEntries
 import eu.aagsolutions.img.nbis.calculators.Calculators.fromTextTolistOfEntries
+import eu.aagsolutions.img.nbis.model.NistEntry
 import eu.aagsolutions.img.nbis.model.NistFile
 import eu.aagsolutions.img.nbis.model.enums.RecordType
 import eu.aagsolutions.img.nbis.model.enums.records.TransactionInformationFields
@@ -51,9 +52,13 @@ class TransactionInformationRecordValidator(
                 .getFieldText(TransactionInformationFields.CNT)
         if (cntFiled != null) {
             val entriesFromCnt =
-                fromTextTolistOfEntries(cntFiled).sortedBy { it.key }
+                fromTextTolistOfEntries(cntFiled).map {
+                    NistEntry(it.key.toInt(), it.value.toInt())
+                }.sortedBy { it.key }
             val entriesFromNistFile =
-                fromRecordsMapToListOfEntries(nistContent.records).sortedBy { it.key }
+                fromRecordsMapToListOfEntries(nistContent.records).map {
+                    NistEntry(it.key.toInt(), it.value.toInt())
+                }.sortedBy { it.key }
             if (entriesFromCnt != entriesFromNistFile) {
                 errors.add(
                     ValidationError(
