@@ -21,6 +21,11 @@
  *
  */
 
-package eu.aagsolutions.img.nbis.validators
+package eu.aagsolutions.img.nbis.validation.predicates
 
-class NistFileValidator
+object StringPredicates {
+    fun stringMatches(regex: Regex): (String) -> Boolean =
+        { inputString ->
+            inputString.matches(regex)
+        }
+}

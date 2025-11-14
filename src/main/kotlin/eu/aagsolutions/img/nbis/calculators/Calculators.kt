@@ -188,7 +188,7 @@ object Calculators {
         val right = convertStringToNumeric(rightPart)
 
         return controlCharacterField +
-                calculateControlNumberLastCharacter(left, right)
+            calculateControlNumberLastCharacter(left, right)
     }
 
     /**
@@ -266,12 +266,13 @@ object Calculators {
         val entries = mutableListOf<NistEntry<String, String>>()
         entries.addAll(
             records
-            .filterKeys { it != RecordType.RT1 }
-            .flatMap { entry ->
-                entry.value.map { record ->
-                    NistEntry(record.recordId.toString(), record.getFieldText(DefaultFields.IDC) ?: "0")
-                }
-            })
+                .filterKeys { it != RecordType.RT1 }
+                .flatMap { entry ->
+                    entry.value.map { record ->
+                        NistEntry(record.recordId.toString(), record.getFieldText(DefaultFields.IDC) ?: "0")
+                    }
+                },
+        )
         entries.add(NistEntry(RecordType.RT1.id.toString(), entries.size.toString()))
         return entries
     }

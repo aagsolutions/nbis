@@ -21,26 +21,6 @@
  *
  */
 
-package eu.aagsolutions.img.nbis.validators.records
+package eu.aagsolutions.img.nbis.validation
 
-import eu.aagsolutions.img.nbis.io.NistFileReader
-import eu.aagsolutions.img.nbis.io.NistFileReaderTest
-import kotlin.test.Test
-import kotlin.test.assertTrue
-import kotlin.use
-
-class TransactionInformationRecordValidatorTest {
-    @Test
-    fun `it should validate successfully CNT field for type 14 nist file`() {
-        val url = NistFileReaderTest::class.java.getResource("/references/type-14-amp-nqm-utf8.an2")
-        val nistContent = NistFileReader(url!!.openStream()).use { reader -> reader.read() }
-        assertTrue(TransactionInformationRecordValidator().validateCNTField(nistContent))
-    }
-
-    @Test
-    fun `it should validate successfully CNT field for type 10 nist file`() {
-        val url = NistFileReaderTest::class.java.getResource("/references/type-10-14-17-piv-index-iris.an2")
-        val nistContent = NistFileReader(url!!.openStream()).use { reader -> reader.read() }
-        assertTrue(TransactionInformationRecordValidator().validateCNTField(nistContent))
-    }
-}
+class NistFileValidator
