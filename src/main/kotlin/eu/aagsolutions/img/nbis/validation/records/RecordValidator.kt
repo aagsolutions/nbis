@@ -21,27 +21,21 @@
  *
  */
 
-package eu.aagsolutions.img.nbis.validation
+package eu.aagsolutions.img.nbis.validation.records
 
+import eu.aagsolutions.img.nbis.calculators.LogicalRecordLengthCalculator
+import eu.aagsolutions.img.nbis.model.NistFile
 import eu.aagsolutions.img.nbis.model.enums.RecordType
+import eu.aagsolutions.img.nbis.validation.ValidationError
 
-enum class ValidationErrors(
-    val message: String,
+abstract class RecordValidator(
+    open val errors: MutableList<ValidationError>,
+    open val nistContent: NistFile,
     val recordType: RecordType,
+    val calculator: LogicalRecordLengthCalculator,
 ) {
-    STD_ERR_CNT_CONTENT_RT1("The content field is not valid", RecordType.RT1),
-    STD_ERR_CNT_MISSING_RT1("The content field is missing", RecordType.RT1),
-    STD_ERR_NSR_WITH_RT4_INVALID_FORMAT_RT1(
-        "NSR is having invalid format invalid, it should be in the format of ^\\d{2}\\.\\d{2}$",
-        RecordType.RT1,
-    ),
-    STD_ERR_NSR_NO_RT4_INVALID_FORMAT_RT1("NSR expected value is 00.00", RecordType.RT1),
-    STD_ERR_NTR_WITH_RT4_INVALID_FORMAT_RT1(
-        "NTR is having invalid format invalid, it should be in the format of ^\\d{2}\\.\\d{2}$",
-        RecordType.RT1,
-    ),
-    STD_ERR_NTR_NO_RT4_INVALID_FORMAT_RT1("NTR expected value is 00.00", RecordType.RT1),
-    STD_ERR_VER_INVALID_FORMAT_RT1("Invalid version provided", RecordType.RT1),
-    STD_ERR_DOM_INVALID_FORMAT_RT1("Invalid domain name field", RecordType.RT1),
-    STD_ERR_DCS_INVALID_FORMAT_RT1("Invalid DCS format, expected 2 or 3 subfields", RecordType.RT1),
+    fun validateLengthField(): RecordValidator {
+        calculator.calculate(recordType.id, nistContent.records[recordType]!![0].fields)
+        return this
+    }
 }

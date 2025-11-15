@@ -27,6 +27,7 @@ import eu.aagsolutions.img.nbis.datakit.AsciiHelper.RECORD_SEPARATOR
 import eu.aagsolutions.img.nbis.datakit.AsciiHelper.UNIT_SEPARATOR
 import eu.aagsolutions.img.nbis.model.NistEntry
 
+@Suppress("TooManyFunctions")
 object Converters {
     const val SHIFT_WITH_EIGHT_BITS = 8
     const val SHIFT_WITH_SIXTEEN_BITS = 16
@@ -166,5 +167,36 @@ object Converters {
         } else {
             NistEntry(parts[0], "")
         }
+    }
+
+    /**
+     * Converts a string containing multiple entries separated by record separators into a list of strings.
+     * Each entry is split into individual subfields, and each subfield is converted into a string.
+     *
+     * @param subfieldString The string containing multiple entries separated by record separators.
+     * @return A list of strings, where each entry in the input string is converted into a string.
+     */
+    fun stringToListByRecordSeparatorAndUnitSeparator(subfieldString: String?): List<String> {
+        val text = subfieldString.takeIf { !it.isNullOrEmpty() } ?: return emptyList()
+        val separators = charArrayOf(UNIT_SEPARATOR, RECORD_SEPARATOR)
+        return text
+            .splitToSequence(*separators)
+            .filter(String::isNotEmpty)
+            .toList()
+    }
+
+    /**
+     * Converts a string containing multiple entries separated by record separators into a list of strings.
+     * Each entry is split into individual subfields, and each subfield is converted into a string.
+     *
+     * @param subfieldString The string containing multiple entries separated by record separators.
+     * @return A list of strings, where each entry in the input string is converted into a string.
+     */
+    fun stringToListByRecordSeparator(subfieldString: String?): List<String> {
+        val text = subfieldString.takeIf { !it.isNullOrEmpty() } ?: return emptyList()
+        return text
+            .splitToSequence(RECORD_SEPARATOR)
+            .filter(String::isNotEmpty)
+            .toList()
     }
 }

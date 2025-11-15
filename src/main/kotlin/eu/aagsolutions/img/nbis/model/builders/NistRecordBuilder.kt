@@ -55,7 +55,7 @@ abstract class NistRecordBuilder<T : BaseRecord, B : NistRecordBuilder<T, B>>(
      * @return Builder instance for method chaining
      */
     fun calculateFields(calculate: Boolean): B {
-        calculate.let {
+        if (calculate) {
             this.fields[LENGTH_FIELD_ID] = calculator.calculate(this.id, this.fields)
         }
         return this as B

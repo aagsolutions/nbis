@@ -25,22 +25,27 @@ package eu.aagsolutions.img.nbis.validation.records
 
 import eu.aagsolutions.img.nbis.calculators.Calculators.fromRecordsMapToListOfEntries
 import eu.aagsolutions.img.nbis.calculators.Calculators.fromTextTolistOfEntries
+import eu.aagsolutions.img.nbis.calculators.TextRecordLengthCalculator
+import eu.aagsolutions.img.nbis.datakit.Converters.stringToListByRecordSeparator
+import eu.aagsolutions.img.nbis.datakit.Converters.stringToListByRecordSeparatorAndUnitSeparator
 import eu.aagsolutions.img.nbis.model.NistEntry
 import eu.aagsolutions.img.nbis.model.NistFile
+import eu.aagsolutions.img.nbis.model.enums.CharacterType
 import eu.aagsolutions.img.nbis.model.enums.RecordType
 import eu.aagsolutions.img.nbis.model.enums.Standard
 import eu.aagsolutions.img.nbis.model.enums.records.TransactionInformationFields
 import eu.aagsolutions.img.nbis.validation.ValidationError
 import eu.aagsolutions.img.nbis.validation.ValidationErrors
-import eu.aagsolutions.img.nbis.validation.predicates.StringPredicates
+import eu.aagsolutions.img.nbis.validation.predicates.ValidationPredicates
+import eu.aagsolutions.img.nbis.validation.predicates.ValidationPredicates.areCharTypeWithMinLength
 
 /**
  * Base validator for the Transaction Information Record (Type 10).
  */
 class TransactionInformationRecordValidator(
-    val errors: MutableList<ValidationError>,
-    val nistContent: NistFile,
-) {
+    override val errors: MutableList<ValidationError>,
+    override val nistContent: NistFile,
+) : RecordValidator(errors, nistContent, RecordType.RT1, TextRecordLengthCalculator()) {
     /**
      * Validates the CNT field of the Transaction Information Record.
      *
@@ -91,13 +96,14 @@ class TransactionInformationRecordValidator(
      *
      * @return `this` validator instance for method chaining
      */
+    @Suppress("LongMethod")
     fun validateSpecialResolutionFields(): TransactionInformationRecordValidator {
         val transactionInformationRecord = nistContent.getTransactionInformationRecord()
         val nsrField = transactionInformationRecord.getFieldText(TransactionInformationFields.NSR) ?: ""
         val ntrField = transactionInformationRecord.getFieldText(TransactionInformationFields.NTR) ?: ""
 
         if (nistContent.getHighResolutionGrayscaleFingerprintRecords().isNotEmpty()) {
-            if (StringPredicates
+            if (ValidationPredicates
                     .stringMatches(Regex("^\\d{2}\\.\\d{2}$"))(nsrField)
                     .not()
             ) {
@@ -111,7 +117,7 @@ class TransactionInformationRecordValidator(
                 )
             }
 
-            if (StringPredicates
+            if (ValidationPredicates
                     .stringMatches(Regex("^\\d{2}\\.\\d{2}$"))(ntrField)
                     .not()
             ) {
@@ -125,7 +131,7 @@ class TransactionInformationRecordValidator(
                 )
             }
         } else {
-            if (StringPredicates
+            if (ValidationPredicates
                     .stringMatches(Regex("^00.00\$"))(nsrField)
                     .not()
             ) {
@@ -139,7 +145,7 @@ class TransactionInformationRecordValidator(
                 )
             }
 
-            if (StringPredicates
+            if (ValidationPredicates
                     .stringMatches(Regex("^00.00\$"))(ntrField)
                     .not()
             ) {
@@ -170,6 +176,44 @@ class TransactionInformationRecordValidator(
                     TransactionInformationFields.VER,
                     ValidationErrors.STD_ERR_VER_INVALID_FORMAT_RT1.message,
                     versionField,
+                ),
+            )
+        }
+        return this
+    }
+
+    /**
+     * Validates the domain name field of the Transaction Information Record.
+     *
+     * @return `this` validator instance for method chaining
+     */
+    fun validateDomainNameField(): TransactionInformationRecordValidator {
+        val domField = nistContent.getTransactionInformationRecord().getFieldText(TransactionInformationFields.DOM) ?: ""
+        val items = stringToListByRecordSeparatorAndUnitSeparator(domField)
+        if (items.size >= 2 || areCharTypeWithMinLength(CharacterType.ANS, 1)(items).not()) {
+            errors.add(
+                ValidationError(
+                    RecordType.RT1,
+                    TransactionInformationFields.DOM,
+                    ValidationErrors.STD_ERR_DOM_INVALID_FORMAT_RT1.message,
+                    domField,
+                ),
+            )
+        }
+        return this
+    }
+
+    @Suppress("MagicNumber")
+    fun validateDirectoryOfCharSets(): TransactionInformationRecordValidator {
+        val dcsField = nistContent.getTransactionInformationRecord().getFieldText(TransactionInformationFields.DCS) ?: ""
+        val subFields = stringToListByRecordSeparator(dcsField)
+        if (subFields.stream().allMatch { subField -> stringToListByRecordSeparatorAndUnitSeparator(subField).size in 2..3 }.not()) {
+            errors.add(
+                ValidationError(
+                    RecordType.RT1,
+                    TransactionInformationFields.DCS,
+                    ValidationErrors.STD_ERR_DCS_INVALID_FORMAT_RT1.message,
+                    dcsField,
                 ),
             )
         }

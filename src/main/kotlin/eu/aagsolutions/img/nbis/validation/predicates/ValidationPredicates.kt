@@ -23,9 +23,35 @@
 
 package eu.aagsolutions.img.nbis.validation.predicates
 
-object StringPredicates {
+import eu.aagsolutions.img.nbis.model.enums.CharacterType
+
+object ValidationPredicates {
     fun stringMatches(regex: Regex): (String) -> Boolean =
         { inputString ->
             inputString.matches(regex)
+        }
+
+    fun areCharTypeWithMinLength(
+        charType: CharacterType,
+        minLength: Int,
+    ): (List<String>) -> Boolean =
+        { inputList ->
+            inputList.all {
+                isCharTypeWithMinLength(charType, minLength)(it)
+            }
+        }
+
+    fun isCharTypeWithMinLength(
+        charType: CharacterType,
+        minLength: Int,
+    ): (String) -> Boolean =
+        { inputString ->
+            if (charType.regexpValidation != null) {
+                inputString.length >= minLength && charType.allowedCharacters!!.containsAll(inputString.toList())
+            }
+            if (charType.regexpValidation != null) {
+                inputString.length >= minLength && stringMatches(Regex(charType.regexpValidation))(inputString)
+            }
+            inputString.length >= minLength
         }
 }

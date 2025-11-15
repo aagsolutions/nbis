@@ -60,6 +60,8 @@ class TransactionInformationRecordValidatorTest {
             .validateCNTField()
             .validateSpecialResolutionFields()
             .validateVersionField()
+            .validateDomainNameField()
+            .validateDirectoryOfCharSets()
         assertTrue { errors.isEmpty() }
     }
 }
