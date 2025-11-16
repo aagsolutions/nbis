@@ -47,11 +47,26 @@ object ValidationPredicates {
     ): (String) -> Boolean =
         { inputString ->
             if (charType.regexpValidation != null) {
+                charType.allowedCharacters!!.containsAll(inputString.toList())
+            }
+            if (charType.regexpValidation != null) {
+                stringMatches(Regex(charType.regexpValidation))(inputString)
+            }
+            inputString.length >= minLength
+        }
+
+    fun isCharTypeWithMinMaxLength(
+        charType: CharacterType,
+        minLength: Int,
+        maxLength: Int,
+    ): (String) -> Boolean =
+        { inputString ->
+            if (charType.regexpValidation != null) {
                 inputString.length >= minLength && charType.allowedCharacters!!.containsAll(inputString.toList())
             }
             if (charType.regexpValidation != null) {
                 inputString.length >= minLength && stringMatches(Regex(charType.regexpValidation))(inputString)
             }
-            inputString.length >= minLength
+            inputString.length in minLength..maxLength
         }
 }

@@ -44,14 +44,29 @@ import eu.aagsolutions.img.nbis.validation.predicates.ValidationPredicates.areCh
  */
 class TransactionInformationRecordValidator(
     override val errors: MutableList<ValidationError>,
-    override val nistContent: NistFile,
-) : RecordValidator(errors, nistContent, RecordType.RT1, TextRecordLengthCalculator()) {
+    val nistContent: NistFile,
+) : RecordValidator(errors, nistContent.getTransactionInformationRecord().fields, RecordType.RT1, TextRecordLengthCalculator()) {
     /**
-     * Validates the CNT field of the Transaction Information Record.
-     *
-     * @return `this` validator instance for method chaining
+     * Validates the version field of the Transaction Information Record (1.002).
      */
-    fun validateCNTField(): TransactionInformationRecordValidator {
+    private fun validateVersionField() {
+        val versionField = nistContent.getTransactionInformationRecord().getFieldText(TransactionInformationFields.VER) ?: ""
+        if (Standard.findByCode(versionField) == null) {
+            errors.add(
+                ValidationError(
+                    RecordType.RT1,
+                    TransactionInformationFields.VER,
+                    ValidationErrors.STD_ERR_VER_INVALID_FORMAT_RT1.message,
+                    versionField,
+                ),
+            )
+        }
+    }
+
+    /**
+     * Validates the CNT field of the Transaction Information Record (1.003).
+     */
+    private fun validateCNTField() {
         val cntFiled =
             nistContent
                 .getTransactionInformationRecord()
@@ -87,17 +102,14 @@ class TransactionInformationRecordValidator(
                 ),
             )
         }
-        return this
     }
 
     /**
      * Validates the special resolution fields of the Transaction Information Record.
      * These fields are validated using a regular expression.
-     *
-     * @return `this` validator instance for method chaining
      */
     @Suppress("LongMethod")
-    fun validateSpecialResolutionFields(): TransactionInformationRecordValidator {
+    private fun validateSpecialResolutionFields() {
         val transactionInformationRecord = nistContent.getTransactionInformationRecord()
         val nsrField = transactionInformationRecord.getFieldText(TransactionInformationFields.NSR) ?: ""
         val ntrField = transactionInformationRecord.getFieldText(TransactionInformationFields.NTR) ?: ""
@@ -159,35 +171,12 @@ class TransactionInformationRecordValidator(
                 )
             }
         }
-        return this
     }
 
     /**
-     * Validates the version field of the Transaction Information Record.
-     *
-     * @return `this` validator instance for method chaining
+     * Validates the domain name field of the Transaction Information Record (1.013).
      */
-    fun validateVersionField(): TransactionInformationRecordValidator {
-        val versionField = nistContent.getTransactionInformationRecord().getFieldText(TransactionInformationFields.VER) ?: ""
-        if (Standard.findByCode(versionField) == null) {
-            errors.add(
-                ValidationError(
-                    RecordType.RT1,
-                    TransactionInformationFields.VER,
-                    ValidationErrors.STD_ERR_VER_INVALID_FORMAT_RT1.message,
-                    versionField,
-                ),
-            )
-        }
-        return this
-    }
-
-    /**
-     * Validates the domain name field of the Transaction Information Record.
-     *
-     * @return `this` validator instance for method chaining
-     */
-    fun validateDomainNameField(): TransactionInformationRecordValidator {
+    private fun validateDomainNameField() {
         val domField = nistContent.getTransactionInformationRecord().getFieldText(TransactionInformationFields.DOM) ?: ""
         val items = stringToListByRecordSeparatorAndUnitSeparator(domField)
         if (items.size >= 2 || areCharTypeWithMinLength(CharacterType.ANS, 1)(items).not()) {
@@ -200,11 +189,13 @@ class TransactionInformationRecordValidator(
                 ),
             )
         }
-        return this
     }
 
+    /**
+     * Validates the directory of character sets field of the Transaction Information Record (1.015).
+     */
     @Suppress("MagicNumber")
-    fun validateDirectoryOfCharSets(): TransactionInformationRecordValidator {
+    private fun validateDirectoryOfCharSets() {
         val dcsField = nistContent.getTransactionInformationRecord().getFieldText(TransactionInformationFields.DCS) ?: ""
         val subFields = stringToListByRecordSeparator(dcsField)
         if (subFields.stream().allMatch { subField -> stringToListByRecordSeparatorAndUnitSeparator(subField).size in 2..3 }.not()) {
@@ -217,6 +208,14 @@ class TransactionInformationRecordValidator(
                 ),
             )
         }
-        return this
+    }
+
+    override fun validate() {
+        validateLengthField()
+        validateCNTField()
+        validateSpecialResolutionFields()
+        validateVersionField()
+        validateDomainNameField()
+        validateDirectoryOfCharSets()
     }
 }

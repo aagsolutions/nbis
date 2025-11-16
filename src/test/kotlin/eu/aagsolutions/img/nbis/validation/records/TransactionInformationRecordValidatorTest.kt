@@ -27,6 +27,7 @@ import eu.aagsolutions.img.nbis.io.NistFileReader
 import eu.aagsolutions.img.nbis.io.NistFileReaderTest
 import eu.aagsolutions.img.nbis.validation.ValidationError
 import kotlin.test.Test
+import kotlin.test.assertEquals
 import kotlin.test.assertTrue
 import kotlin.use
 
@@ -36,7 +37,8 @@ class TransactionInformationRecordValidatorTest {
         val url = NistFileReaderTest::class.java.getResource("/references/type-14-amp-nqm-utf8.an2")
         val nistContent = NistFileReader(url!!.openStream()).use { reader -> reader.read() }
         val errors = mutableListOf<ValidationError>()
-        TransactionInformationRecordValidator(errors, nistContent).validateCNTField().validateSpecialResolutionFields()
+        TransactionInformationRecordValidator(errors, nistContent)
+            .validate()
         assertTrue { errors.isEmpty() }
     }
 
@@ -46,8 +48,7 @@ class TransactionInformationRecordValidatorTest {
         val nistContent = NistFileReader(url!!.openStream()).use { reader -> reader.read() }
         val errors = mutableListOf<ValidationError>()
         TransactionInformationRecordValidator(errors, nistContent)
-            .validateCNTField()
-            .validateSpecialResolutionFields()
+            .validate()
         assertTrue { errors.isEmpty() }
     }
 
@@ -57,11 +58,17 @@ class TransactionInformationRecordValidatorTest {
         val nistContent = NistFileReader(url!!.openStream()).use { reader -> reader.read() }
         val errors = mutableListOf<ValidationError>()
         TransactionInformationRecordValidator(errors, nistContent)
-            .validateCNTField()
-            .validateSpecialResolutionFields()
-            .validateVersionField()
-            .validateDomainNameField()
-            .validateDirectoryOfCharSets()
+            .validate()
         assertTrue { errors.isEmpty() }
+    }
+
+    @Test
+    fun `it should fail validation`() {
+        val url = NistFileReaderTest::class.java.getResource("/invalid/fail-dom-field.nist")
+        val nistContent = NistFileReader(url!!.openStream()).use { reader -> reader.read() }
+        val errors = mutableListOf<ValidationError>()
+        TransactionInformationRecordValidator(errors, nistContent)
+            .validate()
+        assertEquals(2, errors.size)
     }
 }

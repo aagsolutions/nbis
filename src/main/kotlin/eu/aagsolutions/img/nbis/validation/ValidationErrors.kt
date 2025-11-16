@@ -23,25 +23,21 @@
 
 package eu.aagsolutions.img.nbis.validation
 
-import eu.aagsolutions.img.nbis.model.enums.RecordType
-
 enum class ValidationErrors(
     val message: String,
-    val recordType: RecordType,
 ) {
-    STD_ERR_CNT_CONTENT_RT1("The content field is not valid", RecordType.RT1),
-    STD_ERR_CNT_MISSING_RT1("The content field is missing", RecordType.RT1),
+    STD_ERR_INVALID_LEN_FIELD("The length field is not valid"),
+    STD_ERR_CNT_CONTENT_RT1("The content field is not valid"),
+    STD_ERR_CNT_MISSING_RT1("The content field is missing"),
     STD_ERR_NSR_WITH_RT4_INVALID_FORMAT_RT1(
         "NSR is having invalid format invalid, it should be in the format of ^\\d{2}\\.\\d{2}$",
-        RecordType.RT1,
     ),
-    STD_ERR_NSR_NO_RT4_INVALID_FORMAT_RT1("NSR expected value is 00.00", RecordType.RT1),
+    STD_ERR_NSR_NO_RT4_INVALID_FORMAT_RT1("NSR expected value is 00.00"),
     STD_ERR_NTR_WITH_RT4_INVALID_FORMAT_RT1(
         "NTR is having invalid format invalid, it should be in the format of ^\\d{2}\\.\\d{2}$",
-        RecordType.RT1,
     ),
-    STD_ERR_NTR_NO_RT4_INVALID_FORMAT_RT1("NTR expected value is 00.00", RecordType.RT1),
-    STD_ERR_VER_INVALID_FORMAT_RT1("Invalid version provided", RecordType.RT1),
-    STD_ERR_DOM_INVALID_FORMAT_RT1("Invalid domain name field", RecordType.RT1),
-    STD_ERR_DCS_INVALID_FORMAT_RT1("Invalid DCS format, expected 2 or 3 subfields", RecordType.RT1),
+    STD_ERR_NTR_NO_RT4_INVALID_FORMAT_RT1("NTR expected value is 00.00"),
+    STD_ERR_VER_INVALID_FORMAT_RT1("Invalid version provided"),
+    STD_ERR_DOM_INVALID_FORMAT_RT1("Invalid domain name field"),
+    STD_ERR_DCS_INVALID_FORMAT_RT1("Invalid DCS format, expected 2 or 3 subfields"),
 }
