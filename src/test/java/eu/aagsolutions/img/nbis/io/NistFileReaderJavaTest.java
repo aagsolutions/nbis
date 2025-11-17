@@ -29,6 +29,9 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Base64;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
@@ -51,9 +54,18 @@ public class NistFileReaderJavaTest {
         var path = NistFileReaderJavaTest.class.getResource("/base64/base64content.txt").getPath();
         String base64 = Files.readString(Paths.get(path));
         var bytes = Base64.getDecoder().decode(base64);
+        try (ExecutorService executor = Executors.newFixedThreadPool(2)) {
+            CompletableFuture<Boolean> future1 = CompletableFuture.supplyAsync(() -> decodeNist(bytes), executor);
+            CompletableFuture<Boolean> future2 = CompletableFuture.supplyAsync(() -> decodeNist(bytes), executor);
+            CompletableFuture.allOf(future1, future2).join();
+        }
+    }
+
+    private static boolean decodeNist(byte[] bytes) {
         var nistFile = NistFileReader.Companion.decode(bytes);
         nistFile.getTransactionInformationRecord().getFields().forEach((idx, f) -> System.out.println(f.getData()));
         nistFile.getUserDefinedDescriptionTextRecords().forEach(System.out::println);
         assertNotNull(nistFile.getUserDefinedDescriptionTextRecords());
+        return true;
     }
 }

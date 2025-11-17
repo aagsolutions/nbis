@@ -102,7 +102,6 @@ abstract class ImageRecordHandler(
         }
         return BuilderFactory
             .findByRecordId(recordType.id)
-            .builder
             .withFields(fields)
             .build()
     }

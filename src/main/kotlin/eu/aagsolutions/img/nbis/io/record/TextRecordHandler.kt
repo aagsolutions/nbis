@@ -152,7 +152,6 @@ open class TextRecordHandler(
         fields: Map<Int, Field<*>>,
     ) = BuilderFactory
         .findByRecordId(recordType.id)
-        .builder
         .withFields(fields)
         .build()
 
