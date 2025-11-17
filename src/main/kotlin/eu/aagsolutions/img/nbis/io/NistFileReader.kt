@@ -92,8 +92,10 @@ class NistFileReader(
             return true
         }
 
+        @JvmStatic
         fun byteArrayToBase64(content: ByteArray): String = Base64.encode(content)
 
+        @JvmStatic
         fun decode(content: ByteArray): NistFile {
             val recordsMap = mutableMapOf<RecordType, List<BaseRecord>>()
             val token = Token(content)

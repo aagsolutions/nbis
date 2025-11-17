@@ -62,7 +62,7 @@ public class NistFileReaderJavaTest {
     }
 
     private static boolean decodeNist(byte[] bytes) {
-        var nistFile = NistFileReader.Companion.decode(bytes);
+        var nistFile = NistFileReader.decode(bytes);
         nistFile.getTransactionInformationRecord().getFields().forEach((idx, f) -> System.out.println(f.getData()));
         nistFile.getUserDefinedDescriptionTextRecords().forEach(System.out::println);
         assertNotNull(nistFile.getUserDefinedDescriptionTextRecords());

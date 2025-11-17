@@ -246,7 +246,8 @@ class NistFileBuilder {
             transactionInformationBuilder
                 .withFileContentField(
                     fileContent,
-                ).build()
+                ).calculateFields(true)
+                .build()
         this.withTransactionInformationRecord(transactionInformationRecord)
         return NistFile(this.recordsMap)
     }
