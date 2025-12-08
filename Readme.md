@@ -163,7 +163,7 @@ The library supports different field types:
 - **`ImageField`** - Binary image data fields
 
 ## Requirements
-* Java: 21 or higher
+* Java: 17 or higher
 * Kotlin: 2.1 or higher
 
 ## Inspiration and Credits
