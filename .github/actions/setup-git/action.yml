@@ -1,0 +1,11 @@
+name: 'Setup Git'
+description: 'Configure Git user name and email'
+
+runs:
+  using: 'composite'
+  steps:
+    - name: Setup git
+      shell: bash
+      run: |
+        git config --global user.name atdi
+        git config --global user.email aurel.avramescu@gmail.com
