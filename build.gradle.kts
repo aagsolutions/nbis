@@ -82,7 +82,7 @@ tasks.jacocoTestReport {
 }
 
 kotlin {
-    jvmToolchain(21)
+    jvmToolchain(17)
 }
 
 configure<ReleaseExtension> {

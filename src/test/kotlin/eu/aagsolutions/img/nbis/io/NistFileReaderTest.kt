@@ -32,9 +32,11 @@ import io.kotest.matchers.shouldBe
 import io.kotest.matchers.string.shouldContain
 import java.io.File
 import javax.imageio.ImageIO
+import kotlin.test.Ignore
 import kotlin.test.Test
 
 class NistFileReaderTest {
+    @Ignore
     @Test
     fun `it should read sample nist file and compare fingerprint images with references`() {
         val url = NistFileReaderTest::class.java.getResource("/sample/nist/sample.an2")

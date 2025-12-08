@@ -54,11 +54,11 @@ public class NistFileReaderJavaTest {
         var path = NistFileReaderJavaTest.class.getResource("/base64/base64content.txt").getPath();
         String base64 = Files.readString(Paths.get(path));
         var bytes = Base64.getDecoder().decode(base64);
-        try (ExecutorService executor = Executors.newFixedThreadPool(2)) {
-            CompletableFuture<Boolean> future1 = CompletableFuture.supplyAsync(() -> decodeNist(bytes), executor);
-            CompletableFuture<Boolean> future2 = CompletableFuture.supplyAsync(() -> decodeNist(bytes), executor);
-            CompletableFuture.allOf(future1, future2).join();
-        }
+        ExecutorService executor = Executors.newFixedThreadPool(2);
+        CompletableFuture<Boolean> future1 = CompletableFuture.supplyAsync(() -> decodeNist(bytes), executor);
+        CompletableFuture<Boolean> future2 = CompletableFuture.supplyAsync(() -> decodeNist(bytes), executor);
+        CompletableFuture.allOf(future1, future2).join();
+        executor.shutdown();
     }
 
     private static boolean decodeNist(byte[] bytes) {
