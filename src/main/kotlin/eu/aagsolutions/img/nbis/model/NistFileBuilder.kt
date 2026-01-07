@@ -57,6 +57,17 @@ class NistFileBuilder {
         recordsMap[recordType] = recordsMap.getOrDefault(recordType, emptyList()) + nistRecord
     }
 
+    /**
+     * Initializes the builder with records from an existing NIST file.
+     *
+     * @param nistFile The NIST file to initialize the builder with.
+     * @return The current `NistFileBuilder` instance, allowing for method chaining.
+     */
+    fun fromNistFile(nistFile: NistFile): NistFileBuilder {
+        nistFile.records.forEach { (recordType, records) -> records.forEach { addRecord(recordType, it) } }
+        return this
+    }
+
     private fun addTransactionInformationRecord(nistRecord: BaseRecord) {
         recordsMap[RecordType.RT1] = emptyList<BaseRecord>() + nistRecord
     }
