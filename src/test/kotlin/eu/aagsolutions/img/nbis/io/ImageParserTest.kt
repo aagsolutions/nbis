@@ -75,4 +75,20 @@ class ImageParserTest {
             pixelDepth shouldBe 8
         }
     }
+
+    @Test
+    fun `it should successful detect WSQ image properties for sample2`() {
+        val url = ImageParserTest::class.java.getResource("/img/sample2.wsq")
+        val faceImage = url!!.openStream().use { inputStream -> inputStream.readAllBytes() }
+        val imageInfo = ImageParser.readImageInfo(faceImage)
+        imageInfo.apply {
+            compressionAlgorithm shouldBe CompressionAlgorithm.WSQ20
+            width shouldBe 400
+            height shouldBe 512
+            pixelsPerInchX shouldBe 500
+            pixelsPerInchY shouldBe 500
+            colorSpace shouldBe "GRAY"
+            pixelDepth shouldBe 8
+        }
+    }
 }

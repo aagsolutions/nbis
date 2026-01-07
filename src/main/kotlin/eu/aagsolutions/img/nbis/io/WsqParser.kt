@@ -194,38 +194,40 @@ object WsqParser {
      */
     private fun findWSQPixelsPerInch(data: ByteArray): Int? {
         var offset = 0
-        var extractedPpiValue: Int? = null
-        while (offset < data.size - 4) {
-            if (data[offset] == 0xFF.toByte() && data[offset + 1] == 0xA8.toByte()) { // COM segment
-                val segmentLength = readUInt16BigEndian(data, offset + 2)
-                if (offset + 4 + segmentLength <= data.size) {
-                    val commentBytes = data.sliceArray(offset + 4 until offset + 4 + segmentLength - 2)
-                    val comment = String(commentBytes, Charsets.US_ASCII)
-
-                    // Look for PPI information in the comment
-                    val ppiRegex = Regex("""\bPPI\s+(\d+)""", RegexOption.IGNORE_CASE)
-                    val match = ppiRegex.find(comment)
-                    if (match != null) {
-                        extractedPpiValue = match.groupValues[1].toIntOrNull()
-                    } else if (comment.contains("NIST_COM")) {
-                        // Parse NIST comment format if needed
-                        val parts = comment.split("\u0000")
-                        for (part in parts) {
-                            if (part.contains("PPI")) {
-                                val ppiValue = part.filter { it.isDigit() }
-                                if (ppiValue.isNotEmpty()) {
-                                    extractedPpiValue = ppiValue.toIntOrNull()
-                                }
-                            }
-                        }
-                    }
+        return generateSequence {
+            while (offset < data.size - 4) {
+                val currentPos = offset
+                if (data[offset] == 0xFF.toByte() && data[offset + 1] == 0xA8.toByte()) {
+                    val length = readUInt16BigEndian(data, offset + 2)
+                    offset += 2 + length
+                    return@generateSequence currentPos to length
                 }
-                offset += 4 + segmentLength - 2
-            } else {
                 offset++
             }
+            null
+        }.firstNotNullOfOrNull { (pos, length) ->
+            extractPpiFromSegment(data, pos, length)
         }
+    }
 
-        return extractedPpiValue
+    private fun extractPpiFromSegment(data: ByteArray, pos: Int, length: Int): Int? {
+        if (pos + 2 + length > data.size) return null
+
+        // WSQ comments are often ISO_8859_1 or ASCII; ISO handles binary bytes more gracefully
+        val comment = String(data, pos + 4, length - 2, Charsets.ISO_8859_1)
+
+        // 1. Try standard Regex first
+        val ppiRegex = Regex("""\bPPI\s+(\d+)""", RegexOption.IGNORE_CASE)
+        val directMatch = ppiRegex.find(comment)?.groupValues?.get(1)?.toIntOrNull()
+        if (directMatch != null) return directMatch
+
+        // 2. Fallback to NIST_COM parsing if string contains NIST header
+        return comment.takeIf { it.contains("NIST_COM") }
+            ?.split(Regex("[\\s\\x00]+")) // Split by space or null terminator
+            ?.firstNotNullOfOrNull { part ->
+                part.filter { it.isDigit() }
+                    .takeIf { it.isNotEmpty() }
+                    ?.toIntOrNull()
+            }
     }
 }
