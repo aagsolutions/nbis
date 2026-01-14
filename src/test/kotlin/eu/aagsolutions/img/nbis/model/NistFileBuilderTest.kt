@@ -46,7 +46,6 @@ import java.time.ZoneOffset
 import kotlin.test.Test
 
 class NistFileBuilderTest {
-
     @Test
     fun `it should copy successfully nist file in an other nist file`() {
         val url = NistFileReader::class.java.getResource("/ANSI2015/ees_fp_1391.nist")

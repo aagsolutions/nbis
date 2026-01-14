@@ -189,7 +189,11 @@ object WsqParser {
     /**
      * Extracts PPI from a segment using regex and fallback
      */
-    private fun extractPpiFromSegment(data: ByteArray, pos: Int, length: Int): WSQImageDimensions? {
+    private fun extractPpiFromSegment(
+        data: ByteArray,
+        pos: Int,
+        length: Int,
+    ): WSQImageDimensions? {
         if (pos + 2 + length > data.size) return null
 
         // WSQ comments are often ISO_8859_1 or ASCII; ISO handles binary bytes more gracefully
@@ -201,10 +205,30 @@ object WsqParser {
         val pixelHeightRegex = Regex("""\bPIX_HEIGHT\s+(\d+)""", RegexOption.IGNORE_CASE)
         val pixelWidthRegex = Regex("""\bPIX_WIDTH\s+(\d+)""", RegexOption.IGNORE_CASE)
         return WSQImageDimensions(
-            width = pixelWidthRegex.find(comment)?.groupValues?.get(1)?.toIntOrNull() ?: 0,
-            height = pixelHeightRegex.find(comment)?.groupValues?.get(1)?.toIntOrNull() ?: 0,
-            pixelDepth = pixelDepthRegex.find(comment)?.groupValues?.get(1)?.toIntOrNull() ?: 8,
-            pixelsPerInch = ppiRegex.find(comment)?.groupValues?.get(1)?.toIntOrNull() ?: 500,
+            width =
+                pixelWidthRegex
+                    .find(comment)
+                    ?.groupValues
+                    ?.get(1)
+                    ?.toIntOrNull() ?: 0,
+            height =
+                pixelHeightRegex
+                    .find(comment)
+                    ?.groupValues
+                    ?.get(1)
+                    ?.toIntOrNull() ?: 0,
+            pixelDepth =
+                pixelDepthRegex
+                    .find(comment)
+                    ?.groupValues
+                    ?.get(1)
+                    ?.toIntOrNull() ?: 8,
+            pixelsPerInch =
+                ppiRegex
+                    .find(comment)
+                    ?.groupValues
+                    ?.get(1)
+                    ?.toIntOrNull() ?: 500,
         )
     }
 }
