@@ -79,8 +79,8 @@ class NistFileBuilder {
      * @return The current `NistFileBuilder` instance, allowing for method chaining.
      */
     fun clearRecordsByType(recordType: RecordType): NistFileBuilder {
-        recordsMap.remove(recordType);
-        return this;
+        recordsMap.remove(recordType)
+        return this
     }
 
     /**
