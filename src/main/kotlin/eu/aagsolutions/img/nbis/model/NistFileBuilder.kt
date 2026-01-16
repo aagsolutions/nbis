@@ -73,6 +73,17 @@ class NistFileBuilder {
     }
 
     /**
+     * Clears all records of a specific type from the builder.
+     *
+     * @param recordType The type of records to clear.
+     * @return The current `NistFileBuilder` instance, allowing for method chaining.
+     */
+    fun clearRecordsByType(recordType: RecordType): NistFileBuilder {
+        recordsMap.remove(recordType);
+        return this;
+    }
+
+    /**
      * Adds a `TransactionInformationRecord` to the builder and allows chaining additional configurations.
      *
      * @param record The `TransactionInformationRecord` instance to be added.
