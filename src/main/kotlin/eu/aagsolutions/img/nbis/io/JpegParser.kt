@@ -28,7 +28,6 @@ import eu.aagsolutions.img.nbis.datakit.EndianReader.readUInt16BigEndian
 import eu.aagsolutions.img.nbis.model.enums.reference.CompressionAlgorithm
 
 object JpegParser {
-    private const val JP2_SIGNATURE_SIZE = 12
     private const val INCH_TO_CM_MULTIPLIER = 2.54
     private const val DEFAULT_DPI = 72
 
@@ -92,8 +91,6 @@ object JpegParser {
                     }
                     0xE1 -> { // APP1 segment (EXIF)
                         val segmentLength = readUInt16BigEndian(jpegData, offset + 2)
-                        // Could parse EXIF data for more detailed DPI information
-                        // This is more complex and optional
                     }
                     0xD9 -> { // EOI (End of Image)
                         break
@@ -140,53 +137,4 @@ object JpegParser {
     @Suppress("MagicNumber", "ComplexCondition")
     fun isJpegLossless(data: ByteArray): Boolean = (data.size >= 4 && data[0] == 0xFF.toByte() && data[1] == 0xD8.toByte())
 
-    /**
-     * Checks if the byte array represents a JPEG 2000 image.
-     */
-    @Suppress("MagicNumber")
-    fun isJpeg2000(data: ByteArray): Boolean {
-        if (data.size < JP2_SIGNATURE_SIZE) return false
-
-        val jp2Signature =
-            byteArrayOf(
-                0x00,
-                0x00,
-                0x00,
-                0x0C,
-                0x6A,
-                0x50,
-                0x20,
-                0x20,
-                0x0D,
-                0x0A,
-                0x87.toByte(),
-                0x0A,
-            )
-
-        return data.take(JP2_SIGNATURE_SIZE).toByteArray().contentEquals(jp2Signature)
-    }
-
-    /**
-     * Checks if the byte array represents a lossless JPEG 2000 image.
-     * This is more complex and typically requires examining the coding parameters.
-     */
-    private fun isJpeg2000Lossless(data: ByteArray): Boolean {
-        if (!isJpeg2000(data)) return false
-        return containsMarker(data, byteArrayOf(0xFF.toByte(), 0x52.toByte()))
-    }
-
-    /**
-     * Helper function to search for a byte pattern within the data.
-     */
-    private fun containsMarker(
-        data: ByteArray,
-        marker: ByteArray,
-    ): Boolean =
-        if (data.size < marker.size) {
-            false
-        } else {
-            (0..data.size - marker.size).any { i ->
-                marker.indices.all { j -> data[i + j] == marker[j] }
-            }
-        }
 }
