@@ -138,16 +138,7 @@ object JpegParser {
      * Checks if the byte array represents a lossless JPEG image.
      */
     @Suppress("MagicNumber", "ComplexCondition")
-    fun isJpegLossless(data: ByteArray): Boolean {
-        if (data.size < 4 || data[0] != 0xFF.toByte() || data[1] != 0xD8.toByte()) {
-            return false
-        }
-
-        return containsMarker(data, byteArrayOf(0xFF.toByte(), 0xC3.toByte())) ||
-            containsMarker(data, byteArrayOf(0xFF.toByte(), 0xC7.toByte())) ||
-            containsMarker(data, byteArrayOf(0xFF.toByte(), 0xCB.toByte())) ||
-            containsMarker(data, byteArrayOf(0xFF.toByte(), 0xCF.toByte()))
-    }
+    fun isJpegLossless(data: ByteArray): Boolean = (data.size >= 4 && data[0] == 0xFF.toByte() && data[1] == 0xD8.toByte())
 
     /**
      * Checks if the byte array represents a JPEG 2000 image.
