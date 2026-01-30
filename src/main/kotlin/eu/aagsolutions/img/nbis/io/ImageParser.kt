@@ -32,7 +32,7 @@ object ImageParser {
     fun readImageInfo(imageData: ByteArray): ImageInfo =
         when {
             PngParser.isPng(imageData) -> PngParser.readPngInfo(imageData)
-            JpegParser.isJpegBaseline(imageData) || JpegParser.isJpegLossless(imageData) -> JpegParser.readJpegInfo(imageData)
+            JpegParser.isJpegLossless(imageData) -> JpegParser.readJpegInfo(imageData)
             WsqParser.isWsq(imageData) -> WsqParser.readWSQInfo(imageData)
             else -> throw NistException("Unsupported image format")
         }

@@ -134,8 +134,6 @@ object JpegParser {
             4 to "CMYK",
         )[colorType] ?: "UNKNOWN"
 
-    fun isJpegBaseline(data: ByteArray): Boolean = containsMarker(data, byteArrayOf(0xFF.toByte(), 0xC0.toByte()))
-
     /**
      * Checks if the byte array represents a lossless JPEG image.
      */
