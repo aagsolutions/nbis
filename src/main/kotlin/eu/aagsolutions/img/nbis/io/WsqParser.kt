@@ -160,7 +160,31 @@ object WsqParser {
             throw NistException("Invalid WSQ Frame Header: insufficient data")
         }
 
-        return findWSQPixelsPerInch(data)!!
+        // WSQ SOF structure:
+        // 0-1: Marker (0xFF 0xA2)
+        // 2-3: Length of segment
+        // 4: Black value (0)
+        // 5: Precision (must be 8)
+        // 6-7: Height (big-endian)
+        // 8-9: Width (big-endian)
+        // 10: Number of components (must be 1 for grayscale)
+        // 11+: Component specifications
+
+        val segmentLength = readUInt16BigEndian(data, offset + 2)
+
+        val height = readUInt16BigEndian(data, offset + 6)
+        val width = readUInt16BigEndian(data, offset + 8)
+        val numComponents = data[offset + 10].toInt() and 0xFF
+
+        // Try to find PPI in comments, default to 500 if not found
+        val ppi = findWSQPixelsPerInch(data) ?: 500
+
+        return WSQImageDimensions(
+            width = width,
+            height = height,
+            pixelDepth = 8,
+            pixelsPerInch = ppi,
+        )
     }
 
     /**
@@ -168,67 +192,40 @@ object WsqParser {
      *
      * @param data The WSQ byte array
      */
-    private fun findWSQPixelsPerInch(data: ByteArray): WSQImageDimensions? {
+    private fun findWSQPixelsPerInch(data: ByteArray): Int? {
         var offset = 0
-        return generateSequence {
-            while (offset < data.size - 4) {
-                val currentPos = offset
-                if (data[offset] == 0xFF.toByte() && data[offset + 1] == 0xA8.toByte()) {
-                    val length = readUInt16BigEndian(data, offset + 2)
-                    offset += 2 + length
-                    return@generateSequence currentPos to length
+        var extractedPpiValue: Int? = null
+        while (offset < data.size - 4) {
+            if (data[offset] == 0xFF.toByte() && data[offset + 1] == 0xA8.toByte()) { // COM segment
+                val segmentLength = readUInt16BigEndian(data, offset + 2)
+                if (offset + 4 + segmentLength <= data.size) {
+                    val commentBytes = data.sliceArray(offset + 4 until offset + 4 + segmentLength - 2)
+                    val comment = String(commentBytes, Charsets.US_ASCII)
+
+                    // Look for PPI information in the comment
+                    val ppiRegex = Regex("""\bPPI\s+(\d+)""", RegexOption.IGNORE_CASE)
+                    val match = ppiRegex.find(comment)
+                    if (match != null) {
+                        extractedPpiValue = match.groupValues[1].toIntOrNull()
+                    } else if (comment.contains("NIST_COM")) {
+                        // Parse NIST comment format if needed
+                        val parts = comment.split("\u0000")
+                        for (part in parts) {
+                            if (part.contains("PPI")) {
+                                val ppiValue = part.filter { it.isDigit() }
+                                if (ppiValue.isNotEmpty()) {
+                                    extractedPpiValue = ppiValue.toIntOrNull()
+                                }
+                            }
+                        }
+                    }
                 }
+                offset += 4 + segmentLength - 2
+            } else {
                 offset++
             }
-            null
-        }.firstNotNullOfOrNull { (pos, length) ->
-            extractPpiFromSegment(data, pos, length)
         }
-    }
 
-    /**
-     * Extracts PPI from a segment using regex and fallback
-     */
-    private fun extractPpiFromSegment(
-        data: ByteArray,
-        pos: Int,
-        length: Int,
-    ): WSQImageDimensions? {
-        if (pos + 2 + length > data.size) return null
-
-        // WSQ comments are often ISO_8859_1 or ASCII; ISO handles binary bytes more gracefully
-        val comment = String(data, pos + 4, length - 2, Charsets.ISO_8859_1)
-
-        // 1. Try standard Regex first
-        val ppiRegex = Regex("""\bPPI\s+(\d+)""", RegexOption.IGNORE_CASE)
-        val pixelDepthRegex = Regex("""\bPIX_DEPTH\s+(\d+)""", RegexOption.IGNORE_CASE)
-        val pixelHeightRegex = Regex("""\bPIX_HEIGHT\s+(\d+)""", RegexOption.IGNORE_CASE)
-        val pixelWidthRegex = Regex("""\bPIX_WIDTH\s+(\d+)""", RegexOption.IGNORE_CASE)
-        return WSQImageDimensions(
-            width =
-                pixelWidthRegex
-                    .find(comment)
-                    ?.groupValues
-                    ?.get(1)
-                    ?.toIntOrNull() ?: 0,
-            height =
-                pixelHeightRegex
-                    .find(comment)
-                    ?.groupValues
-                    ?.get(1)
-                    ?.toIntOrNull() ?: 0,
-            pixelDepth =
-                pixelDepthRegex
-                    .find(comment)
-                    ?.groupValues
-                    ?.get(1)
-                    ?.toIntOrNull() ?: 8,
-            pixelsPerInch =
-                ppiRegex
-                    .find(comment)
-                    ?.groupValues
-                    ?.get(1)
-                    ?.toIntOrNull() ?: 500,
-        )
+        return extractedPpiValue
     }
 }
