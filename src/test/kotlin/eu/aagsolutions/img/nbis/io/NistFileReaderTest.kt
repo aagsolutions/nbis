@@ -35,7 +35,6 @@ import javax.imageio.ImageIO
 import kotlin.test.Test
 
 class NistFileReaderTest {
-
     companion object {
         init {
             System.setProperty("java.awt.headless", "true")

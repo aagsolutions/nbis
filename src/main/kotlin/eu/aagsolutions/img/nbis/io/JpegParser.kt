@@ -136,5 +136,4 @@ object JpegParser {
      */
     @Suppress("MagicNumber", "ComplexCondition")
     fun isJpegLossless(data: ByteArray): Boolean = (data.size >= 4 && data[0] == 0xFF.toByte() && data[1] == 0xD8.toByte())
-
 }
