@@ -1,5 +1,5 @@
 name: 'Setup Java'
-description: 'Setup Java 17 with Zulu distribution and Gradle'
+description: 'Setup Java 25 with Zulu distribution and Gradle'
 
 runs:
   using: 'composite'
@@ -7,7 +7,7 @@ runs:
     - name: Set up Java
       uses: actions/setup-java@v4.5.0
       with:
-        java-version: '17'
+        java-version: '25'
         distribution: "zulu"
     - name: Setup Gradle
-      uses: gradle/actions/setup-gradle@v3
+      uses: gradle/actions/setup-gradle@v4

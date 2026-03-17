@@ -24,7 +24,7 @@
 import net.researchgate.release.ReleaseExtension
 
 plugins {
-    kotlin("jvm") version "2.2.10"
+    kotlin("jvm") version "2.3.10"
     id("org.jetbrains.dokka") version "2.1.0-Beta"
     id("org.jlleitschuh.gradle.ktlint") version "13.1.0"
     id("net.researchgate.release") version "3.1.0"
@@ -81,10 +81,6 @@ tasks.jacocoTestReport {
     dependsOn(tasks.test)
 }
 
-kotlin {
-    jvmToolchain(17)
-}
-
 configure<ReleaseExtension> {
     ignoredSnapshotDependencies.set(listOf("net.researchgate:gradle-release"))
     with(git) {
@@ -93,6 +89,8 @@ configure<ReleaseExtension> {
 }
 
 java {
+    sourceCompatibility = JavaVersion.VERSION_21
+    targetCompatibility = JavaVersion.VERSION_21
     withJavadocJar()
     withSourcesJar()
 }
