@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2025 Aurel Avramescu.
+ * Copyright (c) 2026 Aurel Avramescu.
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the “Software”), to deal
  * in the Software without restriction, including without limitation the rights to
@@ -22,6 +22,7 @@
  */
 
 import net.researchgate.release.ReleaseExtension
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 plugins {
     kotlin("jvm") version "2.3.10"
@@ -31,11 +32,11 @@ plugins {
     id("net.thebugmc.gradle.sonatype-central-portal-publisher") version "1.2.4"
     id("signing")
     id("jacoco")
-    id("dev.detekt") version "2.0.0-alpha.0"
+    id("dev.detekt") version "2.0.0-alpha.2"
 }
 
 detekt {
-    toolVersion = "2.0.0-alpha.0"
+    toolVersion = "2.0.0-alpha.2"
     buildUponDefaultConfig = true
     config.setFrom(
         resources.text.fromString(
@@ -93,6 +94,12 @@ java {
     targetCompatibility = JavaVersion.VERSION_21
     withJavadocJar()
     withSourcesJar()
+}
+
+kotlin {
+    compilerOptions {
+        jvmTarget.set(JvmTarget.JVM_21)
+    }
 }
 
 centralPortal {
