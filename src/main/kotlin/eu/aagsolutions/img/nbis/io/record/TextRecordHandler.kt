@@ -42,7 +42,6 @@ import eu.aagsolutions.img.nbis.model.records.BaseRecord
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import java.io.OutputStream
-import kotlin.Int
 
 /**
  * This class provides functionality to handle text-based records within a specific record type.
@@ -61,8 +60,9 @@ open class TextRecordHandler(
         isPositionInIndex(token).let {
             val tag = getTagInfo(token)
             isTypeInFieldName(tag, recordType.id).let {
-                val length = nextWord(token, TAG_SEPARATOR_GROUP_FIELD, FIELD_MAX_LENGTH).toInt()
-                val textField = TextField(length.toString())
+                val lengthStringValue = nextWord(token, TAG_SEPARATOR_GROUP_FIELD, FIELD_MAX_LENGTH)
+                val length = lengthStringValue.toInt()
+                val textField = TextField(lengthStringValue)
                 fields[tag.field] = textField
                 token.position++
                 do {
