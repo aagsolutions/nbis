@@ -184,7 +184,6 @@ $dokka.location:eu.aagsolutions.img.nbis.io/ImageInfo/width/#/PointingToDeclarat
 $dokka.location:eu.aagsolutions.img.nbis.io/ImageParser///PointingToDeclaration/nbis/eu.aagsolutions.img.nbis.io/-image-parser/index.html
 $dokka.location:eu.aagsolutions.img.nbis.io/ImageParser/readImageInfo/#kotlin.ByteArray/PointingToDeclaration/nbis/eu.aagsolutions.img.nbis.io/-image-parser/read-image-info.html
 $dokka.location:eu.aagsolutions.img.nbis.io/JpegParser///PointingToDeclaration/nbis/eu.aagsolutions.img.nbis.io/-jpeg-parser/index.html
-$dokka.location:eu.aagsolutions.img.nbis.io/JpegParser/isJpeg2000/#kotlin.ByteArray/PointingToDeclaration/nbis/eu.aagsolutions.img.nbis.io/-jpeg-parser/is-jpeg2000.html
 $dokka.location:eu.aagsolutions.img.nbis.io/JpegParser/isJpegLossless/#kotlin.ByteArray/PointingToDeclaration/nbis/eu.aagsolutions.img.nbis.io/-jpeg-parser/is-jpeg-lossless.html
 $dokka.location:eu.aagsolutions.img.nbis.io/JpegParser/readJpegInfo/#kotlin.ByteArray/PointingToDeclaration/nbis/eu.aagsolutions.img.nbis.io/-jpeg-parser/read-jpeg-info.html
 $dokka.location:eu.aagsolutions.img.nbis.io/NistFileReader.Companion///PointingToDeclaration/nbis/eu.aagsolutions.img.nbis.io/-nist-file-reader/-companion/index.html
