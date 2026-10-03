@@ -380,6 +380,8 @@ enum class StandardNistValidatorError(
         LatentImageFields.DATA,
     ),
 
+    STD_ERR_DATA_RT14("Image is mandatory", VariableResolutionFingerprintImageFields.DATA),
+
     // Errors for Record Type 14
     STD_ERR_IMP_MANDATORY_RT14(
         "IMP value is mandatory and should be one of Impression Type allowed values",
