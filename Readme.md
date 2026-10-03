@@ -23,28 +23,28 @@ NBIS is a library implemented in Kotlin to extract, decode, build and write NIST
 
 ## NIST Record Types Support
 
-| Record Type | Description | Read | Write | Build |
-|-------------|-------------|------|-------|-------|
-| 1 | Transaction Information Record | ✅ | ✅ | ✅ |
-| 2 | User-defined descriptive text | ✅ | ✅ | ✅ |
-| 3 | Low-resolution grayscale fingerprint image | ✅ | ✅ | ✅ |
-| 4 | High-resolution grayscale fingerprint image | ✅ | ✅ | ✅ |
-| 5 | Low-resolution binary fingerprint image | ✅ | ✅ | ✅ |
-| 6 | High-resolution binary fingerprint image | ✅ | ✅ | ✅ |
-| 7 | User-defined image | ✅ | ✅ | ✅ |
-| 8 | Signature image | ✅ | ✅ | ✅ |
-| 9 | Minutiae data (for fingerprints) | ✅ | ✅ | ✅ |
-| 10 | Facial and SMT image | ✅ | ✅ | ✅ |
-| 11 | Forensic and investigatory voice data | ✅ | ✅ | ✅ |
-| 12 | Forensic dental and oral data | ✅ | ✅ | ✅ |
-| 13 | Variable-resolution latent friction ridge image | ✅ | ✅ | ✅ |
-| 14 | Variable-resolution fingerprint image | ✅ | ✅ | ✅ |
-| 15 | Palm print image | ✅ | ✅ | ✅ |
-| 16 | User-defined variable-resolution test image | ✅ | ✅ | ✅ |
-| 17 | Iris image | ✅ | ✅ | ✅ |
-| 18 | DNA data | ❌ | ❌ | ❌ |
-| 19 | Plantar (footprint) image | ❌ | ❌ | ❌ |
-| 20 | Original image record | ❌ | ❌ | ❌ |
+| Record Type | Description | Read | Write | Build | Validation |
+|-------------|-------------|------|-------|-------|------------|
+| 1 | Transaction Information Record | ✅ | ✅ | ✅ | ✅ |
+| 2 | User-defined descriptive text | ✅ | ✅ | ✅ | ❌ |
+| 3 | Low-resolution grayscale fingerprint image | ✅ | ✅ | ✅ | ❌ |
+| 4 | High-resolution grayscale fingerprint image | ✅ | ✅ | ✅ | ❌ |
+| 5 | Low-resolution binary fingerprint image | ✅ | ✅ | ✅ | ❌ |
+| 6 | High-resolution binary fingerprint image | ✅ | ✅ | ✅ | ❌ |
+| 7 | User-defined image | ✅ | ✅ | ✅ | ❌ |
+| 8 | Signature image | ✅ | ✅ | ✅ | ❌ |
+| 9 | Minutiae data (for fingerprints) | ✅ | ✅ | ✅ | ✅ |
+| 10 | Facial and SMT image | ✅ | ✅ | ✅ | ❌ |
+| 11 | Forensic and investigatory voice data | ✅ | ✅ | ✅ | ❌ |
+| 12 | Forensic dental and oral data | ✅ | ✅ | ✅ | ❌ |
+| 13 | Variable-resolution latent friction ridge image | ✅ | ✅ | ✅ | ❌ |
+| 14 | Variable-resolution fingerprint image | ✅ | ✅ | ✅ | ✅ |
+| 15 | Palm print image | ✅ | ✅ | ✅ | ❌ |
+| 16 | User-defined variable-resolution test image | ✅ | ✅ | ✅ | ❌ |
+| 17 | Iris image | ✅ | ✅ | ✅ | ❌ |
+| 18 | DNA data | ❌ | ❌ | ❌ | ❌ |
+| 19 | Plantar (footprint) image | ❌ | ❌ | ❌ | ❌ |
+| 20 | Original image record | ❌ | ❌ | ❌ | ❌ |
 
 ## Installation
 
