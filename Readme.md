@@ -155,6 +155,35 @@ All record types extend `BaseRecord` and provide type-specific functionality:
 - `MinutiaeDataRecord` - Type 9 records
 - And more...
 
+### Basic Record Validation
+
+Validation is opt-in and returns all detected errors as a `List<StandardNistValidatorError>`.
+An empty list means the record passed the basic checks. Validators do not change the record or throw for invalid field values.
+
+```kotlin
+import eu.aagsolutions.img.nbis.validation.TransactionInformationRecordValidator
+import eu.aagsolutions.img.nbis.validation.FacialAndSMTImageRecordValidator
+import eu.aagsolutions.img.nbis.validation.VariableResolutionFingerprintRecordValidator
+
+val errors = TransactionInformationRecordValidator().validate(transactionInformationRecord)
+errors.forEach { error ->
+    println("${error.fieldTypeEnum.code}: ${error.message}")
+}
+// Type 10: FacialAndSMTImageRecordValidator().validate(facialRecord)
+// Type 14: VariableResolutionFingerprintRecordValidator().validate(fingerprintRecord)
+```
+
+The validators check required fields, numeric formats and ranges, calendar dates,
+reference codes, and nonempty embedded image data. Type 1 also checks CNT's subfield
+structure and declared count, and validates optional PRY, GMT, and GNS fields.
+Type 14 checks optional scanned resolutions, SCF, and SIF when present.
+
+These are basic field checks, not full version-specific ANSI/NIST or application-profile
+conformance checks. They do not verify encoded LEN against serialized bytes, CNT against
+the other records in the file, image contents against metadata, or complex optional
+subfields. Type 10 and Type 14 validators target records with embedded images;
+external-reference and image-absent records require profile-specific validation.
+
 ### Field Types
 
 The library supports different field types:
