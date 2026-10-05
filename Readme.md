@@ -33,8 +33,8 @@ NBIS is a library implemented in Kotlin to extract, decode, build and write NIST
 | 6 | High-resolution binary fingerprint image | ✅ | ✅ | ✅ | ❌ |
 | 7 | User-defined image | ✅ | ✅ | ✅ | ❌ |
 | 8 | Signature image | ✅ | ✅ | ✅ | ❌ |
-| 9 | Minutiae data (for fingerprints) | ✅ | ✅ | ✅ | ✅ |
-| 10 | Facial and SMT image | ✅ | ✅ | ✅ | ❌ |
+| 9 | Minutiae data (for fingerprints) | ✅ | ✅ | ✅ | ❌ |
+| 10 | Facial and SMT image | ✅ | ✅ | ✅ | ✅ |
 | 11 | Forensic and investigatory voice data | ✅ | ✅ | ✅ | ❌ |
 | 12 | Forensic dental and oral data | ✅ | ✅ | ✅ | ❌ |
 | 13 | Variable-resolution latent friction ridge image | ✅ | ✅ | ✅ | ❌ |
