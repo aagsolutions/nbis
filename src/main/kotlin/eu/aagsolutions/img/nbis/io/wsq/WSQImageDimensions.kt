@@ -21,7 +21,7 @@
  *
  */
 
-package eu.aagsolutions.img.nbis.io
+package eu.aagsolutions.img.nbis.io.wsq
 
 data class WSQImageDimensions(
     val width: Int,
