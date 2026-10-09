@@ -24,6 +24,7 @@
 package eu.aagsolutions.img.nbis.io
 
 import eu.aagsolutions.img.nbis.exceptions.NistException
+import eu.aagsolutions.img.nbis.io.wsq.WsqParser
 
 object ImageParser {
     /**
