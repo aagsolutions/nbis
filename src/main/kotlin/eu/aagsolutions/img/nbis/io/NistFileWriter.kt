@@ -42,6 +42,8 @@ import java.io.OutputStream
  * binary format as defined by the NIST standards. The writing process ensures compliance with record type
  * handling and ordering as described in the transaction information record. It supports multiple record
  * types and delegates their individual serialization to appropriate record handlers tailored for each type.
+ *
+ * @param outputStream the `OutputStream` where the `NistFile` content will be written.
  */
 class NistFileWriter(
     val outputStream: OutputStream,
@@ -57,7 +59,6 @@ class NistFileWriter(
      * `NistException` being thrown.
      *
      * @param file the `NistFile` containing records to be written.
-     * @param outputStream the `OutputStream` where the `NistFile` content will be written.
      * @return the provided `OutputStream` after writing the data.
      * @throws NistException if an error occurs during the writing process.
      */
