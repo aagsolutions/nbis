@@ -27,7 +27,27 @@ internal class WsqDecoder {
         val pixels: ByteArray,
         val width: Int,
         val height: Int,
-    )
+    ) {
+        override fun equals(other: Any?): Boolean {
+            if (this === other) return true
+            if (javaClass != other?.javaClass) return false
+
+            other as DecodedImage
+
+            if (width != other.width) return false
+            if (height != other.height) return false
+            if (!pixels.contentEquals(other.pixels)) return false
+
+            return true
+        }
+
+        override fun hashCode(): Int {
+            var result = width
+            result = 31 * result + height
+            result = 31 * result + pixels.contentHashCode()
+            return result
+        }
+    }
 
     fun decode(data: ByteArray): DecodedImage {
         val token: WsqHelper.Token = WsqHelper.Token(data)
@@ -95,7 +115,7 @@ internal class WsqDecoder {
                 getCComment(token)
             }
             else -> {
-                throw IllegalArgumentException("ERROR: getCTableWSQ : Invalid table defined : " + marker)
+                throw IllegalArgumentException("ERROR: getCTableWSQ : Invalid table defined : $marker")
             }
         }
         require(token.pointer == segmentEnd) { "Invalid WSQ table length" }
@@ -105,113 +125,103 @@ internal class WsqDecoder {
         token.readBytes(token.readShort() - 2)
     }
 
+    private fun reconstructWaveletFilterCoefficient(token: WsqHelper.Token): Float {
+        val sign = token.readByte()
+        val scale = token.readByte()
+        val shrtDat = token.readInt()
+
+        var value = shrtDat.toFloat()
+        repeat(scale) {
+            value /= 10.0f
+        }
+        if (sign != 0) {
+            value *= -1.0f
+        }
+        return value
+    }
+
     private fun getCTransformTable(token: WsqHelper.Token) {
         token.readShort()
         token.tableDTT.hisz = token.readByte()
         token.tableDTT.losz = token.readByte()
         require(token.tableDTT.hisz > 0 && token.tableDTT.losz > 0) { "Empty WSQ wavelet filter" }
+
         token.tableDTT.hifilt = FloatArray(token.tableDTT.hisz)
         token.tableDTT.lofilt = FloatArray(token.tableDTT.losz)
-        var aSize: Int
-        if ((token.tableDTT.hisz % 2) != 0) {
-            aSize = ((token.tableDTT.hisz + 1) / 2)
-        } else {
-            aSize = (token.tableDTT.hisz / 2)
-        }
-        val aLofilt: FloatArray = FloatArray(aSize)
+
+        var aSize =
+            if (token.tableDTT.hisz % 2 != 0) {
+                (token.tableDTT.hisz + 1) / 2
+            } else {
+                token.tableDTT.hisz / 2
+            }
+
+        val aLofilt = FloatArray(aSize)
         aSize--
-        run {
-            var cnt = 0
-            while (cnt <= aSize) {
-                val sign = token.readByte()
-                var scale = token.readByte()
-                val shrtDat: Long = token.readInt()
-                aLofilt[cnt] = shrtDat.toFloat()
-                while (scale > 0) {
-                    aLofilt[cnt] = (aLofilt[cnt] / 10.0).toFloat()
-                    scale--
+        for (cnt in 0..aSize) {
+            aLofilt[cnt] = reconstructWaveletFilterCoefficient(token)
+
+            if (token.tableDTT.hisz % 2 != 0) {
+                token.tableDTT.hifilt[cnt + aSize] = intSign(cnt) * aLofilt[cnt]
+                if (cnt > 0) {
+                    token.tableDTT.hifilt[aSize - cnt] = token.tableDTT.hifilt[cnt + aSize]
                 }
-                if (sign != 0) {
-                    aLofilt[cnt] *= -1.0f
-                }
-                if ((token.tableDTT.hisz % 2) != 0) {
-                    token.tableDTT.hifilt[(cnt + aSize)] = (intSign(cnt) * aLofilt[cnt])
-                    if (cnt > 0) {
-                        token.tableDTT.hifilt[(aSize - cnt)] = token.tableDTT.hifilt[(cnt + aSize)]
-                    }
-                } else {
-                    token.tableDTT.hifilt[((cnt + aSize) + 1)] = (intSign(cnt) * aLofilt[cnt])
-                    token.tableDTT.hifilt[(aSize - cnt)] = (-1 * token.tableDTT.hifilt[((cnt + aSize) + 1)])
-                }
-                cnt++
+            } else {
+                val targetIdx = cnt + aSize + 1
+                token.tableDTT.hifilt[targetIdx] = intSign(cnt) * aLofilt[cnt]
+                token.tableDTT.hifilt[aSize - cnt] = -token.tableDTT.hifilt[targetIdx]
             }
         }
-        if ((token.tableDTT.losz % 2) != 0) {
-            aSize = ((token.tableDTT.losz + 1) / 2)
-        } else {
-            aSize = (token.tableDTT.losz / 2)
-        }
-        val aHifilt: FloatArray = FloatArray(aSize)
+
+        aSize =
+            if (token.tableDTT.losz % 2 != 0) {
+                (token.tableDTT.losz + 1) / 2
+            } else {
+                token.tableDTT.losz / 2
+            }
+
+        val aHifilt = FloatArray(aSize)
         aSize--
-        run {
-            var cnt: Int = 0
-            while (cnt <= aSize) {
-                val sign: Int = token.readByte()
-                var scale: Int = token.readByte()
-                val shrtDat: Long = token.readInt()
-                aHifilt[cnt] = shrtDat.toFloat()
-                while (scale > 0) {
-                    aHifilt[cnt] = (aHifilt[cnt] / 10.0).toFloat()
-                    scale--
+
+        for (cnt in 0..aSize) {
+            aHifilt[cnt] = reconstructWaveletFilterCoefficient(token)
+
+            if (token.tableDTT.losz % 2 != 0) {
+                token.tableDTT.lofilt[cnt + aSize] = intSign(cnt) * aHifilt[cnt]
+                if (cnt > 0) {
+                    token.tableDTT.lofilt[aSize - cnt] = token.tableDTT.lofilt[cnt + aSize]
                 }
-                if (sign != 0) {
-                    aHifilt[cnt] *= -1.0f
-                }
-                if ((token.tableDTT.losz % 2) != 0) {
-                    token.tableDTT.lofilt[(cnt + aSize)] = (intSign(cnt) * aHifilt[cnt])
-                    if (cnt > 0) {
-                        token.tableDTT.lofilt[(aSize - cnt)] = token.tableDTT.lofilt[(cnt + aSize)]
-                    }
-                } else {
-                    token.tableDTT.lofilt[((cnt + aSize) + 1)] = (intSign(cnt + 1) * aHifilt[cnt])
-                    token.tableDTT.lofilt[(aSize - cnt)] = token.tableDTT.lofilt[((cnt + aSize) + 1)]
-                }
-                cnt++
+            } else {
+                val targetIdx = cnt + aSize + 1
+                token.tableDTT.lofilt[targetIdx] = intSign(cnt + 1) * aHifilt[cnt]
+                token.tableDTT.lofilt[aSize - cnt] = token.tableDTT.lofilt[targetIdx]
             }
         }
+
         token.tableDTT.lodef = 1
         token.tableDTT.hidef = 1
     }
 
     private fun getCQuantizationTable(token: WsqHelper.Token) {
         token.readShort()
-        var scale: Int = token.readByte()
-        var shrtDat: Int = token.readShort()
-        token.tableDQT.binCenter = shrtDat.toFloat()
-        while (scale > 0) {
-            token.tableDQT.binCenter = (token.tableDQT.binCenter / 10.0).toFloat()
-            scale--
-        }
-        run {
-            var cnt: Int = 0
-            while (cnt < WsqHelper.MAX_SUBBANDS) {
-                scale = token.readByte()
-                shrtDat = token.readShort()
-                token.tableDQT.qBin[cnt] = shrtDat.toFloat()
-                while (scale > 0) {
-                    token.tableDQT.qBin[cnt] = (token.tableDQT.qBin[cnt] / 10.0).toFloat()
-                    scale--
-                }
-                scale = token.readByte()
-                shrtDat = token.readShort()
-                token.tableDQT.zBin[cnt] = shrtDat.toFloat()
-                while (scale > 0) {
-                    token.tableDQT.zBin[cnt] = (token.tableDQT.zBin[cnt] / 10.0).toFloat()
-                    scale--
-                }
-                cnt++
+
+        // Local helper to read a scaled float value, avoiding repetitive code blocks
+        fun readScaledFloat(): Float {
+            val scale = token.readByte()
+            var value = token.readShort().toFloat()
+            repeat(scale) {
+                value /= 10.0f
             }
+            return value
         }
+
+        token.tableDQT.binCenter = readScaledFloat()
+
+        for (cnt in 0 until WsqHelper.MAX_SUBBANDS) {
+            token.tableDQT.qBin[cnt] = readScaledFloat()
+            token.tableDQT.zBin[cnt] = readScaledFloat()
+        }
+
         token.tableDQT.dqtDef = 1
     }
 
@@ -242,49 +252,47 @@ internal class WsqDecoder {
         readTableLen: Boolean,
     ): WsqHelper.HuffmanTable {
         var bytesLeft = bytesLeftInitial
-        val huffmanTable: WsqHelper.HuffmanTable = WsqHelper.HuffmanTable()
+        val huffmanTable = WsqHelper.HuffmanTable()
+
         if (readTableLen) {
             huffmanTable.tableLen = token.readShort()
-            huffmanTable.bytesLeft = (huffmanTable.tableLen - 2)
+            huffmanTable.bytesLeft = huffmanTable.tableLen - 2
             bytesLeft = huffmanTable.bytesLeft
         } else {
             huffmanTable.bytesLeft = bytesLeft
         }
-        if (bytesLeft <= 0) {
-            throw IllegalArgumentException("ERROR : getCHuffmanTable : no huffman table bytes remaining")
-        }
+
+        require(bytesLeft > 0) { "ERROR : getCHuffmanTable : no huffman table bytes remaining" }
+
         huffmanTable.tableId = token.readByte()
         require(huffmanTable.tableId < WsqHelper.MAX_DHT_TABLES) { "Invalid WSQ Huffman table ID" }
         huffmanTable.bytesLeft--
+
         huffmanTable.huffbits = IntArray(WsqHelper.MAX_HUFFBITS)
-        var numHufvals: Int = 0
-        run {
-            var i: Int = 0
-            while (i < WsqHelper.MAX_HUFFBITS) {
-                huffmanTable.huffbits[i] = token.readByte()
-                numHufvals += huffmanTable.huffbits[i]
-                i++
-            }
+        var numHufvals = 0
+
+        for (i in 0 until WsqHelper.MAX_HUFFBITS) {
+            huffmanTable.huffbits[i] = token.readByte()
+            numHufvals += huffmanTable.huffbits[i]
         }
+
         var availableCodes = 1
         for (count in huffmanTable.huffbits) {
             availableCodes = availableCodes * 2 - count
             require(availableCodes >= 0) { "Oversubscribed WSQ Huffman table" }
         }
+
         huffmanTable.bytesLeft -= WsqHelper.MAX_HUFFBITS
-        if (numHufvals > maxHuffcounts) {
-            throw IllegalArgumentException("ERROR : getCHuffmanTable : numHufvals is larger than MAX_HUFFCOUNTS")
-        }
+        require(numHufvals <= maxHuffcounts) { "ERROR : getCHuffmanTable : numHufvals is larger than MAX_HUFFCOUNTS" }
+
         huffmanTable.huffvalues = IntArray(maxHuffcounts + 1)
-        run {
-            var i: Int = 0
-            while (i < numHufvals) {
-                huffmanTable.huffvalues[i] = token.readByte()
-                i++
-            }
+        for (i in 0 until numHufvals) {
+            huffmanTable.huffvalues[i] = token.readByte()
         }
+
         huffmanTable.bytesLeft -= numHufvals
         require(numHufvals > 0 && huffmanTable.bytesLeft >= 0) { "Invalid WSQ Huffman table length" }
+
         return huffmanTable
     }
 
@@ -329,66 +337,41 @@ internal class WsqDecoder {
         width: Int,
         height: Int,
     ) {
-        var lenx: Int = 0
-        var lenx2: Int = 0
-        var leny: Int = 0
-        var leny2: Int = 0
+        // Array factory automatically populates each slot with a new WaveletTree instance
         token.wtree = Array(wtreelen) { WsqHelper.WaveletTree() }
-        run {
-            var i: Int = 0
-            while (i < wtreelen) {
-                token.wtree[i] = WsqHelper.WaveletTree()
-                token.wtree[i].invrw = 0
-                token.wtree[i].invcl = 0
-                i++
-            }
+
+        // Set inverse row flags
+        for (i in intArrayOf(2, 4, 7, 9, 11, 13, 16, 18)) {
+            token.wtree[i].invrw = 1
         }
-        token.wtree[2].invrw = 1
-        token.wtree[4].invrw = 1
-        token.wtree[7].invrw = 1
-        token.wtree[9].invrw = 1
-        token.wtree[11].invrw = 1
-        token.wtree[13].invrw = 1
-        token.wtree[16].invrw = 1
-        token.wtree[18].invrw = 1
-        token.wtree[3].invcl = 1
-        token.wtree[5].invcl = 1
-        token.wtree[8].invcl = 1
-        token.wtree[9].invcl = 1
-        token.wtree[12].invcl = 1
-        token.wtree[13].invcl = 1
-        token.wtree[17].invcl = 1
-        token.wtree[18].invcl = 1
+
+        // Set inverse column flags
+        for (i in intArrayOf(3, 5, 8, 9, 12, 13, 17, 18)) {
+            token.wtree[i].invcl = 1
+        }
+
         wtree4(token, 0, 1, width, height, 0, 0, 1)
-        if ((token.wtree[1].lenx % 2) == 0) {
-            lenx = (token.wtree[1].lenx / 2)
-            lenx2 = lenx
-        } else {
-            lenx = ((token.wtree[1].lenx + 1) / 2)
-            lenx2 = (lenx - 1)
-        }
-        if ((token.wtree[1].leny % 2) == 0) {
-            leny = (token.wtree[1].leny / 2)
-            leny2 = leny
-        } else {
-            leny = ((token.wtree[1].leny + 1) / 2)
-            leny2 = (leny - 1)
-        }
+
+        val lenx1Val = token.wtree[1].lenx
+        val lenx = if (lenx1Val % 2 == 0) lenx1Val / 2 else (lenx1Val + 1) / 2
+        val lenx2 = if (lenx1Val % 2 == 0) lenx.let { it } else lenx - 1
+
+        val leny1Val = token.wtree[1].leny
+        val leny = if (leny1Val % 2 == 0) leny1Val / 2 else (leny1Val + 1) / 2
+        val leny2 = if (leny1Val % 2 == 0) leny.let { it } else leny - 1
+
         wtree4(token, 4, 6, lenx2, leny, lenx, 0, 0)
         wtree4(token, 5, 10, lenx, leny2, 0, leny, 0)
         wtree4(token, 14, 15, lenx, leny, 0, 0, 0)
+
         token.wtree[19].x = 0
         token.wtree[19].y = 0
-        if ((token.wtree[15].lenx % 2) == 0) {
-            token.wtree[19].lenx = (token.wtree[15].lenx / 2)
-        } else {
-            token.wtree[19].lenx = ((token.wtree[15].lenx + 1) / 2)
-        }
-        if ((token.wtree[15].leny % 2) == 0) {
-            token.wtree[19].leny = (token.wtree[15].leny / 2)
-        } else {
-            token.wtree[19].leny = ((token.wtree[15].leny + 1) / 2)
-        }
+
+        val lenx15 = token.wtree[15].lenx
+        token.wtree[19].lenx = if (lenx15 % 2 == 0) lenx15 / 2 else (lenx15 + 1) / 2
+
+        val leny15 = token.wtree[15].leny
+        token.wtree[19].leny = if (leny15 % 2 == 0) leny15 / 2 else (leny15 + 1) / 2
     }
 
     private fun wtree4(
@@ -401,14 +384,10 @@ internal class WsqDecoder {
         y: Int,
         stop1: Int,
     ) {
-        var evenx: Int = 0
-        var eveny: Int = 0
-        var p1: Int = 0
-        var p2: Int = 0
-        p1 = start1
-        p2 = start2
-        evenx = (lenx % 2)
-        eveny = (leny % 2)
+        val p1 = start1
+        val p2 = start2
+        val evenx = (lenx % 2)
+        val eveny = (leny % 2)
         token.wtree[p1].x = x
         token.wtree[p1].y = y
         token.wtree[p1].lenx = lenx
@@ -459,14 +438,9 @@ internal class WsqDecoder {
         token: WsqHelper.Token,
         qtreelen: Int,
     ) {
+        // Array factory initializes each element automatically, making the manual loop redundant
         token.qtree = Array(qtreelen) { WsqHelper.QuantTree() }
-        run {
-            var i: Int = 0
-            while (i < token.qtree.size) {
-                token.qtree[i] = WsqHelper.QuantTree()
-                i++
-            }
-        }
+
         qtree16(token, 3, token.wtree[14].lenx, token.wtree[14].leny, token.wtree[14].x, token.wtree[14].y, 0, 0)
         qtree16(token, 19, token.wtree[4].lenx, token.wtree[4].leny, token.wtree[4].x, token.wtree[4].y, 0, 1)
         qtree16(token, 48, token.wtree[0].lenx, token.wtree[0].leny, token.wtree[0].x, token.wtree[0].y, 0, 0)
@@ -484,16 +458,13 @@ internal class WsqDecoder {
         rw: Int,
         cl: Int,
     ) {
-        var tempx: Int = 0
-        var temp2x: Int = 0
-        var tempy: Int = 0
-        var temp2y: Int = 0
-        var evenx: Int = 0
-        var eveny: Int = 0
-        var p: Int = 0
-        p = start
-        evenx = (lenx % 2)
-        eveny = (leny % 2)
+        var tempx: Int
+        var temp2x: Int
+        var tempy: Int
+        var temp2y: Int
+        val p = start
+        var evenx: Int = (lenx % 2)
+        var eveny: Int = (leny % 2)
         if (evenx == 0) {
             tempx = (lenx / 2)
             temp2x = tempx
@@ -624,12 +595,9 @@ internal class WsqDecoder {
         x: Int,
         y: Int,
     ) {
-        var evenx: Int = 0
-        var eveny: Int = 0
-        var p: Int = 0
-        p = start
-        evenx = (lenx % 2)
-        eveny = (leny % 2)
+        val p = start
+        val evenx = (lenx % 2)
+        val eveny = (leny % 2)
         token.qtree[p].x = x
         token.qtree[(p + 2)].x = x
         token.qtree[p].y = y
@@ -667,15 +635,15 @@ internal class WsqDecoder {
         token: WsqHelper.Token,
         size: Int,
     ): IntArray {
-        val qdata: IntArray = IntArray(size)
-        val maxcode: IntArray = IntArray(WsqHelper.MAX_HUFFBITS + 1)
-        val mincode: IntArray = IntArray(WsqHelper.MAX_HUFFBITS + 1)
-        val valptr: IntArray = IntArray(WsqHelper.MAX_HUFFBITS + 1)
+        val qdata = IntArray(size)
+        val maxcode = IntArray(WsqHelper.MAX_HUFFBITS + 1)
+        val mincode = IntArray(WsqHelper.MAX_HUFFBITS + 1)
+        val valptr = IntArray(WsqHelper.MAX_HUFFBITS + 1)
         val marker: WsqHelper.IntRef = WsqHelper.IntRef(getCMarkerWSQ(token, WsqHelper.TBLS_N_SOB))
         val bitCount: WsqHelper.IntRef = WsqHelper.IntRef(0)
         val nextByte: WsqHelper.IntRef = WsqHelper.IntRef(0)
-        var hufftableId: Int = 0
-        var ip: Int = 0
+        var hufftableId = 0
+        var ip = 0
         while (marker.value != WsqHelper.EOI_WSQ) {
             if (marker.value != 0) {
                 while (marker.value != WsqHelper.SOB_WSQ) {
@@ -749,32 +717,27 @@ internal class WsqDecoder {
         huffbits: IntArray,
         maxHuffcounts: Int,
     ): Array<WsqHelper.HuffCode> {
-        lateinit var huffcodeTable: Array<WsqHelper.HuffCode>
-        var numberOfCodes: Int = 1
-        huffcodeTable = Array(maxHuffcounts + 1) { WsqHelper.HuffCode() }
-        var tempSize: Int = 0
-        run {
-            var codeSize: Int = 1
-            while (codeSize <= WsqHelper.MAX_HUFFBITS) {
-                while (numberOfCodes <= huffbits[(codeSize - 1)]) {
-                    huffcodeTable[tempSize] = WsqHelper.HuffCode()
-                    huffcodeTable[tempSize].size = codeSize
-                    tempSize++
-                    numberOfCodes++
-                }
-                numberOfCodes = 1
-                codeSize++
+        val huffcodeTable = Array(maxHuffcounts + 1) { WsqHelper.HuffCode() }
+        var tempSize = 0
+
+        for (codeSize in 1..WsqHelper.MAX_HUFFBITS) {
+            val count = huffbits[codeSize - 1]
+            repeat((1..count).count()) {
+                huffcodeTable[tempSize] = WsqHelper.HuffCode()
+                huffcodeTable[tempSize].size = codeSize
+                tempSize++
             }
         }
+
         huffcodeTable[tempSize] = WsqHelper.HuffCode()
         huffcodeTable[tempSize].size = 0
         return huffcodeTable
     }
 
     private fun buildHuffcodes(huffcodeTable: Array<WsqHelper.HuffCode>) {
-        var tempCode: Int = 0
-        var pointer: Int = 0
-        var tempSize: Int = huffcodeTable[0].size
+        var tempCode = 0
+        var pointer = 0
+        var tempSize = huffcodeTable[0].size
         if (huffcodeTable[pointer].size == 0) {
             return
         }
@@ -801,31 +764,25 @@ internal class WsqDecoder {
         valptr: IntArray,
         huffbits: IntArray,
     ) {
-        run {
-            var i: Int = 0
-            while (i <= WsqHelper.MAX_HUFFBITS) {
-                maxcode[i] = 0
-                mincode[i] = 0
-                valptr[i] = 0
-                i++
-            }
+        for (i in 0..WsqHelper.MAX_HUFFBITS) {
+            maxcode[i] = 0
+            mincode[i] = 0
+            valptr[i] = 0
         }
-        var i2: Int = 0
-        run {
-            var i: Int = 1
-            while (i <= WsqHelper.MAX_HUFFBITS) {
-                if (huffbits[(i - 1)] == 0) {
-                    maxcode[i] = -1
-                    i++
-                    continue
-                }
-                valptr[i] = i2
-                mincode[i] = huffcodeTable[i2].code
-                i2 = ((i2 + huffbits[(i - 1)]) - 1)
-                maxcode[i] = huffcodeTable[i2].code
-                i2++
-                i++
+
+        var i2 = 0
+        for (i in 1..WsqHelper.MAX_HUFFBITS) {
+            val bits = huffbits[i - 1]
+            if (bits == 0) {
+                maxcode[i] = -1
+                continue
             }
+
+            valptr[i] = i2
+            mincode[i] = huffcodeTable[i2].code
+            i2 = (i2 + bits) - 1
+            maxcode[i] = huffcodeTable[i2].code
+            i2++
         }
     }
 
@@ -839,23 +796,22 @@ internal class WsqDecoder {
         marker: WsqHelper.IntRef,
         nextByte: WsqHelper.IntRef,
     ): Int {
-        var code: Int = getCNextbitsWSQ(token, marker, bitCount, 1, nextByte)
+        var code = getCNextbitsWSQ(token, marker, bitCount, 1, nextByte)
         if (marker.value != 0) {
             return -1
         }
-        var inx: Int = 0
-        run {
-            inx = 1
-            while (code > maxcode[inx]) {
-                val tbits: Int = getCNextbitsWSQ(token, marker, bitCount, 1, nextByte)
-                code = ((code shl 1) + tbits)
-                if (marker.value != 0) {
-                    return -1
-                }
-                inx++
+
+        var inx = 1
+        while (code > maxcode[inx]) {
+            val tbits = getCNextbitsWSQ(token, marker, bitCount, 1, nextByte)
+            code = (code shl 1) + tbits
+            if (marker.value != 0) {
+                return -1
             }
+            inx++
         }
-        val inx2: Int = ((valptr[inx] + code) - mincode[inx])
+
+        val inx2 = (valptr[inx] + code) - mincode[inx]
         return huffvalues[inx2]
     }
 
@@ -880,9 +836,9 @@ internal class WsqDecoder {
                 }
             }
         }
-        var bits: Int = 0
-        var tbits: Int = 0
-        var bitsNeeded: Int = 0
+        var bits: Int
+        var tbits: Int
+        var bitsNeeded: Int
         if (bitsReq <= bitCount.value) {
             bits = ((nextByte.value shr (bitCount.value - bitsReq)) and WsqHelper.bitMasks[bitsReq])
             bitCount.value -= bitsReq
@@ -915,7 +871,7 @@ internal class WsqDecoder {
             val region = token.qtree[band]
             for (row in 0 until region.leny) {
                 var target = (region.y + row) * width + region.x
-                for (column in 0 until region.lenx) {
+                repeat(region.lenx) {
                     val coefficient = sip[source++]
                     pixels[target++] =
                         when {
@@ -935,50 +891,46 @@ internal class WsqDecoder {
         width: Int,
         height: Int,
     ) {
-        if (token.tableDTT.lodef != 1) {
-            throw IllegalArgumentException("ERROR: wsq_reconstruct : Lopass filter coefficients not defined")
-        }
-        if (token.tableDTT.hidef != 1) {
-            throw IllegalArgumentException("ERROR: wsq_reconstruct : Hipass filter coefficients not defined")
-        }
-        val numPix: Int = (width * height)
-        val fdataTemp: FloatArray = FloatArray(numPix)
-        run {
-            var node: Int = (WsqHelper.W_TREELEN - 1)
-            while (node >= 0) {
-                val fdataBse: Int = ((token.wtree[node].y * width) + token.wtree[node].x)
-                joinLets(
-                    fdataTemp,
-                    fdata,
-                    0,
-                    fdataBse,
-                    token.wtree[node].lenx,
-                    token.wtree[node].leny,
-                    1,
-                    width,
-                    token.tableDTT.hifilt,
-                    token.tableDTT.hisz,
-                    token.tableDTT.lofilt,
-                    token.tableDTT.losz,
-                    token.wtree[node].invcl,
-                )
-                joinLets(
-                    fdata,
-                    fdataTemp,
-                    fdataBse,
-                    0,
-                    token.wtree[node].leny,
-                    token.wtree[node].lenx,
-                    width,
-                    1,
-                    token.tableDTT.hifilt,
-                    token.tableDTT.hisz,
-                    token.tableDTT.lofilt,
-                    token.tableDTT.losz,
-                    token.wtree[node].invrw,
-                )
-                node--
-            }
+        require(token.tableDTT.lodef == 1) { "ERROR: wsq_reconstruct : Lopass filter coefficients not defined" }
+        require(token.tableDTT.hidef == 1) { "ERROR: wsq_reconstruct : Hipass filter coefficients not defined" }
+
+        val numPix = width * height
+        val fdataTemp = FloatArray(numPix)
+
+        for (node in (WsqHelper.W_TREELEN - 1) downTo 0) {
+            val treeNode = token.wtree[node]
+            val fdataBse = (treeNode.y * width) + treeNode.x
+
+            joinLets(
+                fdataTemp,
+                fdata,
+                0,
+                fdataBse,
+                treeNode.lenx,
+                treeNode.leny,
+                1,
+                width,
+                token.tableDTT.hifilt,
+                token.tableDTT.hisz,
+                token.tableDTT.lofilt,
+                token.tableDTT.losz,
+                treeNode.invcl,
+            )
+            joinLets(
+                fdata,
+                fdataTemp,
+                fdataBse,
+                0,
+                treeNode.leny,
+                treeNode.lenx,
+                width,
+                1,
+                token.tableDTT.hifilt,
+                token.tableDTT.hisz,
+                token.tableDTT.lofilt,
+                token.tableDTT.losz,
+                treeNode.invrw,
+            )
         }
     }
 
@@ -1002,56 +954,52 @@ internal class WsqDecoder {
         lsz: Int,
         inv: Int,
     ) {
-        var lp0: Int = 0
-        var lp1: Int = 0
-        var hp0: Int = 0
-        var hp1: Int = 0
-        var lopass: Int = 0
-        var hipass: Int = 0
-        var limg: Int = 0
-        var himg: Int = 0
-        var pix: Int = 0
-        var clRw: Int = 0
-        var i: Int = 0
-        var daEv: Int = 0
-        var loc: Int = 0
-        var hoc: Int = 0
-        var hlen: Int = 0
-        var llen: Int = 0
-        var nstr: Int = 0
-        var pstr: Int = 0
-        var tap: Int = 0
-        var fiEv: Int = 0
-        var olle: Int = 0
-        var ohle: Int = 0
-        var olre: Int = 0
-        var ohre: Int = 0
-        var lle: Int = 0
-        var lle2: Int = 0
-        var lre: Int = 0
-        var lre2: Int = 0
-        var hle: Int = 0
-        var hle2: Int = 0
-        var hre: Int = 0
-        var hre2: Int = 0
-        var lpx: Int = 0
-        var lspx: Int = 0
-        var lpxstr: Int = 0
-        var lspxstr: Int = 0
-        var lstap: Int = 0
-        var lotap: Int = 0
-        var hpx: Int = 0
-        var hspx: Int = 0
-        var hpxstr: Int = 0
-        var hspxstr: Int = 0
-        var hstap: Int = 0
-        var hotap: Int = 0
-        var asym: Int = 0
-        var fhre: Int = 0
-        var ofhre: Int = 0
-        var ssfac: Float = 0.0f
-        var osfac: Float = 0.0f
-        var sfac: Float = 0.0f
+        var lp0: Int
+        var lp1: Int
+        var hp0: Int
+        var hp1: Int
+        var lopass: Int
+        var hipass: Int
+        var limg: Int
+        var himg: Int
+        var daEv: Int
+        var loc: Int
+        var hoc: Int
+        var hlen: Int
+        var llen: Int
+        var nstr: Int
+        var pstr: Int
+        var fiEv: Int
+        var olle: Int
+        var ohle: Int
+        var olre: Int
+        var ohre: Int
+        var lle: Int
+        var lle2: Int
+        var lre: Int
+        var lre2: Int
+        var hle: Int
+        var hle2: Int
+        var hre: Int
+        var hre2: Int
+        var lpx: Int
+        var lspx: Int
+        var lpxstr: Int
+        var lspxstr: Int
+        var lstap: Int
+        var lotap: Int
+        var hpx: Int
+        var hspx: Int
+        var hpxstr: Int
+        var hspxstr: Int
+        var hstap: Int
+        var hotap: Int
+        var asym: Int
+        var fhre = 0
+        var ofhre: Int
+        var ssfac: Float
+        var osfac: Float
+        var sfac: Float
         daEv = (len2 % 2)
         fiEv = (lsz % 2)
         pstr = stride
@@ -1109,283 +1057,266 @@ internal class WsqDecoder {
                 hoc = 0
                 ohle = 0
             }
-            run {
-                i = 0
-                while (i < hsz) {
-                    hi[i] *= -1.0f
-                    i++
-                }
+            for (i in 0 until hsz) {
+                hi[i] *= -1.0f
             }
         }
-        run {
-            clRw = 0
-            while (clRw < len1) {
-                limg = (newIndex + (clRw * pitch))
-                himg = limg
-                newdata[himg] = 0.0f
-                newdata[(himg + stride)] = 0.0f
-                if (inv != 0) {
-                    hipass = (oldIndex + (clRw * pitch))
-                    lopass = (hipass + (stride * hlen))
-                } else {
-                    lopass = (oldIndex + (clRw * pitch))
-                    hipass = (lopass + (stride * llen))
-                }
-                lp0 = lopass
-                lp1 = (lp0 + ((llen - 1) * stride))
-                lspx = (lp0 + (loc * stride))
-                lspxstr = nstr
-                lstap = lotap
-                lle2 = olle
-                lre2 = olre
-                hp0 = hipass
-                hp1 = (hp0 + ((hlen - 1) * stride))
-                hspx = (hp0 + (hoc * stride))
-                hspxstr = nstr
-                hstap = hotap
-                hle2 = ohle
-                hre2 = ohre
-                osfac = ssfac
-                run {
-                    pix = 0
-                    while (pix < hlen) {
-                        run {
-                            tap = lstap
-                            while (tap >= 0) {
-                                lle = lle2
-                                lre = lre2
-                                lpx = lspx
-                                lpxstr = lspxstr
-                                newdata[limg] = (olddata[lpx] * lo[tap])
-                                run {
-                                    i = (tap + 2)
-                                    while (i < lsz) {
-                                        if (lpx == lp0) {
-                                            if (lle != 0) {
-                                                lpxstr = 0
-                                                lle = 0
-                                            } else {
-                                                lpxstr = pstr
-                                            }
-                                        }
-                                        if (lpx == lp1) {
-                                            if (lre != 0) {
-                                                lpxstr = 0
-                                                lre = 0
-                                            } else {
-                                                lpxstr = nstr
-                                            }
-                                        }
-                                        lpx += lpxstr
-                                        newdata[limg] += (olddata[lpx] * lo[i])
-                                        i += 2
-                                    }
-                                }
-                                limg += stride
-                                tap--
-                            }
-                        }
-                        if (lspx == lp0) {
-                            if (lle2 != 0) {
-                                lspxstr = 0
-                                lle2 = 0
+        for (clRw in 0 until len1) {
+            limg = (newIndex + (clRw * pitch))
+            himg = limg
+            newdata[himg] = 0.0f
+            newdata[(himg + stride)] = 0.0f
+            if (inv != 0) {
+                hipass = (oldIndex + (clRw * pitch))
+                lopass = (hipass + (stride * hlen))
+            } else {
+                lopass = (oldIndex + (clRw * pitch))
+                hipass = (lopass + (stride * llen))
+            }
+            lp0 = lopass
+            lp1 = (lp0 + ((llen - 1) * stride))
+            lspx = (lp0 + (loc * stride))
+            lspxstr = nstr
+            lstap = lotap
+            lle2 = olle
+            lre2 = olre
+            hp0 = hipass
+            hp1 = (hp0 + ((hlen - 1) * stride))
+            hspx = (hp0 + (hoc * stride))
+            hspxstr = nstr
+            hstap = hotap
+            hle2 = ohle
+            hre2 = ohre
+            osfac = ssfac
+            repeat(hlen) {
+                for (tap in lstap downTo 0) {
+                    lle = lle2
+                    lre = lre2
+                    lpx = lspx
+                    lpxstr = lspxstr
+                    newdata[limg] = (olddata[lpx] * lo[tap])
+                    for (i in (tap + 2) until lsz step 2) {
+                        if (lpx == lp0) {
+                            if (lle != 0) {
+                                lpxstr = 0
+                                lle = 0
                             } else {
-                                lspxstr = pstr
+                                lpxstr = pstr
                             }
                         }
-                        lspx += lspxstr
-                        lstap = 1
-                        run {
-                            tap = hstap
-                            while (tap >= 0) {
-                                hle = hle2
-                                hre = hre2
-                                hpx = hspx
-                                hpxstr = hspxstr
-                                fhre = ofhre
-                                sfac = osfac
-                                run {
-                                    i = tap
-                                    while (i < hsz) {
-                                        if (hpx == hp0) {
-                                            if (hle != 0) {
-                                                hpxstr = 0
-                                                hle = 0
-                                            } else {
-                                                hpxstr = pstr
-                                                sfac = 1.0f
-                                            }
-                                        }
-                                        if (hpx == hp1) {
-                                            if (hre != 0) {
-                                                hpxstr = 0
-                                                hre = 0
-                                                if ((asym != 0) && (daEv != 0)) {
-                                                    hre = 1
-                                                    fhre--
-                                                    sfac = fhre.toFloat()
-                                                    if (sfac == 0.0f) {
-                                                        hre = 0
-                                                    }
-                                                }
-                                            } else {
-                                                hpxstr = nstr
-                                                if (asym != 0) {
-                                                    sfac = -1.0f
-                                                }
-                                            }
-                                        }
-                                        newdata[himg] += ((olddata[hpx] * hi[i]) * sfac)
-                                        hpx += hpxstr
-                                        i += 2
-                                    }
-                                }
-                                himg += stride
-                                tap--
-                            }
-                        }
-                        if (hspx == hp0) {
-                            if (hle2 != 0) {
-                                hspxstr = 0
-                                hle2 = 0
+                        if (lpx == lp1) {
+                            if (lre != 0) {
+                                lpxstr = 0
+                                lre = 0
                             } else {
-                                hspxstr = pstr
-                                osfac = 1.0f
+                                lpxstr = nstr
                             }
                         }
-                        hspx += hspxstr
-                        hstap = 1
-                        pix++
+                        lpx += lpxstr
+                        newdata[limg] += (olddata[lpx] * lo[i])
+                    }
+                    limg += stride
+                }
+
+                if (lspx == lp0) {
+                    if (lle2 != 0) {
+                        lspxstr = 0
+                        lle2 = 0
+                    } else {
+                        lspxstr = pstr
                     }
                 }
-                if (daEv != 0) {
-                    if (lotap != 0) {
-                        lstap = 1
+                lspx += lspxstr
+                lstap = 1
+                for (tap in hstap downTo 0) {
+                    convolveHighPassTap(
+                        newdata = newdata,
+                        olddata = olddata,
+                        hi = hi,
+                        hsz = hsz,
+                        himg = himg,
+                        tap = tap,
+                        hp0 = hp0,
+                        hp1 = hp1,
+                        pstr = pstr,
+                        nstr = nstr,
+                        asym = asym,
+                        daEv = daEv,
+                        hle2 = hle2,
+                        hre2 = hre2,
+                        hspx = hspx,
+                        hspxstr = hspxstr,
+                        initialFhre = ofhre,
+                        osfac = osfac,
+                    )
+                    himg += stride
+                }
+                if (hspx == hp0) {
+                    if (hle2 != 0) {
+                        hspxstr = 0
+                        hle2 = 0
                     } else {
-                        lstap = 0
+                        hspxstr = pstr
+                        osfac = 1.0f
                     }
+                }
+                hspx += hspxstr
+                hstap = 1
+            }
+
+            if (daEv != 0) {
+                if (lotap != 0) {
+                    lstap = 1
                 } else {
-                    if (lotap != 0) {
-                        lstap = 2
-                    } else {
-                        lstap = 1
-                    }
+                    lstap = 0
                 }
-                run {
-                    tap = 1
-                    while (tap >= lstap) {
-                        lle = lle2
-                        lre = lre2
-                        lpx = lspx
-                        lpxstr = lspxstr
-                        newdata[limg] = (olddata[lpx] * lo[tap])
-                        run {
-                            i = (tap + 2)
-                            while (i < lsz) {
-                                if (lpx == lp0) {
-                                    if (lle != 0) {
-                                        lpxstr = 0
-                                        lle = 0
-                                    } else {
-                                        lpxstr = pstr
-                                    }
-                                }
-                                if (lpx == lp1) {
-                                    if (lre != 0) {
-                                        lpxstr = 0
-                                        lre = 0
-                                    } else {
-                                        lpxstr = nstr
-                                    }
-                                }
-                                lpx += lpxstr
-                                newdata[limg] += (olddata[lpx] * lo[i])
-                                i += 2
-                            }
-                        }
-                        limg += stride
-                        tap--
-                    }
-                }
-                if (daEv != 0) {
-                    if (hotap != 0) {
-                        hstap = 1
-                    } else {
-                        hstap = 0
-                    }
-                    if (hsz == 2) {
-                        hspx -= hspxstr
-                        fhre = 1
-                    }
+            } else {
+                if (lotap != 0) {
+                    lstap = 2
                 } else {
+                    lstap = 1
+                }
+            }
+            for (tap in 1 downTo lstap) {
+                var lle = lle2
+                var lre = lre2
+                var lpx = lspx
+                var lpxstr = lspxstr
+
+                newdata[limg] = olddata[lpx] * lo[tap]
+                for (i in (tap + 2) until lsz step 2) {
+                    if (lpx == lp0) {
+                        if (lle != 0) {
+                            lpxstr = 0
+                            lle = 0
+                        } else {
+                            lpxstr = pstr
+                        }
+                    }
+                    if (lpx == lp1) {
+                        if (lre != 0) {
+                            lpxstr = 0
+                            lre = 0
+                        } else {
+                            lpxstr = nstr
+                        }
+                    }
+                    lpx += lpxstr
+                    newdata[limg] += olddata[lpx] * lo[i]
+                }
+                limg += stride
+            }
+            if (daEv != 0) {
+                hstap =
                     if (hotap != 0) {
-                        hstap = 2
+                        1
                     } else {
-                        hstap = 1
+                        0
                     }
+                if (hsz == 2) {
+                    hspx -= hspxstr
+                    fhre = 1
                 }
-                run {
-                    tap = 1
-                    while (tap >= hstap) {
-                        hle = hle2
-                        hre = hre2
-                        hpx = hspx
-                        hpxstr = hspxstr
-                        sfac = osfac
-                        if (hsz != 2) {
-                            fhre = ofhre
-                        }
-                        run {
-                            i = tap
-                            while (i < hsz) {
-                                if (hpx == hp0) {
-                                    if (hle != 0) {
-                                        hpxstr = 0
-                                        hle = 0
-                                    } else {
-                                        hpxstr = pstr
-                                        sfac = 1.0f
-                                    }
-                                }
-                                if (hpx == hp1) {
-                                    if (hre != 0) {
-                                        hpxstr = 0
-                                        hre = 0
-                                        if ((asym != 0) && (daEv != 0)) {
-                                            hre = 1
-                                            fhre--
-                                            sfac = fhre.toFloat()
-                                            if (sfac == 0.0f) {
-                                                hre = 0
-                                            }
-                                        }
-                                    } else {
-                                        hpxstr = nstr
-                                        if (asym != 0) {
-                                            sfac = -1.0f
-                                        }
-                                    }
-                                }
-                                newdata[himg] += ((olddata[hpx] * hi[i]) * sfac)
-                                hpx += hpxstr
-                                i += 2
-                            }
-                        }
-                        himg += stride
-                        tap--
+            } else {
+                hstap =
+                    if (hotap != 0) {
+                        2
+                    } else {
+                        1
                     }
+            }
+            for (tap in 1 downTo hstap) {
+                if (hsz != 2) {
+                    fhre = ofhre
                 }
-                clRw++
+                convolveHighPassTap(
+                    newdata = newdata,
+                    olddata = olddata,
+                    hi = hi,
+                    hsz = hsz,
+                    himg = himg,
+                    tap = tap,
+                    hp0 = hp0,
+                    hp1 = hp1,
+                    pstr = pstr,
+                    nstr = nstr,
+                    asym = asym,
+                    daEv = daEv,
+                    hle2 = hle2,
+                    hre2 = hre2,
+                    hspx = hspx,
+                    hspxstr = hspxstr,
+                    initialFhre = fhre,
+                    osfac = osfac,
+                )
+                himg += stride
             }
         }
+
         if (fiEv == 0) {
-            run {
-                i = 0
-                while (i < hsz) {
-                    hi[i] *= -1.0f
-                    i++
+            for (i in 0 until hsz) {
+                hi[i] *= -1.0f
+            }
+        }
+    }
+
+    private fun convolveHighPassTap(
+        newdata: FloatArray,
+        olddata: FloatArray,
+        hi: FloatArray,
+        hsz: Int,
+        himg: Int,
+        tap: Int,
+        hp0: Int,
+        hp1: Int,
+        pstr: Int,
+        nstr: Int,
+        asym: Int,
+        daEv: Int,
+        hle2: Int,
+        hre2: Int,
+        hspx: Int,
+        hspxstr: Int,
+        initialFhre: Int,
+        osfac: Float,
+    ) {
+        var hle = hle2
+        var hre = hre2
+        var hpx = hspx
+        var hpxstr = hspxstr
+        var fhre = initialFhre
+        var sfac = osfac
+        for (i in tap until hsz step 2) {
+            if (hpx == hp0) {
+                if (hle != 0) {
+                    hpxstr = 0
+                    hle = 0
+                } else {
+                    hpxstr = pstr
+                    sfac = 1.0f
                 }
             }
+            if (hpx == hp1) {
+                if (hre != 0) {
+                    hpxstr = 0
+                    hre = 0
+                    if (asym != 0 && daEv != 0) {
+                        hre = 1
+                        fhre--
+                        sfac = fhre.toFloat()
+                        if (sfac == 0.0f) {
+                            hre = 0
+                        }
+                    }
+                } else {
+                    hpxstr = nstr
+                    if (asym != 0) {
+                        sfac = -1.0f
+                    }
+                }
+            }
+            newdata[himg] += (olddata[hpx] * hi[i]) * sfac
+            hpx += hpxstr
         }
     }
 
