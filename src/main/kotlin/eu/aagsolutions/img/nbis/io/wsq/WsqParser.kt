@@ -171,12 +171,8 @@ object WsqParser {
         // 10: Number of components (must be 1 for grayscale)
         // 11+: Component specifications
 
-        val segmentLength = readUInt16BigEndian(data, offset + 2)
-
         val height = readUInt16BigEndian(data, offset + 6)
         val width = readUInt16BigEndian(data, offset + 8)
-        val numComponents = data[offset + 10].toInt() and 0xFF
-
         // Try to find PPI in comments, default to 500 if not found
         val ppi = findWSQPixelsPerInch(data) ?: 500
 
