@@ -25,18 +25,18 @@ import net.researchgate.release.ReleaseExtension
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 plugins {
-    kotlin("jvm") version "2.3.10"
-    id("org.jetbrains.dokka") version "2.1.0-Beta"
-    id("org.jlleitschuh.gradle.ktlint") version "13.1.0"
-    id("net.researchgate.release") version "3.1.0"
+    kotlin("jvm") version "2.4.21"
+    id("org.jetbrains.dokka") version "2.3.0-Beta"
+    id("org.jlleitschuh.gradle.ktlint") version "14.2.0"
+    id("net.researchgate.release") version "3.2.0"
     id("net.thebugmc.gradle.sonatype-central-portal-publisher") version "1.2.4"
     id("signing")
     id("jacoco")
-    id("dev.detekt") version "2.0.0-alpha.2"
+    id("dev.detekt") version "2.0.0-alpha.6"
 }
 
 detekt {
-    toolVersion = "2.0.0-alpha.2"
+    toolVersion = "2.0.0-alpha.6"
     buildUponDefaultConfig = true
     config.setFrom(
         resources.text.fromString(
@@ -53,11 +53,10 @@ detekt {
 description = "Small library for decoding/encoding NIST biometric files"
 group = "eu.aagsolutions.img"
 
-val slf4jVersion = "2.0.17"
-val logbackVersion = "1.5.18"
-val kotestVersion = "6.0.3"
-val mockkVersion = "1.14.5"
-val junitVersion = "6.0.0"
+val slf4jVersion = "2.0.20"
+val kotestVersion = "6.1.0"
+val mockkVersion = "1.14.11"
+val junitVersion = "6.1.3"
 
 repositories {
     mavenCentral()
@@ -67,7 +66,6 @@ dependencies {
     testImplementation(kotlin("test"))
     testImplementation("io.kotest:kotest-assertions-core:$kotestVersion")
     testImplementation("io.mockk:mockk:$mockkVersion")
-    testImplementation("ch.qos.logback:logback-classic:$logbackVersion")
     testImplementation("org.junit.jupiter:junit-jupiter:$junitVersion")
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
     implementation("org.slf4j:slf4j-api:$slf4jVersion")
